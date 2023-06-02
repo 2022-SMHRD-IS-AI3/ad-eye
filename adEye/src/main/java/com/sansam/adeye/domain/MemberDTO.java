@@ -12,5 +12,6 @@ import lombok.NoArgsConstructor;
 public class MemberDTO {
 	
 	private String mem_id;
+	private String mem_pw;
 
 }
