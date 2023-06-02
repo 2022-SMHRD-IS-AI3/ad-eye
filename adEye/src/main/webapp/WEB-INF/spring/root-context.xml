@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- HikariCP Oracle 설정 -->
+   	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+         <!-- <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
+         <property name="jdbcUrl" value="jdbc:oracle:thin:@211.223.37.220:1521:XE"></property> -->
+         <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
+         <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@project-db-stu.smhrd.com:1524:XE"></property>
+         <property name="username" value="campus_c_230531_1"></property>
+         <property name="password" value="smhrd1"></property>
+   </bean>
+   
+   <!-- hikaricp -->
+   <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+         <constructor-arg ref="hikariConfig"></constructor-arg>
+   </bean>
+   
+   <tx:annotation-driven/> <!-- 왼쪽  스프링이 트랜잭션을 처리하게끔 준비가 되었다 -->
+   	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+   		<property name="dataSource" ref="dataSource"></property> <!-- ref : 참조, 어디를 가리키고 있는 것 -->
+		<property name="configLocation" value="classpath:/mybatis-config.xml"></property> <!-- SqlSessionFactoryBean.class 에 멤버필드에 잡혀있는 이름으로 해준다 -->
+		<property name="mapperLocations" value="classpath:mappers/**/*Mapper.xml"></property>
+   	</bean>
+   
+   	<!-- mybatis-spring에서 제공하는 SqlSessionTemplate -->
+   	<!-- Mybatis의 Sqlsession 인터페이스를 구현한 클래스, 트랜잭션 관리,
+   	 쓰레드 처리의 안정성 보장, 데이터베이스의 연결과 종료를 책임-->
+   	<bean id="sqlsession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+   		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
+   	</bean>
+   	<context:component-scan base-package="com.sansam.adeye"></context:component-scan>
+   	<mybatis-spring:scan base-package="com.sansam.adeye.mapper"/>
+</beans>
+
