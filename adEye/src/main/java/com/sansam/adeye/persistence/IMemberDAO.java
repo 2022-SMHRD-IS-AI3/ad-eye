@@ -16,7 +16,7 @@ public interface IMemberDAO {
 	//특정 유저 정보 수정
 	public int memberUpdate(MemberDTO mDto) throws Exception;
 	// 특정 유저 정보 삭제 (상태 변경)
-	public int memberDelete(MemberDTO mDto) throws Exception;	
+	public int memberDelete(String mId) throws Exception;	
 	// Login
 	public MemberDTO login(MemberDTO mDto) throws Exception;
 }
