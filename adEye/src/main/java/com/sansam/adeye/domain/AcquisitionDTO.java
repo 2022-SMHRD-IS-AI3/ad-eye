@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 @Data
 public class AcquisitionDTO {
 
+
 	private int acq_seq;
+
 	
 }
