@@ -8,7 +8,7 @@ import com.sansam.adeye.domain.Criteria;
 
 public interface IBoardService {
 
-//	// 등록
+//	// 등록.
 //	public void register(BoardDTO bto) throws Exception;
 //	// 가져오기
 //	public BoardDTO read(Integer bno) throws Exception;
