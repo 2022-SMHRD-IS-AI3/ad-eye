@@ -31,8 +31,6 @@ public class MemberController {
 	    
 	    service.memberInsert(data);
 
-	    // paramMap 담을 객체 생성
-	    Map<String,Object> paramMapSub = new HashMap<String, Object>();
 	    paramMap.put("code", "201");
 	    paramMap.put("message", "등록 성공");
 	    
@@ -52,12 +50,22 @@ public class MemberController {
 	    Map<String,Object> paramMapSub = new HashMap<String, Object>();
 
 	    paramMapSub.put("mem-id", "ad230531xxx");
+	    paramMapSub.put("mem-company", "ad230531xxx");
+	    paramMapSub.put("mem-pw", "ad230531xxx");
+	    paramMapSub.put("mem-phone", "ad230531xxx");
+	    paramMapSub.put("mem-email", "ad230531xxx");
+	    paramMapSub.put("mem-state", "ad230531xxx");
+	    paramMapSub.put("mem-joindate", "ad230531xxx");
+	    paramMapSub.put("company-addr", "ad230531xxx");
 	    paramMap.put("result", paramMapSub);
-	    paramMap.put("code", "201");
-	    paramMap.put("message", "등록 성공");
+	    paramMap.put("code", "200");
+	    paramMap.put("message", "조회 성공");
 	    
 		return paramMap;
 	}
+	
+	// 회원 삭제
+	
 	
 	
 	
