@@ -9,5 +9,6 @@ import lombok.NoArgsConstructor;
 @Data
 public class AcquisitionDTO {
 
-	private int acq_seq;
+	private String now_time;
+	
 }

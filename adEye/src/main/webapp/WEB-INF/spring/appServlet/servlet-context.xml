@@ -25,6 +25,6 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="com.sansam.hrd" />
+	<context:component-scan base-package="com.sansam.adeye" />
 	
 </beans:beans>
