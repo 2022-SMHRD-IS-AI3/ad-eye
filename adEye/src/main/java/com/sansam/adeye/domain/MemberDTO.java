@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@RequiredArgsConstructor
 public class MemberDTO {
 	
 	@NonNull
