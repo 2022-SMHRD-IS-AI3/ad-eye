@@ -29,7 +29,7 @@ public class AcquisitionController {
 			System.out.println(dto.getNow_time() +" ... " +dto.getTid_gender());
 		}
 		
-		// 보내줄 맵 객체 생성,
+		// 보내줄 맵 객체 생성, 
 	    Map<String,Object> paramMap = new HashMap<String, Object>();
 
 	    // paramMap 담을 객체 생성
