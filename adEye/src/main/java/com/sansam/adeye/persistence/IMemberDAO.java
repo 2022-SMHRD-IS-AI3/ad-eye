@@ -12,7 +12,7 @@ public interface IMemberDAO {
 	// 유저 생성
 	public void memberInsert(MemberDTO mDto) throws Exception;
 	// 특정 유저 정보 조회
-	public MemberDTO memberDetail(Integer seq) throws Exception;
+	public MemberDTO memberDetail(String mId) throws Exception;
 	//특정 유저 정보 수정
 	public int memberUpdate(MemberDTO mDto) throws Exception;
 	// 특정 유저 정보 삭제 (상태 변경)

@@ -30,8 +30,8 @@ public class MemberDAO implements IMemberDAO{
 	
 	// 특정 유저 정보 조회 : /detail
 	@Override
-	public MemberDTO memberDetail(Integer seq) throws Exception {
-		return session.selectOne("MemberMapper.detail", seq);
+	public MemberDTO memberDetail(String mId) throws Exception {
+		return session.selectOne("MemberMapper.detail", mId);
 	}
 	
 	//특정 유저 정보 수정 : /update
