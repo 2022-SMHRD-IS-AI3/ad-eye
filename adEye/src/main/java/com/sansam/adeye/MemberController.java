@@ -3,6 +3,7 @@ package com.sansam.adeye;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sansam.adeye.domain.MemberDTO;
+import com.sansam.adeye.service.IMemberService;
 
 import lombok.extern.log4j.Log4j;
 
@@ -18,11 +20,53 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class MemberController {
 	
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String bookList(@RequestParam("bno") int bno) {
-		System.out.println(bno);
-		return "login";
+	@Autowired
+	IMemberService service;
+	
+	// 회원 등록
+	@RequestMapping(value = "/insert", method = RequestMethod.POST)
+	public @ResponseBody Map<String,Object> insert(MemberDTO data) throws Exception {
+		// 보내줄 맵 객체 생성,
+	    Map<String,Object> paramMap = new HashMap<String, Object>();
+	    
+	    service.memberInsert(data);
+
+	    // paramMap 담을 객체 생성
+	    Map<String,Object> paramMapSub = new HashMap<String, Object>();
+	    paramMap.put("code", "201");
+	    paramMap.put("message", "등록 성공");
+	    
+		return paramMap;
 	}
+	
+	// 회원 조회
+	@RequestMapping(value = "/detail", method = RequestMethod.POST)
+	public @ResponseBody Map<String,Object> update(@RequestParam("mem-id") String data) throws Exception {
+		
+		// 보내줄 맵 객체 생성,
+	    Map<String,Object> paramMap = new HashMap<String, Object>();
+	    
+	    service.memberDetail(data);
+
+	    // paramMap 담을 객체 생성
+	    Map<String,Object> paramMapSub = new HashMap<String, Object>();
+
+	    paramMapSub.put("mem-id", "ad230531xxx");
+	    paramMap.put("result", paramMapSub);
+	    paramMap.put("code", "201");
+	    paramMap.put("message", "등록 성공");
+	    
+		return paramMap;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	// 예시 컨트롤러 코드 작성
 //		@RequestMapping(value = "/member", method = RequestMethod.POST)
@@ -51,22 +95,7 @@ public class MemberController {
 //			
 //		}
 	
-	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public @ResponseBody Map<String,Object> insert(MemberDTO data) throws Exception {
-		// 보내줄 맵 객체 생성,
-	    Map<String,Object> paramMap = new HashMap<String, Object>();
-	    
-	    
-
-	    // paramMap 담을 객체 생성
-	    Map<String,Object> paramMapSub = new HashMap<String, Object>();
-		paramMapSub.put("mem-id", "ad230531xxx");
-	    paramMap.put("result", paramMapSub);
-	    paramMap.put("code", "201");
-	    paramMap.put("message", "등록 성공");
-	    
-		return paramMap;
-	}
+	
 }
 
 
