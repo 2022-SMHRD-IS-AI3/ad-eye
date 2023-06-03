@@ -25,7 +25,10 @@ public class MemberController {
 	
 	// 회원 등록
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public @ResponseBody Map<String,Object> insert(MemberDTO data) throws Exception {
+	public @ResponseBody Map<String, Object> insert(MemberDTO data) throws Exception {
+		
+		log.info("/member/insert..................");
+		
 		// 보내줄 맵 객체 생성,
 	    Map<String,Object> paramMap = new HashMap<String, Object>();
 	    
@@ -37,9 +40,11 @@ public class MemberController {
 		return paramMap;
 	}
 	
-	// 회원 조회 
-	@RequestMapping(value = "/detail", method = RequestMethod.POST)
-	public @ResponseBody Map<String,Object> update(@RequestParam("mem-id") String data) throws Exception {
+	// 회원 상세 
+	@RequestMapping(value = "/detail", method = RequestMethod.GET)
+	public @ResponseBody Map<String, Object> detail(@RequestParam("mem-id") String data) throws Exception {
+		
+		log.info("/member/detail..................");
 		
 		// 보내줄 맵 객체 생성,
 	    Map<String,Object> paramMap = new HashMap<String, Object>();
@@ -64,45 +69,47 @@ public class MemberController {
 		return paramMap;
 	}
 	
+	// 회원 수정
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public @ResponseBody Map<String, String> update(MemberDTO data) throws Exception {
+		
+		log.info("/member/update..................");
+		
+		// 보내줄 맵 객체 생성,
+	    Map<String, String> paramMap = new HashMap<String, String>();
+	    
+	    int cnt = service.memberUpdate(data);
+
+	    if(cnt > 0) {
+	    	paramMap.put("code", "202");
+		    paramMap.put("message", "처리 완료");
+	    } else {
+	    	paramMap.put("code", "204");
+		    paramMap.put("message", "조회 성공");
+	    }
+		
+		return paramMap;
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	// 예시 컨트롤러 코드 작성
-//		@RequestMapping(value = "/member", method = RequestMethod.POST)
-//		public @ResponseBody Map<String,Object> member(MemberDTO data) { // @ResponseBody : 응답할 때 JSON 데이터로 반환
-//			log.info("/member.................");
-//			
-//			if(data.getMem_id().equals("admin") && data.getMem_pw().equals("123")) {
-//				System.out.println(data.getMem_id());
-//				System.out.println(data.getMem_pw());
-//			}
-//			
-//			
-//			// 보내줄 맵 객체 생성,
-//		    Map<String,Object> paramMap = new HashMap<String, Object>();
-//
-//		    // paramMap 담을 객체 생성
-//		    Map<String,Object> paramMap2 = new HashMap<String, Object>();
-//		      
-//		    paramMap2.put("mem-id", "ad230531xxx");
-//		    paramMap.put("result", paramMap2);
-//		    paramMap.put("code", "201");
-//		    paramMap.put("message", "등록 성공");
-//		    
-//		    // {"result":{"mem-id":"ad230531xxx"},"code":"201","message":"등록 성공"}
-//			return paramMap;
-//			
-//		}
-	
+	// 회원 삭제
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public @ResponseBody Map<String, String> delete(@RequestParam("mem-id") String data) throws Exception {
+		
+		log.info("/member/delete..................");
+		
+		// 보내줄 맵 객체 생성
+	    Map<String, String> paramMap = new HashMap<String, String>();
+	    
+	    int cnt = service.memberDelete(data);
+
+	    if(cnt > 0) {
+	    	paramMap.put("code", "202");
+		    paramMap.put("message", "처리 완료");
+	    } else {
+	    	paramMap.put("code", "204");
+		    paramMap.put("message", "존재하지 않는 데이터입니다");
+	    }
+		return paramMap;
+	}
 	
 }
-
-
-
