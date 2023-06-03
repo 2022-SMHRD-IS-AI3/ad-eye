@@ -44,27 +44,25 @@ public class MemberController {
 		// 보내줄 맵 객체 생성,
 	    Map<String,Object> paramMap = new HashMap<String, Object>();
 	    
-	    service.memberDetail(data);
+	    MemberDTO dto = service.memberDetail(data);
 
-	    // paramMap 담을 객체 생성
+	    // paramMap 담을 객체 생성 
 	    Map<String,Object> paramMapSub = new HashMap<String, Object>();
 
-	    paramMapSub.put("mem-id", "ad230531xxx");
-	    paramMapSub.put("mem-company", "ad230531xxx");
-	    paramMapSub.put("mem-pw", "ad230531xxx");
-	    paramMapSub.put("mem-phone", "ad230531xxx");
-	    paramMapSub.put("mem-email", "ad230531xxx");
-	    paramMapSub.put("mem-state", "ad230531xxx");
-	    paramMapSub.put("mem-joindate", "ad230531xxx");
-	    paramMapSub.put("company-addr", "ad230531xxx");
+	    paramMapSub.put("mem-id", dto.getMem_id());
+	    paramMapSub.put("mem-pw", dto.getMem_pw());
+	    paramMapSub.put("mem-company", dto.getMem_company());
+	    paramMapSub.put("mem-phone", dto.getMem_phone());
+	    paramMapSub.put("mem-email", dto.getMem_email());
+	    paramMapSub.put("mem-status", dto.getMem_status());
+	    paramMapSub.put("mem-joindate", dto.getMem_joindate());
+	    paramMapSub.put("company-addr", dto.getCompany_addr());
 	    paramMap.put("result", paramMapSub);
 	    paramMap.put("code", "200");
 	    paramMap.put("message", "조회 성공");
 	    
 		return paramMap;
 	}
-	
-	// 회원 삭제
 	
 	
 	
