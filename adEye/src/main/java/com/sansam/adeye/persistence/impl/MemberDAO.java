@@ -46,4 +46,9 @@ public class MemberDAO implements IMemberDAO{
 		return session.update("MemberMapper.delUpdate", mDto);
 	}
 	
+	// Login
+	@Override
+	public MemberDTO login(MemberDTO mDto) throws Exception {
+		return session.selectOne("MemberMapper.login", mDto);
+	}
 }
