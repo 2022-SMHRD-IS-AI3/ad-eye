@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sansam.adeye.mapper.MemberMapper">
+<mapper namespace="MemberMapper">
   
 	<select id="list" resultType="MemberDTO">
 		select * from member
@@ -20,7 +20,7 @@
 		UPDATE MEMBER SET mem_pw = #{mem_pw}, mem_phone = #{mem_phone}, mem_email=#{mem_email}, company_addr = #{company_addr} where mem_id = #{mem_id}
 	</update>
 
-	<update id="delUpdate" parameterType="String">
+	<update id="delete" parameterType="String">
 		UPDATE MEMBER SET mem_status = 'D' where mem_id = #{mem_id}
 	</update>
 	

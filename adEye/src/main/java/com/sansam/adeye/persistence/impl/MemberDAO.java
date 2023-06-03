@@ -43,7 +43,7 @@ public class MemberDAO implements IMemberDAO{
 	// 특정 유저 정보 삭제 (상태 변경) : /delete
 	@Override
 	public int memberDelete(String mId) throws Exception {
-		return session.update("MemberMapper.delUpdate", mId);
+		return session.update("MemberMapper.delete", mId);
 	}
 	
 	// Login
