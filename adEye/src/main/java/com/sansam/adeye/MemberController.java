@@ -37,7 +37,7 @@ public class MemberController {
 		return paramMap;
 	}
 	
-	// 회원 조회
+	// 회원 조회 
 	@RequestMapping(value = "/detail", method = RequestMethod.POST)
 	public @ResponseBody Map<String,Object> update(@RequestParam("mem-id") String data) throws Exception {
 		
