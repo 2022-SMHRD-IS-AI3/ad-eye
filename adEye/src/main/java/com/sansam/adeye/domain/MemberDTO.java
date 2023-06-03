@@ -19,12 +19,12 @@ public class MemberDTO {
 	private String mem_id;
 	@NonNull
 	private String mem_pw;
-	private String company;
+	private String mem_company;
 	private String mem_phone;
 	private String mem_email;
-	private char mem_state;
-	private Date join_date;
-	private String comp_addr;
+	private char mem_status;
+	private Date mem_joindate;
+	private String company_addr;
 	private char admin_yn;
 	
 }
