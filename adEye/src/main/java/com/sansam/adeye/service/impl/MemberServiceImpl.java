@@ -16,8 +16,8 @@ public class MemberServiceImpl implements IMemberService {
 	// 회원 등록  
 	@Override
 	public void memberInsert(MemberDTO dto) throws Exception {
-		mDao.memberInsert(dto);
 		
+		mDao.memberInsert(dto);
 	}
 
 	// 회원 조회
@@ -25,6 +25,20 @@ public class MemberServiceImpl implements IMemberService {
 	public MemberDTO memberDetail(String mid) throws Exception {
 		
 		return mDao.memberDetail(mid);
+	}
+
+	// 회원 수정
+	@Override
+	public int memberUpdate(MemberDTO dto) throws Exception {
+
+		return mDao.memberUpdate(dto);
+	}
+
+	// 회원 삭제
+	@Override
+	public int memberDelete(String mid) throws Exception {
+
+		return mDao.memberDelete(mid);
 	}
 	
 }
