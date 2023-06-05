@@ -14,7 +14,17 @@
 				   mem_state,
 				   mem_joindate,
 				   company_addr
-			from member
+			from (select rownum rn,
+						 mem_id,
+				   		 mem_pw,
+				     	 mem_company,
+				   		 mem_phone,
+				   		 mem_email,
+				   	     mem_state,
+				   		 mem_joindate,
+				   		 company_addr
+				  from member
+				  where
 		]]>
 	  <include refid="criteria"></include>         
       <![CDATA[
