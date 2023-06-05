@@ -59,11 +59,12 @@
          </foreach>
       </trim>
    </sql>
+	-->
 	
 	<insert id="create">
-		insert into member values(#{mem_id}, #{mem_pw}, #{mem_company}, #{mem_phone}, #{mem_email}, 'Y', sysdate, #{company_addr}, #{admin_yn})
+		insert into tb_member values(#{mem_id}, #{mem_pw}, #{mem_company}, #{mem_phone}, #{mem_email}, #{mem_status},  sysdate, #{company_addr}, 'N')
 	</insert>
-	
+	<!--  
 	<select id="detail" resultType="com.sansam.adeye.domain.MemberDTO">
 		select * from member where mem_id = #{mem_id}
 	</select>

@@ -42,10 +42,16 @@ public class MemberController {
 		// 보내줄 맵 객체 생성,
 	    Map<String,Object> paramMap = new HashMap<String, Object>();
 	    
-	    // service.memberInsert(data);
+	    int cnt = service.memberInsert(data);
 
-	    paramMap.put("code", "201");
-	    paramMap.put("message", "등록 성공");
+	    if(cnt > 0 ) {
+	    	paramMap.put("code", "201");
+		    paramMap.put("message", "등록 성공");
+	    }else {
+	    	paramMap.put("code", "203");
+		    paramMap.put("message", "처리 실패");
+	    }
+	    
 	    
 		return paramMap;
 	}
