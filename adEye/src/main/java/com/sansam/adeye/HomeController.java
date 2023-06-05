@@ -42,7 +42,7 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value = "/submit2", method = RequestMethod.POST)
+	@RequestMapping(value = "/submit", method = RequestMethod.POST)
 	public @ResponseBody Map<String,String> submit(@RequestParam("tid_data") String data) {
 		
 		logger.info("Welcome home! The client locale is {}.", "/tid_data.................");

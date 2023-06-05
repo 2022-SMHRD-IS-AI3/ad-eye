@@ -41,53 +41,80 @@
 </head>
 <body>
 	
-	<button onclick="getAPI()">영화 정보 가져오기</button>
-    <!-- 영화 진흥위원회 API를 가져와서
-    일일 박스오피스 영화 TOP 10의
-    순위, 영화 이름, 개봉일 출력 -->
-
-    <!-- <table>
-        <td>
-            <th>순위</th>
-            <th>영화 제목</th>
-            <th>개봉일</th>
-        </td>
-        <td>
-            <tr>1</tr>
-            <tr>2</tr>
-            <tr>3</tr>
-        </td>
-    </table> -->
-    <div id="container"></div>    
+	<button onclick="getAPI('mem_insert')">회원가입</button>
+	<button onclick="getAPI('mem_detail')">회원조회</button>
+	<button onclick="getAPI('mem_update')">회원수정</button>
+	<button onclick="getAPI('mem_delete')">회원삭제</button>
+	<button onclick="getAPI('mem_list')">회원목록</button>
+	
 	<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 	<script type="text/javascript">
 	
 	
-	const getAPI = () => {
-		let datas = 
-		{
-			mem_id : "test01",
-			mem_pw : "0000",
-			mem_company : "애드컴퍼니",
-			mem_phone : "000-000-0000",
-			mem_email : "smhrd@smhrd.com",
-			company_addr : "광주 동구 예술길 31-15",
-			mem_status : "Y"
+	const getAPI = (code) => {
+		let aDatas
+		let aUri = ""
+		let aType = ""
+	
+		if (code == "mem_insert"){
+			
+			aUri = "/member/insert"
+			aType = "POST"
+			aDatas = 
+			{
+				mem_id : "test01",
+				mem_pw : "0000",
+				mem_company : "애드컴퍼니",
+				mem_phone : "000-000-0000",
+				mem_email : "smhrd@smhrd.com",
+				company_addr : "광주 동구 예술길 31-15",
+				mem_status : "Y"
+			}
+		}else if(code == "mem_detail"){
+			aUri = "/member/detail"
+			aType = "GET"
+			aDatas = "mem_id=test01"
+		}else if(code == "mem_delete"){
+			aUri = "/member/delete"
+			aType = "GET"
+			aDatas = "mem_id=test01"
+		}else if(code == "mem_update"){
+			aUri = "/member/update"
+			aType = "POST"
+			aDatas = 
+			{
+				mem_id : "test01",
+				mem_pw : "0000",
+				mem_phone : "000-000-0000",
+				mem_email : "smhrd@smhrd.com",
+				company_addr : "광주 동구 예술길 31-14",
+				mem_status : "Y"
+			}
+		}else if(code == "mem_list"){
+			aUri = "/member/list"
+			aType = "POST"
+			aDatas = 
+			{
+				mem_id : "test01",
+				mem_pw : "0000",
+				mem_phone : "000-000-0000",
+				mem_email : "smhrd@smhrd.com",
+				company_addr : "광주 동구 예술길 31-14",
+				mem_status : "Y"
+			}
 		}
-		
-		
-		console.log(123123)
+		console.log(aUri)
+		console.log(aDatas)
         // ajax문
         $.ajax({ // url, success, error 는 무조건 있어야한다
             // 어디랑 통신 할건지
-            url: 'http://localhost:9000/member/insert',
-            type: 'POST',
-            data: datas,
+            url: 'http://localhost:9000' + aUri,
+            type: aType,
+            data: aDatas,
             // 통신에 성공했을 때 실행할 로직
             success: function (response) {
             	console.log("통신성공")
             	console.log(response)
-                
             },
             // 통신에 실패했을 때 실행할 로직
             error: function () {
@@ -95,7 +122,6 @@
             }
         })
     }
-	
 	
 	
 	</script>
