@@ -35,12 +35,14 @@ public class MemberController {
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> insert(MemberDTO data) throws Exception {
 		
-		log.info("/member/insert..................");
+		log.info("/member/insert.................."+ data.getMem_company());
+		
+			
 		
 		// 보내줄 맵 객체 생성,
 	    Map<String,Object> paramMap = new HashMap<String, Object>();
 	    
-	    service.memberInsert(data);
+	    // service.memberInsert(data);
 
 	    paramMap.put("code", "201");
 	    paramMap.put("message", "등록 성공");

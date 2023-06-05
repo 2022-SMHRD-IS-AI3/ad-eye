@@ -30,14 +30,19 @@ public class MemberDTO {
 	
 	// 회원 가입요청 용  생성자
 	public MemberDTO(@NonNull String mem_id, @NonNull String mem_pw, String mem_company, String mem_phone,
-			String mem_email, String company_addr) {
+			String mem_email, String company_addr, char mem_status) {
 		this.mem_id = mem_id;
 		this.mem_pw = mem_pw;
 		this.mem_company = mem_company;
 		this.mem_phone = mem_phone;
 		this.mem_email = mem_email;
 		this.company_addr = company_addr;
+		this.mem_status = mem_status;
+		
+		
 	}
+	
+	
 	
 	
 	

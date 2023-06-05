@@ -62,40 +62,31 @@
 	<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 	<script type="text/javascript">
 	
+	
 	const getAPI = () => {
+		let datas = 
+		{
+			mem_id : "test01",
+			mem_pw : "0000",
+			mem_company : "애드컴퍼니",
+			mem_phone : "000-000-0000",
+			mem_email : "smhrd@smhrd.com",
+			company_addr : "광주 동구 예술길 31-15",
+			mem_status : "Y"
+		}
+		
+		
+		console.log(123123)
         // ajax문
         $.ajax({ // url, success, error 는 무조건 있어야한다
             // 어디랑 통신 할건지
-            url: 'https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json',
-            type: 'GET',
-            data: 'key=f5eef3421c602c6cb7ea224104795888&targetDt=20230101',
+            url: 'http://localhost:9000/member/insert',
+            type: 'POST',
+            data: datas,
             // 통신에 성공했을 때 실행할 로직
             success: function (response) {
-                // response => 응답 데이터
-                // alert('통신성공');
-                let movieList = response.boxOfficeResult.dailyBoxOfficeList;
-                let tableForm = `
-                    <table>
-                        <tr>
-                            <th>순위</th>
-                            <th>영화제목</th>
-                            <th>개봉일</th>
-                        <tr>
-                `;
-
-                movieList.forEach(v => {
-                    console.log(v.rank, v.movieNm, v.openDt);
-                    tableForm += `
-                        <tr>
-                            <td>${v.rank}</td>
-                            <td class="title">${v.movieNm}</td>
-                            <td style="color: #5e5e5e;">${v.openDt}</td>
-                        </tr>`;
-                });
-                
-                tableForm += `</table>`;
-                $('#container').html(tableForm);
-
+            	console.log("통신성공")
+            	console.log(response)
                 
             },
             // 통신에 실패했을 때 실행할 로직
