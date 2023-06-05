@@ -27,7 +27,7 @@ public class DeviceDAO implements IDeviceDAO{
 		session.insert("DeviceMapper.create", dDto);	
 	}
 	// 특정 기기 조회 : /detail
-	public DeviceDTO deviceDetail(Integer seq) throws Exception {
+	public DeviceDTO deviceDetail(int seq) throws Exception {
 		return session.selectOne("DeviceMapper.detail", seq);
 	}	
 	// 특정 기기 수정 : /update
@@ -37,8 +37,8 @@ public class DeviceDAO implements IDeviceDAO{
 	}
 	// 특정 기기 삭제 (상태 변경) : /delete
 	@Override
-	public int deviceDelete(DeviceDTO dDto) throws Exception {
-		return session.update("DeviceMapper.delUpdate", dDto);
+	public int deviceDelete(int seq) throws Exception {
+		return session.update("DeviceMapper.delete", seq);
 	}
 	// 특정 기기 컨트롤 : /control
 	@Override
@@ -48,6 +48,6 @@ public class DeviceDAO implements IDeviceDAO{
 	// 특정 기기 로그 조회 : /log
 	@Override
 	public List<DeviceDTO> deviceLog(Criteria cri) throws Exception {
-		return session.selectList("DeviceMapper.매퍼ID", cri);
+		return session.selectList("DeviceMapper.logList", cri);
 	}
 }
