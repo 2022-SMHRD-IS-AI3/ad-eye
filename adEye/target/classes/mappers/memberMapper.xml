@@ -37,6 +37,28 @@
          WHERE rn > (#{pageNum} - 1) * #{amount}
       ]]>
 	</select>
+	<sql id="criteria">
+      <trim prefix="(" suffix=") AND" prefixOverrides="OR">
+         <foreach collection="typeArr" item="type">
+            <trim prefix="OR">
+               <choose>
+                  <when test="type == 'C'.toString()">
+                     mem_company LIKE '%'||#{keyword}||'%'
+                  </when>
+                  <when test="type == 'I'.toString()">
+                     mem_id LIKE '%'||#{keyword}||'%'
+                  </when>
+                  <when test="type == 'E'.toString()">
+                     mem_email LIKE '%'||#{keyword}||'%'
+                  </when>
+                  <when test="type == 'P'.toString()">
+                     mem_phone LIKE '%'||#{keyword}||'%'
+                  </when>
+               </choose>
+            </trim>
+         </foreach>
+      </trim>
+   </sql>
 	
 	<insert id="create">
 		insert into member values(#{mem_id}, #{mem_pw}, #{mem_company}, #{mem_phone}, #{mem_email}, 'Y', sysdate, #{company_addr}, #{admin_yn})
