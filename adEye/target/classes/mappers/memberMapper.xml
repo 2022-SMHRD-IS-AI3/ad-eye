@@ -3,20 +3,50 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="MemberMapper">
-  
-	<select id="list" resultType="MemberDTO">
-		select * from member
+
+	<!-- <select id="list" resultType="MemberDTO">
+=======
+
+ <select id="list" resultType="com.sansam.adeye.domain.MemberDTO">
+>>>>>>> branch 'master' of https://github.com/2022-SMHRD-IS-AI3/ad-eye.git
+		<![CDATA[
+			select mem_id,
+				   mem_pw,
+				   mem_company,
+				   mem_phone,
+				   mem_email,
+				   mem_state,
+				   mem_joindate,
+				   company_addr
+			from (select rownum rn,
+						 mem_id,
+				   		 mem_pw,
+				     	 mem_company,
+				   		 mem_phone,
+				   		 mem_email,
+				   	     mem_state,
+				   		 mem_joindate,
+				   		 company_addr
+				  from member
+				  where
+		]]>
+	  <include refid="criteria"></include>         
+      <![CDATA[
+               rownum <= #{pageNum} * #{amount}
+              )
+         WHERE rn > (#{pageNum} - 1) * #{amount}
+      ]]>
 	</select>
 	
 	<insert id="create">
 		insert into member values(#{mem_id}, #{mem_pw}, #{mem_company}, #{mem_phone}, #{mem_email}, 'Y', sysdate, #{company_addr}, #{admin_yn})
 	</insert>
 	
-	<select id="detail" resultType="MemberDTO">
+	<select id="detail" resultType="com.sansam.adeye.domain.MemberDTO">
 		select * from member where mem_id = #{mem_id}
 	</select>
 	
-  	<update id="update" parameterType="MemberDTO">
+  	<update id="update" parameterType="com.sansam.adeye.domain.MemberDTO">
 		UPDATE MEMBER SET mem_pw = #{mem_pw}, mem_phone = #{mem_phone}, mem_email=#{mem_email}, company_addr = #{company_addr} where mem_id = #{mem_id}
 	</update>
 
@@ -24,8 +54,13 @@
 		UPDATE MEMBER SET mem_status = 'D' where mem_id = #{mem_id}
 	</update>
 	
-	<select id="login" resultType="MemberDTO">
+	<select id="login" resultType="com.sansam.adeye.domain.MemberDTO">
 		SELECT * FROM member WHERE mem_id = #{mem_id} AND mem_pw = #{mem_pw}
+<<<<<<< HEAD
 	</select>
 	  
+
+	</select>
+	   -->
+
 </mapper>

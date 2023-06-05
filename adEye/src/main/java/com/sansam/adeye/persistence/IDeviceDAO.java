@@ -7,6 +7,7 @@ import com.sansam.adeye.domain.DeviceDTO;
 
 public interface IDeviceDAO {
 
+	// dkanrjsk
 	// 전체 기기 조회
 	public List<DeviceDTO> deviceList(Criteria cri) throws Exception;
 	// 기기 생성
