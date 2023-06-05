@@ -36,14 +36,4 @@
     <servlet-name>appServlet</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>SansamApi</display-name>
-    <servlet-name>SansamApi</servlet-name>
-    <servlet-class>com.sansam.adeye.sansamapi.SansamApi</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>SansamApi</servlet-name>
-    <url-pattern>/sansamapi</url-pattern>
-  </servlet-mapping>
 </web-app>
