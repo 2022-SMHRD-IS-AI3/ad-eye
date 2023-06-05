@@ -5,7 +5,23 @@
 <mapper namespace="MemberMapper">
   
 	<select id="list" resultType="MemberDTO">
-		select * from member
+		<![CDATA[
+			select mem_id,
+				   mem_pw,
+				   mem_company,
+				   mem_phone,
+				   mem_email,
+				   mem_state,
+				   mem_joindate,
+				   company_addr
+			from member
+		]]>
+	  <include refid="criteria"></include>         
+      <![CDATA[
+               rownum <= #{pageNum} * #{amount}
+              )
+         WHERE rn > (#{pageNum} - 1) * #{amount}
+      ]]>
 	</select>
 	
 	<insert id="create">
