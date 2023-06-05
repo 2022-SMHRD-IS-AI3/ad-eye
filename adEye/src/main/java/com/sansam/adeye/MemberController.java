@@ -23,6 +23,14 @@ public class MemberController {
 	@Autowired
 	IMemberService service;
 	
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public String register() throws Exception{
+
+		log.info("/member/register..............");
+		
+		return "/member/register";
+	}
+	
 	// 회원 등록
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> insert(MemberDTO data) throws Exception {
