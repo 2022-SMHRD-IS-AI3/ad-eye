@@ -24,8 +24,16 @@ public class MemberDAO implements IMemberDAO{
 	
 	// 유저 생성 : /insert
 	@Override
-	public void memberInsert(MemberDTO mDto) throws Exception {
-		session.insert("MemberMapper.create", mDto);
+	public int memberInsert(MemberDTO mDto) throws Exception {
+		
+		int result = 0;
+		
+		try {
+			result = session.insert("MemberMapper.create", mDto);
+		} catch (Exception e) {
+		}
+		
+		return result;
 	}
 	
 	// 특정 유저 정보 조회 : /detail

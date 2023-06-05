@@ -5,7 +5,7 @@ import com.sansam.adeye.domain.MemberDTO;
 public interface IMemberService {
 	
 	// 회원등록 
-	public void memberInsert(MemberDTO dto) throws Exception;
+	public int memberInsert(MemberDTO dto) throws Exception;
 	
 	// 회원상세
 	public MemberDTO memberDetail(String mid) throws Exception;
