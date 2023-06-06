@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.sansam.adeye.domain.Criteria;
 import com.sansam.adeye.domain.MemberDTO;
 import com.sansam.adeye.service.IMemberService;
 
@@ -33,27 +32,31 @@ public class MemberController {
 		return "/member/register";
 	}
 	
-	// 관리자 - 회원 등록
+	// 회원 등록
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> insert(MemberDTO data) throws Exception {
 		
 		log.info("/member/insert.................."+ data.getMem_company());
 		
-			
-		
-		// 보내줄 맵 객체 생성,
+		// 보내줄 맵 객체 생성
 	    Map<String,Object> paramMap = new HashMap<String, Object>();
 	    
-	    int cnt = service.memberInsert(data);
-
-	    if(cnt > 0 ) {
-	    	paramMap.put("code", "201");
-		    paramMap.put("message", "등록 성공");
-	    }else {
-	    	paramMap.put("code", "203");
-		    paramMap.put("message", "처리 실패");
-	    }
-	    
+	    try {
+	    	
+		    int cnt = service.memberInsert(data);
+	
+		    if(cnt > 0 ) {
+		    	paramMap.put("code", "201");
+			    paramMap.put("message", "등록 성공");
+		    }else {
+		    	paramMap.put("code", "203");
+			    paramMap.put("message", "처리 실패");
+		    }
+		    
+	    } catch (Exception e) {
+			paramMap.put("code", "500");
+		    paramMap.put("message", "서버 문제");
+		}
 	    
 		return paramMap;
 	}
@@ -65,7 +68,9 @@ public class MemberController {
 		log.info("/member/detail..................data : " + data);
 		
 		Map<String,Object> paramMap = new HashMap<String, Object>();
+		
 		try {
+			
 			MemberDTO dto = service.memberDetail(data);
 			// 보내줄 맵 객체 생성,
 		    
@@ -83,12 +88,11 @@ public class MemberController {
 		    paramMap.put("result", paramMapSub);
 		    paramMap.put("code", "200");
 		    paramMap.put("message", "조회 성공");
+		    
 		} catch (Exception e) {
 			paramMap.put("code", "204");
 		    paramMap.put("message", "조회 실패");
 		}
-		
-		
 	    
 		return paramMap;
 	}
@@ -99,19 +103,26 @@ public class MemberController {
 		
 		log.info("/member/update..................");
 		
-		// 보내줄 맵 객체 생성,
+		// 보내줄 맵 객체 생성
 	    Map<String, String> paramMap = new HashMap<String, String>();
-	    System.out.println(data.toString());
-	    int cnt = service.memberUpdate(data);
 
-	    if(cnt > 0) {
-	    	paramMap.put("code", "202");
-		    paramMap.put("message", "수정 완료");
-	    } else {
-	    	paramMap.put("code", "204");
-		    paramMap.put("message", "수정 실패");
-	    }
-		
+	    try {
+	    	
+	    	int cnt = service.memberUpdate(data);
+
+		    if(cnt > 0) {
+		    	paramMap.put("code", "202");
+			    paramMap.put("message", "수정 완료");
+		    } else {
+		    	paramMap.put("code", "204");
+			    paramMap.put("message", "수정 실패");
+		    }
+		    
+	    } catch (Exception e) {
+			paramMap.put("code", "500");
+		    paramMap.put("message", "서버 문제");
+		}
+	    
 		return paramMap;
 	}
 	
@@ -124,15 +135,23 @@ public class MemberController {
 		// 보내줄 맵 객체 생성
 	    Map<String, String> paramMap = new HashMap<String, String>();
 	    
-	    int cnt = service.memberDelete(data);
+	    try {
+	    	
+		    int cnt = service.memberDelete(data);
+			    
+		    if(cnt > 0 ) {
+		    	paramMap.put("code", "201");
+			    paramMap.put("message", "삭제 성공");
+		    }else {
+		    	paramMap.put("code", "203");
+			    paramMap.put("message", "삭제 실패");
+		    }
 		    
-	    if(cnt > 0 ) {
-	    	paramMap.put("code", "201");
-		    paramMap.put("message", "삭제 성공");
-	    }else {
-	    	paramMap.put("code", "203");
-		    paramMap.put("message", "삭제 실패");
-	    }
+	    } catch (Exception e) {
+			paramMap.put("code", "500");
+		    paramMap.put("message", "서버 문제");
+		}
+	    
 		return paramMap;
 	}
 	

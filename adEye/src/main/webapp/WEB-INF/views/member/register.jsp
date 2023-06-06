@@ -45,7 +45,11 @@
 	<button onclick="getAPI('mem_detail')">회원조회</button>
 	<button onclick="getAPI('mem_update')">회원수정</button>
 	<button onclick="getAPI('mem_delete')">회원삭제</button>
-	<button onclick="getAPI('mem_list')">회원목록</button>
+	<br>
+	<button onclick="getAPI('dev_insert')">기기등록</button>
+	<button onclick="getAPI('dev_detail')">기기상세</button>
+	<button onclick="getAPI('dev_update')">기기수정</button>
+	<button onclick="getAPI('dev_delete')">기기삭제</button>
 	
 	<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 	<script type="text/javascript">
@@ -90,17 +94,33 @@
 				company_addr : "광주 동구 예술길 31-14",
 				mem_status : "Y"
 			}
-		}else if(code == "mem_list"){
-			aUri = "/member/list"
+		}else if (code == "dev_insert"){
+			
+			aUri = "/device/insert"
 			aType = "POST"
 			aDatas = 
 			{
-				mem_id : "test01",
-				mem_pw : "0000",
-				mem_phone : "000-000-0000",
-				mem_email : "smhrd@smhrd.com",
-				company_addr : "광주 동구 예술길 31-14",
-				mem_status : "Y"
+				device_uid : "device-01-dsfefsdjkwef",
+				device_NM : "디바이스네임"
+			}
+		}else if(code == "dev_detail"){
+			aUri = "/device/detail"
+			aType = "GET"
+			aDatas = "device_seq=1"
+		}else if(code == "dev_delete"){
+			aUri = "/device/delete"
+			aType = "GET"
+			aDatas = "device_seq=1"
+		}else if(code == "dev_update"){
+			aUri = "/device/update"
+			aType = "POST"
+			aDatas = 
+			{
+				device_seq : 1,
+				device_uid : "device-01-dsfefsdjkwef",
+				device_NM : "디바이스네임",
+				device_onoff : "Y",
+				device_status : "Y"
 			}
 		}
 		console.log(aUri)
