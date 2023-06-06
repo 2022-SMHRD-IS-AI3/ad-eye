@@ -23,8 +23,16 @@ public class DeviceDAO implements IDeviceDAO{
 	}
 	// 기기 생성 : /insert
 	@Override
-	public void deviceInsert(DeviceDTO dDto) throws Exception {
-		session.insert("DeviceMapper.create", dDto);	
+	public int deviceInsert(DeviceDTO dDto) throws Exception {
+		
+		int result = 0;
+		
+		try {
+			result = session.insert("DeviceMapper.create", dDto);
+		} catch (Exception e) {
+		}
+		
+		return result;
 	}
 	// 특정 기기 조회 : /detail
 	public DeviceDTO deviceDetail(int seq) throws Exception {
@@ -42,8 +50,8 @@ public class DeviceDAO implements IDeviceDAO{
 	}
 	// 특정 기기 컨트롤 : /control
 	@Override
-	public int deviceControl(DeviceDTO dDto) throws Exception {
-		return session.update("DeviceMapper.control", dDto);
+	public int deviceControl(int seq) throws Exception {
+		return session.update("DeviceMapper.control", seq);
 	}		
 	// 특정 기기 로그 조회 : /log
 	@Override
