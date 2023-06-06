@@ -1,7 +1,52 @@
 package com.sansam.adeye.persistence.impl;
 
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.sansam.adeye.domain.Criteria;
+import com.sansam.adeye.domain.SubscriptionDTO;
 import com.sansam.adeye.persistence.ISubscriptionDAO;
 
+@Repository
 public class SubscriptionDAO implements ISubscriptionDAO{
 
+	@Autowired
+	private SqlSession session;
+	
+	// 전체 구독 조회 : /
+	@Override
+	public List<SubscriptionDTO> sdsList(Criteria cri) throws Exception{
+		return session.selectList("SubscriptionMapper.list", cri);
+	}
+	// 구독 생성 : /insert
+	@Override
+	public int sbsInsert(SubscriptionDTO sDto) throws Exception {
+
+		int result = 0;
+		
+		try {
+			result = session.insert("SubscriptionMapper.create", sDto);
+		} catch (Exception e) {
+		}
+		
+		return result;
+	}
+	// 특정 구독 정보 조회 : /detail
+	@Override
+	public SubscriptionDTO sbsDetail(int seq) throws Exception {
+		return session.selectOne("SubscriptionMapper.detail", seq);
+	}
+	// 특정 구독 수정 : /update
+	@Override
+	public int sbsUpdate(SubscriptionDTO sDto) throws Exception{
+		return session.update("SubscriptionMapper.update", sDto);
+	}
+	// 특정 구독 삭제 (상태 변경) : /delete
+	@Override
+	public int sbsDelete(int seq) throws Exception {
+		return session.update("SubscriptionMapper.delete", seq);
+	}
 }
