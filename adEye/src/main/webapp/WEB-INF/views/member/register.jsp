@@ -50,6 +50,11 @@
 	<button onclick="getAPI('dev_detail')">기기상세</button>
 	<button onclick="getAPI('dev_update')">기기수정</button>
 	<button onclick="getAPI('dev_delete')">기기삭제</button>
+	<br>
+	<button onclick="getAPI('sbs_insert')">구독등록</button>
+	<button onclick="getAPI('sbs_detail')">구독상세</button>
+	<button onclick="getAPI('sbs_update')">구독수정</button>
+	<button onclick="getAPI('sbs_delete')">구독삭제</button>
 	
 	<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 	<script type="text/javascript">
@@ -121,6 +126,42 @@
 				device_NM : "디바이스네임",
 				device_onoff : "Y",
 				device_status : "Y"
+			}
+		}else if (code == "sbs_insert"){
+			
+			aUri = "/subscription/insert"
+			aType = "POST"
+			aDatas = 
+			{
+				mem_id : "test01",
+				device_seq : "2",
+				sbs_loc : "매채위치주소",
+				sbs_alias : "구독 별칭",
+				sbs_start_dt : "2023-01-01",
+				sbs_end_dt : "2023-12-31",
+				sbs_grade : "standard",
+				sbs_status : "Y"
+			}
+		}else if(code == "sbs_detail"){
+			aUri = "/subscription/detail"
+			aType = "GET"
+			aDatas = "sbs_seq=1"
+		}else if(code == "sbs_delete"){
+			aUri = "/subscription/delete"
+			aType = "GET"
+			aDatas = "sbs_seq=1"
+		}else if(code == "sbs_update"){
+			aUri = "/subscription/update"
+			aType = "POST"
+			aDatas = 
+			{
+				sbs_seq : "1",
+				device_seq : "2",
+				sbs_loc : "매채위치주소",
+				sbs_alias : "구독 별칭",
+				sbs_end_dt : "2023-12-31",
+				sbs_grade : "standard",
+				sbs_status : "Y"
 			}
 		}
 		console.log(aUri)
