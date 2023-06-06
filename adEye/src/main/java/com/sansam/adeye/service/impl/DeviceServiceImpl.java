@@ -3,12 +3,14 @@ package com.sansam.adeye.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.sansam.adeye.domain.Criteria;
 import com.sansam.adeye.domain.DeviceDTO;
 import com.sansam.adeye.persistence.IDeviceDAO;
 import com.sansam.adeye.service.IDeviceService;
 
+@Service
 public class DeviceServiceImpl implements IDeviceService{
 
 	@Autowired
