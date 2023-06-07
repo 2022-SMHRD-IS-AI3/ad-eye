@@ -1,12 +1,16 @@
-package com.sansam.adeye.persistence;
+package com.sansam.adeye.service;
 
 import java.util.List;
+
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sansam.adeye.domain.Criteria;
 import com.sansam.adeye.domain.DeviceDTO;
 
-public interface IDeviceDAO {
-
+public interface IDeviceService {
+	
 	// 전체 기기 조회
 	public List<DeviceDTO> deviceList(Criteria cri) throws Exception;
 	// 기기 생성

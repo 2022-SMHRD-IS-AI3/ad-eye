@@ -41,62 +41,141 @@
 </head>
 <body>
 	
-	<button onclick="getAPI()">영화 정보 가져오기</button>
-    <!-- 영화 진흥위원회 API를 가져와서
-    일일 박스오피스 영화 TOP 10의
-    순위, 영화 이름, 개봉일 출력 -->
-
-    <!-- <table>
-        <td>
-            <th>순위</th>
-            <th>영화 제목</th>
-            <th>개봉일</th>
-        </td>
-        <td>
-            <tr>1</tr>
-            <tr>2</tr>
-            <tr>3</tr>
-        </td>
-    </table> -->
-    <div id="container"></div>    
+	<button onclick="getAPI('mem_insert')">회원가입</button>
+	<button onclick="getAPI('mem_detail')">회원조회</button>
+	<button onclick="getAPI('mem_update')">회원수정</button>
+	<button onclick="getAPI('mem_delete')">회원삭제</button>
+	<br>
+	<button onclick="getAPI('dev_insert')">기기등록</button>
+	<button onclick="getAPI('dev_detail')">기기상세</button>
+	<button onclick="getAPI('dev_update')">기기수정</button>
+	<button onclick="getAPI('dev_delete')">기기삭제</button>
+	<br>
+	<button onclick="getAPI('sbs_insert')">구독등록</button>
+	<button onclick="getAPI('sbs_detail')">구독상세</button>
+	<button onclick="getAPI('sbs_update')">구독수정</button>
+	<button onclick="getAPI('sbs_delete')">구독삭제</button>
+	
 	<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 	<script type="text/javascript">
 	
-	const getAPI = () => {
+	
+	const getAPI = (code) => {
+		let aDatas
+		let aUri = ""
+		let aType = ""
+	
+		if (code == "mem_insert"){
+			
+			aUri = "/member/insert"
+			aType = "POST"
+			aDatas = 
+			{
+				mem_id : "test01",
+				mem_pw : "0000",
+				mem_company : "애드컴퍼니",
+				mem_phone : "000-000-0000",
+				mem_email : "smhrd@smhrd.com",
+				company_addr : "광주 동구 예술길 31-15",
+				mem_status : "Y"
+			}
+		}else if(code == "mem_detail"){
+			aUri = "/member/detail"
+			aType = "GET"
+			aDatas = "mem_id=test01"
+		}else if(code == "mem_delete"){
+			aUri = "/member/delete"
+			aType = "GET"
+			aDatas = "mem_id=test01"
+		}else if(code == "mem_update"){
+			aUri = "/member/update"
+			aType = "POST"
+			aDatas = 
+			{
+				mem_id : "test01",
+				mem_pw : "0000",
+				mem_phone : "000-000-0000",
+				mem_email : "smhrd@smhrd.com",
+				company_addr : "광주 동구 예술길 31-14",
+				mem_status : "Y"
+			}
+		}else if (code == "dev_insert"){
+			
+			aUri = "/device/insert"
+			aType = "POST"
+			aDatas = 
+			{
+				device_uid : "device-01-dsfefsdjkwef",
+				device_NM : "디바이스네임"
+			}
+		}else if(code == "dev_detail"){
+			aUri = "/device/detail"
+			aType = "GET"
+			aDatas = "device_seq=1"
+		}else if(code == "dev_delete"){
+			aUri = "/device/delete"
+			aType = "GET"
+			aDatas = "device_seq=1"
+		}else if(code == "dev_update"){
+			aUri = "/device/update"
+			aType = "POST"
+			aDatas = 
+			{
+				device_seq : 1,
+				device_uid : "device-01-dsfefsdjkwef",
+				device_NM : "디바이스네임",
+				device_onoff : "Y",
+				device_status : "Y"
+			}
+		}else if (code == "sbs_insert"){
+			
+			aUri = "/subscription/insert"
+			aType = "POST"
+			aDatas = 
+			{
+				mem_id : "test01",
+				device_seq : "2",
+				sbs_loc : "매채위치주소",
+				sbs_alias : "구독 별칭",
+				sbs_start_dt : "2023-01-01",
+				sbs_end_dt : "2023-12-31",
+				sbs_grade : "standard",
+				sbs_status : "Y"
+			}
+		}else if(code == "sbs_detail"){
+			aUri = "/subscription/detail"
+			aType = "GET"
+			aDatas = "sbs_seq=1"
+		}else if(code == "sbs_delete"){
+			aUri = "/subscription/delete"
+			aType = "GET"
+			aDatas = "sbs_seq=1"
+		}else if(code == "sbs_update"){
+			aUri = "/subscription/update"
+			aType = "POST"
+			aDatas = 
+			{
+				sbs_seq : "1",
+				device_seq : "2",
+				sbs_loc : "매채위치주소",
+				sbs_alias : "구독 별칭",
+				sbs_end_dt : "2023-12-31",
+				sbs_grade : "standard",
+				sbs_status : "Y"
+			}
+		}
+		console.log(aUri)
+		console.log(aDatas)
         // ajax문
         $.ajax({ // url, success, error 는 무조건 있어야한다
             // 어디랑 통신 할건지
-            url: 'https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json',
-            type: 'GET',
-            data: 'key=f5eef3421c602c6cb7ea224104795888&targetDt=20230101',
+            url: 'http://localhost:9000' + aUri,
+            type: aType,
+            data: aDatas,
             // 통신에 성공했을 때 실행할 로직
             success: function (response) {
-                // response => 응답 데이터
-                // alert('통신성공');
-                let movieList = response.boxOfficeResult.dailyBoxOfficeList;
-                let tableForm = `
-                    <table>
-                        <tr>
-                            <th>순위</th>
-                            <th>영화제목</th>
-                            <th>개봉일</th>
-                        <tr>
-                `;
-
-                movieList.forEach(v => {
-                    console.log(v.rank, v.movieNm, v.openDt);
-                    tableForm += `
-                        <tr>
-                            <td>${v.rank}</td>
-                            <td class="title">${v.movieNm}</td>
-                            <td style="color: #5e5e5e;">${v.openDt}</td>
-                        </tr>`;
-                });
-                
-                tableForm += `</table>`;
-                $('#container').html(tableForm);
-
-                
+            	console.log("통신성공")
+            	console.log(response)
             },
             // 통신에 실패했을 때 실행할 로직
             error: function () {
@@ -104,7 +183,6 @@
             }
         })
     }
-	
 	
 	
 	</script>
