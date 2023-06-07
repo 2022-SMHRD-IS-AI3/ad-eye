@@ -55,6 +55,17 @@
 	<button onclick="getAPI('sbs_detail')">구독상세</button>
 	<button onclick="getAPI('sbs_update')">구독수정</button>
 	<button onclick="getAPI('sbs_delete')">구독삭제</button>
+	<br>
+	<button onclick="getAPI('ai_submit')">AI전송</button>
+	<br>
+	<input type="text" name="mem_id" id="mem_id" value="test01">
+	<input type="text" name="mem_pw" id="mem_pw" value="0000">
+	<br>
+	<button onclick="getAPI('login')">로그인</button>
+	<button onclick="getAPI('logout')">로그아웃</button>
+	<button onclick="getAPI('loginSession')">로그인확인</button>
+	<br>
+	<button onclick="getAPI('adminDashboard')">어드민 대시보드</button>
 	
 	<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 	<script type="text/javascript">
@@ -65,7 +76,34 @@
 		let aUri = ""
 		let aType = ""
 	
-		if (code == "mem_insert"){
+		if(false){
+			
+		}else if (code == "adminDashboard"){
+			aUri = "/adminDashboard"
+			aType = "GET"
+		}else if (code == "loginSession"){
+			
+			
+			aUri = "/loginSession"
+			aType = "GET"
+			
+		}else if (code == "login"){
+			
+			let mem_id = document.getElementById("mem_id").value;
+			let mem_pw = document.getElementById("mem_pw").value;
+			aUri = "/login"
+			aType = "POST"
+			aDatas = 
+			{
+				mem_id : mem_id,
+				mem_pw : mem_pw
+			}
+		}else if (code == "logout"){
+			
+			aUri = "/logout"
+			aType = "GET"
+			
+		}else if (code == "mem_insert"){
 			
 			aUri = "/member/insert"
 			aType = "POST"
@@ -163,15 +201,48 @@
 				sbs_grade : "standard",
 				sbs_status : "Y"
 			}
+		}else if(code == "ai_submit"){
+			aUri = "/acq/submit"
+			aType = "POST"
+			aDatas = [
+				{
+					start_data_time: "2023-06-07 09:30:50", 
+					end_data_time: "2023-06-07 09:31:20", 
+					effect: 0, 
+					gender: "W"
+				},
+				{
+					start_data_time: "2023-06-07 09:30:50", 
+					end_data_time: "2023-06-07 09:31:20", 
+					effect: 2, 
+					gender: "W"
+				}
+					
+			]
+			
+			/* aDatas = {tid_data:{
+					
+							start_data_time: "2023-06-07 09:30:50", 
+							end_data_time: "2023-06-07 09:31:20", 
+							effect: 0, 
+							gender: "W"
+						}} */
+						
+					
+				
+			
+			
 		}
 		console.log(aUri)
 		console.log(aDatas)
         // ajax문
         $.ajax({ // url, success, error 는 무조건 있어야한다
             // 어디랑 통신 할건지
-            url: 'http://localhost:9000' + aUri,
+            url: 'http://211.223.37.186:9000' + aUri,
             type: aType,
-            data: aDatas,
+            data: JSON.stringify(aDatas),
+            contentType: 'application/json',
+            dataType: 'json',
             // 통신에 성공했을 때 실행할 로직
             success: function (response) {
             	console.log("통신성공")

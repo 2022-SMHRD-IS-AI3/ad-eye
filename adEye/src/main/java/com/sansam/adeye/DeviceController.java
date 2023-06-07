@@ -33,7 +33,7 @@ public class DeviceController {
 		
 	}
 	
-	// 기기 등록
+	// 관리자 - 기기 등록
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> insert(DeviceDTO data) throws Exception {
 		
