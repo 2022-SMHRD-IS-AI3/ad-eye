@@ -2,8 +2,10 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sansam.adeye.mapper.AcquisitionMapper">
-  
-  
-  
+<mapper namespace="AcquisitionMapper">
+	<select id="list" resultType="com.sansam.adeye.domain.AcquisitionDTO">
+		SELECT acq_gender, acq_interest, acq_dt
+		FROM tb_acquisition
+		WHERE sbs_seq = #{sbs_seq} AND acq_dt = current_date
+	</select>
 </mapper>
