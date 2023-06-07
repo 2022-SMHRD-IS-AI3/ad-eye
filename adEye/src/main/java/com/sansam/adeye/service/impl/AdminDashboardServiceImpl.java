@@ -1,11 +1,13 @@
 package com.sansam.adeye.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.sansam.adeye.domain.AdminDashboardDTO;
 import com.sansam.adeye.persistence.IAdminDashboardDAO;
 import com.sansam.adeye.service.IAdminDashboardService;
 
+@Service
 public class AdminDashboardServiceImpl implements IAdminDashboardService{
 
 	@Autowired

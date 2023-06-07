@@ -11,6 +11,6 @@
   			(SELECT COUNT(device_seq) FROM tb_device WHERE device_status IN ('Y', 'N')) AS device_total,
   			(SELECT COUNT(sbs_seq) FROM tb_subscription WHERE TRUNC(current_timestamp) - TRUNC(sbs_end_dt) &lt;= 5) AS sbs_dday,
   			(SELECT COUNT(sbs_seq) FROM tb_subscription) AS sbs_total
-		FROM dual;
+		FROM dual
 	</select>	
 </mapper>

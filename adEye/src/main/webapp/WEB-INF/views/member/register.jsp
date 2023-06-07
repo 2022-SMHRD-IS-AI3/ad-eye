@@ -79,7 +79,7 @@
 		if(false){
 			
 		}else if (code == "adminDashboard"){
-			aUri = "/adminDashboard"
+			aUri = "/admin/dashboard"
 			aType = "GET"
 		}else if (code == "loginSession"){
 			
@@ -104,12 +104,12 @@
 			aType = "GET"
 			
 		}else if (code == "mem_insert"){
-			
+			var mem_id = document.getElementById("mem_id").value;
 			aUri = "/member/insert"
 			aType = "POST"
 			aDatas = 
 			{
-				mem_id : "test01",
+				mem_id : mem_id,
 				mem_pw : "0000",
 				mem_company : "애드컴퍼니",
 				mem_phone : "000-000-0000",
@@ -202,9 +202,11 @@
 				sbs_status : "Y"
 			}
 		}else if(code == "ai_submit"){
+			
+			
 			aUri = "/acq/submit"
 			aType = "POST"
-			aDatas = [
+			var datas = [
 				{
 					start_data_time: "2023-06-07 09:30:50", 
 					end_data_time: "2023-06-07 09:31:20", 
@@ -219,6 +221,7 @@
 				}
 					
 			]
+			aDatas = JSON.stringify(datas)
 			
 			/* aDatas = {tid_data:{
 					
@@ -231,7 +234,7 @@
 					
 				
 			
-			
+			content = 'application/json';
 		}
 		console.log(aUri)
 		console.log(aDatas)
@@ -240,9 +243,7 @@
             // 어디랑 통신 할건지
             url: 'http://211.223.37.186:9000' + aUri,
             type: aType,
-            data: JSON.stringify(aDatas),
-            contentType: 'application/json',
-            dataType: 'json',
+            data: aDatas,
             // 통신에 성공했을 때 실행할 로직
             success: function (response) {
             	console.log("통신성공")

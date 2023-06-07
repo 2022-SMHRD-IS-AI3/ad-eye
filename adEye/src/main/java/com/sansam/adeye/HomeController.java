@@ -50,6 +50,7 @@ public class HomeController {
 		
 		return "home";
 	}
+	
 	@RequestMapping(value = "/submit", method = RequestMethod.POST)
 	public @ResponseBody Map<String,String> submit(@RequestBody List<AcquisitionSubmitDTO> data) {
 		
@@ -124,30 +125,5 @@ public class HomeController {
 		return paramMap;
 	}
 	
-	// 어드민대시보드
-	@RequestMapping(value = "/adminDashboard", method = RequestMethod.GET)
-	public @ResponseBody Map<String,Object> adminDashboard(HttpSession session) {
-		
-		Map<String,Object> paramMap = new HashMap<String, Object>();
-		if(session.getAttribute("LoginId") != null) {
-			
-			Map<String,Object> paramMapSub = new HashMap<String, Object>();
-		    paramMapSub.put("contact_noread_cnt", 3);
-		    paramMapSub.put("contact_total", 55);
-		    paramMapSub.put("device_use_cnt", 13);
-		    paramMapSub.put("device_total", 20);
-		    paramMapSub.put("sbs_dday", 3);
-		    paramMapSub.put("sbs_total", 13);
-		    paramMap.put("result", paramMapSub);
-			paramMap.put("code", "200");
-			paramMap.put("message", "조회 성공");
-		}else {
-			paramMap.put("code", "202");
-			paramMap.put("message", "로그인 후 이용해주세요");
-		}
-		logger.info("/adminDashboard.................");
-		
-		return paramMap;
-	}
 	
 }
