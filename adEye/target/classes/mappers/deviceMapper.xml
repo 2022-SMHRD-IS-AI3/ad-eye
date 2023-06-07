@@ -21,7 +21,7 @@
 							  device_onoff,
 							  device_status,
 							  device_dt
-		           	   from device
+		           	   from tb_device
 		           	   where
 		]]>
 		<include refid="criteria"></include>         
@@ -32,16 +32,16 @@
       	]]>
 	</select>
 	<delete id="device_delete" parameterType="int">
-		delete from device where device_seq = #{device_seq}
+		delete from tb_device where device_seq = #{device_seq}
 	</delete>
 	<update id="device_on" parameterType="int">
-		update device set device_onoff = 'Y' where device_seq = #{device_seq}
+		update tb_device set device_onoff = 'Y' where device_seq = #{device_seq}
 	</update>
 	<update id="device_off" parameterType="int">
-		update device set device_onoff = 'N' where device_seq = #{device_seq}
+		update tb_device set device_onoff = 'N' where device_seq = #{device_seq}
 	</update>
 	<update id="device_update" parameterType="com.sansam.adeye.domain.DeviceDTO">
-		update device set device_uid=#{device_uid}, device_NM=#{device_NM}, device_onoff = 'Y', device_status=#{device_status} where device_seq = #{device_seq}
+		update tb_device set device_uid=#{device_uid}, device_NM=#{device_NM}, device_onoff = 'Y', device_status=#{device_status} where device_seq = #{device_seq}
 	</update> -->
   
 </mapper>
