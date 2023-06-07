@@ -7,7 +7,7 @@
   <!-- <insert id="device_on">
 		insert into device values(device_seq.nextInt, #{device_uid}, #{device_NM}, #{device_onoff}, #{device_status}, sysdate)
 	</insert>
-	<select id="device_selectall" resultType="DeviceDTO">
+	<select id="device_selectall" resultType="com.sansam.adeye.domain.DeviceDTO">
 		<![CDATA[select device_seq,
 						device_uid,
 						device_NM,
