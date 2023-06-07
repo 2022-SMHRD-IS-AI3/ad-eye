@@ -12,7 +12,7 @@
 				   mem_company,
 				   mem_phone,
 				   mem_email,
-				   mem_state,
+				   mem_status,
 				   mem_joindate,
 				   company_addr
 			from (select rownum rn,
@@ -21,10 +21,10 @@
 				     	 mem_company,
 				   		 mem_phone,
 				   		 mem_email,
-				   	     mem_state,
+				   	     mem_status,
 				   		 mem_joindate,
 				   		 company_addr
-				  from member
+				  from tb_member
 				  where
 		]]>
 	  <include refid="criteria"></include>         
@@ -75,7 +75,7 @@
 	</update>
 	<!-- 
 	<select id="login" resultType="com.sansam.adeye.domain.MemberDTO">
-		SELECT * FROM member WHERE mem_id = #{mem_id} AND mem_pw = #{mem_pw}
+		SELECT * FROM tb_member WHERE mem_id = #{mem_id} AND mem_pw = #{mem_pw}
 <<<<<<< HEAD
 	</select>
 	  
