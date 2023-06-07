@@ -7,7 +7,7 @@
   <!-- <insert id="device_on">
 		insert into device values(device_seq.nextInt, #{device_uid}, #{device_NM}, #{device_onoff}, #{device_status}, sysdate)
 	</insert>
-	<select id="device_selectall" resultType="DeviceDTO">
+	<select id="device_selectall" resultType="com.sansam.adeye.domain.DeviceDTO">
 		<![CDATA[select device_seq,
 						device_uid,
 						device_NM,
@@ -40,7 +40,7 @@
 	<update id="device_off" parameterType="int">
 		update device set device_onoff = 'N' where device_seq = #{device_seq}
 	</update>
-	<update id="device_update" parameterType="DeviceDTO">
+	<update id="device_update" parameterType="com.sansam.adeye.domain.DeviceDTO">
 		update device set device_uid=#{device_uid}, device_NM=#{device_NM}, device_onoff = 'Y', device_status=#{device_status} where device_seq = #{device_seq}
 	</update> -->
   
