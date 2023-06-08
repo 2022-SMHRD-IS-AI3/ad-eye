@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AdminDashboardMapper">
+	<select id="adminView" resultType="com.sansam.adeye.domain.AdminDashboardDTO">
+		SELECT
+			(SELECT COUNT(contact_seq) FROM tb_contact WHERE contact_open = 'N') AS contact_noread_cnt,
+  			(SELECT COUNT(contact_seq) FROM tb_contact) AS contact_total,
+  			(SELECT COUNT(device_seq) FROM tb_device WHERE device_status = 'Y') AS device_use_cnt,
+  			(SELECT COUNT(device_seq) FROM tb_device WHERE device_status IN ('Y', 'N')) AS device_total,
+  			(SELECT COUNT(sbs_seq) FROM tb_subscription WHERE TRUNC(current_timestamp) - TRUNC(sbs_end_dt) &lt;= 5) AS sbs_dday,
+  			(SELECT COUNT(sbs_seq) FROM tb_subscription) AS sbs_total
+		FROM dual
+	</select>	
+</mapper>
