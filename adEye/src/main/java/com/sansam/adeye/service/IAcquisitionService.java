@@ -9,7 +9,7 @@ import com.sansam.adeye.domain.LogDTO;
 public interface IAcquisitionService {
 
 	// 데이터 조회
-	public List<AcquisitionDTO> checkData(int seq) throws Exception;
+	public List<AcquisitionDTO> acqDashboard(int seq) throws Exception;
 	// 데이터 수집
 	public List<AcquisitionSubmitDTO> submit(String uid) throws Exception;
 	// 로그 수집

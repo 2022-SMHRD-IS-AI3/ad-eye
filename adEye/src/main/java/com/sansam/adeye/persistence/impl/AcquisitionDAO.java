@@ -19,7 +19,7 @@ public class AcquisitionDAO implements IAcquisitionDAO{
 	
 	// 데이터 조회 : 분석페이지화면구성
 	@Override
-	public List<AcquisitionDTO> checkData(int seq) throws Exception{
+	public List<AcquisitionDTO> acqDashboard(int seq) throws Exception{
 		
 		return session.selectList("AcquisitionMapper.list", seq);
 	}
