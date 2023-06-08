@@ -36,7 +36,7 @@ public class ContactDAO implements IContactDAO{
 	}
 	// 특정 문의 내역 조회
 	@Override
-	public ContactDTO contactDetail(Integer seq) throws Exception{
+	public ContactDTO contactDetail(int seq) throws Exception{
 		return session.selectOne("ContactMapper.detail", seq);
 	}
 }
