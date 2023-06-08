@@ -51,21 +51,7 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value = "/submit", method = RequestMethod.POST)
-	public @ResponseBody Map<String,String> submit(@RequestBody List<AcquisitionSubmitDTO> data) {
-		
-		logger.info("Welcome home! The client locale is {}.", "/tid_data.................");
-		for (AcquisitionSubmitDTO adto : data) {
-			System.out.println(adto.getUid()+"-"+adto.getTid()+"-"+adto.getStart_data_time()+"-"+adto.getEnd_data_time()+"-"+adto.getEffect()+"-"+adto.getGender());
-		}
-//		for (AiSubmitDTO dto : data) {
-//			
-//			System.out.println(dto.getData_time() +" ... " +dto.getEffect()+" ... " +dto.getGender());
-//		}
-		Map<String,String> paramMap = new HashMap<String, String>();
-		paramMap.put("reboot_code", "0");
-		return paramMap;
-	}
+	
 	
 	// 로그인
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
