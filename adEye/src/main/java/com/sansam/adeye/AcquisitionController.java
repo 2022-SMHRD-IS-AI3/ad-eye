@@ -58,8 +58,8 @@ public class AcquisitionController {
 		
 	}
 	
-	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
-	public @ResponseBody Map<String,Object> dashboard(@RequestParam("sbs_seq") String sbs_seq,@RequestParam("search_date") String search_date) { // @ResponseBody : 응답할 때 JSON 데이터로 반환
+	@RequestMapping(value = "/acqDashboard", method = RequestMethod.GET)
+	public @ResponseBody Map<String,Object> acqDashboard(@RequestParam("sbs_seq") String sbs_seq,@RequestParam("search_date") String search_date) { // @ResponseBody : 응답할 때 JSON 데이터로 반환
 		
 		System.out.println("분석 메인 화면 ......sbs_seq: " + sbs_seq);
 		

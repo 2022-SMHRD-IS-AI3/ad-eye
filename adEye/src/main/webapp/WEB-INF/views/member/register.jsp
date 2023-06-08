@@ -163,7 +163,21 @@
 				mem_pw : "0000",
 				mem_company : "애드컴퍼니",
 				mem_phone : "000-000-0000",
-				mem_email : "smhrd@smhrd.com",
+				mem_email : "smhrd@smhdrd.com",
+				company_addr : "광주 동구 예술길 31-15",
+				mem_status : "Y"
+			}
+		}else if (code == "mem_insert"){
+			var mem_id = document.getElementById("mem_id").value;
+			aUri = "/member/insert"
+			aType = "POST"
+			aDatas = 
+			{
+				pageNum : 1,
+				pageAmount : "0000",
+				mem_company : "애드컴퍼니",
+				mem_phone : "000-000-0000",
+				mem_email : "smhrd@smhdrd.com",
 				company_addr : "광주 동구 예술길 31-15",
 				mem_status : "Y"
 			}
