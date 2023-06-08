@@ -5,6 +5,7 @@ import java.sql.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,12 +13,16 @@ import lombok.NoArgsConstructor;
 public class ContactDTO {
 
 	private int contact_seq;
+	@NonNull
 	private String email;
+	@NonNull
 	private String phone;
-	private int company;
-	private int contact_content;
+	@NonNull
+	private String company;
+	@NonNull
+	private String contact_content;
 	private Date contact_dt;
-	private int contact_open;
-	private int admin_id;
+	private char contact_open;
+	private String admin_id;
 	
 }
