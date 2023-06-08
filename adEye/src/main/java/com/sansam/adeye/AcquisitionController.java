@@ -58,7 +58,7 @@ public class AcquisitionController {
 		
 	}
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
 	public @ResponseBody Map<String,Object> dashboard(@RequestParam("sbs_seq") String sbs_seq,@RequestParam("search_date") String search_date) { // @ResponseBody : 응답할 때 JSON 데이터로 반환
 		
 		System.out.println("분석 메인 화면 ......sbs_seq: " + sbs_seq);
@@ -67,27 +67,28 @@ public class AcquisitionController {
 		Map<String,Object> paramMap = new HashMap<String, Object>();
 		
 		try {
-			
 			//List<DeviceDTO> dto = service.deviceLog(Integer.parseInt(data));
-		    
-		    // paramMap 담을 객체 생성
+			int[] oneH_man_cnt = {50,23,15,46,84,53,200,489,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+			int[] oneH_interest = {30,13,5,26,34,23,110,189,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 			
-		    List<Map<String, Object>> paramMapSubList = new ArrayList<>();
-		    for (int i = 0; i < 2; i++) {
-		    	Map<String,Object> paramMapSub = new HashMap<String, Object>();
-		    	paramMapSub.put("device_seq", 1);
-			    paramMapSub.put("device_uid", "device-test");
-			    paramMapSub.put("device_NM", "기기네임");
-			    paramMapSub.put("device_onoff", "Y");
-			    paramMapSub.put("device_status", "Y");
-			    paramMapSub.put("device_dt", "2023-05-05 12:50:12");
+			int man_total = 1634;
+			int interest_total = 811;
+			int male_cnt = 1154;
+			int female_cnt = 480;
+					
+			// paramMap 담을 객체 생성
+		    Map<String,Object> paramMapSub = new HashMap<String, Object>();
+		    paramMapSub.put("oneH_man_cnt", oneH_man_cnt);
+			paramMapSub.put("oneH_interest", oneH_interest);
+			paramMapSub.put("man_total", man_total);
+			paramMapSub.put("interest_total", interest_total);
+			paramMapSub.put("male_cnt", male_cnt);
+			paramMapSub.put("female_cnt", female_cnt);
 			    
-			    paramMapSubList.add(paramMapSub);
-			}
 		    
-		    System.out.println(paramMapSubList.toString());
+		    System.out.println(paramMapSub.toString());
 		    
-		    paramMap.put("result", paramMapSubList);
+		    paramMap.put("result", paramMapSub);
 		    paramMap.put("code", "200");
 		    paramMap.put("message", "조회 성공");
 		    

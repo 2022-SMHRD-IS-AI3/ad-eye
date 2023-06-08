@@ -83,9 +83,9 @@
 		if(false){
 			
 		}else if(code == "userDashboard"){
-			aUri = "/acq"
+			aUri = "/acq/dashboard"
 			aType = "GET"
-			aDatas = "device_seq="+val
+			aDatas = "sbs_seq="+val+"&search_date=2023-06-08"
 			
 		}else if(code == "dev_log"){
 			aUri = "/device/log"
