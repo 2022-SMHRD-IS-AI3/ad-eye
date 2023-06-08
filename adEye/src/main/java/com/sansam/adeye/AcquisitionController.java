@@ -25,7 +25,7 @@ public class AcquisitionController {
 		
 		log.info("Welcome home! The client locale is {}");
 		for (AcquisitionSubmitDTO adto : data) {
-			System.out.println(adto.getUid()+"-"+adto.getTid()+"-"+adto.getStart_data_time()+"-"+adto.getEnd_data_time()+"-"+adto.getEffect()+"-"+adto.getGender());
+			System.out.println(adto.getDevice_uid()+"-"+adto.getAcq_tid()+"-"+adto.getAcq_start_dt()+"-"+adto.getAcq_end_dt()+"-"+adto.getAcq_interest()+"-"+adto.getAcq_gender());
 		}
 //		for (AiSubmitDTO dto : data) {
 //			
@@ -39,15 +39,7 @@ public class AcquisitionController {
 	@RequestMapping(value = "/log", method = RequestMethod.POST)
 	public @ResponseBody Map<String,Object> log(@RequestBody String data) { // @ResponseBody : 응답할 때 JSON 데이터로 반환
 		
-		System.out.println(data);
-		
-		/*for (AcquisitionSubmitDTO dto : data) {
-			
-			System.out.println(dto.getEffect() +" ... " +dto.getGender());
-		}*/
-//		ObjectMapper mapper = new ObjectMapper();
-//
-//		List<AcquisitionSubmitDTO> board = mapper.readValue(data, List<AcquisitionSubmitDTO>);
+		System.out.println("test " + data);
 		
 		// 보내줄 맵 객체 생성, 
 	    Map<String,Object> paramMap = new HashMap<String, Object>();
@@ -60,7 +52,6 @@ public class AcquisitionController {
 	    paramMap.put("code", "201");
 	    paramMap.put("message", "등록 성공");
 	    
-	    // {"result":{"mem-id":"ad230531xxx"},"code":"201","message":"등록 성공"}
 		return paramMap;
 		
 	}
