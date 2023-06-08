@@ -4,10 +4,10 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="DeviceMapper">
   
-  <!-- <insert id="device_on">
+  <!-- <insert id="create">
 		insert into device values(device_seq.nextInt, #{device_uid}, #{device_NM}, #{device_onoff}, #{device_status}, sysdate)
 	</insert>
-	<select id="device_selectall" resultType="com.sansam.adeye.domain.DeviceDTO">
+	<select id="list" resultType="com.sansam.adeye.domain.DeviceDTO">
 		<![CDATA[select device_seq,
 						device_uid,
 						device_NM,
@@ -31,17 +31,14 @@
          WHERE rn > (#{pageNum} - 1) * #{amount}
       	]]>
 	</select>
-	<delete id="device_delete" parameterType="int">
+	<delete id="delete" parameterType="int">
 		delete from tb_device where device_seq = #{device_seq}
 	</delete>
-	<update id="device_on" parameterType="int">
-		update tb_device set device_onoff = 'Y' where device_seq = #{device_seq}
+	<update id="control" parameterType="dom.sansam.adeye.domain.DeviceDTO">
+		update device set device_onoff = #{device_onoff} where device_seq = #{device_seq}
 	</update>
-	<update id="device_off" parameterType="int">
-		update tb_device set device_onoff = 'N' where device_seq = #{device_seq}
-	</update>
-	<update id="device_update" parameterType="com.sansam.adeye.domain.DeviceDTO">
-		update tb_device set device_uid=#{device_uid}, device_NM=#{device_NM}, device_onoff = 'Y', device_status=#{device_status} where device_seq = #{device_seq}
+	<update id="update" parameterType="dom.sansam.adeye.domain.DeviceDTO">
+		update device set device_uid=#{device_uid}, device_NM=#{device_NM}, device_onoff = 'Y', device_status=#{device_status} where device_seq = #{device_seq}
 	</update> -->
   
 </mapper>

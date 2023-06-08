@@ -1,6 +1,9 @@
 package com.sansam.adeye;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -165,7 +168,7 @@ public class DeviceController {
 	@RequestMapping(value = "/onoff", method = RequestMethod.POST)
 	public @ResponseBody Map<String, String> onoff(DeviceDTO data) throws Exception {
 		
-		log.info("/device/onoff..................data : ");
+		log.info("/device/onoff..................data : "+data);
 		
 		// 보내줄 맵 객체 생성
 	    Map<String, String> paramMap = new HashMap<String, String>();
@@ -191,6 +194,50 @@ public class DeviceController {
 		return paramMap;
 	}
 	
+	// 기기 로그 
+	@SuppressWarnings("null")
+	@RequestMapping(value = "/log", method = RequestMethod.GET)
+	public @ResponseBody Map<String, Object> log(@RequestParam("device_seq") String data) throws Exception {
+
+		log.info("/device/detail..................data : " + data);
+		
+		// 보내줄 맵 객체 생성
+		Map<String,Object> paramMap = new HashMap<String, Object>();
+		
+		try {
+			
+			//List<DeviceDTO> dto = service.deviceLog(Integer.parseInt(data));
+		    
+		    // paramMap 담을 객체 생성
+			
+		    List<Map<String, Object>> paramMapSubList = new ArrayList<>();
+		    for (int i = 0; i < 2; i++) {
+		    	Map<String,Object> paramMapSub = new HashMap<String, Object>();
+		    	paramMapSub.put("device_seq", 1);
+			    paramMapSub.put("device_uid", "device-test");
+			    paramMapSub.put("device_NM", "기기네임");
+			    paramMapSub.put("device_onoff", "Y");
+			    paramMapSub.put("device_status", "Y");
+			    paramMapSub.put("device_dt", "2023-05-05 12:50:12");
+			    
+			    paramMapSubList.add(paramMapSub);
+			}
+		    
+		    System.out.println(paramMapSubList.toString());
+		    
+		    paramMap.put("result", paramMapSubList);
+		    paramMap.put("code", "200");
+		    paramMap.put("message", "조회 성공");
+		    
+		} catch (Exception e) {
+			
+			paramMap.put("code", "500");
+		    paramMap.put("message", "서버 문제");
+		    
+		}
+		
+		return paramMap;
+	}
 	
 
 }

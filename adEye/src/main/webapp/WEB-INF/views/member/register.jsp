@@ -51,6 +51,11 @@
 	<button onclick="getAPI('dev_update')">기기수정</button>
 	<button onclick="getAPI('dev_delete')">기기삭제</button>
 	<br>
+	<button onclick="changeAPI('dev_onoff','Y')">기기 ON</button>
+	<button onclick="changeAPI('dev_onoff','N')">기기 OFF</button>
+	<button onclick="changeAPI('dev_onoff','R')">기기 REBOOT</button>
+	<button onclick="changeAPI('dev_log','1')">기기 로그</button>
+	<br>
 	<button onclick="getAPI('sbs_insert')">구독등록</button>
 	<button onclick="getAPI('sbs_detail')">구독상세</button>
 	<button onclick="getAPI('sbs_update')">구독수정</button>
@@ -66,10 +71,55 @@
 	<button onclick="getAPI('loginSession')">로그인확인</button>
 	<br>
 	<button onclick="getAPI('adminDashboard')">어드민 대시보드</button>
-	
+	<button onclick="changeAPI('userDashboard','1')">분석 그래프 페이지</button>
 	<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 	<script type="text/javascript">
 	
+	const changeAPI = (code,val) => {
+		let aDatas
+		let aUri = ""
+		let aType = ""
+	
+		if(false){
+			
+		}else if(code == "userDashboard"){
+			aUri = "/acq"
+			aType = "GET"
+			aDatas = "device_seq="+val
+			
+		}else if(code == "dev_log"){
+			aUri = "/device/log"
+			aType = "GET"
+			aDatas = "device_seq="+val
+			
+		}else if(code == "dev_onoff"){
+			aUri = "/device/onoff"
+			aType = "POST"
+			aDatas = 
+			{
+				device_seq : 1,
+				device_onoff : val
+			}
+		}
+		console.log(aUri)
+		console.log(aDatas)
+        // ajax문
+        $.ajax({ // url, success, error 는 무조건 있어야한다
+            // 어디랑 통신 할건지
+            url: 'http://211.223.37.186:9000' + aUri,
+            type: aType,
+            data: aDatas,
+            // 통신에 성공했을 때 실행할 로직
+            success: function (response) {
+            	console.log("통신성공")
+            	console.log(response)
+            },
+            // 통신에 실패했을 때 실행할 로직
+            error: function () {
+                alert('통신실패');
+            }
+        })
+    }
 	
 	const getAPI = (code) => {
 		let aDatas
