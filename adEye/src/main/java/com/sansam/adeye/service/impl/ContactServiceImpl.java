@@ -30,7 +30,7 @@ public class ContactServiceImpl implements IContactService{
 	}
 	// 특정 문의 내역 조회
 	@Override
-	public ContactDTO contactDetail(Integer seq) throws Exception {
+	public ContactDTO contactDetail(int seq) throws Exception {
 		
 		return cDao.contactDetail(seq);
 	}

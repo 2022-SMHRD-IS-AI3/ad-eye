@@ -12,6 +12,6 @@ public interface IContactService {
 	// 문의 생성
 	public int contactSend(ContactDTO cDto) throws Exception;
 	// 특정 문의 내역 조회
-	public ContactDTO contactDetail(Integer seq) throws Exception;
+	public ContactDTO contactDetail(int seq) throws Exception;
 	
 }

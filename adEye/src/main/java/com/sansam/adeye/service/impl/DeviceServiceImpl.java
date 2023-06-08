@@ -48,9 +48,9 @@ public class DeviceServiceImpl implements IDeviceService{
 	}
 	// 특정 기기 컨트롤
 	@Override
-	public int deviceControl(int seq) throws Exception {
+	public int deviceControl(DeviceDTO dDto) throws Exception {
 		
-		return dDao.deviceControl(seq);
+		return dDao.deviceControl(dDto);
 	}
 	//특정 기기 로그 조회
 	@Override

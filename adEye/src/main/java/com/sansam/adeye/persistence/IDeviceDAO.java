@@ -18,7 +18,7 @@ public interface IDeviceDAO {
 	// 특정 기기 삭제 (상태 변경)
 	public int deviceDelete(int seq) throws Exception;
 	// 특정 기기 컨트롤
-	public int deviceControl(int seq) throws Exception;
+	public int deviceControl(DeviceDTO dDto) throws Exception;
 	//특정 기기 로그 조회
 	public List<DeviceDTO> deviceLog(Criteria cri) throws Exception;
 }
