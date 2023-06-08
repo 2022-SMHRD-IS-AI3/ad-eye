@@ -21,7 +21,7 @@ public class AcquisitionServiceImpl implements IAcquisitionService{
 	@Override
 	public List<AcquisitionDTO> acqDashboard(int seq) throws Exception {
 		
-		return acDao.checkData(seq);
+		return acDao.acqDashboard(seq);
 	}
 	// 데이터 수집
 	@Override
