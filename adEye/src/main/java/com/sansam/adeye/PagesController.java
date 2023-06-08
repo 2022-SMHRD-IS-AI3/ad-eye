@@ -1,4 +1,4 @@
-package com.sansam.adeye.pages;
+package com.sansam.adeye;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
