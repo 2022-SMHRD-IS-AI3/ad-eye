@@ -14,7 +14,7 @@ public class AcquisitionDTO {
 
 	private int acq_seq;
 	@NonNull
-	private int sbs_deq;
+	private int sbs_seq;
 	private char acq_gender;
 	private String acq_interest;
 	private Date acq_dt;
