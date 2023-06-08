@@ -21,5 +21,5 @@ public class AcquisitionDAO implements IAcquisitionDAO{
 		
 		return session.selectList("Acquisition.list", seq);
 	}
-	
+		
 }
