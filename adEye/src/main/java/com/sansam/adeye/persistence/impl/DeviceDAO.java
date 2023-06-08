@@ -50,8 +50,8 @@ public class DeviceDAO implements IDeviceDAO{
 	}
 	// 특정 기기 컨트롤 : /control
 	@Override
-	public int deviceControl(int seq) throws Exception {
-		return session.update("DeviceMapper.control", seq);
+	public int deviceControl(DeviceDTO dDto) throws Exception {
+		return session.update("DeviceMapper.control", dDto);
 	}		
 	// 특정 기기 로그 조회 : /log
 	@Override

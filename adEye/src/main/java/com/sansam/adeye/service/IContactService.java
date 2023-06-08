@@ -1,11 +1,11 @@
-package com.sansam.adeye.persistence;
+package com.sansam.adeye.service;
 
 import java.util.List;
 
 import com.sansam.adeye.domain.ContactDTO;
 import com.sansam.adeye.domain.Criteria;
 
-public interface IContactDAO {
+public interface IContactService {
 
 	// 전체 문의 내역 조회
 	public List<ContactDTO> contactList(Criteria cri) throws Exception;
@@ -13,4 +13,5 @@ public interface IContactDAO {
 	public int contactSend(ContactDTO cDto) throws Exception;
 	// 특정 문의 내역 조회
 	public ContactDTO contactDetail(int seq) throws Exception;
+	
 }

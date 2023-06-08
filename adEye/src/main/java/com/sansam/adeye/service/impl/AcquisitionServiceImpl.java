@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sansam.adeye.domain.AcquisitionDTO;
+import com.sansam.adeye.domain.AcquisitionSubmitDTO;
+import com.sansam.adeye.domain.LogDTO;
 import com.sansam.adeye.persistence.IAcquisitionDAO;
 import com.sansam.adeye.service.IAcquisitionService;
 
@@ -21,5 +23,16 @@ public class AcquisitionServiceImpl implements IAcquisitionService{
 		
 		return acDao.checkData(seq);
 	}
-	
+	// 데이터 수집
+	@Override
+	public List<AcquisitionSubmitDTO> submit(String uid) throws Exception {
+		
+		return acDao.submit(uid);
+	}
+	// 로그 수집
+	@Override
+	public List<LogDTO> log(String uid) throws Exception {
+		
+		return acDao.log(uid);
+	}
 }

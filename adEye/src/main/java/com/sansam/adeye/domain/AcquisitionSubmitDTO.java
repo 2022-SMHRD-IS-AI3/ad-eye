@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class AcquisitionSubmitDTO {
-	private String tid;
-	private String uid;
-	private String start_data_time;
-	private String end_data_time;
-	private int effect;
-	private String gender;
+	private String device_uid;
+	private String acq_tid;
+	private String acq_start_dt;
+	private String acq_end_dt;
+	private String acq_interest;
+	private String acq_gender;
 }

@@ -159,5 +159,38 @@ public class DeviceController {
 	    
 		return paramMap;
 	}
+	
+
+	// 기기 onoff
+	@RequestMapping(value = "/onoff", method = RequestMethod.POST)
+	public @ResponseBody Map<String, String> onoff(DeviceDTO data) throws Exception {
+		
+		log.info("/device/onoff..................data : ");
+		
+		// 보내줄 맵 객체 생성
+	    Map<String, String> paramMap = new HashMap<String, String>();
+	    
+	    try {
+	    	
+	    	int cnt = service.deviceControl(data); // data로 변경
+
+		    if(cnt > 0) {
+		    	paramMap.put("code", "202");
+			    paramMap.put("message", "처리 완료");
+		    } else {
+		    	paramMap.put("code", "204");
+			    paramMap.put("message", "처리 실패");
+		    }
+		    
+		} catch (Exception e) {
+			paramMap.put("code", "500");
+		    paramMap.put("message", "서버 문제");
+		}
+	    
+	    
+		return paramMap;
+	}
+	
+	
 
 }
