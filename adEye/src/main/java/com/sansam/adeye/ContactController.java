@@ -2,6 +2,7 @@ package com.sansam.adeye;
 
 import java.sql.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sansam.adeye.domain.ContactDTO;
+import com.sansam.adeye.domain.Criteria;
 import com.sansam.adeye.service.IContactService;
 
 import lombok.extern.java.Log;
@@ -35,22 +37,33 @@ public class ContactController {
 	}
 	
 	
-//	// 전체 문의 내역 조회
-//	@RequestMapping(value = "/", method = RequestMethod.GET)
-//	public @ResponseBody Map<String, Object> contactList() throws Exception {
-//		
-////		log.info("/contact/list : " + data);
-//		// 보내줄 맵 객체 생성
-//		Map<String, Object> paramMap = new HashMap<String, Object>();
-//		
-//		try {
-//			
-//		} catch (Exception e) {
-//			
-//		}
-//		
-//		return paramMap;
-//	}
+	// 전체 문의 내역 조회
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public @ResponseBody Map<String, Object> contactList(@RequestParam("cri") Criteria cri, ContactDTO cDto) throws Exception {
+		
+		log.info("/contact/list : " + cri);
+		// 보내줄 맵 객체 생성
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		log.info("0");
+		try {
+			log.info("1");
+			List<ContactDTO> cDtoList = service.contactList(cri);
+			log.info("2");
+			Map<String,Object> paramMapsub = new HashMap<String, Object>();
+			log.info("3");
+			paramMapsub.put("??", cDto);
+		    paramMap.put("result", paramMapsub);
+		    paramMap.put("code", "200");
+		    paramMap.put("message", "조회 성공");
+		    log.info("4");
+			
+		} catch (Exception e) {
+			paramMap.put("code", "204");
+			paramMap.put("message", "조회불가");
+		}
+		
+		return paramMap;
+	}
 	
 	
 	// 문의 생성
