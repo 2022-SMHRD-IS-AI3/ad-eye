@@ -19,7 +19,7 @@ public class ContactServiceImpl implements IContactService{
 	// 전체 문의 내역 조회
 	@Override
 	public List<ContactDTO> contactList(Criteria cri) throws Exception {
-
+		System.out.println("contactList...Service");
 		return cDao.contactList(cri);
 	}
 	// 문의 생성
