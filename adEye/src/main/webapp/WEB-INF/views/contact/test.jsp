@@ -10,6 +10,7 @@
 
 	<button onclick="getAPI('contact_send')">문의등록</button>
 	<button onclick="getAPI('contact_detail')">문의상세</button>
+	<button onclick="getAPI('contact_list')">전체 문의 조회</button>	
 <!-- 	<input type="text" name="contact_seq" id="contact_seq" value="0"> -->
 
 	<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
@@ -41,7 +42,14 @@
 			aType = "GET"
 			aDatas = "contact_seq=3"
 			
+		}else if(code == "contact_list"){
+			
+			aUri = "/contact/"
+			aType = "GET"
+			aDatas = "cri"
 		}
+		
+		
 		console.log(aUri)
 		console.log(aDatas)
 		$.ajax({
