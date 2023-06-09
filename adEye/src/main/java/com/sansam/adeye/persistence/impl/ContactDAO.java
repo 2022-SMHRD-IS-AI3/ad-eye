@@ -19,6 +19,7 @@ public class ContactDAO implements IContactDAO{
 	// 전체 문의 내역 조회
 	@Override
 	public List<ContactDTO> contactList(Criteria cri) throws Exception{
+		System.out.println("contactList...DAO");
 		return session.selectList("ContactMapper.list", cri);
 	}
 	// 문의 생성

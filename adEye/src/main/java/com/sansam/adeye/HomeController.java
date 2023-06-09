@@ -51,16 +51,11 @@ public class HomeController {
 		return "home";
 	}
 	
-	
-	
 	// 로그인
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public @ResponseBody Map<String,String> login(@RequestBody MemberDTO data, HttpServletRequest request) {
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public @ResponseBody Map<String,String> login(MemberDTO data,HttpServletRequest request) {
 		
-		logger.info("/login................."+data.toString());
-		
-		System.out.println(data.getMem_id()+"-"+data.getMem_pw());
-		
+		System.out.println("로그인 아이디 "+data.toString());
 		Map<String,String> paramMap = new HashMap<String, String>();
 		if(data.getMem_id().equals("test01") && data.getMem_pw().equals("0000")) {
 			
@@ -82,16 +77,13 @@ public class HomeController {
 		
 		logger.info("/logout................."+session.getAttribute("LoginId"));
 		System.out.println("삭제할 세션 "+session.getAttributeNames());
-		session.invalidate();
+		
 		Map<String,String> paramMap = new HashMap<String, String>();
 		paramMap.put("code", "202");
 		paramMap.put("message", "로그아웃 성공");
 		
-		
-		
 		return paramMap;
 	}
-	
 	
 	// 로그인상태 확인
 	@RequestMapping(value = "/loginSession", method = RequestMethod.GET)

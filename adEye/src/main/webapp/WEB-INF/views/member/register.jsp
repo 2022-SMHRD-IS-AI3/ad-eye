@@ -41,7 +41,9 @@
 </head>
 <body>
 	
-	<button onclick="getAPI('mem_insert')">회원가입</button>
+	<button onclick="getAPI('mem_list')">회원목록</button>
+	<button onclick="getAPI('mem_sbslist')">회원구독목록</button>
+	<button onclick="changeAPI('mem_insert')">회원가입</button>
 	<button onclick="getAPI('mem_detail')">회원조회</button>
 	<button onclick="getAPI('mem_update')">회원수정</button>
 	<button onclick="getAPI('mem_delete')">회원삭제</button>
@@ -82,6 +84,29 @@
 	
 		if(false){
 			
+		}else if (code == "dev_insert"){
+			
+			aUri = "/device/insert"
+			aType = "POST"
+			aDatas = 
+			{
+				device_uid : "device-01-dsfefsdj2kwef"
+			}
+			
+		}else if (code == "mem_insert"){
+			var mem_id = document.getElementById("mem_id").value;
+			aUri = "/member/insert"
+			aType = "POST"
+			aDatas = 
+			{
+				mem_id : mem_id,
+				mem_pw : "0000",
+				mem_company : "애드컴퍼니",
+				mem_phone : "000-000-0000",
+				mem_email : "smhrd@smhdrd.com",
+				company_addr : "광주 동구 예술길 31-15",
+				mem_status : "Y"
+			}	
 		}else if(code == "userDashboard"){
 			aUri = "/acq/dashboard"
 			aType = "GET"
@@ -137,7 +162,7 @@
 			aUri = "/loginSession"
 			aType = "GET"
 			
-		}else if (code == "login"){
+		/* }else if (code == "login"){
 			
 			let mem_id = document.getElementById("mem_id").value;
 			let mem_pw = document.getElementById("mem_pw").value;
@@ -147,40 +172,35 @@
 			{
 				mem_id : mem_id,
 				mem_pw : mem_pw
-			}
+			} */
 		}else if (code == "logout"){
 			
 			aUri = "/logout"
 			aType = "GET"
 			
-		}else if (code == "mem_insert"){
+		}else if (code == "mem_list"){
 			var mem_id = document.getElementById("mem_id").value;
-			aUri = "/member/insert"
-			aType = "POST"
-			aDatas = 
-			{
-				mem_id : mem_id,
-				mem_pw : "0000",
-				mem_company : "애드컴퍼니",
-				mem_phone : "000-000-0000",
-				mem_email : "smhrd@smhdrd.com",
-				company_addr : "광주 동구 예술길 31-15",
-				mem_status : "Y"
-			}
-		}else if (code == "mem_insert"){
-			var mem_id = document.getElementById("mem_id").value;
-			aUri = "/member/insert"
-			aType = "POST"
+			aUri = "/member/"
+			aType = "GET"
 			aDatas = 
 			{
 				pageNum : 1,
-				pageAmount : "0000",
-				mem_company : "애드컴퍼니",
-				mem_phone : "000-000-0000",
-				mem_email : "smhrd@smhdrd.com",
-				company_addr : "광주 동구 예술길 31-15",
-				mem_status : "Y"
+				amount : 5,
+				type : "",
+				keyword : ""
+				
 			}
+		}else if (code == "mem_sbslist"){
+			var mem_id = document.getElementById("mem_id").value;
+			aUri = "/member/devicelist"
+			aType = "GET"
+			aDatas = 
+			{
+				pageNum : 1,
+				amount : 5,
+				mem_id : "test012123"
+			}
+		
 		}else if(code == "mem_detail"){
 			aUri = "/member/detail"
 			aType = "GET"
@@ -201,15 +221,7 @@
 				company_addr : "광주 동구 예술길 31-14",
 				mem_status : "Y"
 			}
-		}else if (code == "dev_insert"){
-			
-			aUri = "/device/insert"
-			aType = "POST"
-			aDatas = 
-			{
-				device_uid : "device-01-dsfefsdjkwef",
-				device_NM : "디바이스네임"
-			}
+		
 		}else if(code == "dev_detail"){
 			aUri = "/device/detail"
 			aType = "GET"
@@ -252,6 +264,14 @@
 			aUri = "/subscription/delete"
 			aType = "GET"
 			aDatas = "sbs_seq=1"
+		}else if(code == "login"){
+			aUri = "/login"
+			aType = "GET"
+			aDatas = 
+			{
+				mem_id : "test01",
+				mem_pw : "0000"
+			}
 		}else if(code == "sbs_update"){
 			aUri = "/subscription/update"
 			aType = "POST"
@@ -298,7 +318,7 @@
 					
 				
 			
-			content = 'application/json';
+			
 		}
 		console.log(aUri)
 		console.log(aDatas)
@@ -308,6 +328,7 @@
             url: 'http://211.223.37.186:9000' + aUri,
             type: aType,
             data: aDatas,
+            contentType : 'application/json',
             // 통신에 성공했을 때 실행할 로직
             success: function (response) {
             	console.log("통신성공")

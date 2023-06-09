@@ -44,7 +44,7 @@
 					contact_dt,
 					contact_open
 				FROM tb_contact
-				WEHRE
+				WHERE
 		]]>
 		<include refid="criteria"></include>
 		<![CDATA[
