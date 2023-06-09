@@ -14,4 +14,6 @@ public interface IAcquisitionService {
 	public List<AcquisitionSubmitDTO> submit(String uid) throws Exception;
 	// 로그 수집
 	public List<LogDTO> log(String uid) throws Exception;
+	
+
 }
