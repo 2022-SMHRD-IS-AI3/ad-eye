@@ -8,7 +8,7 @@
 		FROM tb_acquisition
 		WHERE sbs_seq = #{sbs_seq} AND acq_dt = current_date
   </select>
-  <insert id="submit" parameterType="com.sansam.adeye.domain.AcquisitionDTO">
+  <insert id="create" parameterType="com.sansam.adeye.domain.AcquisitionDTO">
   		insert into tb_acquisition (acq_gender, acq_interest, acq_start_dt, acq_end_dt, acq_tid, sbs_seq) values(#{acq_gender}, #{acq_interest}, #{acq_start_dt}, #{acq_end_dt}, #{acq_tid}, #{sbs_seq})
   </insert>
   <update id="update">
