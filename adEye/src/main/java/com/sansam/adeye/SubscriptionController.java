@@ -71,14 +71,19 @@ public class SubscriptionController {
 		    // paramMap 담을 객체 생성 
 		    Map<String,Object> paramMapSub = new HashMap<String, Object>();
 
-//		    paramMapSub.put("mem-id", dto.getMem_id());
-//		    paramMapSub.put("mem-pw", dto.getMem_pw());
-//		    paramMapSub.put("mem-company", dto.getMem_company());
-//		    paramMapSub.put("mem-phone", dto.getMem_phone());
-//		    paramMapSub.put("mem-email", dto.getMem_email());
-//		    paramMapSub.put("mem-status", dto.getMem_status());
-//		    paramMapSub.put("mem-joindate", dto.getMem_joindate());
-//		    paramMapSub.put("company-addr", dto.getCompany_addr());
+		    paramMapSub.put("sbs_seq", 1);
+		    paramMapSub.put("mem-pw", 0000);
+		    paramMapSub.put("mem_id", "test012123");
+		    paramMapSub.put("mem_company", "애드컴퍼니");
+		    paramMapSub.put("device_seq", 1);
+		    paramMapSub.put("sbs_loc", "광주 동구 예술길 31_15");
+		    paramMapSub.put("sbs_alias", "별칭");
+		    paramMapSub.put("sbs_start_dt", "2023-04-01");
+		    paramMapSub.put("sbs_end_dt", "2023-04-01");
+		    paramMapSub.put("sbs_end_dt", "2023-04-01");
+		    paramMapSub.put("sbs_reg_dt", "2023-04-01");
+		    paramMapSub.put("sbs_grade", "standard");
+		    paramMapSub.put("sbs_status ", "Y");
 		    paramMap.put("result", paramMapSub);
 		    paramMap.put("code", "200");
 		    paramMap.put("message", "조회 성공");
@@ -95,7 +100,7 @@ public class SubscriptionController {
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public @ResponseBody Map<String, String> update(SubscriptionDTO data) throws Exception {
 		
-		log.info("/subscription/update..................data : ");
+		log.info("/subscription/update..................data : "+data.toString());
 		
 		// 보내줄 맵 객체 생성
 	    Map<String, String> paramMap = new HashMap<String, String>();

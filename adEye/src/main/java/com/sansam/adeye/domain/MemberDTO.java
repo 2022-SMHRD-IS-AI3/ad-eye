@@ -12,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@RequiredArgsConstructor
 public class MemberDTO {
 	
 	@NonNull
@@ -40,6 +39,12 @@ public class MemberDTO {
 		this.mem_status = mem_status;
 		
 		
+	}
+	
+	// 회원 가입요청 용  생성자
+	public MemberDTO(@NonNull String mem_id, @NonNull String mem_pw) {
+		this.mem_id = mem_id;
+		this.mem_pw = mem_pw;
 	}
 	
 	
