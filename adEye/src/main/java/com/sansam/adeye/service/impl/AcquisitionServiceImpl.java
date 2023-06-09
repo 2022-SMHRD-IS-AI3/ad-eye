@@ -35,4 +35,8 @@ public class AcquisitionServiceImpl implements IAcquisitionService{
 		
 		return acDao.log(uid);
 	}
+	@Override
+	public int acqCreate(List<AcquisitionSubmitDTO> dtoList) throws Exception {
+		return acDao.acqCreate(dtoList);
+	}
 }
