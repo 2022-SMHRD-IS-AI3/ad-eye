@@ -7,5 +7,12 @@
 		SELECT acq_gender, acq_interest, acq_dt
 		FROM tb_acquisition
 		WHERE sbs_seq = #{sbs_seq} AND acq_dt = current_date
-	</select>
+  </select>
+  <insert id="create" parameterType="com.sansam.adeye.domain.AcquisitionDTO">
+  		insert into tb_acquisition (acq_gender, acq_interest, acq_start_dt, acq_end_dt, acq_tid, sbs_seq) values(#{acq_gender}, #{acq_interest}, #{acq_start_dt}, #{acq_end_dt}, #{acq_tid}, #{sbs_seq})
+  </insert>
+  <update id="update">
+  		update tb_acquisition set acq_gender = #{acq_gender}, acq_interest = #{acq_interest}, acq_start_dt = #{acq_start_dt}, acq_end_dt = #{acq_end_dt} 
+  			where acq_tid = #{acq_tid} and device_uid = #{device_uid}
+  </update>
 </mapper>
