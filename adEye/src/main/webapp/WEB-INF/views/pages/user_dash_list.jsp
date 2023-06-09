@@ -14,7 +14,9 @@
         <link rel="icon" type="image/x-icon" href="${path}/resources/assets/img/logo.png" />
         <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
-
+		<style>
+		
+		</style>
 </head>
 <body class="nav-fixed">
 <!-- * * Tip * * 경로설정 ${path}/resources/ -->
@@ -35,10 +37,10 @@
             <ul class="navbar-nav align-items-center ms-auto">
                 <!-- User Dropdown-->
                 <li class="nav-item dropdown no-caret dropdown-user me-3 me-lg-4">
-                    <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="img-fluid" src="${path}/resources/assets/img/illustrations/profiles/profile-1.png" /></a>
+                    <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="img-fluid" src="${path}/resources/assets/img/user.png" /></a>
                     <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownUserImage">
                         <h6 class="dropdown-header d-flex align-items-center">
-                            <img class="dropdown-user-img" src="${path}/resources/assets/img/illustrations/profiles/profile-1.png" />
+                            <img class="dropdown-user-img" src="${path}/resources/assets/img/user.png" />
                             <div class="dropdown-user-details">
                                 <div class="dropdown-user-details-name">서울교통공사</div>
                                 <div class="dropdown-user-details-email">is2u111</div>
