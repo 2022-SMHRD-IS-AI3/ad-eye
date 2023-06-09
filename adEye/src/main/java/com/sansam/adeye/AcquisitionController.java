@@ -29,10 +29,6 @@ public class AcquisitionController {
 		for (AcquisitionSubmitDTO adto : data) {
 			System.out.println(adto.getDevice_uid()+"-"+adto.getAcq_tid()+"-"+adto.getAcq_start_dt()+"-"+adto.getAcq_end_dt()+"-"+adto.getAcq_interest()+"-"+adto.getAcq_gender());
 		}
-//		for (AiSubmitDTO dto : data) {
-//			
-//			System.out.println(dto.getData_time() +" ... " +dto.getEffect()+" ... " +dto.getGender());
-//		}
 		Map<String,String> paramMap = new HashMap<String, String>();
 		paramMap.put("reboot_code", "0");
 		return paramMap;

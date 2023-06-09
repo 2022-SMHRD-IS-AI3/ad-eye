@@ -35,5 +35,23 @@ public class AcquisitionDAO implements IAcquisitionDAO{
 		
 		return session.selectList("AcquisitionMapper.log", uid);
 	}
+	@Override
+	public int acqCreate(List<AcquisitionSubmitDTO> dtoList) throws Exception {
+		
+		int result = 0;
+		
+		try {
+			
+			for (AcquisitionSubmitDTO dto : dtoList) {
+				session.selectList("AcquisitionMapper.create", dto);
+			}
+			result = 1;
+			
+		} catch (Exception e) {
+			result = 2;
+		}
+		
+		return result;
+	}
 		
 }

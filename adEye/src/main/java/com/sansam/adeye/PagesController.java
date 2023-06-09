@@ -12,13 +12,15 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class PagesController {
 	
-	@RequestMapping(value = "/user_dash_list", method = RequestMethod.GET)
+	@RequestMapping(value = "/user_dashboard", method = RequestMethod.GET)
 	public String userDashList()throws Exception{
 		
-		log.info("/user_dash_list.................");
+		log.info("/user_dashboard.................");
 		
-		return "pages/user_dash_list";
+		return "pages/user_dashboard";
 	}
+	
+	
 	
 //	// Login 을 위한 HTML 파일 내려주기
 //    @GetMapping("/pages/user_dash_list")
