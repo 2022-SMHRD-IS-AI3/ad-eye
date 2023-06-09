@@ -23,7 +23,7 @@
             margin: 15px;
         }
         
-        table{
+        table{	
             min-width: 500px;
             text-align: center;
         }
@@ -58,7 +58,7 @@
 	<button onclick="changeAPI('dev_onoff','R')">기기 REBOOT</button>
 	<button onclick="changeAPI('dev_log','1')">기기 로그</button>
 	<br>
-	<button onclick="getAPI('sbs_insert')">구독등록</button>
+	<button onclick="changeAPI('sbs_insert','')">구독등록</button>
 	<button onclick="getAPI('sbs_detail')">구독상세</button>
 	<button onclick="getAPI('sbs_update')">구독수정</button>
 	<button onclick="getAPI('sbs_delete')">구독삭제</button>
@@ -124,6 +124,21 @@
 			{
 				device_seq : 1,
 				device_onoff : val
+			}
+		}else if (code == "sbs_insert"){
+			
+			aUri = "/subscription/insert"
+			aType = "POST"
+			aDatas = 
+			{
+				mem_id : "11test01",
+				device_seq : "1",
+				sbs_loc : "매채위치주소",
+				sbs_alias : "구독 별칭",
+				sbs_start_dt : "2023-01-01",
+				sbs_end_dt : "2023-12-31",
+				sbs_grade : "standard",
+				sbs_status : "Y"
 			}
 		}
 		console.log(aUri)
@@ -241,21 +256,7 @@
 				device_onoff : "Y",
 				device_status : "Y"
 			}
-		}else if (code == "sbs_insert"){
-			
-			aUri = "/subscription/insert"
-			aType = "POST"
-			aDatas = 
-			{
-				mem_id : "test01",
-				device_seq : "2",
-				sbs_loc : "매채위치주소",
-				sbs_alias : "구독 별칭",
-				sbs_start_dt : "2023-01-01",
-				sbs_end_dt : "2023-12-31",
-				sbs_grade : "standard",
-				sbs_status : "Y"
-			}
+		
 		}else if(code == "sbs_detail"){
 			aUri = "/subscription/detail"
 			aType = "GET"
@@ -292,16 +293,20 @@
 			aType = "POST"
 			var datas = [
 				{
-					start_data_time: "2023-06-07 09:30:50", 
-					end_data_time: "2023-06-07 09:31:20", 
-					effect: 0, 
-					gender: "W"
+					device_uid:'cam_device_001',
+					acq_tid:1,
+					acq_start_dt: "2023-06-07 09:30:50", 
+					acq_end_dt: "2023-06-07 09:31:20", 
+					acq_interest: 1, 
+					acq_gender: "W"
 				},
 				{
-					start_data_time: "2023-06-07 09:30:50", 
-					end_data_time: "2023-06-07 09:31:20", 
-					effect: 2, 
-					gender: "W"
+					device_uid:'cam_device_001',
+					acq_tid:2,
+					acq_start_dt: "2023-06-07 09:30:50", 
+					acq_end_dt: "2023-06-07 09:31:20", 
+					acq_interest: 2, 
+					acq_gender: "W"
 				}
 					
 			]

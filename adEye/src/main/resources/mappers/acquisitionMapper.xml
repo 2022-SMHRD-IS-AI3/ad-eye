@@ -8,8 +8,9 @@
 		FROM tb_acquisition
 		WHERE sbs_seq = #{sbs_seq} AND acq_dt = current_date
   </select>
-  <insert id="create" parameterType="com.sansam.adeye.domain.AcquisitionDTO">
-  		insert into tb_acquisition (acq_gender, acq_interest, acq_start_dt, acq_end_dt, acq_tid, sbs_seq) values(#{acq_gender}, #{acq_interest}, #{acq_start_dt}, #{acq_end_dt}, #{acq_tid}, #{sbs_seq})
+  <insert id="create" parameterType="com.sansam.adeye.domain.AcquisitionSubmitDTO">
+  		insert into tb_acquisition (acq_gender, acq_interest, acq_start_dt, acq_end_dt, acq_tid, sbs_seq) values(#{acq_gender}, #{acq_interest}, TO_DATE(#{acq_start_dt},'YYYY-MM-DD HH24:MI:SS'), TO_DATE(#{acq_end_dt},'YYYY-MM-DD HH24:MI:SS'), #{acq_tid},
+  									 (select s.sbs_seq from tb_subscription s, tb_device d where s.device_seq = d.device_seq and d.device_uid = #{device_uid} and s.sbs_status = 'Y'))
   </insert>
   <update id="update">
   		update tb_acquisition set acq_gender = #{acq_gender}, acq_interest = #{acq_interest}, acq_start_dt = #{acq_start_dt}, acq_end_dt = #{acq_end_dt} 
