@@ -41,7 +41,7 @@ public class ContactController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public @ResponseBody Map<String, Object> contactList(@RequestParam("cri") Criteria cri, ContactDTO cDto) throws Exception {
 		
-		log.info("/contact/list : " + cri);
+		log.info("/contactList : " + cri);
 		// 보내줄 맵 객체 생성
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		log.info("0");
