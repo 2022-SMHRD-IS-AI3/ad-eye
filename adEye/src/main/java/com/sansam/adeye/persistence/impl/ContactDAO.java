@@ -27,16 +27,18 @@ public class ContactDAO implements IContactDAO{
 		
 		int result = 0;
 		
-		try {
-			result = session.insert("ContactMapper.create", cDto);
-		} catch (Exception e) {
-		}
+		System.out.println(123);
+		result = session.insert("ContactMapper.create", cDto);
+			
+		System.out.println(result);
+		
 		
 		return result;
 	}
 	// 특정 문의 내역 조회
 	@Override
 	public ContactDTO contactDetail(int seq) throws Exception{
+		System.out.println(123);
 		return session.selectOne("ContactMapper.detail", seq);
 	}
 }
