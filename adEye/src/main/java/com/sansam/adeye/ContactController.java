@@ -54,9 +54,7 @@ public class ContactController {
 			paramMapsub.put("", cDtoList);
 		    paramMap.put("result", paramMapsub);
 		    paramMap.put("code", "200");
-		    paramMap.put("message", "조회 성공");
-		    log.info("4");
-			
+		    paramMap.put("message", "조회 성공");			
 		} catch (Exception e) {
 			paramMap.put("code", "204");
 			paramMap.put("message", "조회불가");
