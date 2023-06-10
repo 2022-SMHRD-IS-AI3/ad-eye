@@ -37,8 +37,14 @@ public class AcquisitionDAO implements IAcquisitionDAO{
 			for (AcquisitionSubmitDTO dto : dtoList) {
 				System.out.println(dto);
 				
-				// 데이터 수집 생성 - 객체 1개마다
-				session.insert("AcquisitionMapper.create", dto);
+				int cnt = session.selectOne("AcquisitionMapper.tidCheck",new AcquisitionSubmitDTO(dto.getDevice_uid(), dto.getAcq_tid(), null, null, null, null));
+				
+				if(cnt > 0) {
+					session.insert("AcquisitionMapper.update", dto);
+					System.out.println(cnt);
+				}else {
+					session.insert("AcquisitionMapper.create", dto);
+				}
 			}
 			
 			result.setDevice_seq(1);

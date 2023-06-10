@@ -8,5 +8,10 @@
   	insert into tb_subscription (mem_id,device_seq,sbs_loc,sbs_alias,sbs_start_dt,sbs_end_dt,sbs_reg_dt,sbs_grade,sbs_status) values (#{mem_id},#{device_seq},#{sbs_loc},#{sbs_alias},#{sbs_start_dt},#{sbs_end_dt},sysdate,'standard',#{sbs_status})
   </insert>
   
+  <select id="select" resultType="com.sansam.adeye.domain.SubscriptionDTO" parameterType="String">
+      select s.* from tb_subscription s, tb_device d
+      where s.device_seq = d.device_seq 
+      and d.device_uid = #{device_uid}
+  </select>
   
 </mapper>
