@@ -1,8 +1,14 @@
 package com.sansam.adeye.service;
 
+import java.util.List;
+
+import com.sansam.adeye.domain.Criteria;
 import com.sansam.adeye.domain.MemberDTO;
 
 public interface IMemberService {
+	
+	// 회원목록
+	public List<MemberDTO> memberList(Criteria cri) throws Exception;
 	
 	// 회원등록 
 	public int memberInsert(MemberDTO dto) throws Exception;

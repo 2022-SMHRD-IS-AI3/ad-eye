@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sansam.adeye.domain.DeviceDTO;
 import com.sansam.adeye.domain.MemberDTO;
 import com.sansam.adeye.domain.SubscriptionDTO;
+import com.sansam.adeye.service.ISubscriptionService;
 
 import lombok.extern.log4j.Log4j;
 
@@ -21,37 +23,42 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class SubscriptionController {
 	
-	// @Autowired
-	// ISubcriptionService service;
+	 @Autowired
+	 ISubscriptionService service;
 	
 	// 구독 등록
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> insert(SubscriptionDTO data) throws Exception {
 		
-		log.info("/subscription/insert.................."+ data.getSbs_seq());
+		log.info("/subscription/insert.................."+ data.toString());
 		// 보내줄 맵 객체 생성
 	    Map<String,Object> paramMap = new HashMap<String, Object>();
 	    
+	    
 	    try {
 	    	
-	    	//int cnt = service.subscriptionInsert(data);
-	    	
-	    	if(1 > 0 ) {
+	    	System.out.println("test1");
+	    	int cnt = service.sbsInsert(data);
+	    	System.out.println("test2");
+	    	if(cnt > 0 ) {
 		    	
 		    	paramMap.put("code", "201");
 			    paramMap.put("message", "등록 성공");
 			    
+			    System.out.println("test3");
 		    }else {
 		    	
 		    	paramMap.put("code", "203");
 			    paramMap.put("message", "처리 실패");
+			    System.out.println("test4");
 			    
 		    }
 		} catch (Exception e) {
 			paramMap.put("code", "500");
 		    paramMap.put("message", "서버 문제");
+		    System.out.println("test5");
 		}
-	    
+	    System.out.println("test6");
 		return paramMap;
 	}
 	

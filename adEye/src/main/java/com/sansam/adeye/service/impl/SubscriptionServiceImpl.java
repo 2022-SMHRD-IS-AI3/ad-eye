@@ -25,8 +25,10 @@ public class SubscriptionServiceImpl implements ISubscriptionService{
 	// 구독 생성
 	@Override
 	public int sbsInsert(SubscriptionDTO sDto) throws Exception {
+		int t = sDao.sbsInsert(sDto);
+		System.out.println(t);
 		
-		return sDao.sbsInsert(sDto);
+		return t;
 	}
 	// 특정 구독 정보 조회
 	@Override

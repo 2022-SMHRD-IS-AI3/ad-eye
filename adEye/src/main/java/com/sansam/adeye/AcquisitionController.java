@@ -1,10 +1,10 @@
 package com.sansam.adeye;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import com.sansam.adeye.domain.AcquisitionSubmitDTO;
+import com.sansam.adeye.service.IAcquisitionService;
 
 import lombok.extern.log4j.Log4j;
 
@@ -22,15 +23,24 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class AcquisitionController {
 	
+	@Autowired
+	IAcquisitionService service;
+	
 	@RequestMapping(value = "/submit", method = RequestMethod.POST)
-	public @ResponseBody Map<String,String> submit(@RequestBody List<AcquisitionSubmitDTO> data) {
+	public @ResponseBody Map<String,String> submit(@RequestBody List<AcquisitionSubmitDTO> data) throws Exception {
 		
-		log.info("Welcome home! The client locale is {}");
-		for (AcquisitionSubmitDTO adto : data) {
-			System.out.println(adto.getDevice_uid()+"-"+adto.getAcq_tid()+"-"+adto.getAcq_start_dt()+"-"+adto.getAcq_end_dt()+"-"+adto.getAcq_interest()+"-"+adto.getAcq_gender());
-		}
+		log.info("Welcome home! The client locale is submit");
 		Map<String,String> paramMap = new HashMap<String, String>();
-		paramMap.put("reboot_code", "0");
+		try {
+			int cnt = service.acqCreate(data);
+			System.out.println(cnt);
+			paramMap.put("reboot_code", "0");
+			paramMap.put("code", "201");
+		    paramMap.put("message", "등록 성공");
+		} catch (Exception e) {
+			
+		}
+		
 		return paramMap;
 	}
 	
@@ -88,6 +98,31 @@ public class AcquisitionController {
 		    paramMap.put("code", "200");
 		    paramMap.put("message", "조회 성공");
 		    
+		} catch (Exception e) {
+			
+			paramMap.put("code", "500");
+		    paramMap.put("message", "서버 문제");
+		    
+		}
+	    
+		return paramMap;
+		
+	}
+	
+	@RequestMapping(value = "/max_tid", method = RequestMethod.POST)
+	public @ResponseBody Map<String,Object> acqMaxTid(@RequestBody String data) { // @ResponseBody : 응답할 때 JSON 데이터로 반환
+		
+		System.out.println("tid......uid: " + data);
+		
+		// 보내줄 맵 객체 생성
+		Map<String,Object> paramMap = new HashMap<String, Object>();
+		
+		try {
+			int max_tid = service.acqMaxTid(data);
+			System.out.println(max_tid);
+			paramMap.put("max_tid", max_tid);
+			paramMap.put("code", "200");
+		    paramMap.put("message", "전송 완료");
 		} catch (Exception e) {
 			
 			paramMap.put("code", "500");
