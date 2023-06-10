@@ -2,16 +2,19 @@ package com.sansam.adeye;
 
 import java.sql.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sansam.adeye.domain.ContactDTO;
+import com.sansam.adeye.domain.Criteria;
 import com.sansam.adeye.service.IContactService;
 
 import lombok.extern.java.Log;
@@ -34,24 +37,30 @@ public class ContactController {
 		return "/contact/test";
 	}
 	
-	
-//	// 전체 문의 내역 조회
-//	@RequestMapping(value = "/", method = RequestMethod.GET)
-//	public @ResponseBody Map<String, Object> contactList() throws Exception {
-//		
-////		log.info("/contact/list : " + data);
-//		// 보내줄 맵 객체 생성
-//		Map<String, Object> paramMap = new HashMap<String, Object>();
-//		
-//		try {
-//			
-//		} catch (Exception e) {
-//			
-//		}
-//		
-//		return paramMap;
-//	}
-	
+	// 전체 문의 내역 조회
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public @ResponseBody Map<String, Object> contactList(Criteria cri) throws Exception {
+		
+		log.info("/contactList : " + cri);
+		// 보내줄 맵 객체 생성
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+
+		try {
+			// 
+			List<ContactDTO> cDtoList = service.contactList(cri);
+			log.info(cDtoList);
+			Map<String,Object> paramMapsub = new HashMap<String, Object>();
+			// 키값 나중에 정해야 함!
+			paramMapsub.put("", cDtoList);
+		    paramMap.put("result", paramMapsub);
+		    paramMap.put("code", "200");
+		    paramMap.put("message", "조회 성공");			
+		} catch (Exception e) {
+			paramMap.put("code", "204");
+			paramMap.put("message", "조회불가");
+		}
+		return paramMap;
+	}
 	
 	// 문의 생성
 	@RequestMapping(value = "/send", method = RequestMethod.POST)
@@ -78,11 +87,8 @@ public class ContactController {
 			paramMap.put("code", "500");
 			paramMap.put("message", "서버문제");
 		}
-		
-		
 		return paramMap;
 	}
-	
 	
 	// 특정 문의 내역 조회
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
@@ -114,9 +120,6 @@ public class ContactController {
 			paramMap.put("code", "204");
 			paramMap.put("message", "조회불가");
 		}
-				
 		return paramMap;
 	}
-	
-	
 }

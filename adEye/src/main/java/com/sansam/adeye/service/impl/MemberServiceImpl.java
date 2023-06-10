@@ -1,8 +1,11 @@
 package com.sansam.adeye.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sansam.adeye.domain.Criteria;
 import com.sansam.adeye.domain.MemberDTO;
 import com.sansam.adeye.persistence.IMemberDAO;
 import com.sansam.adeye.service.IMemberService;
@@ -12,6 +15,13 @@ public class MemberServiceImpl implements IMemberService {
 
 	@Autowired
 	private IMemberDAO mDao;
+	
+	// 회원 목록
+	@Override
+	public List<MemberDTO> memberList(Criteria cri) throws Exception {
+		
+		return mDao.memberList(cri);
+	}
 
 	// 회원 등록  
 	@Override

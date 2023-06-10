@@ -19,6 +19,7 @@ public class ContactDAO implements IContactDAO{
 	// 전체 문의 내역 조회
 	@Override
 	public List<ContactDTO> contactList(Criteria cri) throws Exception{
+		System.out.println("contactList...DAO");
 		return session.selectList("ContactMapper.list", cri);
 	}
 	// 문의 생성
@@ -27,16 +28,18 @@ public class ContactDAO implements IContactDAO{
 		
 		int result = 0;
 		
-		try {
-			result = session.insert("ContactMapper.create", cDto);
-		} catch (Exception e) {
-		}
+		System.out.println(123);
+		result = session.insert("ContactMapper.create", cDto);
+			
+		System.out.println(result);
+		
 		
 		return result;
 	}
 	// 특정 문의 내역 조회
 	@Override
 	public ContactDTO contactDetail(int seq) throws Exception{
+		System.out.println(123);
 		return session.selectOne("ContactMapper.detail", seq);
 	}
 }

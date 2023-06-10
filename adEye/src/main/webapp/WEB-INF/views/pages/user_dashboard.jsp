@@ -1,14 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <html lang="en">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<title>내 구독 목록 - Ad-EYE</title>
+<title>대시보드 - Ad-EYE</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="${path}/resources/css/styles.css" rel="stylesheet" />
         <link rel="icon" type="image/x-icon" href="${path}/resources/assets/img/logo.png" />
@@ -78,9 +78,8 @@
                       </div>
                 </nav>
             </div>
-           
-           
-           <!-- content -->
+
+        <!-- content -->
             <div id="layoutSidenav_content">
                 <main>
                     <header class="page-header pb-10">
@@ -89,10 +88,13 @@
                                 <div class="row align-items-center justify-content-between">
                                     <div class="col-auto mt-4">
                                         <h1 class="page-header-title">
-                                            <div class="page-header"></div>
-                                            서울교통공사
+                                            한성대 입구역 1번 출구 1
                                         </h1>
-                                        <div class="page-header-subtitle">총 구독 수 : 개</div>
+                                        <div class="page-header-subtitle">
+                                        	<i class="fa-solid fa-chevron-left"></i>
+                                            오늘 날짜
+                                            <i class="fa-solid fa-chevron-right"></i>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -100,44 +102,66 @@
                     </header>
                     <!-- Main page content-->
                     <div class="container-xl px-4 mt-n10">
+                        <!-- Area chart example-->
                         <div class="card mb-4">
-                            <div class="card-header">내 구독 확인</div>
+                            <div class="card-header">Area Chart Example</div>
                             <div class="card-body">
-                                <table id="datatablesSimple">
-                                    <thead>
-                                        <tr>
-                                            <th>매체 위치</th>
-                                            <th>매체 이름</th>
-                                            <th>광고 노출 인구(명)</th>
-                                            <th>광고 인지 및 관심 인구(명)</th>
-                                            <th>전체 남녀 비율(%)</th>
-                                            
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>매체 위치</th>
-                                            <th>매체 이름</th>
-                                            <th>광고 노출 인구(명)</th>
-                                            <th>주요 시청 횟수(회)</th>
-                                            <th>광고 노출 인구 중 남녀 비율(%)</th>
-                                            
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        <tr>
-                                            <td>서울 성북구 삼선동1가</td>
-                                            <td>한성대입구역 1번출구 1</td>
-                                            <td>55,712</td>
-                                            <td>32,011</td>
-                                            <td>52.1:47.9</td>  
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <div class="chart-area"><canvas id="myCombinedChart" width="100%" height="30"></canvas></div>
                             </div>
+                            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
                         </div>
-                    </div>
+                        
+                        <div class="row">
+                            <!-- <div class="col-lg-6"> -->
+                                
+                                <!-- Bar chart example
+                                <div class="card mb-4">
+                                    <div class="card-header">Bar Chart Example</div>
+                                    <div class="card-body">
+                                        <div class="chart-bar"><canvas id="myBarChart" width="100%" height="50"></canvas></div>
+                                    </div>
+                                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+                                </div>
+                            </div> -->
+                            
+                            <div class="col-lg-6">
+                                <!-- Pie chart example-->
+                                <div class="card mb-4">
+                                    <div class="card-header">Pie Chart Example</div>
+                                    <div class="card-body">
+                                        <div class="chart-pie"><canvas id="myPieChart" width="100%" height="50"></canvas></div>
+                                    </div>
+                                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                
+                                <!-- Dashboard info widget 1-->
+                                <div class="card border-start-lg border-start-primary h-100">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-grow-1">
+                                                <div class="small fw-bold text-primary mb-1">Earnings (monthly)</div>
+                                                <div class="h5">$4,390</div>
+                                                <div class="text-xs fw-bold text-success d-inline-flex align-items-center">
+                                                    <i class="me-1" data-feather="trending-up"></i>
+                                                    12%
+                                                </div>
+                                            </div>
+                                            <div class="ms-2"><i class="fas fa-dollar-sign fa-2x text-gray-200"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                             
+                            </div>
+                            
+                        </div>
+                        
+                        </div>
+                        
                 </main>
+
                 <footer class="footer-admin mt-auto footer-light">
                     <div class="container-xl px-4">
                         <div class="row">
@@ -154,8 +178,11 @@
         
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="${path}/resources/js/scripts.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-        <script src="${path}/resources/js/datatables/datatables-simple-demo.js"></script>
-        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" crossorigin="anonymous"></script>
+        <%-- <script src="${path}/resources/assets/demo/chart-area-demo.js"></script> --%>
+        <%-- <script src="${path}/resources/assets/demo/chart-bar-demo.js"></script> --%>
+        <script src="${path}/resources/assets/demo/chart-pie-demo.js"></script>
+        <script src="${path}/resources/assets/demo/multi-chart.js"></script>
+        <!-- <script type="text/javascript" src="//code.jquery.com/jquery.min.js"></script> -->
     </body>
 </html>

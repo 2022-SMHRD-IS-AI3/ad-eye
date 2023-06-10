@@ -24,15 +24,10 @@ public class SubscriptionDAO implements ISubscriptionDAO{
 	// 구독 생성 : /insert
 	@Override
 	public int sbsInsert(SubscriptionDTO sDto) throws Exception {
-
-		int result = 0;
+		System.out.println("test11");
+		return session.insert("SubscriptionMapper.create", sDto);
 		
-		try {
-			result = session.insert("SubscriptionMapper.create", sDto);
-		} catch (Exception e) {
-		}
 		
-		return result;
 	}
 	// 특정 구독 정보 조회 : /detail
 	@Override

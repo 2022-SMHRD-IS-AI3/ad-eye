@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,7 +39,7 @@ public class DeviceController {
 	
 	// 관리자 - 기기 등록
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public @ResponseBody Map<String, Object> insert(DeviceDTO data) throws Exception {
+	public @ResponseBody Map<String, Object> insert(@RequestBody DeviceDTO data) throws Exception {
 		
 		log.info("/device/insert.................."+ data.getDevice_uid());
 		
@@ -86,7 +87,6 @@ public class DeviceController {
 
 		    paramMapSub.put("device_seq", dto.getDevice_seq());
 		    paramMapSub.put("device_uid", dto.getDevice_uid());
-		    paramMapSub.put("device_NM", dto.getDevice_NM());
 		    paramMapSub.put("device_onoff", dto.getDevice_onoff());
 		    paramMapSub.put("device_status", dto.getDevice_status());
 		    paramMapSub.put("device_dt", dto.getDevice_dt());

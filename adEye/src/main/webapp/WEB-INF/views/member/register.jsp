@@ -23,7 +23,7 @@
             margin: 15px;
         }
         
-        table{
+        table{	
             min-width: 500px;
             text-align: center;
         }
@@ -41,7 +41,9 @@
 </head>
 <body>
 	
-	<button onclick="getAPI('mem_insert')">회원가입</button>
+	<button onclick="getAPI('mem_list')">회원목록</button>
+	<button onclick="getAPI('mem_sbslist')">회원구독목록</button>
+	<button onclick="changeAPI('mem_insert')">회원가입</button>
 	<button onclick="getAPI('mem_detail')">회원조회</button>
 	<button onclick="getAPI('mem_update')">회원수정</button>
 	<button onclick="getAPI('mem_delete')">회원삭제</button>
@@ -56,7 +58,7 @@
 	<button onclick="changeAPI('dev_onoff','R')">기기 REBOOT</button>
 	<button onclick="changeAPI('dev_log','1')">기기 로그</button>
 	<br>
-	<button onclick="getAPI('sbs_insert')">구독등록</button>
+	<button onclick="changeAPI('sbs_insert','')">구독등록</button>
 	<button onclick="getAPI('sbs_detail')">구독상세</button>
 	<button onclick="getAPI('sbs_update')">구독수정</button>
 	<button onclick="getAPI('sbs_delete')">구독삭제</button>
@@ -82,6 +84,29 @@
 	
 		if(false){
 			
+		}else if (code == "dev_insert"){
+			
+			aUri = "/device/insert"
+			aType = "POST"
+			aDatas = 
+			{
+				device_uid : "device-01-dsfefsdj2kwef"
+			}
+			
+		}else if (code == "mem_insert"){
+			var mem_id = document.getElementById("mem_id").value;
+			aUri = "/member/insert"
+			aType = "POST"
+			aDatas = 
+			{
+				mem_id : mem_id,
+				mem_pw : "0000",
+				mem_company : "애드컴퍼니",
+				mem_phone : "000-000-0000",
+				mem_email : "smhrd@smhdrd.com",
+				company_addr : "광주 동구 예술길 31-15",
+				mem_status : "Y"
+			}	
 		}else if(code == "userDashboard"){
 			aUri = "/acq/dashboard"
 			aType = "GET"
@@ -99,6 +124,21 @@
 			{
 				device_seq : 1,
 				device_onoff : val
+			}
+		}else if (code == "sbs_insert"){
+			
+			aUri = "/subscription/insert"
+			aType = "POST"
+			aDatas = 
+			{
+				mem_id : "11test01",
+				device_seq : "1",
+				sbs_loc : "매채위치주소",
+				sbs_alias : "구독 별칭",
+				sbs_start_dt : "2023-01-01",
+				sbs_end_dt : "2023-12-31",
+				sbs_grade : "standard",
+				sbs_status : "Y"
 			}
 		}
 		console.log(aUri)
@@ -137,7 +177,7 @@
 			aUri = "/loginSession"
 			aType = "GET"
 			
-		}else if (code == "login"){
+		/* }else if (code == "login"){
 			
 			let mem_id = document.getElementById("mem_id").value;
 			let mem_pw = document.getElementById("mem_pw").value;
@@ -147,40 +187,35 @@
 			{
 				mem_id : mem_id,
 				mem_pw : mem_pw
-			}
+			} */
 		}else if (code == "logout"){
 			
 			aUri = "/logout"
 			aType = "GET"
 			
-		}else if (code == "mem_insert"){
+		}else if (code == "mem_list"){
 			var mem_id = document.getElementById("mem_id").value;
-			aUri = "/member/insert"
-			aType = "POST"
-			aDatas = 
-			{
-				mem_id : mem_id,
-				mem_pw : "0000",
-				mem_company : "애드컴퍼니",
-				mem_phone : "000-000-0000",
-				mem_email : "smhrd@smhdrd.com",
-				company_addr : "광주 동구 예술길 31-15",
-				mem_status : "Y"
-			}
-		}else if (code == "mem_insert"){
-			var mem_id = document.getElementById("mem_id").value;
-			aUri = "/member/insert"
-			aType = "POST"
+			aUri = "/member/"
+			aType = "GET"
 			aDatas = 
 			{
 				pageNum : 1,
-				pageAmount : "0000",
-				mem_company : "애드컴퍼니",
-				mem_phone : "000-000-0000",
-				mem_email : "smhrd@smhdrd.com",
-				company_addr : "광주 동구 예술길 31-15",
-				mem_status : "Y"
+				amount : 5,
+				type : "",
+				keyword : ""
+				
 			}
+		}else if (code == "mem_sbslist"){
+			var mem_id = document.getElementById("mem_id").value;
+			aUri = "/member/devicelist"
+			aType = "GET"
+			aDatas = 
+			{
+				pageNum : 1,
+				amount : 5,
+				mem_id : "test012123"
+			}
+		
 		}else if(code == "mem_detail"){
 			aUri = "/member/detail"
 			aType = "GET"
@@ -201,15 +236,7 @@
 				company_addr : "광주 동구 예술길 31-14",
 				mem_status : "Y"
 			}
-		}else if (code == "dev_insert"){
-			
-			aUri = "/device/insert"
-			aType = "POST"
-			aDatas = 
-			{
-				device_uid : "device-01-dsfefsdjkwef",
-				device_NM : "디바이스네임"
-			}
+		
 		}else if(code == "dev_detail"){
 			aUri = "/device/detail"
 			aType = "GET"
@@ -229,21 +256,7 @@
 				device_onoff : "Y",
 				device_status : "Y"
 			}
-		}else if (code == "sbs_insert"){
-			
-			aUri = "/subscription/insert"
-			aType = "POST"
-			aDatas = 
-			{
-				mem_id : "test01",
-				device_seq : "2",
-				sbs_loc : "매채위치주소",
-				sbs_alias : "구독 별칭",
-				sbs_start_dt : "2023-01-01",
-				sbs_end_dt : "2023-12-31",
-				sbs_grade : "standard",
-				sbs_status : "Y"
-			}
+		
 		}else if(code == "sbs_detail"){
 			aUri = "/subscription/detail"
 			aType = "GET"
@@ -252,6 +265,14 @@
 			aUri = "/subscription/delete"
 			aType = "GET"
 			aDatas = "sbs_seq=1"
+		}else if(code == "login"){
+			aUri = "/login"
+			aType = "GET"
+			aDatas = 
+			{
+				mem_id : "test01",
+				mem_pw : "0000"
+			}
 		}else if(code == "sbs_update"){
 			aUri = "/subscription/update"
 			aType = "POST"
@@ -272,16 +293,20 @@
 			aType = "POST"
 			var datas = [
 				{
-					start_data_time: "2023-06-07 09:30:50", 
-					end_data_time: "2023-06-07 09:31:20", 
-					effect: 0, 
-					gender: "W"
+					device_uid:'cam_device_001',
+					acq_tid:1,
+					acq_start_dt: "2023-06-07 09:30:50", 
+					acq_end_dt: "2023-06-07 09:31:20", 
+					acq_interest: 1, 
+					acq_gender: "W"
 				},
 				{
-					start_data_time: "2023-06-07 09:30:50", 
-					end_data_time: "2023-06-07 09:31:20", 
-					effect: 2, 
-					gender: "W"
+					device_uid:'cam_device_001',
+					acq_tid:2,
+					acq_start_dt: "2023-06-07 09:30:50", 
+					acq_end_dt: "2023-06-07 09:31:20", 
+					acq_interest: 2, 
+					acq_gender: "W"
 				}
 					
 			]
@@ -298,7 +323,7 @@
 					
 				
 			
-			content = 'application/json';
+			
 		}
 		console.log(aUri)
 		console.log(aDatas)
@@ -308,6 +333,7 @@
             url: 'http://211.223.37.186:9000' + aUri,
             type: aType,
             data: aDatas,
+            contentType : 'application/json',
             // 통신에 성공했을 때 실행할 로직
             success: function (response) {
             	console.log("통신성공")

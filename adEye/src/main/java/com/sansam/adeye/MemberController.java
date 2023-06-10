@@ -1,6 +1,8 @@
 package com.sansam.adeye;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -158,10 +160,73 @@ public class MemberController {
 	}
 	
 	// 회원 목록
-//		@RequestMapping(value = "/", method = RequestMethod.GET)
-//		public void list(Criteria cri) throws Exception {
-//
-//			log.info("/member/delete..................");
-//			
-//		}
+		@RequestMapping(value = "/", method = RequestMethod.GET)
+		public @ResponseBody Map<String, Object> memberList(Criteria cri) throws Exception {
+			log.info("/member/목록..................");
+			Map<String,Object> paramMap = new HashMap<String, Object>();
+
+			try {
+				// 회원 목록 정보 불러오기
+				List<MemberDTO> mDtoList = service.memberList(cri);
+				System.out.println(mDtoList);
+			    // paramMap 담을 객체 생성
+			    Map<String,Object> paramMapsub = new HashMap<String, Object>();
+			    
+			    paramMapsub.put("data", mDtoList);		    
+			    paramMap.put("result", paramMapsub);
+			    paramMap.put("code", "200");
+			    paramMap.put("message", "조회 성공");
+			} catch (Exception e) {
+				paramMap.put("code", "500");
+			    paramMap.put("message", "서버 문제");
+			}
+			return paramMap;
+		}
+
+	// 회원 구독목록 조회
+	@RequestMapping(value = "/devicelist", method = RequestMethod.GET)
+	public @ResponseBody Map<String, Object> devicelist(Criteria cri, @RequestParam("mem_id") String data) throws Exception {
+		log.info("/devicelist/메인 구독 목록..................");
+		Map<String,Object> paramMap = new HashMap<String, Object>();
+
+		try {
+			System.out.println(cri.toString());
+			System.out.println(data);
+			//List<DeviceDTO> dto = service.deviceLog(Integer.parseInt(data));
+		    
+		    // paramMap 담을 객체 생성
+			
+			paramMap.put("mem_company", "애드컴퍼니");
+			paramMap.put("sbs_total", "2");
+		    List<Map<String, Object>> paramMapSubList = new ArrayList<>();
+		    for (int i = 0; i < 2; i++) {
+		    	Map<String,Object> paramMapSub = new HashMap<String, Object>();
+		    	paramMapSub.put("sbs_seq", "test012123");
+			    paramMapSub.put("sbs_alias", "애드컴퍼니");
+			    paramMapSub.put("sbs_loc", "0000");
+			    paramMapSub.put("sbs_total_man", "000-000-0000");
+			    paramMapSub.put("sbs_total_interest", "smhrd@smhdrd.com");
+			    paramMapSub.put("sbs_male_per", "Y");
+			    paramMapSub.put("sbs_female_per", "2023-05-05 12:50:12");
+			    
+			    paramMapSubList.add(paramMapSub);
+			}
+		    
+		    System.out.println(paramMapSubList.toString());
+		    
+		    paramMap.put("result", paramMapSubList);
+		    paramMap.put("code", "200");
+		    paramMap.put("message", "조회 성공");
+		    
+		} catch (Exception e) {
+			
+			paramMap.put("code", "500");
+		    paramMap.put("message", "서버 문제");
+		    
+		}
+	    
+		return paramMap;
+		
+		
+	}
 }

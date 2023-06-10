@@ -12,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@RequiredArgsConstructor
 public class MemberDTO {
 	
 	@NonNull
@@ -38,12 +37,24 @@ public class MemberDTO {
 		this.mem_email = mem_email;
 		this.company_addr = company_addr;
 		this.mem_status = mem_status;
-		
-		
 	}
 	
+	// 로그인 용  생성자
+	public MemberDTO(@NonNull String mem_id, @NonNull String mem_pw) {
+		this.mem_id = mem_id;
+		this.mem_pw = mem_pw;
+	}
 	
-	
-	
+	// 회원 목록 용 생성자
+	public MemberDTO(@NonNull String mem_id, String mem_company, String mem_phone, String mem_email, char mem_status,
+			Date mem_joindate, String company_addr) {
+		this.mem_id = mem_id;
+		this.mem_company = mem_company;
+		this.mem_phone = mem_phone;
+		this.mem_email = mem_email;
+		this.mem_status = mem_status;
+		this.mem_joindate = mem_joindate;
+		this.company_addr = company_addr;
+	}
 	
 }
