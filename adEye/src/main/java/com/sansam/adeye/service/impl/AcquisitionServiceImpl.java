@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.sansam.adeye.domain.AcquisitionDTO;
 import com.sansam.adeye.domain.AcquisitionSubmitDTO;
+import com.sansam.adeye.domain.DeviceDTO;
 import com.sansam.adeye.domain.LogDTO;
 import com.sansam.adeye.persistence.IAcquisitionDAO;
+import com.sansam.adeye.persistence.ILogDAO;
 import com.sansam.adeye.service.IAcquisitionService;
 
 @Service
@@ -17,26 +19,28 @@ public class AcquisitionServiceImpl implements IAcquisitionService{
 	@Autowired
 	private IAcquisitionDAO acDao;
 	
+	@Autowired
+	private ILogDAO lDao;
+	
 	// 데이터 조회
 	@Override
 	public List<AcquisitionDTO> acqDashboard(int seq) throws Exception {
 		
 		return acDao.acqDashboard(seq);
 	}
-	// 데이터 수집
-	@Override
-	public List<AcquisitionSubmitDTO> submit(String uid) throws Exception {
-		
-		return acDao.submit(uid);
-	}
+	
 	// 로그 수집
 	@Override
-	public List<LogDTO> log(String uid) throws Exception {
+	public int logInsert(List<LogDTO> dto) throws Exception {
 		
-		return acDao.log(uid);
+		return lDao.logInsert(dto);
 	}
 	@Override
-	public int acqCreate(List<AcquisitionSubmitDTO> dtoList) throws Exception {
+	public DeviceDTO acqCreate(List<AcquisitionSubmitDTO> dtoList) throws Exception {
 		return acDao.acqCreate(dtoList);
+	}
+	@Override
+	public int acqMaxTid(String uid) throws Exception {
+		return acDao.acqMaxTid(uid);
 	}
 }
