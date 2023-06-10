@@ -255,7 +255,7 @@
 			{
 				pageNum : 1,
 				amount : 5,
-				mem_id : "test012123"
+				mem_id : mem_id
 			}
 		
 		}else if(code == "mem_detail"){
