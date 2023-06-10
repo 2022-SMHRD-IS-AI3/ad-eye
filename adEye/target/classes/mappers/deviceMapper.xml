@@ -31,7 +31,7 @@
          WHERE rn > (#{pageNum} - 1) * #{amount}
       	]]>
 	</select>
-	
+	<sql id="criteria"/>
 	<select id="detail" parameterType="com.sansam.adeye.domain.DeviceDTO">
 		select * from tb_device where device_seq = #{device_seq}
 	</select>
