@@ -4,7 +4,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>로그인 - Ad-EYE</title>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+        <link href="${path}/resources/css/styles.css" rel="stylesheet" />
+        <link rel="icon" type="image/x-icon" href="${path}/resources/assets/img/logo.png" />
+        <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
+		<style>
+		
+		</style>
 </head>
 <body class="nav-fixed my-10">    
 
@@ -36,7 +44,7 @@
                                             </div>
                                             <!-- Form Group (forgot password link)-->
                                             <div class="mb-3"><a class="small" href="auth-password-social.html"></a></div>
-                                            <!-- Form Group (login box)-->
+                                            <!-- Form Group (login box).-->
                                             <div class="d-flex align-items-center justify-content-between mb-0">
                                                 <div class="form-check">
                                                     
@@ -49,7 +57,7 @@
                                     <div class="card-body px-5 py-4">
                                         <div class="small text-center">
                                             아직 회원이 아니시라면 
-                                            <a href="auth-register-social.html">여기</a>를 눌러주세요!
+                                            <a href="#!">여기</a>를 눌러주세요!
                                         </div>
                                     </div>
                                 </div>
@@ -59,10 +67,10 @@
                 </main>
             </div>
             <div id="layoutAuthentication_footer">
-                <footer class="footer-admin mt-auto footer-dark">
+                <footer class="footer-admin mt-auto">
                     <div class="container-xl px-4">
                         <div class="row">
-                            <div class="col-md-6 small">Copyright &copy; Your Website 2021</div>
+                            <div class="col-md-6 small">Copyright &copy; Ad-EYE 2023</div>
                             <div class="col-md-6 text-md-end small">
                                 <a href="#!">Privacy Policy</a>
                                 &middot;
@@ -74,7 +82,7 @@
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="js/scripts.js"></script>
+        <script src="${path}/resources/js/scripts.js"></script>
 
 </body>
 </html>
