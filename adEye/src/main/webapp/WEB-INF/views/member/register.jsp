@@ -45,8 +45,29 @@
 	<button onclick="getAPI('mem_sbslist')">회원구독목록</button>
 	<button onclick="changeAPI('mem_insert')">회원가입</button>
 	<button onclick="getAPI('mem_detail')">회원조회</button>
-	<button onclick="getAPI('mem_update')">회원수정</button>
+	<button onclick="changeAPI('mem_update')">회원수정</button>
 	<button onclick="getAPI('mem_delete')">회원삭제</button>
+	<br>
+	등록 입력란
+	<br>
+	<input type="text" name="mem_id" id="mem_id1" value="아이디">
+	<input type="text" name="mem_company" id="mem_company" value="회사명">
+	<input type="text" name="mem_phone" id="mem_phone" value="연락처">
+	<input type="text" name="mem_email" id="mem_email" value="이메일">
+	<input type="text" name="company_addr" id="company_addr" value="회사주소">
+	<br>
+	수정 입력란
+	<br>
+	PW
+	<input type="text" name="mem_pw" id="mem_pw3">
+	연락처
+	<input type="text" name="mem_phone" id="mem_phone3">
+	이메일
+	<input type="text" name="mem_email" id="mem_email3">
+	주소
+	<input type="text" name="company_addr" id="company_addr3">
+	상태
+	<input type="text" name="mem_status" id="mem_status3" value="Y">
 	<br>
 	<button onclick="getAPI('dev_insert')">기기등록</button>
 	<button onclick="getAPI('dev_detail')">기기상세</button>
@@ -94,17 +115,21 @@
 			}
 			
 		}else if (code == "mem_insert"){
-			var mem_id = document.getElementById("mem_id").value;
+			var mem_id = document.getElementById("mem_id1").value;
+			var mem_company = document.getElementById("mem_company").value;
+			var mem_phone = document.getElementById("mem_phone").value;
+			var mem_email = document.getElementById("mem_email").value;
+			var company_addr = document.getElementById("company_addr").value;
 			aUri = "/member/insert"
 			aType = "POST"
 			aDatas = 
 			{
 				mem_id : mem_id,
 				mem_pw : "0000",
-				mem_company : "애드컴퍼니",
-				mem_phone : "000-000-0000",
-				mem_email : "smhrd@smhdrd.com",
-				company_addr : "광주 동구 예술길 31-15",
+				mem_company : mem_company,
+				mem_phone : mem_phone,
+				mem_email : mem_email,
+				company_addr : company_addr,
 				mem_status : "Y"
 			}	
 		}else if(code == "userDashboard"){
@@ -140,13 +165,31 @@
 				sbs_grade : "standard",
 				sbs_status : "Y"
 			}
+		}else if(code == "mem_update"){	// 회원 수정
+			var mem_id = document.getElementById("mem_id").value;
+			var mem_pw = document.getElementById("mem_pw3").value;
+			var mem_phone = document.getElementById("mem_phone3").value;
+			var mem_email = document.getElementById("mem_email3").value;
+			var company_addr = document.getElementById("company_addr3").value;
+			var mem_status = document.getElementById("mem_status3").value;
+			aUri = "/member/update"
+			aType = "POST"
+			aDatas = 
+			{
+				mem_pw : mem_pw,
+				mem_phone : mem_phone,
+				mem_email : mem_email,
+				company_addr : company_addr,
+				mem_status : mem_status,
+				mem_id : mem_id
+			}	
 		}
 		console.log(aUri)
 		console.log(aDatas)
         // ajax문
         $.ajax({ // url, success, error 는 무조건 있어야한다
             // 어디랑 통신 할건지
-            url: 'http://211.223.37.186:9000' + aUri,
+            url: 'http://218.157.24.2:9000' + aUri,
             type: aType,
             data: aDatas,
             // 통신에 성공했을 때 실행할 로직
@@ -203,7 +246,6 @@
 				amount : 5,
 				type : "",
 				keyword : ""
-				
 			}
 		}else if (code == "mem_sbslist"){
 			var mem_id = document.getElementById("mem_id").value;
@@ -217,26 +259,21 @@
 			}
 		
 		}else if(code == "mem_detail"){
+			var mem_id = document.getElementById("mem_id").value;
 			aUri = "/member/detail"
 			aType = "GET"
-			aDatas = "mem_id=test01"
+			aDatas = 
+				{
+					mem_id : mem_id
+				}
 		}else if(code == "mem_delete"){
+			var mem_id = document.getElementById("mem_id").value;
 			aUri = "/member/delete"
 			aType = "GET"
-			aDatas = "mem_id=test01"
-		}else if(code == "mem_update"){
-			aUri = "/member/update"
-			aType = "POST"
-			aDatas = 
-			{
-				mem_id : "test01",
-				mem_pw : "0000",
-				mem_phone : "000-000-0000",
-				mem_email : "smhrd@smhrd.com",
-				company_addr : "광주 동구 예술길 31-14",
-				mem_status : "Y"
-			}
-		
+			aDatas =
+				{
+					mem_id : mem_id
+				}
 		}else if(code == "dev_detail"){
 			aUri = "/device/detail"
 			aType = "GET"
@@ -330,7 +367,7 @@
         // ajax문
         $.ajax({ // url, success, error 는 무조건 있어야한다
             // 어디랑 통신 할건지
-            url: 'http://211.223.37.186:9000' + aUri,
+            url: 'http://218.157.24.2:9000' + aUri,
             type: aType,
             data: aDatas,
             contentType : 'application/json',

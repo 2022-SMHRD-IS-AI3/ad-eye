@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -48,7 +47,7 @@ public class MemberController {
 	    try {
 	    	
 		    int cnt = service.memberInsert(data);
-	
+		    
 		    if(cnt > 0 ) {
 		    	paramMap.put("code", "201");
 			    paramMap.put("message", "등록 성공");
@@ -56,12 +55,10 @@ public class MemberController {
 		    	paramMap.put("code", "203");
 			    paramMap.put("message", "처리 실패");
 		    }
-		    
 	    } catch (Exception e) {
 			paramMap.put("code", "500");
 		    paramMap.put("message", "서버 문제");
 		}
-	    
 		return paramMap;
 	}
 	
@@ -97,7 +94,6 @@ public class MemberController {
 			paramMap.put("code", "204");
 		    paramMap.put("message", "조회 실패");
 		}
-	    
 		return paramMap;
 	}
 	
@@ -106,14 +102,14 @@ public class MemberController {
 	public @ResponseBody Map<String, String> update(MemberDTO data) throws Exception {
 		
 		log.info("/member/update..................");
-		
+		System.out.println(data);
 		// 보내줄 맵 객체 생성
 	    Map<String, String> paramMap = new HashMap<String, String>();
 
 	    try {
 	    	
 	    	int cnt = service.memberUpdate(data);
-
+	    	System.out.println(cnt);
 		    if(cnt > 0) {
 		    	paramMap.put("code", "202");
 			    paramMap.put("message", "수정 완료");
@@ -160,28 +156,28 @@ public class MemberController {
 	}
 	
 	// 회원 목록
-		@RequestMapping(value = "/", method = RequestMethod.GET)
-		public @ResponseBody Map<String, Object> memberList(Criteria cri) throws Exception {
-			log.info("/member/목록..................");
-			Map<String,Object> paramMap = new HashMap<String, Object>();
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public @ResponseBody Map<String, Object> memberList(Criteria cri) throws Exception {
+		log.info("/member/목록..................");
+		Map<String,Object> paramMap = new HashMap<String, Object>();
 
-			try {
-				// 회원 목록 정보 불러오기
-				List<MemberDTO> mDtoList = service.memberList(cri);
-				System.out.println(mDtoList);
-			    // paramMap 담을 객체 생성
-			    Map<String,Object> paramMapsub = new HashMap<String, Object>();
-			    
-			    paramMapsub.put("data", mDtoList);		    
-			    paramMap.put("result", paramMapsub);
-			    paramMap.put("code", "200");
-			    paramMap.put("message", "조회 성공");
-			} catch (Exception e) {
-				paramMap.put("code", "500");
-			    paramMap.put("message", "서버 문제");
-			}
-			return paramMap;
+		try {
+			// 회원 목록 정보 불러오기
+			List<MemberDTO> mDtoList = service.memberList(cri);
+			System.out.println(mDtoList);
+		    // paramMap 담을 객체 생성
+		    Map<String,Object> paramMapsub = new HashMap<String, Object>();
+		    
+		    paramMapsub.put("data", mDtoList);		    
+		    paramMap.put("result", paramMapsub);
+		    paramMap.put("code", "200");
+		    paramMap.put("message", "조회 성공");
+		} catch (Exception e) {
+			paramMap.put("code", "500");
+		    paramMap.put("message", "서버 문제");
 		}
+		return paramMap;
+	}
 
 	// 회원 구독목록 조회
 	@RequestMapping(value = "/devicelist", method = RequestMethod.GET)
@@ -195,7 +191,6 @@ public class MemberController {
 			//List<DeviceDTO> dto = service.deviceLog(Integer.parseInt(data));
 		    
 		    // paramMap 담을 객체 생성
-			
 			paramMap.put("mem_company", "애드컴퍼니");
 			paramMap.put("sbs_total", "2");
 		    List<Map<String, Object>> paramMapSubList = new ArrayList<>();
