@@ -2,8 +2,10 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sansam.adeye.mapper.LogMapper">
+<mapper namespace="LogMapper">
   
-  
+ 	<insert id="create" parameterType="com.sansam.adeye.domain.LogDTO">
+ 		insert into tb_log (log_msg, log_dt, device_uid) values (#{log_msg},#{log_dt},#{device_uid})
+ 	</insert>
   
 </mapper>

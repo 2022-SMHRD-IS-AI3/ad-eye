@@ -1,5 +1,6 @@
 package com.sansam.adeye;
 
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import com.sansam.adeye.domain.AcquisitionSubmitDTO;
+import com.sansam.adeye.domain.DeviceDTO;
+import com.sansam.adeye.domain.LogDTO;
+import com.sansam.adeye.persistence.impl.LogDAO;
 import com.sansam.adeye.service.IAcquisitionService;
 
 import lombok.extern.log4j.Log4j;
@@ -28,37 +32,43 @@ public class AcquisitionController {
 	
 	@RequestMapping(value = "/submit", method = RequestMethod.POST)
 	public @ResponseBody Map<String,String> submit(@RequestBody List<AcquisitionSubmitDTO> data) throws Exception {
-		
+		System.out.println(data.toString());
 		log.info("Welcome home! The client locale is submit");
 		Map<String,String> paramMap = new HashMap<String, String>();
 		try {
-			int cnt = service.acqCreate(data);
-			System.out.println(cnt);
-			paramMap.put("reboot_code", "0");
+			DeviceDTO result = service.acqCreate(data);
+			System.out.println(result.toString());
+			if(result.getDevice_onoff() == 'R') {
+				paramMap.put("reboot_code", "1");
+			}else {
+				paramMap.put("reboot_code", "0");
+			}
 			paramMap.put("code", "201");
 		    paramMap.put("message", "등록 성공");
 		} catch (Exception e) {
-			
+			paramMap.put("reboot_code", "0");
+			paramMap.put("code", "500");
+		    paramMap.put("message", "서버 문제");
 		}
 		
 		return paramMap;
 	}
 	
 	@RequestMapping(value = "/log", method = RequestMethod.POST)
-	public @ResponseBody Map<String,Object> log(@RequestBody String data) { // @ResponseBody : 응답할 때 JSON 데이터로 반환
+	public @ResponseBody Map<String,Object> log(@RequestBody List<LogDTO> data) throws Exception { // @ResponseBody : 응답할 때 JSON 데이터로 반환
 		
-		System.out.println("test " + data);
+		int result = service.logInsert(data);
 		
-		// 보내줄 맵 객체 생성, 
-	    Map<String,Object> paramMap = new HashMap<String, Object>();
-
-	    // paramMap 담을 객체 생성
-	    Map<String,Object> paramMap2 = new HashMap<String, Object>();
-	    
-	    paramMap2.put("mem_id", "ad230531xxx");
-	    paramMap.put("result", paramMap2);
-	    paramMap.put("code", "201");
-	    paramMap.put("message", "등록 성공");
+		// 보내줄 맵 객체 생성
+		Map<String,Object> paramMap = new HashMap<String, Object>();
+		
+		if(result == 1) {
+			paramMap.put("code", "200");
+			paramMap.put("message", "등록 성공");
+		}else {
+			paramMap.put("code", "500");
+			paramMap.put("code", "서버 문제");
+		}
 	    
 		return paramMap;
 		
