@@ -15,5 +15,9 @@ public interface IAcquisitionDAO {
 	// 로그 수집
 	public List<LogDTO> log(String uid) throws Exception;
 	
+	// 수집 등록
 	public int acqCreate(List<AcquisitionSubmitDTO> dtoList) throws Exception;
+	
+	// maxTid
+	public int acqMaxTid(String uid) throws Exception;
 }

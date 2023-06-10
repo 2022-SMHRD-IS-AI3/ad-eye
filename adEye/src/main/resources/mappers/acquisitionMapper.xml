@@ -20,7 +20,7 @@
   	</update>
   	
   	<!-- 높은 max_tid 값 -->
-	<select id="maxTid">
+	<select id="maxTid" resultType="Integer">
 		select nvl(max(acq_tid),0) as max_tid from tb_acquisition where sbs_seq = (select sbs.sbs_seq from tb_subscription sbs inner join tb_device dev on sbs.device_seq = dev.device_seq and sbs.sbs_status = 'Y' and dev.device_uid = #{device_uid})
 	</select>
 </mapper>

@@ -69,5 +69,12 @@ public class AcquisitionDAO implements IAcquisitionDAO{
 		
 		return result;
 	}
+	@Override
+	public int acqMaxTid(String uid) throws Exception {
+		System.out.println("dao u " + uid);
+		int t = session.selectOne("AcquisitionMapper.maxTid", uid);
+		System.out.println("dao t " + t);
+		return t; 
+	}
 		
 }
