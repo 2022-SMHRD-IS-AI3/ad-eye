@@ -11,14 +11,43 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/pages")
 @Log4j
 public class PagesController {
-	
-	@RequestMapping(value = "/user_dashboard", method = RequestMethod.GET)
+	// user dash list
+	@RequestMapping(value = "/user_dash_list", method = RequestMethod.GET)
 	public String userDashList()throws Exception{
+		
+		log.info("/user_dashboard.................");
+		
+		return "pages/user_dash_list";
+	}
+	
+	// user dashboard
+	@RequestMapping(value = "/user_dashboard", method = RequestMethod.GET)
+	public String userDash()throws Exception{
 		
 		log.info("/user_dashboard.................");
 		
 		return "pages/user_dashboard";
 	}
+
+	// login	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login()throws Exception{
+		
+		log.info("/login.................");
+		
+		return "pages/login";
+	}
+	
+	// main
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	public String main()throws Exception{
+		
+		log.info("/index.................");
+		
+		return "pages/index";
+	}
+	
+
 	
 	
 	
