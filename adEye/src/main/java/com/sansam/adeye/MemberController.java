@@ -160,48 +160,28 @@ public class MemberController {
 	}
 	
 	// 회원 목록
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public @ResponseBody Map<String, Object> list(Criteria cri) throws Exception {
-		log.info("/member/목록..................");
-		Map<String,Object> paramMap = new HashMap<String, Object>();
+		@RequestMapping(value = "/", method = RequestMethod.GET)
+		public @ResponseBody Map<String, Object> memberList(Criteria cri) throws Exception {
+			log.info("/member/목록..................");
+			Map<String,Object> paramMap = new HashMap<String, Object>();
 
-		try {
-			
-			//List<DeviceDTO> dto = service.deviceLog(Integer.parseInt(data));
-		    
-		    // paramMap 담을 객체 생성
-		    List<Map<String, Object>> paramMapSubList = new ArrayList<>();
-		    for (int i = 0; i < 2; i++) {
-		    	Map<String,Object> paramMapSub = new HashMap<String, Object>();
-		    	paramMapSub.put("mem_id", "test012123");
-			    paramMapSub.put("mem_company", "애드컴퍼니");
-			    paramMapSub.put("mem_pw", "0000");
-			    paramMapSub.put("mem_phone", "000-000-0000");
-			    paramMapSub.put("mem_email", "smhrd@smhdrd.com");
-			    paramMapSub.put("mem_status", "Y");
-			    paramMapSub.put("mem_joindate", "2023-05-05 12:50:12");
-			    paramMapSub.put("company_addr", "광주 동구 예술길 31-15");
+			try {
+				// 회원 목록 정보 불러오기
+				List<MemberDTO> mDtoList = service.memberList(cri);
+				System.out.println(mDtoList);
+			    // paramMap 담을 객체 생성
+			    Map<String,Object> paramMapsub = new HashMap<String, Object>();
 			    
-			    paramMapSubList.add(paramMapSub);
+			    paramMapsub.put("data", mDtoList);		    
+			    paramMap.put("result", paramMapsub);
+			    paramMap.put("code", "200");
+			    paramMap.put("message", "조회 성공");
+			} catch (Exception e) {
+				paramMap.put("code", "500");
+			    paramMap.put("message", "서버 문제");
 			}
-		    
-		    System.out.println(paramMapSubList.toString());
-		    
-		    paramMap.put("result", paramMapSubList);
-		    paramMap.put("code", "200");
-		    paramMap.put("message", "조회 성공");
-		    
-		} catch (Exception e) {
-			
-			paramMap.put("code", "500");
-		    paramMap.put("message", "서버 문제");
-		    
+			return paramMap;
 		}
-	    
-		return paramMap;
-		
-		
-	}
 
 	// 회원 구독목록 조회
 	@RequestMapping(value = "/devicelist", method = RequestMethod.GET)
