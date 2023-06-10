@@ -39,4 +39,8 @@ public class AcquisitionServiceImpl implements IAcquisitionService{
 	public int acqCreate(List<AcquisitionSubmitDTO> dtoList) throws Exception {
 		return acDao.acqCreate(dtoList);
 	}
+	@Override
+	public int acqMaxTid(String uid) throws Exception {
+		return acDao.acqMaxTid(uid);
+	}
 }

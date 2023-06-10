@@ -108,4 +108,29 @@ public class AcquisitionController {
 		return paramMap;
 		
 	}
+	
+	@RequestMapping(value = "/max_tid", method = RequestMethod.POST)
+	public @ResponseBody Map<String,Object> acqMaxTid(@RequestBody String data) { // @ResponseBody : 응답할 때 JSON 데이터로 반환
+		
+		System.out.println("tid......uid: " + data);
+		
+		// 보내줄 맵 객체 생성
+		Map<String,Object> paramMap = new HashMap<String, Object>();
+		
+		try {
+			int max_tid = service.acqMaxTid(data);
+			System.out.println(max_tid);
+			paramMap.put("max_tid", max_tid);
+			paramMap.put("code", "200");
+		    paramMap.put("message", "전송 완료");
+		} catch (Exception e) {
+			
+			paramMap.put("code", "500");
+		    paramMap.put("message", "서버 문제");
+		    
+		}
+	    
+		return paramMap;
+		
+	}
 }
