@@ -44,7 +44,7 @@
                                             </div>
                                             <!-- Form Group (forgot password link)-->
                                             <div class="mb-3"><a class="small" href="auth-password-social.html"></a></div>
-                                            <!-- Form Group (login box)-->
+                                            <!-- Form Group (login box).-->
                                             <div class="d-flex align-items-center justify-content-between mb-0">
                                                 <div class="form-check">
                                                     
