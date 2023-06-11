@@ -8,7 +8,7 @@
   	<select id="list" resultType="com.sansam.adeye.domain.AcquisitionDTO">
 		SELECT acq_gender, acq_interest, acq_dt
 		FROM tb_acquisition
-		WHERE sbs_seq = #{sbs_seq} AND acq_dt = current_date
+		WHERE sbs_seq = #{sbs_seq} AND acq_dt = current_date and s.sbs_status = 'Y'
   	</select>
   	
   	<!-- 수집 데이터 등록 -->
@@ -25,8 +25,8 @@
 	<!-- 수집데이터 수정 -->
 	<update id="update" parameterType="com.sansam.adeye.domain.AcquisitionSubmitDTO">
         update tb_acquisition a 
-        set a.acq_gender = #{acq_gender}, a.acq_interest = #{acq_interest}, a.acq_start_dt = #{acq_start_dt}, a.acq_end_dt = #{acq_end_dt} 
-        where a.acq_tid = #{acq_tid} and a.sbs_seq = (select s.sbs_seq from tb_subscription s, tb_device d where s.device_seq = d.device_seq and d.device_uid = #{device_uid})
+        set a.acq_gender = #{acq_gender}, a.acq_interest = #{acq_interest}, a.acq_start_dt = TO_DATE(#{acq_start_dt},'YYYY-MM-DD HH24:MI:SS'), a.acq_end_dt = TO_DATE(#{acq_end_dt},'YYYY-MM-DD HH24:MI:SS' 
+        where a.acq_tid = #{acq_tid} and a.sbs_seq = (select s.sbs_seq from tb_subscription s, tb_device d where s.device_seq = d.device_seq and d.device_uid = #{device_uid} and s.sbs_status = 'Y')
   	</update>
   	
   	<!-- 수집데이터에 같은 구독번호와 tid 가 있는지  -->
