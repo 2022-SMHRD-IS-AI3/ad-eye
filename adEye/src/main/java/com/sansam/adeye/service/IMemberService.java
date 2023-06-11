@@ -13,10 +13,8 @@ public interface IMemberService {
 	
 	// 회원 구독 전체 목록 : sbs_list
 	public List<SubscriptionDTO> devicelist(Criteria cri) throws Exception;
-	// 회원 전체 구독 조회 : 회사명
-	public SubscriptionDTO memSbsCompany(Criteria cri) throws Exception;
-	// 회원 전체 구독 조회 : 구독 수
-	public SubscriptionDTO memSbsTotal(Criteria cri) throws Exception;
+	// 회원 전체 구독 조회 : 회사명, 구독 수
+	public SubscriptionDTO memSbsData(Criteria cri) throws Exception;
 	
 	// 회원등록 
 	public int memberInsert(MemberDTO dto) throws Exception;

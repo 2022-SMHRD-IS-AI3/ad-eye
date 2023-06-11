@@ -26,15 +26,10 @@ public class SubscriptionDAO implements ISubscriptionDAO{
 		System.out.println("DAO 접속");
 		return session.selectList("SubscriptionMapper.memSbsList", cri);
 	}
-	// 특정 회원 전체 구독 조회 : 회사명
-	public SubscriptionDTO memSbsCompany(Criteria cri) throws Exception {
+	// 특정 회원 전체 구독 조회 : 회사명, 구독 수
+	public SubscriptionDTO memSbsData(Criteria cri) throws Exception {
 		System.out.println("DAO 접속");
 		return session.selectOne("SubscriptionMapper.memSbsCompany", cri);
-	}
-	// 특정 회원 전체 구독 조회 : 구독 수
-	public SubscriptionDTO memSbsTotal(Criteria cri) throws Exception {
-		System.out.println("DAO 접속");
-		return session.selectOne("SubscriptionMapper.memSbsTotal", cri);
 	}
 	// 구독 생성 : /insert
 	@Override

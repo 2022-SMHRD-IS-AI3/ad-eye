@@ -33,15 +33,10 @@ public class MemberServiceImpl implements IMemberService {
 		System.out.println("Service 접속");
 		return sDao.devicelist(cri);
 	}
-	// 회원 전체 구독 조회 : 회사명
-	public SubscriptionDTO memSbsCompany(Criteria cri) throws Exception {
+	// 회원 전체 구독 조회 : 회사명, 구독 수
+	public SubscriptionDTO memSbsData(Criteria cri) throws Exception {
 		System.out.println("Service 접속");
-		return sDao.memSbsCompany(cri);
-	}
-	// 회원 전체 구독 조회 : 구독 수
-	public SubscriptionDTO memSbsTotal(Criteria cri) throws Exception {
-		System.out.println("Service 접속");
-		return sDao.memSbsTotal(cri);
+		return sDao.memSbsData(cri);
 	}
 
 	// 회원 등록  

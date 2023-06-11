@@ -191,9 +191,9 @@ public class MemberController {
 			// 회원 구독 목록 불러오기
 			List<SubscriptionDTO> sDtoList = service.devicelist(cri);
 			System.out.println(sDtoList);
-			String mem_company = service.memSbsCompany(cri).getMem_company();
+			String mem_company = service.memSbsData(cri).getMem_company();
 			System.out.println(mem_company);
-			int sbs_total = service.memSbsTotal(cri).getSbs_total();
+			int sbs_total = service.memSbsData(cri).getSbs_total();
 			System.out.println(sbs_total);
 		    // paramMap 담을 객체 생성
 			Map<String,Object> paramMapsub = new HashMap<String, Object>();

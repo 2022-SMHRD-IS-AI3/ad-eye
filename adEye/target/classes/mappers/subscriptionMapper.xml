@@ -57,14 +57,15 @@
 		]]>
 	</select>
 	
-	<select id="memSbsCompany" resultType="com.sansam.adeye.domain.SubscriptionDTO">
-		SELECT DISTINCT mem_company FROM tb_subscription s JOIN tb_member m ON m.mem_id = s.mem_id WHERE m.mem_id = #{mem_id}
+	<select id="memSbsData" resultType="com.sansam.adeye.domain.SubscriptionDTO">
+		SELECT DISTINCT mem_company, sbs_total
+		FROM (
+    		SELECT
+        		(SELECT DISTINCT mem_company FROM tb_subscription s, tb_member m WHERE m.mem_id = '11test01' AND s.mem_id = '11test01') AS mem_company,
+        		(SELECT COUNT(sbs_seq) FROM tb_subscription WHERE mem_id = '11test01') AS sbs_total
+    		FROM tb_subscription);
 	</select>
 	
-	<select id="memSbsTotal" resultType="com.sansam.adeye.domain.SubscriptionDTO">
-		SELECT COUNT(sbs_seq) AS sbs_total FROM tb_subscription WHERE mem_id = #{mem_id}
-	</select>
-
 	<insert id="create">
   		insert into tb_subscription (mem_id,device_seq,sbs_loc,sbs_alias,sbs_start_dt,sbs_end_dt,sbs_reg_dt,sbs_grade,sbs_status) values (#{mem_id},#{device_seq},#{sbs_loc},#{sbs_alias},#{sbs_start_dt},#{sbs_end_dt},sysdate,'standard',#{sbs_status})
   	</insert>
