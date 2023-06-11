@@ -9,10 +9,6 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
-/**
- * @author smhrd
- *
- */
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -70,9 +66,5 @@ public class MemberDTO {
 		this.mem_status = mem_status;
 		this.mem_id = mem_id;
 	}
-	
-	
-	
-	
 	
 }

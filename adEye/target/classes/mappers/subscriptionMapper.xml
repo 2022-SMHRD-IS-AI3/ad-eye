@@ -4,14 +4,69 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="SubscriptionMapper">
 
-  <insert id="create">
-  	insert into tb_subscription (mem_id,device_seq,sbs_loc,sbs_alias,sbs_start_dt,sbs_end_dt,sbs_reg_dt,sbs_grade,sbs_status) values (#{mem_id},#{device_seq},#{sbs_loc},#{sbs_alias},#{sbs_start_dt},#{sbs_end_dt},sysdate,'standard',#{sbs_status})
-  </insert>
-  
-  <select id="select" resultType="com.sansam.adeye.domain.SubscriptionDTO" parameterType="String">
-      select s.* from tb_subscription s, tb_device d
-      where s.device_seq = d.device_seq 
-      and d.device_uid = #{device_uid}
-  </select>
-  
+	<sql id="criteria">
+    	<trim prefix="(" suffix=") AND" prefixOverrides="OR">
+        	<foreach collection="typeArr" item="type">
+            	<trim prefix="OR">
+                	<choose>
+                    	<when test="type == 'C'.toString()">
+                     		mem_company LIKE '%'||#{keyword}||'%'
+                  		</when>
+                  		<when test="type == 'I'.toString()">
+                     		mem_id LIKE '%'||#{keyword}||'%'
+                  		</when>
+                  		<when test="type == 'E'.toString()">
+                     		mem_email LIKE '%'||#{keyword}||'%'
+                  		</when>
+                  		<when test="type == 'P'.toString()">
+                     		mem_phone LIKE '%'||#{keyword}||'%'
+                  		</when>
+               		</choose>
+            	</trim>
+         	</foreach>
+      	</trim>
+   	</sql>
+
+	<select id="memSbsList" resultType="com.sansam.adeye.domain.SubscriptionDTO">
+		<![CDATA[      	
+ 	     	SELECT	sbs_seq,
+    				sbs_alias,
+    				sbs_loc,
+    				sbs_total_man,
+    				sbs_total_interest,
+    				sbs_male_per,
+    				sbs_female_per
+			FROM (
+				SELECT /*+ INDEX_DESC(tb_subscription IDX_tb_subscription_PK) */
+        			rownum rn,
+        			s.sbs_seq,
+        			s.sbs_alias,
+        			s.sbs_loc,
+        			(SELECT COUNT(acq_seq) FROM tb_acquisition WHERE sbs_seq = s.sbs_seq) AS sbs_total_man,
+        			(SELECT COUNT(acq_interest) FROM tb_acquisition WHERE sbs_seq = s.sbs_seq AND (acq_interest = 1 OR acq_interest = 2)) AS sbs_total_interest,
+        			(SELECT COUNT(acq_gender) FROM tb_acquisition WHERE sbs_seq = s.sbs_seq AND acq_gender = 'M') AS sbs_male_per,
+        			(SELECT COUNT(acq_gender) FROM tb_acquisition WHERE sbs_seq = s.sbs_seq AND acq_gender = 'W') AS sbs_female_per
+    			FROM tb_subscription s, dual
+    			WHERE mem_id = #{mem_id} AND 
+    	]]>
+		<include refid="criteria"></include>         
+      	<![CDATA[
+		    		rownum <= #{pageNum} * #{amount}
+        	)
+			WHERE rn > (#{pageNum} - 1) * #{amount}
+		]]>
+	</select>
+	
+	<select id="memSbsCompany" resultType="com.sansam.adeye.domain.SubscriptionDTO">
+		SELECT DISTINCT mem_company FROM tb_subscription s JOIN tb_member m ON m.mem_id = s.mem_id WHERE m.mem_id = #{mem_id}
+	</select>
+	
+	<select id="memSbsTotal" resultType="com.sansam.adeye.domain.SubscriptionDTO">
+		SELECT COUNT(sbs_seq) AS sbs_total FROM tb_subscription WHERE mem_id = #{mem_id}
+	</select>
+
+	<insert id="create">
+  		insert into tb_subscription (mem_id,device_seq,sbs_loc,sbs_alias,sbs_start_dt,sbs_end_dt,sbs_reg_dt,sbs_grade,sbs_status) values (#{mem_id},#{device_seq},#{sbs_loc},#{sbs_alias},#{sbs_start_dt},#{sbs_end_dt},sysdate,'standard',#{sbs_status})
+  	</insert>
+
 </mapper>
