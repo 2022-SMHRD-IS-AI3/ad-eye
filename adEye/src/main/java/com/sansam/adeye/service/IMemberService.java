@@ -30,4 +30,7 @@ public interface IMemberService {
 	// 회원수정
 	public int memberDelete(String mid) throws Exception;
 
+	// 로그인
+	public MemberDTO login(MemberDTO mDto) throws Exception;
+	
 }

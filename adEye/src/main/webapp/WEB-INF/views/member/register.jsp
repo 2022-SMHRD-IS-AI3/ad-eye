@@ -104,7 +104,17 @@
 		let aType = ""
 	
 		if(false){
-			
+		
+		}else if(code == "login"){
+			var mem_id = document.getElementById("mem_id").value;
+			var mem_pw = document.getElementById("mem_pw").value;
+			aUri = "/login"
+			aType = "POST"
+			aDatas = 
+			{
+				mem_id : mem_id,
+				mem_pw : mem_pw
+			}
 		}else if (code == "dev_insert"){
 			
 			aUri = "/device/insert"

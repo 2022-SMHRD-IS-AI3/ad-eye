@@ -72,4 +72,11 @@ public class MemberServiceImpl implements IMemberService {
 		return mDao.memberDelete(mid);
 	}
 	
+	// Login
+	@Override
+	public MemberDTO login(MemberDTO mDto) throws Exception {
+		System.out.println("Service 접속");
+		return mDao.login(mDto);
+	}
+	
 }
