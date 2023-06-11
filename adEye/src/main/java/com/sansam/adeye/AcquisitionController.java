@@ -30,27 +30,45 @@ public class AcquisitionController {
 	@Autowired
 	IAcquisitionService service;
 	
+	String code = "";
+	String message = "";
+	String reboot_code = "0";
+	
 	@RequestMapping(value = "/submit", method = RequestMethod.POST)
 	public @ResponseBody Map<String,String> submit(@RequestBody List<AcquisitionSubmitDTO> data) throws Exception {
 		System.out.println(data.toString());
-		log.info("Welcome home! The client locale is submit");
+		log.info("수집 데이터 개수 : " + data.size() + " 개");
 		Map<String,String> paramMap = new HashMap<String, String>();
+		
 		try {
-			DeviceDTO result = service.acqCreate(data);
-			System.out.println(result.toString());
-			if(result.getDevice_onoff() == 'R') {
-				paramMap.put("reboot_code", "1");
+			
+			if(data.size() > 0) {
+				DeviceDTO result = service.acqCreate(data);
+				System.out.println(result.toString());
+				if(result.getDevice_onoff() == 'R') {
+					reboot_code = "1";
+				}
+				code = "201";
+				message = "등록 성공";
 			}else {
-				paramMap.put("reboot_code", "0");
+				code = "206";
+				message = "전송데이터 없음";
 			}
-			paramMap.put("code", "201");
-		    paramMap.put("message", "등록 성공");
+			
+			
 		} catch (Exception e) {
-			paramMap.put("reboot_code", "0");
-			paramMap.put("code", "500");
-		    paramMap.put("message", "서버 문제");
+			reboot_code = "0";
+			code = "500";
+			message = "서버 문제";
 		}
 		
+		System.out.println(code);
+		System.out.println(message);
+		
+		paramMap.put("reboot_code", reboot_code);
+		paramMap.put("code", code);
+	    paramMap.put("message", message);
+	    
 		return paramMap;
 	}
 	
