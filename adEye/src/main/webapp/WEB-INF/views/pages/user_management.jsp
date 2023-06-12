@@ -48,20 +48,20 @@
                 </li>
                 <!-- User Dropdown-->
                 <li class="nav-item dropdown no-caret dropdown-user me-3 me-lg-4">
-                    <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="img-fluid" src="assets/img/illustrations/profiles/profile-1.png" /></a>
+                    <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="img-fluid" src="${path}/resources/assets/img/user-gear.png" /></a>
                     <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownUserImage">
                         <h6 class="dropdown-header d-flex align-items-center">
-                            <img class="dropdown-user-img" src="${path}/resources/assets/img/user.png" />
+                            <img class="dropdown-user-img" src="${path}/resources/assets/img/user-gear.png" />
                             <div class="dropdown-user-details">
-                                <div class="dropdown-user-details-name">서울교통공사</div>
-                                <div class="dropdown-user-details-email">is2u111</div>
+                                <div class="dropdown-user-details-name">admin</div>
+                                <div class="dropdown-user-details-email">admin</div>
                             </div>
                         </h6>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#!">
+                        <!-- <a class="dropdown-item" href="#!">
                             <div class="dropdown-item-icon"><i data-feather="settings"></i></div>
                             정보수정
-                        </a>
+                        </a> -->
                         <a class="dropdown-item" href="#!">
                             <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
                             로그아웃
