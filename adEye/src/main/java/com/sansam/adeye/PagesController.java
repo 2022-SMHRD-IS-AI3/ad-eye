@@ -48,17 +48,42 @@ public class PagesController {
 	}
 	
 	// admin_user_register
-	@RequestMapping(value = "/admin_user_register", method = RequestMethod.GET)
-	public String admin_user_register()throws Exception{
+	@RequestMapping(value = "/user_register", method = RequestMethod.GET)
+	public String user_register()throws Exception{
 		
-		log.info("/index.................");
+		log.info("/user_register.................");
 		
-		return "pages/admin_user_register";
+		return "pages/user_register";
 	}
 	
-
+	// admin_user_register
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public String test()throws Exception{
+		
+		log.info("/test.................");
+		
+		return "pages/test";
+	}
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// admin_user_register
+	@RequestMapping(value = "/admin_dashboard", method = RequestMethod.GET)
+	public String admin_dashboard()throws Exception{
+		
+		log.info("/admin_dashboard.................");
+		
+		return "pages/admin_dashboard";
+	}
 	
 //	// Login 을 위한 HTML 파일 내려주기
 //    @GetMapping("/pages/user_dash_list")
