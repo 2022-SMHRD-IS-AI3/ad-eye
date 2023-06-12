@@ -20,6 +20,7 @@ public class AcquisitionDTO {
 	private Date acq_end_dt;
 	private int acq_tid;
 	private int sbs_seq;
+	private String search_date;
 	
 	// 데이터 등록용
 	public AcquisitionDTO(char acq_gender, String acq_interest, Date acq_start_dt, Date acq_end_dt, int acq_tid, int sbs_seq) {
@@ -31,5 +32,10 @@ public class AcquisitionDTO {
 		this.sbs_seq = sbs_seq;
 	}
 
+	// 분석페이지 용
+	public AcquisitionDTO(int sbs_seq, String search_date) {
+		this.sbs_seq = sbs_seq;
+		this.search_date = search_date;
+	}
 
 }

@@ -1,6 +1,7 @@
 package com.sansam.adeye;
 
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
+import com.sansam.adeye.domain.AcqDashboardDTO;
+import com.sansam.adeye.domain.AcquisitionDTO;
+import com.sansam.adeye.domain.AcquisitionDashboardDTO;
 import com.sansam.adeye.domain.AcquisitionSubmitDTO;
 import com.sansam.adeye.domain.DeviceDTO;
 import com.sansam.adeye.domain.LogDTO;
@@ -95,27 +98,54 @@ public class AcquisitionController {
 	@RequestMapping(value = "/acqDashboard", method = RequestMethod.GET)
 	public @ResponseBody Map<String,Object> acqDashboard(@RequestParam("sbs_seq") String sbs_seq,@RequestParam("search_date") String search_date) { // @ResponseBody : 응답할 때 JSON 데이터로 반환
 		
-		System.out.println("분석 메인 화면 ......sbs_seq: " + sbs_seq);
-		
+		System.out.println("분석 메인 화면 ......sbs_seq: " + sbs_seq + ", search_date" + search_date);
+		int seq = Integer.parseInt(sbs_seq);
+
 		// 보내줄 맵 객체 생성
 		Map<String,Object> paramMap = new HashMap<String, Object>();
 		
 		try {
-			//List<DeviceDTO> dto = service.deviceLog(Integer.parseInt(data));
-			int[] oneH_man_cnt = {50,23,15,46,84,53,200,489,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-			int[] oneH_interest = {30,13,5,26,34,23,110,189,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 			
-			int man_total = 1634;
-			int interest_total = 811;
-			int male_total_cnt = 1154;
-			int male_interest_cnt = 505;
-			int female_total_cnt = 480;
-			int female_interest_cnt = 306;
-					
+			List<AcquisitionDashboardDTO> acdDto = service.totalCntList(new AcquisitionDTO(seq,search_date));
+			System.out.println(acdDto);
+			AcqDashboardDTO acDto = service.totalCnt(new AcquisitionDTO(seq,search_date));
+			System.out.println(acDto);
+			
+			// 전체 노출인구 수 배열 선언
+			int[] oneH_man_cnt = new int[24];
+			// 전체 관심인구 수 배열 선언			
+			int[] oneH_interest = new int[24];
+			System.out.println(1);
+			
+			
+			for (int i=0; i<24 ; i++) {
+				// 하루 시간대별 노출인구 값 인덱스 순으로 저장
+				oneH_man_cnt[i] = acdDto.get(i).getTotal_cnt();
+				// 하루 시간대별 관심인구 값 인덱스 순으로 저장
+				oneH_interest[i] = acdDto.get(i).getInterest_total_cnt();
+			}
+			// 하루 시간대별 전체 노출인구 수 확인
+			System.out.println(Arrays.toString(oneH_man_cnt));
+			// 하루 시간대별 전체 관심인구 수 확인
+			System.out.println(Arrays.toString(oneH_interest));
+
+			// 남자 노출인구 수
+			int male_total_cnt = acDto.getMale_total_cnt();
+			// 남자 관심인구 수			
+			int male_interest_cnt = acDto.getMale_interest_cnt();
+			// 여자 노출인구 수
+			int female_total_cnt = acDto.getFemale_total_cnt();
+			// 여자 관심인구 수
+			int female_interest_cnt = acDto.getFemale_interest_cnt();
+			// 하루 전체 노출인구 수
+			int man_total = male_total_cnt + female_total_cnt;
+			// 하루 전체 관심인구 수
+			int interest_total = male_interest_cnt + female_interest_cnt;		
+			
 			// paramMap 담을 객체 생성
 		    Map<String,Object> paramMapSub = new HashMap<String, Object>();
-		    paramMapSub.put("oneH_man_cnt", oneH_man_cnt);
-			paramMapSub.put("oneH_interest", oneH_interest);
+		    paramMapSub.put("oneH_man_cnt", Arrays.toString(oneH_man_cnt));
+			paramMapSub.put("oneH_interest", Arrays.toString(oneH_interest));
 			paramMapSub.put("man_total", man_total);
 			paramMapSub.put("interest_total", interest_total);
 			paramMapSub.put("male_total_cnt", male_total_cnt);
@@ -136,9 +166,7 @@ public class AcquisitionController {
 		    paramMap.put("message", "서버 문제");
 		    
 		}
-	    
 		return paramMap;
-		
 	}
 	
 	@RequestMapping(value = "/max_tid", method = RequestMethod.POST)
