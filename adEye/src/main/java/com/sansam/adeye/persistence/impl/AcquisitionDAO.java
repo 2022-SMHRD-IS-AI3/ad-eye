@@ -63,6 +63,8 @@ public class AcquisitionDAO implements IAcquisitionDAO{
 			// result 재부팅 요청 ai 쪽에 알려주 코드
 		}
 		
+		System.out.println(result.toString());
+		
 		return result;
 	}
 	

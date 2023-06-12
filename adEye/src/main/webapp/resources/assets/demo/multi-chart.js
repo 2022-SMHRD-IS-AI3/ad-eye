@@ -34,6 +34,7 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 
 // Combined Chart Example
 var ctxCombined = document.getElementById("myCombinedChart");
+
 var myCombinedChart = new Chart(ctxCombined, {
     type: "bar",
     data: {

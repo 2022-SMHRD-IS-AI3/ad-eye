@@ -47,6 +47,15 @@ public class PagesController {
 		return "pages/index";
 	}
 	
+	// admin_user_register
+	@RequestMapping(value = "/admin_user_register", method = RequestMethod.GET)
+	public String admin_user_register()throws Exception{
+		
+		log.info("/index.................");
+		
+		return "pages/admin_user_register";
+	}
+	
 
 	
 	
