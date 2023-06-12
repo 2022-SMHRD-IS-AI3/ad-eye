@@ -144,8 +144,8 @@ public class AcquisitionController {
 			
 			// paramMap 담을 객체 생성
 		    Map<String,Object> paramMapSub = new HashMap<String, Object>();
-		    paramMapSub.put("oneH_man_cnt", Arrays.toString(oneH_man_cnt));
-			paramMapSub.put("oneH_interest", Arrays.toString(oneH_interest));
+		    paramMapSub.put("oneH_man_cnt", oneH_man_cnt);
+			paramMapSub.put("oneH_interest", oneH_interest);
 			paramMapSub.put("man_total", man_total);
 			paramMapSub.put("interest_total", interest_total);
 			paramMapSub.put("male_total_cnt", male_total_cnt);

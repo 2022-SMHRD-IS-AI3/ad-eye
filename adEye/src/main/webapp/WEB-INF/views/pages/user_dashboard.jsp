@@ -228,7 +228,7 @@
         <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
         <script>
-        var nowDay = ""
+        	var nowDay = ""
             getNowTime()
             var search_date = $('#search_date')
             search_date.val(nowDay)
@@ -294,6 +294,8 @@
                 return nowTime;
             }
             
+            
+            
             document.getElementById('updateDate').innerText = getNowTime()
 			var dashboardData = {}
             const changeAPI = (code,val) => {
@@ -316,7 +318,7 @@
                     data: aDatas,
                     // 통신에 성공했을 때 실행할 로직
                     success: function (response) {
-                        
+                    	
 	                	if(response.code == "200") {
 	                		
 	                		dashboardData = response.result;
@@ -338,13 +340,13 @@
 
 	        
 	       	function dataChange(){
-	        	
+	        	console.log(dashboardData)
 	        	// 총 유동인구
 	        	$('#man_total').text(dashboardData.man_total.toLocaleString())
 	        	// 총 주요 시청 횟수
 	        	$('#interest_total').text(dashboardData.interest_total.toLocaleString())
 	        	pieChart()
-	        	
+	        	multiChart()
 	        	$('#updateDate').text(getNowTime())
 	        }
 	        
