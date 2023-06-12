@@ -107,8 +107,10 @@ public class AcquisitionController {
 			
 			int man_total = 1634;
 			int interest_total = 811;
-			int male_cnt = 1154;
-			int female_cnt = 480;
+			int male_total_cnt = 1154;
+			int male_interest_cnt = 505;
+			int female_total_cnt = 480;
+			int female_interest_cnt = 306;
 					
 			// paramMap 담을 객체 생성
 		    Map<String,Object> paramMapSub = new HashMap<String, Object>();
@@ -116,8 +118,10 @@ public class AcquisitionController {
 			paramMapSub.put("oneH_interest", oneH_interest);
 			paramMapSub.put("man_total", man_total);
 			paramMapSub.put("interest_total", interest_total);
-			paramMapSub.put("male_cnt", male_cnt);
-			paramMapSub.put("female_cnt", female_cnt);
+			paramMapSub.put("male_total_cnt", male_total_cnt);
+			paramMapSub.put("male_interest_cnt", male_interest_cnt);
+			paramMapSub.put("female_total_cnt", female_total_cnt);
+			paramMapSub.put("female_interest_cnt", female_interest_cnt);
 			    
 		    
 		    System.out.println(paramMapSub.toString());
