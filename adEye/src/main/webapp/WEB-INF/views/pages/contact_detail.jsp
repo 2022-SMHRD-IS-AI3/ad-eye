@@ -1,25 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta charset="utf-8" />
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>대시보드 - Ad-EYE</title>
+        <title>문의상세 - admin</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="${path}/resources/css/styles.css" rel="stylesheet" />
         <link rel="icon" type="image/x-icon" href="${path}/resources/assets/img/logo.png" />
         <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
         <style>
-            .cnt_size {
-                font-size: xxx-large;
+            .con_th {
+                background: #efefef !important;
             }
-            
         </style>
     </head>
     <body class="nav-fixed">
@@ -130,13 +128,13 @@
             <!-- content -->
             <div id="layoutSidenav_content">
                 <main>
-                    <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
+                    <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
                         <div class="container-xl px-4">
-                            <div class="page-header-content pt-4">
-                                <div class="row align-items-center justify-content-between">
-                                    <div class="col-auto mt-4">
-                                        <h1 class="page-header-title fw-bolder">
-                                            관리자 홈
+                            <div class="page-header-content">
+                                <div class="row align-items-center justify-content-between pt-3">
+                                    <div class="col-auto mb-3">
+                                        <h1 class="page-header-title">
+                                            <b>문의 관리</b>
                                         </h1>
                                     </div>
                                 </div>
@@ -144,49 +142,59 @@
                         </div>
                     </header>
                     <!-- Main page content-->
-                    <div class="container-xl px-4 mt-n10">
+                    <div class="container-xl px-4 mt-4">
                         <div class="row">
-                            <!-- 읽지 않은 문의글-->
-                            <div class="col-xl-4 mb-4">
-                                <a class="card lift h-100" href="#!">
-                                    <div class="card-body d-flex justify-content-center flex-column">
-                                        <div class="align-items-center text-center">
-                                            <div class="text-center">
-                                                <p class="fs-4 fw-bolder">읽지 않은 문의 글</p>
-                                                <p class="cnt_size" style="color: #8572b3;">1/18</p>
-                                            </div>
-                                        </div>
+                            
+                            <div class="col-xl-12">
+                                <!-- Account details card-->
+                                <div class="card mb-4">
+                                    <div class="card-header">문의 상세</div>
+                                    <div class="card-body">
+                                        
+                                        <table class="table table-bordered ">
+                                            <tbody>
+                                                <tr>
+                                                    <th class="border-start-0 text-center w-25 con_th">회사명</th>
+                                                    <td>adcompany</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="border-start-0 text-center con_th">연락처</th>
+                                                    <td>adcompany</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="border-start-0 text-center con_th">이메일</th>
+                                                    <td>adcompany</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                        <table class="table table-bordered ">
+                                            <tbody>
+                                                <tr>
+                                                    <th class="border-start-0 text-center w-25 con_th" style="min-height: 300px;height: 300px;">문의 내용</th>
+                                                    <td>
+                                                        <div id="contact_content" class="text-break">
+                                                            
+                                                        </div> 
+                                                        집에보내줘 집에보내줘 집에보내줘 집에보내줘 집에보내줘 집에보내줘 집에보내줘 집에보내줘 집에보내줘 집에보내줘
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+
+
                                     </div>
-                                </a>
-                            </div>
-                            <!-- 사용 중인 기기-->
-                            <div class="col-xl-4 mb-4">
-                                <a class="card lift h-100" href="#!">
-                                    <div class="card-body d-flex justify-content-center flex-column">
-                                        <div class="align-items-center text-center">
-                                            <div class="text-center">
-                                                <p class="fs-4 fw-bolder">사용 중인 기기</p>
-                                                <p class="cnt_size" style="color: #3a91dd;">1/18</p>
-                                            </div>
+                                    <div class="card-footer position-relative">
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <button class="btn btn-secondary" type="button">목록</button>
                                         </div>
+
                                     </div>
-                                </a>
-                            </div>
-                            <!-- 만료 예정 구독 (5일 전)-->
-                            <div class="col-xl-4 mb-4">
-                                <a class="card lift h-100" href="#!">
-                                    <div class="card-body d-flex justify-content-center flex-column">
-                                        <div class="align-items-center text-center">
-                                            <div class="text-center">
-                                                <p class="fs-4 fw-bolder">만료 예정 구독 (5일 전)</p>
-                                                <p class="cnt_size" style="color: #ff6868;">1/18</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
+                                </div>
                             </div>
                         </div>
-                        
                     </div>
                 </main>
                 <footer class="footer-admin mt-auto footer-light">

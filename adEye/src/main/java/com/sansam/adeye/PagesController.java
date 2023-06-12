@@ -65,13 +65,22 @@ public class PagesController {
 		return "pages/user_management";
 	}
 	
-	// admin_user_register
+	// admin_dashboard
 	@RequestMapping(value = "/admin_dashboard", method = RequestMethod.GET)
 	public String admin_dashboard()throws Exception{
 		
 		log.info("/admin_dashboard.................");
 		
 		return "pages/admin_dashboard";
+	}
+	
+	// contact_detail
+	@RequestMapping(value = "/contact_detail", method = RequestMethod.GET)
+	public String contact_detail()throws Exception{
+		
+		log.info("/contact_detail.................");
+		
+		return "pages/contact_detail";
 	}
 	
 //	// Login 을 위한 HTML 파일 내려주기
