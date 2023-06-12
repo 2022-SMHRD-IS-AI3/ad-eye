@@ -55,26 +55,15 @@ public class PagesController {
 		
 		return "pages/user_register";
 	}
-	
-	// admin_user_register
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public String test()throws Exception{
-		
-		log.info("/test.................");
-		
-		return "pages/test";
+
+	// admin_user_management_list
+	@RequestMapping(value = "/user_management", method = RequestMethod.GET)
+	public String user_management()throws Exception{
+			
+		log.info("/user_management.................");
+			
+		return "pages/user_management";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	// admin_user_register
 	@RequestMapping(value = "/admin_dashboard", method = RequestMethod.GET)
