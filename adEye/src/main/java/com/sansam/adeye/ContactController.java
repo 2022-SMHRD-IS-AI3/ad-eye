@@ -50,8 +50,8 @@ public class ContactController {
 			List<ContactDTO> cDtoList = service.contactList(cri);
 			log.info(cDtoList);
 			Map<String,Object> paramMapsub = new HashMap<String, Object>();
-			// 키값 나중에 정해야 함!
-			paramMapsub.put("", cDtoList);
+
+			paramMapsub.put("data", cDtoList);
 		    paramMap.put("result", paramMapsub);
 		    paramMap.put("code", "200");
 		    paramMap.put("message", "조회 성공");			
