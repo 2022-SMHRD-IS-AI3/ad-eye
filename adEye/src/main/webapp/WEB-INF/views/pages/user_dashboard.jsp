@@ -200,9 +200,9 @@
                         <div class="row">
                             <div class="col-md-6 small">Copyright &copy; Ad-EYE 2023</div>
                             <div class="col-md-6 text-md-end small">
-                                <a href="#!">Privacy Policy</a>
+                                <span>최근 업데이트 날짜</span>
                                 &middot;
-                                <a href="#!">Terms &amp; Conditions</a>
+                                <span id="updateDate"></span>
                             </div>
                         </div>
                     </div>
@@ -214,8 +214,72 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" crossorigin="anonymous"></script>
         <%-- <script src="${path}/resources/assets/demo/chart-area-demo.js"></script> --%>
         <%-- <script src="${path}/resources/assets/demo/chart-bar-demo.js"></script> --%>
+
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+        <script>
+	        function getNowTime(){
+	            var today = new Date();	// 현재 날짜 및 시간
+	            var year = today.getFullYear();
+	            var month = ('0' + (today.getMonth() + 1)).slice(-2);
+	            var day = ('0' + today.getDate()).slice(-2);
+	
+	            var hours = ('0' + today.getHours()).slice(-2); 
+	            var minutes = ('0' + today.getMinutes()).slice(-2);
+	            var seconds = ('0' + today.getSeconds()).slice(-2); 
+	            var nowTime = `${year}년 ${month}월 ${day}일 ${hours}:${minutes}:${seconds}`   
+	            return nowTime;
+	        }
+	        document.getElementById('updateDate').innerText = getNowTime()
+			var dashboardData = {}
+	        const changeAPI = (code,val) => {
+	            let aDatas
+	            let aUri = ""
+	            let aType = ""
+	        
+	            if(code == "userDashboard"){
+	                aUri = "/acq/acqDashboard"
+	                aType = "GET"
+	                aDatas = "sbs_seq="+val+"&search_date=2023-06-08"
+	            }
+	            console.log(aUri)
+	            console.log(aDatas)
+	            // ajax문
+	            $.ajax({ // url, success, error 는 무조건 있어야한다
+	                // 어디랑 통신 할건지
+	                url: 'http://211.223.37.186:9000' + aUri,
+	                type: aType,
+	                data: aDatas,
+	                // 통신에 성공했을 때 실행할 로직
+	                success: function (response) {
+	                	
+	                	if(response.code == "200") {
+	                		
+	                		dashboardData = response.result;
+	                		dataChange()
+	                	}
+	                    console.log("통신성공")
+	                    console.log(dashboardData)
+	                },
+	                // 통신에 실패했을 때 실행할 로직
+	                error: function () {
+	                    alert('통신실패');
+	                }
+	            })
+	        }
+	
+	        changeAPI("userDashboard","1")
+	        
+	       	function dataChange(){
+	        	
+	        	// 총 유동인구
+	        	$('#man_total').text(dashboardData.man_total.toLocaleString())
+	        	// 총 주요 시청 횟수
+	        	$('#interest_total').text(dashboardData.interest_total.toLocaleString())
+	        	pieChart()
+	        }
+                
+        </script>
         <script src="${path}/resources/assets/demo/chart-pie-demo.js"></script>
         <script src="${path}/resources/assets/demo/multi-chart.js"></script>
-        <!-- <script type="text/javascript" src="//code.jquery.com/jquery.min.js"></script> -->
     </body>
 </html>

@@ -157,7 +157,7 @@ public class AcquisitionController {
 		    paramMap.put("message", "서버 문제");
 		    
 		}
-	    
+		
 		return paramMap;
 		
 	}
