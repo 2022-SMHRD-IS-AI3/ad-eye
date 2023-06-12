@@ -198,7 +198,7 @@
                                                     <input class="form-control" id="post_num" type="text" name="post_num" placeholder="우편번호" value="" />
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <button class="btn btn-info w-100" type="button">우편번호 검색</button>
+                                                    <button onclick="postSearch()" class="btn btn-info w-100" type="button">우편번호 검색</button>
                                                 </div>
                                                 <div class="col-md-7 mt-2">
                                                     <input class="form-control" id="addr1" type="text" name="addr1" placeholder="주소" value="" />
@@ -212,13 +212,28 @@
                                             <div class="mb-3">
                                                 <label class="small mb-1">계정구분</label>
                                                 <br>
-                                                <div class="form-check  form-check-inline">
-                                                    <input class="form-check-input" id="admin_n" name="admin_yn" type="radio" value="" />
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" id="admin_n" name="admin_yn" type="radio" value="N" checked/>
                                                     <label class="form-check-label" for="admin_n">사용자(N)</label>
                                                 </div>
-                                                <div class="form-check  form-check-inline">
-                                                    <input class="form-check-input" id="admin_y" name="admin_yn" type="radio" value="" />
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" id="admin_y" name="admin_yn" type="radio" value="Y" />
                                                     <label class="form-check-label" for="admin_y">관리자(Y)</label>
+                                                </div>
+                                                
+                                            </div>
+
+                                            <!-- 계정상태 -->
+                                            <div class="mb-3">
+                                                <label class="small mb-1">계정구분</label>
+                                                <br>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" id="mem_status_y" name="mem_status" type="radio" value="Y" checked/>
+                                                    <label class="form-check-label" for="mem_status_y">사용중</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" id="mem_status_n" name="mem_status" type="radio" value="N" />
+                                                    <label class="form-check-label" for="mem_status_n">사용중지</label>
                                                 </div>
                                                 
                                             </div>
@@ -231,10 +246,10 @@
                                     <div class="card-footer position-relative">
                                         <div class="d-flex align-items-center justify-content-between">
                                             <button class="btn btn-secondary" type="button">목록</button>
-                                            <button class="btn btn-primary" type="button">등록</button>
-                                            <button class="btn btn-danger" type="button">삭제</button>
-                                            
-	
+                                            <div class="submit-btn-wrap">
+                                                <button class="btn btn-danger del-btn" type="button">삭제</button>
+                                                <button class="btn btn-primary del-btn" type="button">등록</button>
+                                            </div>
                                         </div>
 
                                     </div>
@@ -257,5 +272,19 @@
         <script src="${path}/resources/js/scripts.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="${path}/resources/js/datatables/datatables-simple-demo.js"></script>
+        <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+        <script>
+            function postSearch(){
+
+                new daum.Postcode({
+                    oncomplete: function(data) {
+                        $('#post_num').val(data.zonecode)
+                        $('#addr1').val(data.address)
+                        $('#addr2').focus()
+                        console.log(data)
+                    }
+                }).open();
+            }
+        </script>
     </body>
 </html>
