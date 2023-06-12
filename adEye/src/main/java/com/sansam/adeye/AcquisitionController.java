@@ -30,27 +30,45 @@ public class AcquisitionController {
 	@Autowired
 	IAcquisitionService service;
 	
+	String code = "";
+	String message = "";
+	String reboot_code = "0";
+	
 	@RequestMapping(value = "/submit", method = RequestMethod.POST)
 	public @ResponseBody Map<String,String> submit(@RequestBody List<AcquisitionSubmitDTO> data) throws Exception {
 		System.out.println(data.toString());
-		log.info("Welcome home! The client locale is submit");
+		log.info("수집 데이터 개수 : " + data.size() + " 개");
 		Map<String,String> paramMap = new HashMap<String, String>();
+		
 		try {
-			DeviceDTO result = service.acqCreate(data);
-			System.out.println(result.toString());
-			if(result.getDevice_onoff() == 'R') {
-				paramMap.put("reboot_code", "1");
+			
+			if(data.size() > 0) {
+				DeviceDTO result = service.acqCreate(data);
+				System.out.println(result.toString());
+				if(result.getDevice_onoff() == 'R') {
+					reboot_code = "1";
+				}
+				code = "201";
+				message = "등록 성공";
 			}else {
-				paramMap.put("reboot_code", "0");
+				code = "206";
+				message = "전송데이터 없음";
 			}
-			paramMap.put("code", "201");
-		    paramMap.put("message", "등록 성공");
+			
+			
 		} catch (Exception e) {
-			paramMap.put("reboot_code", "0");
-			paramMap.put("code", "500");
-		    paramMap.put("message", "서버 문제");
+			reboot_code = "0";
+			code = "500";
+			message = "서버 문제";
 		}
 		
+		System.out.println(code);
+		System.out.println(message);
+		
+		paramMap.put("reboot_code", reboot_code);
+		paramMap.put("code", code);
+	    paramMap.put("message", message);
+	    
 		return paramMap;
 	}
 	
@@ -89,8 +107,10 @@ public class AcquisitionController {
 			
 			int man_total = 1634;
 			int interest_total = 811;
-			int male_cnt = 1154;
-			int female_cnt = 480;
+			int male_total_cnt = 1154;
+			int male_interest_cnt = 505;
+			int female_total_cnt = 480;
+			int female_interest_cnt = 306;
 					
 			// paramMap 담을 객체 생성
 		    Map<String,Object> paramMapSub = new HashMap<String, Object>();
@@ -98,8 +118,10 @@ public class AcquisitionController {
 			paramMapSub.put("oneH_interest", oneH_interest);
 			paramMapSub.put("man_total", man_total);
 			paramMapSub.put("interest_total", interest_total);
-			paramMapSub.put("male_cnt", male_cnt);
-			paramMapSub.put("female_cnt", female_cnt);
+			paramMapSub.put("male_total_cnt", male_total_cnt);
+			paramMapSub.put("male_interest_cnt", male_interest_cnt);
+			paramMapSub.put("female_total_cnt", female_total_cnt);
+			paramMapSub.put("female_interest_cnt", female_interest_cnt);
 			    
 		    
 		    System.out.println(paramMapSub.toString());

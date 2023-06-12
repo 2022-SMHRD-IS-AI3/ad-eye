@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sansam.adeye.domain.Criteria;
 import com.sansam.adeye.domain.MemberDTO;
+import com.sansam.adeye.domain.SubscriptionDTO;
 import com.sansam.adeye.service.IMemberService;
 
 import lombok.extern.log4j.Log4j;
@@ -48,7 +48,7 @@ public class MemberController {
 	    try {
 	    	
 		    int cnt = service.memberInsert(data);
-	
+		    
 		    if(cnt > 0 ) {
 		    	paramMap.put("code", "201");
 			    paramMap.put("message", "등록 성공");
@@ -56,12 +56,10 @@ public class MemberController {
 		    	paramMap.put("code", "203");
 			    paramMap.put("message", "처리 실패");
 		    }
-		    
 	    } catch (Exception e) {
 			paramMap.put("code", "500");
 		    paramMap.put("message", "서버 문제");
 		}
-	    
 		return paramMap;
 	}
 	
@@ -97,7 +95,6 @@ public class MemberController {
 			paramMap.put("code", "204");
 		    paramMap.put("message", "조회 실패");
 		}
-	    
 		return paramMap;
 	}
 	
@@ -106,14 +103,14 @@ public class MemberController {
 	public @ResponseBody Map<String, String> update(MemberDTO data) throws Exception {
 		
 		log.info("/member/update..................");
-		
+		System.out.println(data);
 		// 보내줄 맵 객체 생성
 	    Map<String, String> paramMap = new HashMap<String, String>();
 
 	    try {
 	    	
 	    	int cnt = service.memberUpdate(data);
-
+	    	System.out.println(cnt);
 		    if(cnt > 0) {
 		    	paramMap.put("code", "202");
 			    paramMap.put("message", "수정 완료");
@@ -160,61 +157,51 @@ public class MemberController {
 	}
 	
 	// 회원 목록
-		@RequestMapping(value = "/", method = RequestMethod.GET)
-		public @ResponseBody Map<String, Object> memberList(Criteria cri) throws Exception {
-			log.info("/member/목록..................");
-			Map<String,Object> paramMap = new HashMap<String, Object>();
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public @ResponseBody Map<String, Object> memberList(Criteria cri) throws Exception {
+		log.info("/member/목록..................");
+		Map<String,Object> paramMap = new HashMap<String, Object>();
 
-			try {
-				// 회원 목록 정보 불러오기
-				List<MemberDTO> mDtoList = service.memberList(cri);
-				System.out.println(mDtoList);
-			    // paramMap 담을 객체 생성
-			    Map<String,Object> paramMapsub = new HashMap<String, Object>();
-			    
-			    paramMapsub.put("data", mDtoList);		    
-			    paramMap.put("result", paramMapsub);
-			    paramMap.put("code", "200");
-			    paramMap.put("message", "조회 성공");
-			} catch (Exception e) {
-				paramMap.put("code", "500");
-			    paramMap.put("message", "서버 문제");
-			}
-			return paramMap;
+		try {
+			// 회원 목록 정보 불러오기
+			List<MemberDTO> mDtoList = service.memberList(cri);
+			System.out.println(mDtoList);
+		    // paramMap 담을 객체 생성
+		    Map<String,Object> paramMapsub = new HashMap<String, Object>();
+		    
+		    paramMapsub.put("data", mDtoList);		    
+		    paramMap.put("result", paramMapsub);
+		    paramMap.put("code", "200");
+		    paramMap.put("message", "조회 성공");
+		} catch (Exception e) {
+			paramMap.put("code", "500");
+		    paramMap.put("message", "서버 문제");
 		}
+		return paramMap;
+	}
 
 	// 회원 구독목록 조회
 	@RequestMapping(value = "/devicelist", method = RequestMethod.GET)
-	public @ResponseBody Map<String, Object> devicelist(Criteria cri, @RequestParam("mem_id") String data) throws Exception {
-		log.info("/devicelist/메인 구독 목록..................");
+	public @ResponseBody Map<String, Object> devicelist(Criteria cri) throws Exception {
+		log.info("/devicelist/회원 구독 목록..................");
 		Map<String,Object> paramMap = new HashMap<String, Object>();
 
 		try {
 			System.out.println(cri.toString());
-			System.out.println(data);
-			//List<DeviceDTO> dto = service.deviceLog(Integer.parseInt(data));
-		    
+			// 회원 구독 목록 불러오기
+			List<SubscriptionDTO> sDtoList = service.devicelist(cri);
+			System.out.println(sDtoList);
+			String mem_company = service.memSbsData(cri).getMem_company();
+			System.out.println(mem_company);
+			int sbs_total = service.memSbsData(cri).getSbs_total();
+			System.out.println(sbs_total);
 		    // paramMap 담을 객체 생성
-			
-			paramMap.put("mem_company", "애드컴퍼니");
-			paramMap.put("sbs_total", "2");
-		    List<Map<String, Object>> paramMapSubList = new ArrayList<>();
-		    for (int i = 0; i < 2; i++) {
-		    	Map<String,Object> paramMapSub = new HashMap<String, Object>();
-		    	paramMapSub.put("sbs_seq", "test012123");
-			    paramMapSub.put("sbs_alias", "애드컴퍼니");
-			    paramMapSub.put("sbs_loc", "0000");
-			    paramMapSub.put("sbs_total_man", "000-000-0000");
-			    paramMapSub.put("sbs_total_interest", "smhrd@smhdrd.com");
-			    paramMapSub.put("sbs_male_per", "Y");
-			    paramMapSub.put("sbs_female_per", "2023-05-05 12:50:12");
-			    
-			    paramMapSubList.add(paramMapSub);
-			}
-		    
-		    System.out.println(paramMapSubList.toString());
-		    
-		    paramMap.put("result", paramMapSubList);
+			Map<String,Object> paramMapsub = new HashMap<String, Object>();
+
+			paramMapsub.put("mem_company", mem_company);
+			paramMapsub.put("sbs_total", sbs_total);
+			paramMapsub.put("sbs_list", sDtoList);
+			paramMap.put("result", paramMapsub);
 		    paramMap.put("code", "200");
 		    paramMap.put("message", "조회 성공");
 		    

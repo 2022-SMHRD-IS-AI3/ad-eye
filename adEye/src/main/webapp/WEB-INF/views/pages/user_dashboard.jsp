@@ -82,84 +82,117 @@
         <!-- content -->
             <div id="layoutSidenav_content">
                 <main>
+
+                    <!-- 날짜 이동 -->
                     <header class="page-header pb-10">
                         <div class="container-xl px-4">
                             <div class="page-header-content pt-4">
                                 <div class="row align-items-center justify-content-between">
                                     <div class="col-auto mt-4">
                                         <h1 class="page-header-title">
-                                            한성대 입구역 1번 출구 1
+                                            한성대 입구역 1번 출구 12
                                         </h1>
-                                        <div class="page-header-subtitle">
-                                        	<i class="fa-solid fa-chevron-left"></i>
-                                            오늘 날짜
-                                            <i class="fa-solid fa-chevron-right"></i>
-                                        </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container-xl px-4 text-lg mb-3">
+                            <div class="text-center">
+                                <div class="">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                    <span class="ms-3 me-3">06.10</span>
+                                    <i class="fa-solid fa-chevron-right"></i>
                                 </div>
                             </div>
                         </div>
                     </header>
+                    <!-- 날짜 이동 끝 -->
+
                     <!-- Main page content-->
                     <div class="container-xl px-4 mt-n10">
-                        <!-- Area chart example-->
+
+                        <!-- 멀티 그래프 -->
                         <div class="card mb-4">
-                            <div class="card-header">Area Chart Example</div>
                             <div class="card-body">
-                                <div class="chart-area"><canvas id="myCombinedChart" width="100%" height="30"></canvas></div>
-                            </div>
-                            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-                        </div>
-                        
-                        <div class="row">
-                            <!-- <div class="col-lg-6"> -->
-                                
-                                <!-- Bar chart example
-                                <div class="card mb-4">
-                                    <div class="card-header">Bar Chart Example</div>
-                                    <div class="card-body">
-                                        <div class="chart-bar"><canvas id="myBarChart" width="100%" height="50"></canvas></div>
-                                    </div>
-                                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+                                <div class="chart-area">
+                                    <canvas id="myCombinedChart" width="100%" height="30"></canvas>
                                 </div>
-                            </div> -->
-                            
+                                <div class="mt-5 text-muted text-center fw-700">시간 별 유동인구 & 주요 시청 횟수</div>
+                            </div>
+                        </div>
+                        <!-- 멀티 그래프 끝 -->
+
+                        <div class="row">
+
+                            <!-- 남여 파이 그래프  -->
                             <div class="col-lg-6">
                                 <!-- Pie chart example-->
                                 <div class="card mb-4">
-                                    <div class="card-header">Pie Chart Example</div>
                                     <div class="card-body">
-                                        <div class="chart-pie"><canvas id="myPieChart" width="100%" height="50"></canvas></div>
+                                        <div class="chart-pie">
+                                            <canvas id="myPieChart" width="100%"
+                                                height="50"></canvas>
+                                            </div>
                                     </div>
-                                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+                                    <div class="card-footer small text-center text-muted">
+                                        <span>남</span>
+                                        <span style="color: rgb(54, 162, 235);">■</span> 
+                                        <span>여</span>
+                                        <span style="color: rgb(255, 128, 122);">■</span> 
+                                    </div>
                                 </div>
                             </div>
-                            
-                            <div class="col-xl-3 col-md-6 mb-4">
-                                
-                                <!-- Dashboard info widget 1-->
-                                <div class="card border-start-lg border-start-primary h-100">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center">
-                                            <div class="flex-grow-1">
-                                                <div class="small fw-bold text-primary mb-1">Earnings (monthly)</div>
-                                                <div class="h5">$4,390</div>
-                                                <div class="text-xs fw-bold text-success d-inline-flex align-items-center">
-                                                    <i class="me-1" data-feather="trending-up"></i>
-                                                    12%
+                            <!-- 남여 파이그래프 끝  -->
+
+                            <!-- 총 유동인구 주요시청횟수 -->
+                            <div class="col-lg-6 mb-4">
+                                <div class="card row h-100 pt-4 p-3">
+                                    <div class="col-12 mb-4">
+
+                                        <div class="card border-start-lg border-start-primary h-100">
+                                            <div class="card-body">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1">
+                                                        
+                                                        <div class="h1 text-center">
+                                                            <span id="man_total">0</span> 명
+                                                        </div>
+                                                        <h4 class="text-success text-center  fw-bolder">총 유동 인구
+                                                            </h4>
+                                                    </div>
+                                                    
                                                 </div>
                                             </div>
-                                            <div class="ms-2"><i class="fas fa-dollar-sign fa-2x text-gray-200"></i></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+
+                                        <div class="card border-start-lg border-start-primary h-100">
+                                            <div class="card-body">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1">
+                                                        
+                                                        <div class="h1 text-center">
+                                                            <span id="interest_total">0</span> 명
+                                                        </div>
+                                                        <h4 class="text-success text-center  fw-bolder">총 주요 시청 횟수
+                                                            </h4>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                             
+                                
+
                             </div>
-                            
+                            <!-- 총 유동인구 주요시청횟수 끝 -->
+
                         </div>
-                        
-                        </div>
-                        
+
+                    </div>
+
                 </main>
 
                 <footer class="footer-admin mt-auto footer-light">

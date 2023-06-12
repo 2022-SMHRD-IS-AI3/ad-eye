@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,18 +24,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sansam.adeye.domain.AcquisitionSubmitDTO;
 import com.sansam.adeye.domain.MemberDTO;
+import com.sansam.adeye.service.IMemberService;
 
-/**
- * Handles requests for the application home page.
- */
+
 @Controller
 public class HomeController {
 	
+	@Autowired
+	IMemberService service;
+	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
@@ -52,24 +52,37 @@ public class HomeController {
 	}
 	
 	// 로그인
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public @ResponseBody Map<String,String> login(MemberDTO data,HttpServletRequest request) {
-		
-		System.out.println("로그인 아이디 "+data.toString());
-		Map<String,String> paramMap = new HashMap<String, String>();
-		if(data.getMem_id().equals("test01") && data.getMem_pw().equals("0000")) {
+		@RequestMapping(value = "/login", method = RequestMethod.POST)
+		public @ResponseBody Map<String, Object> login(MemberDTO data) {
 			
-			HttpSession session = request.getSession();
-			session.setAttribute("LoginId","test01");
-			paramMap.put("code", "200");
-			paramMap.put("message", "로그인 성공");
-		}else {
-			paramMap.put("code", "204");
-			paramMap.put("message", "로그인 실패");
+			System.out.println("로그인 아이디 "+data.toString());
+			Map<String,Object> paramMap = new HashMap<String, Object>();
+			Map<String,Object> paramMapsub = new HashMap<String, Object>();
+			
+			try {
+				
+				MemberDTO mDto = service.login(data);
+				char admin_yn = mDto.getAdmin_yn();
+				String mem_id = mDto.getMem_id();
+				
+				if(admin_yn == 'N') {
+					paramMapsub.put("move_url", "/mem/main?mem_id=" + mem_id);
+					paramMap.put("result", paramMapsub);
+					paramMap.put("code", "200");
+					paramMap.put("message", "로그인 성공");
+				}else if(admin_yn == 'Y'){
+					paramMapsub.put("move_url", "/adm/main");
+					paramMap.put("result", paramMapsub);
+					paramMap.put("code", "200");
+					paramMap.put("message", "로그인 성공");				
+				}
+				
+			} catch (Exception e) {
+				paramMap.put("code", "204");
+				paramMap.put("message", "로그인 실패");		
+			}
+			return paramMap;
 		}
-		
-		return paramMap;
-	}
 	
 	// 로그아웃
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)

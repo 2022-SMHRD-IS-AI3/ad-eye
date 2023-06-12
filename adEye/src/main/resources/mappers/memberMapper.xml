@@ -66,7 +66,7 @@
 	</select>
 
   	<update id="update">
-		update tb_member set mem_pw = #{mem_pw}, mem_phone = #{mem_phone}, mem_email=#{mem_email}, company_addr = #{company_addr}, mem_status = #{mem_status} where mem_id = #{mem_id}
+		update tb_member set mem_pw = #{mem_pw}, mem_phone = #{mem_phone}, mem_email = #{mem_email}, company_addr = #{company_addr}, mem_status = #{mem_status} where mem_id = #{mem_id}
 	</update>
 
 	<update id="delete">
