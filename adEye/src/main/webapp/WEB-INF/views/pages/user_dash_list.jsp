@@ -10,7 +10,7 @@
 <meta name="author" content="" />
 <title>내 구독 목록 - Ad-EYE</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-        <link href="${path}/resources/css/styles.css" rel="stylesheet" />
+       <link href="${path}/resources/css/styles.css" rel="stylesheet" />
         <link rel="icon" type="image/x-icon" href="${path}/resources/assets/img/logo.png" />
         <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
@@ -27,8 +27,8 @@
             <!-- * * Tip * * You can use text or an image for your navbar brand.-->
             <!-- * * * * * * When using an image, we recommend the SVG format.-->
             <!-- * * * * * * Dimensions: Maximum height: 32px, maximum width: 240px-->
-            <a class="navbar-brad pe-3 ps-4 ps-lg-2"  href="#!">
-                <svg xmlns="http:n//www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stack" viewBox="0 0 16 16">
+             <a class="navbar-brand pe-3 ps-4 ps-lg-2"  href="#!">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stack" viewBox="0 0 16 16">
                     <path d="m14.12 10.163 1.715.858c.22.11.22.424 0 .534L8.267 15.34a.598.598 0 0 1-.534 0L.165 11.555a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0l5.317-2.66zM7.733.063a.598.598 0 0 1 .534 0l7.568 3.784a.3.3 0 0 1 0 .535L8.267 8.165a.598.598 0 0 1-.534 0L.165 4.382a.299.299 0 0 1 0-.535L7.733.063z"/>
                     <path d="m14.12 6.576 1.715.858c.22.11.22.424 0 .534l-7.568 3.784a.598.598 0 0 1-.534 0L.165 7.968a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0l5.317-2.659z"/>
                   </svg> Ad-EYE</a>
@@ -109,7 +109,7 @@
                                             <th>매체 위치</th>
                                             <th>매체 이름</th>
                                             <th>광고 노출 인구(명)</th>
-                                            <th>광고 인지 및 관심 인구(명)</th>
+                                            <th>광고 주목 인구(명)</th>
                                             <th>전체 남녀 비율(%)</th>
                                             
                                         </tr>
@@ -119,8 +119,8 @@
                                             <th>매체 위치</th>
                                             <th>매체 이름</th>
                                             <th>광고 노출 인구(명)</th>
-                                            <th>주요 시청 횟수(회)</th>
-                                            <th>광고 노출 인구 중 남녀 비율(%)</th>
+                                            <th>광고 주목 인구(명)</th>
+                                            <th>전체 남녀 비율(%)</th>
                                             
                                         </tr>
                                     </tfoot>
@@ -130,7 +130,7 @@
                                             <td>한성대입구역 1번출구 1</td>
                                             <td>55,712</td>
                                             <td>32,011</td>
-                                            <td>52.1:47.9</td>  
+                                            <td>52.1 : 47.9</td>  
                                         </tr>
                                     </tbody>
                                 </table>
@@ -142,11 +142,11 @@
                     <div class="container-xl px-4">
                         <div class="row">
                             <div class="col-md-6 small">Copyright &copy; Ad-EYE 2023</div>
-                            <div class="col-md-6 text-md-end small">
+                            <!-- <div class="col-md-6 text-md-end small">
                                 <a href="#!">Privacy Policy</a>
                                 &middot;
                                 <a href="#!">Terms &amp; Conditions</a>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </footer>
