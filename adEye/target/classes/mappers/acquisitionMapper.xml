@@ -3,14 +3,58 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="AcquisitionMapper">
-
 	
-  	<select id="list" resultType="com.sansam.adeye.domain.AcquisitionDTO">
-		SELECT acq_gender, acq_interest, acq_dt
-		FROM tb_acquisition
-		WHERE sbs_seq = #{sbs_seq} AND acq_dt = current_date and s.sbs_status = 'Y'
+	<!-- 분석페이지 : 시간대별 전체 수 및 관심 수 리스트 -->
+  	<select id="totalCntList" resultType="com.sansam.adeye.domain.AcquisitionDashboardDTO" parameterType="com.sansam.adeye.domain.AcquisitionDTO">
+		WITH hours AS (
+			SELECT 	TO_CHAR(TRUNC(TO_DATE('2023-06-12', 'YYYY-MM-DD')) + (LEVEL - 1) / 24, 'YYYY-MM-DD') AS acq_date,
+					LPAD((LEVEL - 1), 2, '0') AS acq_hour
+			FROM DUAL
+			CONNECT BY LEVEL &lt;= 24
+			)
+		SELECT	h.acq_date,
+				h.acq_hour,
+				NVL(t.total_count, 0) AS total_count,
+				NVL(t.interest_total_count, 0) AS interest_total_count
+		FROM hours h
+		LEFT JOIN (
+			SELECT 	TO_CHAR(a.acq_start_dt, 'YYYY-MM-DD') AS acq_date,
+					TO_CHAR(a.acq_start_dt, 'HH24') AS acq_hour,
+					COUNT(*) AS total_count, 
+					COUNT(CASE WHEN a.acq_interest &gt; 0 THEN 1 END) AS interest_total_count
+			FROM tb_acquisition a
+			WHERE TRUNC(a.acq_start_dt) &gt;= TRUNC(TO_DATE('2023-06-12', 'YYYY-MM-DD'))
+			AND TRUNC(a.acq_start_dt) &lt; TRUNC(TO_DATE('2023-06-12', 'YYYY-MM-DD')) + INTERVAL '1' DAY
+			AND EXISTS (
+				SELECT 1 FROM tb_subscription s WHERE s.sbs_seq = a.sbs_seq AND s.sbs_seq = 37
+			)
+		GROUP BY TO_CHAR(a.acq_start_dt, 'YYYY-MM-DD'), TO_CHAR(a.acq_start_dt, 'HH24')
+		) t ON h.acq_date = t.acq_date AND h.acq_hour = t.acq_hour
+		ORDER BY h.acq_date, h.acq_hour
   	</select>
   	
+   	<select id="totalCnt" resultType="com.sansam.adeye.domain.AcqDashboardDTO" parameterType="com.sansam.adeye.domain.AcquisitionDTO">
+  		
+  		SELECT
+    		COUNT(CASE WHEN acq_gender = 'M' AND a.sbs_seq = #{sbs_seq} THEN 1 END) AS male_total_cnt,
+    		COUNT(CASE WHEN a.acq_interest &gt; 0 AND acq_gender = 'M' AND a.sbs_seq = #{sbs_seq} THEN 1 END) AS male_interest_cnt,
+    		COUNT(CASE WHEN acq_gender = 'W' AND a.sbs_seq = #{sbs_seq} THEN 1 END) AS female_total_cnt,
+    		COUNT(CASE WHEN a.acq_interest &gt; 0 AND acq_gender = 'W' AND a.sbs_seq = #{sbs_seq} THEN 1 END) AS female_interest_cnt
+		FROM tb_acquisition a
+		WHERE TRUNC(a.acq_start_dt) = TRUNC(TO_DATE(#{search_date}, 'YYYY-MM-DD'))
+  	</select>
+  	
+<!--   	<select id="totalCnt" resultType="com.sansam.adeye.domain.AcquisitionDashboardDTO" parameterType="com.sansam.adeye.domain.AcquisitionDTO">
+    	SELECT
+	        NVL(SUM(CASE WHEN a.acq_gender = 'M' THEN 1 ELSE 0 END), 0) AS male_total_cnt,
+        	NVL(SUM(CASE WHEN a.acq_interest &gt; 0 AND a.acq_gender = 'M' THEN 1 ELSE 0 END), 0) AS male_interest_cnt,
+        	NVL(SUM(CASE WHEN a.acq_gender = 'W' THEN 1 ELSE 0 END), 0) AS female_total_cnt,
+        	NVL(SUM(CASE WHEN a.acq_interest &gt; 0 AND a.acq_gender = 'W' THEN 1 ELSE 0 END), 0) AS female_interest_cnt
+    	FROM tb_acquisition a
+    	WHERE TRUNC(a.acq_start_dt) = TRUNC(TO_DATE(#{search_date}, 'YYYY-MM-DD'))
+	        AND a.sbs_seq = #{sbs_seq}
+	</select> -->
+  	  	
   	<!-- 수집 데이터 등록 -->
   	<insert id="create" parameterType="com.sansam.adeye.domain.AcquisitionSubmitDTO">
   		insert into tb_acquisition (acq_gender, acq_interest, acq_start_dt, acq_end_dt, acq_tid, sbs_seq) values(#{acq_gender}, #{acq_interest}, TO_DATE(#{acq_start_dt},'YYYY-MM-DD HH24:MI:SS'), TO_DATE(#{acq_end_dt},'YYYY-MM-DD HH24:MI:SS'), #{acq_tid},
@@ -25,7 +69,7 @@
 	<!-- 수집데이터 수정 -->
 	<update id="update" parameterType="com.sansam.adeye.domain.AcquisitionSubmitDTO">
         update tb_acquisition a 
-        set a.acq_gender = #{acq_gender}, a.acq_interest = #{acq_interest}, a.acq_start_dt = TO_DATE(#{acq_start_dt},'YYYY-MM-DD HH24:MI:SS'), a.acq_end_dt = TO_DATE(#{acq_end_dt},'YYYY-MM-DD HH24:MI:SS') 
+        set a.acq_gender = #{acq_gender}, a.acq_interest = #{acq_interest}, a.acq_start_dt = TO_DATE(#{acq_start_dt},'YYYY-MM-DD HH24:MI:SS'), a.acq_end_dt = TO_DATE(#{acq_end_dt},'YYYY-MM-DD HH24:MI:SS' )
         where a.acq_tid = #{acq_tid} and a.sbs_seq = (select s.sbs_seq from tb_subscription s, tb_device d where s.device_seq = d.device_seq and d.device_uid = #{device_uid} and s.sbs_status = 'Y')
   	</update>
   	

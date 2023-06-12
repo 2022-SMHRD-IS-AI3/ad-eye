@@ -94,7 +94,7 @@
 	<button onclick="getAPI('loginSession')">로그인확인</button>
 	<br>
 	<button onclick="getAPI('adminDashboard')">어드민 대시보드</button>
-	<button onclick="changeAPI('userDashboard','1')">분석 그래프 페이지</button>
+	<button onclick="getAPI('userDashboard')">분석 그래프 페이지</button>
 	<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 	<script type="text/javascript">
 	
@@ -142,11 +142,6 @@
 				company_addr : company_addr,
 				mem_status : "Y"
 			}	
-		}else if(code == "userDashboard"){
-			aUri = "/acq/dashboard"
-			aType = "GET"
-			aDatas = "sbs_seq="+val+"&search_date=2023-06-08"
-			
 		}else if(code == "dev_log"){
 			aUri = "/device/log"
 			aType = "GET"
@@ -221,6 +216,12 @@
 	
 		if(false){
 			
+		}else if(code == "userDashboard"){
+			var seq = 37 
+			aUri = "/acq/acqDashboard"
+			aType = "GET"
+			aDatas = "sbs_seq="+seq+"&search_date=2023-06-12"
+		
 		}else if (code == "adminDashboard"){
 			aUri = "/admin/dashboard"
 			aType = "GET"
