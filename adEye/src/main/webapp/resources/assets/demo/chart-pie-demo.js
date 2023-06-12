@@ -16,7 +16,7 @@ function pieChart(){
 	    ],
 	    datasets: [{
 	      label: 'My First Dataset',
-	      data: [dashboardData.female_cnt, dashboardData.male_cnt],
+	      data: [dashboardData.female_total_cnt, dashboardData.male_total_cnt],
 	      backgroundColor: [
 	        'rgb(255, 128, 122)',
 	        'rgb(54, 162, 235)'
