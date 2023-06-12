@@ -1,6 +1,7 @@
 package com.sansam.adeye;
 
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -97,7 +98,7 @@ public class AcquisitionController {
 	@RequestMapping(value = "/acqDashboard", method = RequestMethod.GET)
 	public @ResponseBody Map<String,Object> acqDashboard(@RequestParam("sbs_seq") String sbs_seq,@RequestParam("search_date") String search_date) { // @ResponseBody : 응답할 때 JSON 데이터로 반환
 		
-		System.out.println("분석 메인 화면 ......sbs_seq: " + sbs_seq + "," + search_date);
+		System.out.println("분석 메인 화면 ......sbs_seq: " + sbs_seq + ", search_date" + search_date);
 		int seq = Integer.parseInt(sbs_seq);
 
 		// 보내줄 맵 객체 생성
@@ -110,22 +111,24 @@ public class AcquisitionController {
 			AcqDashboardDTO acDto = service.totalCnt(new AcquisitionDTO(seq,search_date));
 			System.out.println(acDto);
 			
-			// 하루 시간대별 전체 노출인구 수
+			// 전체 노출인구 수 배열 선언
 			int[] oneH_man_cnt = new int[24];
-			// 하루 시간대별 전체 관심인구 수			
+			// 전체 관심인구 수 배열 선언			
 			int[] oneH_interest = new int[24];
 			System.out.println(1);
 			
 			
 			for (int i=0; i<24 ; i++) {
+				// 하루 시간대별 노출인구 값 인덱스 순으로 저장
 				oneH_man_cnt[i] = acdDto.get(i).getTotal_cnt();
+				// 하루 시간대별 관심인구 값 인덱스 순으로 저장
 				oneH_interest[i] = acdDto.get(i).getInterest_total_cnt();
-				System.out.println(oneH_man_cnt[i]);
-				System.out.println(oneH_interest[i]);
 			}
-			System.out.println(oneH_man_cnt.toString());
-			System.out.println(oneH_interest.toString());
-			System.out.println(2);	
+			// 하루 시간대별 전체 노출인구 수 확인
+			System.out.println(Arrays.toString(oneH_man_cnt));
+			// 하루 시간대별 전체 관심인구 수 확인
+			System.out.println(Arrays.toString(oneH_interest));
+
 			// 남자 노출인구 수
 			int male_total_cnt = acDto.getMale_total_cnt();
 			// 남자 관심인구 수			
@@ -139,12 +142,10 @@ public class AcquisitionController {
 			// 하루 전체 관심인구 수
 			int interest_total = male_interest_cnt + female_interest_cnt;		
 			
-			System.out.println(321);
-			
 			// paramMap 담을 객체 생성
 		    Map<String,Object> paramMapSub = new HashMap<String, Object>();
-		    paramMapSub.put("oneH_man_cnt", oneH_man_cnt);
-			paramMapSub.put("oneH_interest", oneH_interest);
+		    paramMapSub.put("oneH_man_cnt", Arrays.toString(oneH_man_cnt));
+			paramMapSub.put("oneH_interest", Arrays.toString(oneH_interest));
 			paramMapSub.put("man_total", man_total);
 			paramMapSub.put("interest_total", interest_total);
 			paramMapSub.put("male_total_cnt", male_total_cnt);
