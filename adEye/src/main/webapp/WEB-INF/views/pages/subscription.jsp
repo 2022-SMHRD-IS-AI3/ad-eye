@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>회원관리 - admin</title>
+        <title>구독 - admin</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="${path}/resources/css/styles.css" rel="stylesheet" />
         <link rel="icon" type="image/x-icon" href="${path}/resources/assets/img/logo.png" />
@@ -129,13 +129,13 @@
                                 <div class="row align-items-center justify-content-between pt-3">
                                     <div class="col-auto mb-3">
                                         <h1 class="page-header-title">
-                                            <b>회원 관리</b>
+                                            <b>구독 관리</b>
                                         </h1>
                                     </div>
                                     <div class="col-12 col-xl-auto mb-3">
                                         <a class="btn btn-sm btn-light text-primary" href="#!">
                                             <i class="me-1" data-feather="user-plus"></i>
-                                            회원 등록
+                                            구독 등록
                                         </a>
                                     </div>
                                 </div>
@@ -143,6 +143,43 @@
                         </div>
                     </header>
                     <!-- Main page content-->
+                    <div class="container-fluid px-4 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                            	<div class="row gx-3">
+                                   	<label for="" class="col-sm-1 col-form-label fw-bolder text-center">검색</label>
+                                   	<div class="col-md-2">
+                                   		<select class="form-select" name="key">
+                                   			<option value="">--- 선택 ---</option>
+                                   			<option value="company">회사명</option>
+                                   			<option value="alias">매체 이름</option>
+                                   		</select>
+                                    </div>
+                                   	<div class="col-md-3">
+                                        <input class="form-control" id="keword" type="text" name="keword" placeholder="내용을 입력해주세요" value="" />
+                                    </div>
+                                    
+                                    <div class="col-md-2">
+                                   		<select class="form-select" name="sbs_grade" disabled>
+                                   			<option value="">--- 등급 ---</option>
+                                   			<option value="standard" selected>standard</option>
+                                   		</select>
+                                    </div>
+                                    <div class="col-md-2">
+                                   		<select class="form-select" name="sbs_status">
+                                   			<option value="">--- 상태 ---</option>
+                                   			<option value="Y">사용</option>
+                                   			<option value="N">중지</option>
+                                   		</select>
+                                    </div>
+                                    <div class="col-md-2">
+                                   		<button class="btn btn-dark" id="search_btn">검색</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+ 
                     <div class="container-fluid px-4">
                         <div class="card">
                             <div class="card-body">
@@ -150,39 +187,43 @@
                                     <thead>
                                         <tr>
                                             <th>회사명</th>
-                                            <th>연락처</th>
-                                            <th>아이디</th>
-                                            <th>이메일</th>
-                                            <th>가입일</th>
-                                            <th>구독 수</th>
-                                            <th>수정 / 삭제</th>
+                                            <th>매체 이름</th>
+                                            <th>구독 등급</th>
+                                            <th>상태</th>
+                                            <th>시작일</th>
+                                            <th>종료일</th>
+                                            <th>남은 일자</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>회사명</th>
-                                            <th>연락처</th>
-                                            <th>아이디</th>
-                                            <th>이메일</th>
-                                            <th>가입일</th>
-                                            <th>구독 수</th>
-                                            <th>수정 / 삭제</th>
+                                            <th>매체 이름</th>
+                                            <th>구독 등급</th>
+                                            <th>상태</th>
+                                            <th>시작일</th>
+                                            <th>종료일</th>
+                                            <th>남은 일자</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                         <tr>
                                             <td>서울교통공사</td>
-                                            <td>02-000-0000</td>
-                                            <td>is2u111</td>
-                                            <td>kkk@kkkk.kk</td>
+                                            <td>입구역광고매체</td>
+                                            <td>standard</td>
+                                            <td>사용</td>
                                             <td>2023-05-01</td>
-                                            <td>4</td>
-                                            <td>
-                                                <!-- 회원 수정 -->
-                                                <a class="btn btn-datatable btn-icon btn-transparent-dark me-2" href="#!"><i data-feather="edit"></i></a>
-                                                <!-- 회원 삭제 -->
-                                                <a class="btn btn-datatable btn-icon btn-transparent-dark" href="#!"><i data-feather="trash-2"></i></a>
-                                            </td>
+                                            <td>2024-05-01</td>
+                                            <td>211</td>
+                                        </tr>
+                                        <tr>
+                                            <td>서울교통공사</td>
+                                            <td>입구역광고매체</td>
+                                            <td>standard</td>
+                                            <td>사용</td>
+                                            <td>2023-05-01</td>
+                                            <td>2024-05-01</td>
+                                            <td>211</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -203,5 +244,6 @@
         <script src="${path}/resources/js/scripts.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="${path}/resources/js/datatables/datatables-simple-demo.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     </body>
 </html>
