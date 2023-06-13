@@ -92,6 +92,24 @@ public class PagesController {
 		return "pages/admin_user_dashboard";
 	}
 	
+	// subscription
+	@RequestMapping(value = "/subscription", method = RequestMethod.GET)
+	public String subscription()throws Exception{
+		
+		log.info("/subscription.................");
+		
+		return "pages/subscription";
+	}
+	
+	// subscription_register
+	@RequestMapping(value = "/subscription_register", method = RequestMethod.GET)
+	public String subscription_register()throws Exception{
+		
+		log.info("/subscription_register.................");
+		
+		return "pages/subscription_register";
+	}
+	
 //	// Login 을 위한 HTML 파일 내려주기
 //    @GetMapping("/pages/user_dash_list")
 //    public String loginPage() {
