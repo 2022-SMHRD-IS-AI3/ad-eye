@@ -53,8 +53,8 @@ function multiChart(){
                     pointBackgroundColor: "rgba(169, 205, 62, 1)",
                     pointBorderColor: "rgba(169, 205, 62, 1)",
                     pointHoverRadius: 3,
-                    pointHoverBackgroundColor: "rgba(0, 97, 242, 1)",
-                    pointHoverBorderColor: "rgba(0, 97, 242, 1)",
+                    pointHoverBackgroundColor: "rgba(169, 205, 62, 1)",
+                    pointHoverBorderColor: "rgba(169, 205, 62, 1)",
                     pointHitRadius: 10,
                     pointBorderWidth: 2,
                     data: dashboardData.oneH_interest
@@ -104,7 +104,7 @@ function multiChart(){
                             padding: 10,
                             // Include a dollar sign in the ticks
                             callback: function(value, index, values) {
-                                return number_format(value) + " 명";
+                                return number_format(value);
                             }
                         },
                         gridLines: {

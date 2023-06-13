@@ -172,11 +172,11 @@
                                             <div class="row gx-3 mb-3">
                                                 <div class="col-md-6">
                                                     <label class="small mb-1" for="mem_pw">* 비밀번호</label>
-                                                    <input class="form-control" id="mem_pw" type="password" name="mem_pw" placeholder="비밀번호" value="0000" />
+                                                    <input class="form-control" id="mem_pw" type="password" name="mem_pw" placeholder="비밀번호" value="1234" />
                                                 </div>
                                                 <div class="col-md-6">
                                                     <br>
-                                                    <span class="text-muted small">* 기본 비밀번호는 0000 입니다.</span>
+                                                    <span class="text-muted small">* 기본 비밀번호는 1234 입니다.</span>
                                                     
                                                 </div>
                                             </div>
@@ -255,9 +255,9 @@
                                     </div>
                                     <div class="card-footer position-relative">
                                         <div class="d-flex align-items-center justify-content-between">
-                                            <button class="btn btn-secondary" type="button" onclick="moveUri('/pages/user_management')">목록</button>
+                                            <button class="btn btn-secondary" type="button" onclick="moveCode('mlist')">목록</button>
                                             <div class="submit-btn-wrap">
-                                                <button class="btn btn-primary del-btn" type="button">등록</button>
+                                                <button class="btn btn-primary del-btn" onClick="dataSubmit('in')" type="button">등록</button>
                                             </div>
                                         </div>
 
@@ -283,8 +283,9 @@
         <script src="${path}/resources/js/datatables/datatables-simple-demo.js"></script>
         <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
         <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+        <script src="${path}/resources/js/cus.js"></script>
         <script>
-     // uuid 생성
+     	// uuid 생성
         function generateUUID(id) {
             const uuid = 'xxxxxxxxxx'.replace(/[xy]/g, function(c) {
                 var r = Math.random() * 16 | 0,
@@ -306,31 +307,23 @@
                     console.log(data)
                 }
             }).open();
-            
-        }
-
-        // 쿼리스트링 값 가져오기
-        function getQueryParameterValue(parameterName) {
-
-            const queryString = window.location.search;
-            const urlParams = new URLSearchParams(queryString);
-            return urlParams.get(parameterName);
-
         }
 
         // 문서준비 완료 되면
         $(document).ready(function() {
 
             // 등록, 수정 유무 id 값 가져오기
-            const idValue = getQueryParameterValue('id');
+            const idValue = getQueryString('id');
 
             // id 값 유무로 등록 수정 판단
             if(idValue){
 
                 // 삭제, 수정 버튼
-                const changebtn = '<button class="btn btn-danger me-2" type="button ">삭제</button>'+
-                        '<button class="btn btn-primary" type="button">수정</button>';
+                const changebtn = '<button class="btn btn-danger me-2" onClick="dataSubmit(\'dl\')" type="button ">삭제</button>'+
+                        '<button class="btn btn-primary" onClick="dataSubmit(\'up\')" type="button">수정</button>';
                 $('.submit-btn-wrap').html(changebtn)
+                
+                $('#mem_id').val(idValue)
             
             }else{ // 값 없으면 회원 등록
 
@@ -341,12 +334,56 @@
 
         });
         
-        function moveUri(path){
-
-        	// 상대적인 경로를 지정하여 이동
-        	window.location.href = path;
-        }
-	        
+        // 데이터 전송
+        function dataSubmit(flag){
+        	
+       		var path = "";
+       		var type = "POST";
+       		var data = null;
+       		
+       		
+        	if(flag == 'dl'){ // 삭제
+        		path = "/member/delete";
+        		type = "GET";
+        		data =  {
+        			mem_id : $('#mem_id').val()
+              	}
+       		
+        	}else if('in' || 'up') { // 등록, 수정
+        		
+        		data = {
+                  	mem_id : $('#mem_id').val(),
+                   	mem_pw : $('#mem_pw').val(),
+                  	mem_company : $('#mem_company').val(),
+                  	mem_phone : $('#mem_phone').val(),
+                  	mem_email : $('#mem_email').val(),
+                   	mem_status : $('input[name=mem_status]').val(),
+                  	company_addr : $('#addr1').val() + "," + $('#addr2').val()
+               	}
+        		
+	       		if(isObjectEmpty(data)){ // 빈 값 체크
+	       			alert("필수 입력정보가 입력되지 않았습니다");
+	       			return
+	       		}
+        	
+        		if(flag=='in') {
+        			path = "/member/insert";
+        		}else{
+        			path = "/member/update";
+        		}
+        		
+        	}
+       		
+       		ajaxCallBack(path, type, data, function(response){
+       			
+       			conLog(response)
+       			if(response.code == "201") {
+       				alert("회원등록이 완료되었습니다.")
+       				moveCode('mlist');
+       			}
+       		});
+       	}
+        
         </script>
     </body>
 </html>

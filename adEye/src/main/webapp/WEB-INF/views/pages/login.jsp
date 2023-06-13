@@ -24,12 +24,11 @@
                             <div class="col-xl-5 col-lg-6 col-md-7 col-sm-11">
                                 <!-- Social login form-->
                                 <div class="card my-5">
-                                    <div class="card-body p-5 text-center">
-                                        <div class="h1 fw-bold mb-3">Ad - EYE</div>
-                                        <div class="h1 fw-light mb-3">Sign In</div>
+                                    <div class="pt-5 text-center">
+                                        <img class="w-25 mb-1" src="${path}/resources/assets/img/custom/logo.png" />
+                                        <div class="h1 fw-bolder mt-3 mb-3">LOGIN</div>
                                     </div>
-                                    <hr class="my-0" />
-                                    <div class="card-body p-5">
+                                    <div class="p-5 pt-3">
                                         <!-- Login form-->
                                         <form>
                                             <!-- Form Group (email address)-->
@@ -45,15 +44,11 @@
                                             <!-- Form Group (forgot password link)-->
                                             <div class="mb-3"><a class="small" href="auth-password-social.html"></a></div>
                                             <!-- Form Group (login box).-->
-                                            <div class="d-flex align-items-center justify-content-between mb-0">
-                                                <div class="form-check">
-                                                    
-                                                </div>
+                                            <div class="text-end align-items-center justify-content-between mb-0">
                                                 <a class="btn btn-primary" href="dashboard-1.html">Login</a>
                                             </div>
                                         </form>
                                     </div>
-                                    <hr class="my-0" />
                                     <div class="card-body px-5 py-4">
                                         <div class="small text-center">
                                             아직 회원이 아니시라면 
