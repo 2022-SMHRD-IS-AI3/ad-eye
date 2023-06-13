@@ -150,17 +150,17 @@
                             	<div class="row gx-3">
                                    	<label for="" class="col-sm-1 col-form-label fw-bolder text-center">검색</label>
                                    	<div class="col-md-2">
-                                   		<select class="form-select" name="key">
+                                   		<select class="form-select" name="key" disabled>
                                    			<option value="">--- 선택 ---</option>
-                                   			<option value="company">회사명</option>
-                                   			<option value="alias">매체 이름</option>
+                                   			<option value="company" selected>회사명</option>
+                                   			
                                    		</select>
                                     </div>
                                    	<div class="col-md-3">
                                         <input class="form-control" id="keword" type="text" name="keword" placeholder="내용을 입력해주세요" value="" />
                                     </div>
                                     
-                                    <div class="col-md-2">
+                                   <!--  <div class="col-md-2">
                                    		<select class="form-select" name="sbs_grade" disabled>
                                    			<option value="">--- 등급 ---</option>
                                    			<option value="standard" selected>standard</option>
@@ -172,7 +172,7 @@
                                    			<option value="Y">사용</option>
                                    			<option value="N">중지</option>
                                    		</select>
-                                    </div>
+                                    </div> -->
                                     <div class="col-md-2">
                                    		<button class="btn btn-dark" id="search_btn">검색</button>
                                     </div>
