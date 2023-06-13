@@ -94,10 +94,10 @@
                                 회원 관리
                                 <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
-                            <div class="collapse" id="pagesCollapseAccount" data-bs-parent="#accordionSidenav">
+                           	<div class="collapse" id="pagesCollapseAccount" data-bs-parent="#accordionSidenav">
                                 <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
-                                    <a class="nav-link" href="#!">회원 목록</a>
-                                    <a class="nav-link" href="#!">회원 등록</a>
+                                    <a class="nav-link" href="/pages/user_management">회원 목록</a>
+                                    <a class="nav-link" href="/pages/user_register">회원 등록</a>
                                 </nav>
                             </div>
                             <!-- Sidenav Accordion (구독)-->

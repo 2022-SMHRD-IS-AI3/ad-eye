@@ -6,7 +6,7 @@ Chart.defaults.global.defaultFontColor = "#858796";
 
 // Pie Chart Example
 var ctx = document.getElementById("myPieChart");
-
+var myPieChart = null;
 function pieChart(){
 
 	const data = {
@@ -25,7 +25,7 @@ function pieChart(){
 	    }]
 	  };
 	  
-	var myPieChart = new Chart(ctx, {
+	myPieChart = new Chart(ctx, {
 	    type: "pie",
 	    data: data,
 	    options: {
@@ -44,3 +44,9 @@ function pieChart(){
 	    }
 	});
 }
+
+function rePieChart(){
+	myPieChart.data.datasets[0].data = [dashboardData.female_total_cnt, dashboardData.male_total_cnt];
+	myPieChart.update();
+}
+
