@@ -9,14 +9,22 @@
 <meta name="description" content="" />
 <meta name="author" content="" />
 <title>대시보드 - Ad-EYE</title>
+    	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="${path}/resources/css/styles.css" rel="stylesheet" />
         <link rel="icon" type="image/x-icon" href="${path}/resources/assets/img/logo.png" />
         <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
 		<style>
-		
-		</style>
+	        .dateSelector{
+	            width: 8rem;
+	            text-align: center;
+	            border: none;
+	            background: none;
+	            color: #777777;
+	            outline: none;
+	        }
+	    </style>
 </head>
 <body class="nav-fixed">
 <!-- * * Tip * * 경로설정 ${path}/resources/ -->
@@ -99,9 +107,11 @@
                         <div class="container-xl px-4 text-lg mb-3">
                             <div class="text-center">
                                 <div class="">
-                                    <i class="fa-solid fa-chevron-left"></i>
-                                    <span class="ms-3 me-3">06.10</span>
-                                    <i class="fa-solid fa-chevron-right"></i>
+                                    <i class="fa-solid fa-chevron-left" onclick="changeDay('m')"></i>
+                                    <input type="text" class="dateSelector"/>
+                                    <input type="hidden" name="search_date" id="search_date">
+                                    <input type="hidden" name="sbs_seq" id="sbs_seq" value="37">
+                                    <i class="fa-solid fa-chevron-right" onclick="changeDay('p')"></i>
                                 </div>
                             </div>
                         </div>
@@ -216,67 +226,131 @@
         <%-- <script src="${path}/resources/assets/demo/chart-bar-demo.js"></script> --%>
 
         <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
         <script>
-	        function getNowTime(){
-	            var today = new Date();	// 현재 날짜 및 시간
-	            var year = today.getFullYear();
-	            var month = ('0' + (today.getMonth() + 1)).slice(-2);
-	            var day = ('0' + today.getDate()).slice(-2);
-	
-	            var hours = ('0' + today.getHours()).slice(-2); 
-	            var minutes = ('0' + today.getMinutes()).slice(-2);
-	            var seconds = ('0' + today.getSeconds()).slice(-2); 
-	            var nowTime = `${year}년 ${month}월 ${day}일 ${hours}:${minutes}:${seconds}`   
-	            return nowTime;
-	        }
-	        document.getElementById('updateDate').innerText = getNowTime()
+        	var nowDay = ""
+            getNowTime()
+            var search_date = $('#search_date')
+            search_date.val(nowDay)
+            
+            var dateSelector = document.querySelector('.dateSelector');
+            var te = flatpickr(dateSelector,{
+                defaultDate: $('#search_date').val(),
+                local: 'ko',
+                dateFormat : "Y-m-d",
+                onChange: function(selectDates, dateStr, instance){
+                	
+                    $('#search_date').val(dateStr)
+                    changeAPI('userDashboard')
+                },
+            });
+
+            // 화살표꺽쇠 날짜 변경
+            function changeDay(c){
+
+                var cDate = new Date(search_date.val())
+                
+                var gDate = new Date(cDate);
+                if(c === 'm'){
+                    gDate.setDate(cDate.getDate() - 1)
+                }else if(c === 'p'){
+                    gDate.setDate(cDate.getDate() + 1)
+                }
+                search_date.val(getYMD(gDate));
+                te.setDate(getYMD(gDate))
+                changeAPI('userDashboard')
+                
+            }
+
+            function getYMD(d){
+
+                var year = d.getFullYear();
+                var month = ('0' + (d.getMonth() + 1)).slice(-2);
+                var day = ('0' + d.getDate()).slice(-2);
+
+    
+                nowDay = year+"-"+month+"-"+day
+                
+                return nowDay;
+            }
+            
+            function getNowTime(){
+                var today = new Date();	// 현재 날짜 및 시간
+                var year = today.getFullYear();
+                var month = ('0' + (today.getMonth() + 1)).slice(-2);
+                var day = ('0' + today.getDate()).slice(-2);
+
+                var hours = ('0' + today.getHours()).slice(-2); 
+                var minutes = ('0' + today.getMinutes()).slice(-2);
+                var seconds = ('0' + today.getSeconds()).slice(-2); 
+	            var nowTime = year +"년 "+ month +"월 "+ day +"일 "+ hours +":"+ minutes + ":" +seconds
+	            nowDay = year+"-"+month+"-"+day
+                dateObj = {
+                    year : year,
+                    month : month,
+                    day : day
+                }  
+
+                return nowTime;
+            }
+            
+            
+            
+            document.getElementById('updateDate').innerText = getNowTime()
 			var dashboardData = {}
-	        const changeAPI = (code,val) => {
-	            let aDatas
-	            let aUri = ""
-	            let aType = ""
-	        
-	            if(code == "userDashboard"){
-	                aUri = "/acq/acqDashboard"
-	                aType = "GET"
-	                aDatas = "sbs_seq="+val+"&search_date=2023-06-08"
-	            }
-	            console.log(aUri)
-	            console.log(aDatas)
-	            // ajax문
-	            $.ajax({ // url, success, error 는 무조건 있어야한다
-	                // 어디랑 통신 할건지
-	                url: 'http://211.223.37.186:9000' + aUri,
-	                type: aType,
-	                data: aDatas,
-	                // 통신에 성공했을 때 실행할 로직
-	                success: function (response) {
-	                	
+            const changeAPI = (code,val) => {
+                let aDatas
+                let aUri = ""
+                let aType = ""
+            
+                if(code == "userDashboard"){
+                    aUri = "/acq/acqDashboard"
+                    aType = "GET"
+                    aDatas = "sbs_seq="+$('#sbs_seq').val()+"&search_date="+$('#search_date').val()
+                }
+                console.log(aUri)
+                console.log(aDatas)
+                // ajax문
+                $.ajax({ // url, success, error 는 무조건 있어야한다
+                    // 어디랑 통신 할건지
+                    url: 'http://211.223.37.186:9000/acq/acqDashboard',
+                    type: aType,
+                    data: aDatas,
+                    // 통신에 성공했을 때 실행할 로직
+                    success: function (response) {
+                    	
 	                	if(response.code == "200") {
 	                		
 	                		dashboardData = response.result;
 	                		dataChange()
 	                	}
-	                    console.log("통신성공")
-	                    console.log(dashboardData)
-	                },
-	                // 통신에 실패했을 때 실행할 로직
-	                error: function () {
-	                    alert('통신실패');
-	                }
-	            })
-	        }
-	
-	        changeAPI("userDashboard","1")
+                    	console.log("통신성공")
+                        console.log(response)
+                        
+                        dataChange()
+                    },
+                    // 통신에 실패했을 때 실행할 로직
+                    error: function () {
+                        alert('통신실패');
+                    }
+                })
+            }
+
+            changeAPI("userDashboard","37")
+
 	        
 	       	function dataChange(){
-	        	
+	        	console.log(dashboardData)
 	        	// 총 유동인구
 	        	$('#man_total').text(dashboardData.man_total.toLocaleString())
 	        	// 총 주요 시청 횟수
 	        	$('#interest_total').text(dashboardData.interest_total.toLocaleString())
 	        	pieChart()
+	        	multiChart()
+	        	$('#updateDate').text(getNowTime())
 	        }
+	        
+	        
                 
         </script>
         <script src="${path}/resources/assets/demo/chart-pie-demo.js"></script>

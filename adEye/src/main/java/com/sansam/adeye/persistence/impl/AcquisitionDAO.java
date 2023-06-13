@@ -6,7 +6,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.sansam.adeye.domain.AcqDashboardDTO;
 import com.sansam.adeye.domain.AcquisitionDTO;
+import com.sansam.adeye.domain.AcquisitionDashboardDTO;
 import com.sansam.adeye.domain.AcquisitionSubmitDTO;
 import com.sansam.adeye.domain.DeviceDTO;
 import com.sansam.adeye.domain.LogDTO;
@@ -18,11 +20,26 @@ public class AcquisitionDAO implements IAcquisitionDAO{
 	@Autowired
 	private SqlSession session;
 	
-	// 데이터 조회 : 분석페이지화면구성
+	// 데이터 조회 : 분석페이지화면구성(리스트)
 	@Override
-	public List<AcquisitionDTO> acqDashboard(int seq) throws Exception{
-		
-		return session.selectList("AcquisitionMapper.list", seq);
+	public List<AcquisitionDashboardDTO> totalCntList(AcquisitionDTO reParam) throws Exception {
+		System.out.println("DAO 접속");
+		System.out.println("sbs_seq "+ reParam.getSbs_seq());
+		System.out.println("search_date "+ reParam.getSearch_date());
+		List<AcquisitionDashboardDTO> t = session.selectList("AcquisitionMapper.totalCntList", reParam);
+		System.out.println(t.toString());
+		return t;
+	}
+	
+	// 데이터 조회 : 분석페이지화면구성(값)
+	@Override
+	public AcqDashboardDTO totalCnt(AcquisitionDTO reParam) throws Exception {
+		System.out.println("DAO 접속");
+		System.out.println("sbs_seq "+ reParam.getSbs_seq());
+		System.out.println("search_date "+ reParam.getSearch_date());
+		AcqDashboardDTO t = session.selectOne("AcquisitionMapper.totalCnt", reParam);
+		System.out.println(t.toString());
+		return t;
 	}
 	
 	// 수집 데이터 저장
