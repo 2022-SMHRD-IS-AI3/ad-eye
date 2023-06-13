@@ -47,7 +47,7 @@ public class AcquisitionDAO implements IAcquisitionDAO{
 	public DeviceDTO acqCreate(List<AcquisitionSubmitDTO> dtoList) throws Exception {
 		
 		// 처리에 따른 결과코드 담아주기 
-		DeviceDTO result = null;
+		DeviceDTO result = new DeviceDTO();
 		
 		try {
 			
@@ -55,22 +55,23 @@ public class AcquisitionDAO implements IAcquisitionDAO{
 				System.out.println(dto);
 				
 				int cnt = session.selectOne("AcquisitionMapper.tidCheck",new AcquisitionSubmitDTO(dto.getDevice_uid(), dto.getAcq_tid(), null, null, null, null));
-				
 				if(cnt > 0) {
 					session.insert("AcquisitionMapper.update", dto);
 					System.out.println(cnt);
 				}else {
 					session.insert("AcquisitionMapper.create", dto);
 				}
+				
 			}
 			
 			result.setDevice_seq(1);
-			
 		} catch (Exception e) {
 			result.setDevice_seq(2);
+			
 		}
 		// uid 값으로  seq,onoff 상태 가져오기
 		DeviceDTO d = session.selectOne("DeviceMapper.getOnoff", dtoList.get(0).getDevice_uid());
+		
 		result.setDevice_onoff(d.getDevice_onoff());
 		// 재부팅 요청이 들어온 경우
 		if(d.getDevice_onoff() == 'R') {
