@@ -160,8 +160,7 @@
                                         </div>
                                         <div class="mt-5 text-muted text-center fw-500">
 		                                	<span>총 인구 남녀 비율</span>
-		                                </div>
-                                        
+		                                </div>                                        
                                     </div>
                                     <div class="card-footer small text-center text-muted">
                                         <span style="color: rgb(54, 162, 235);">■</span> 

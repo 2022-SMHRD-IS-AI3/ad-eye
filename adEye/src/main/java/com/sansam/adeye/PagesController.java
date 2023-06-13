@@ -83,7 +83,17 @@ public class PagesController {
 		return "pages/contact_detail";
 	}
 	
-	// contact_detail
+
+	// contact_list
+		@RequestMapping(value = "/contact_list", method = RequestMethod.GET)
+		public String contact_list()throws Exception{
+			
+			log.info("/contact_list.................");
+			
+			return "pages/contact_list";
+		}
+	
+	// admin_user_dashboard
 	@RequestMapping(value = "/admin_user_dashboard", method = RequestMethod.GET)
 	public String admin_user_dashboard()throws Exception{
 		
@@ -91,6 +101,8 @@ public class PagesController {
 		
 		return "pages/admin_user_dashboard";
 	}
+	
+		
 	
 	// subscription
 	@RequestMapping(value = "/subscription", method = RequestMethod.GET)

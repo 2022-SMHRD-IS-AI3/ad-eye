@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>회원관리 - admin</title>
+        <title>문의관리 - admin</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="${path}/resources/css/styles.css" rel="stylesheet" />
         <link rel="icon" type="image/x-icon" href="${path}/resources/assets/img/logo.png" />
@@ -121,39 +121,37 @@
                         </nav>
                     </div>               
             <!-- content -->
-            <!-- header -->
             <div id="layoutSidenav_content">
                 <main>
-                <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
+                    <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
                         <div class="container-fluid px-4">
                             <div class="page-header-content">
                                 <div class="row align-items-center justify-content-between pt-3">
                                     <div class="col-auto mb-3">
                                         <h1 class="page-header-title">
-                                            <b>회원 관리</b>
+                                            <b>문의 관리</b>
                                         </h1>
                                     </div>
-                                    <div class="col-12 col-xl-auto mb-3">
+                                    <!-- <div class="col-12 col-xl-auto mb-3">
                                         <a class="btn btn-sm btn-light text-primary" href="#!">
                                             <i class="me-1" data-feather="user-plus"></i>
                                             회원 등록
                                         </a>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
                     </header>
-                <!-- 검색 -->
-                <div class="container-fluid px-4 mb-4">
+                    <!-- 검색 -->
+                    <div class="container-fluid px-4 mb-4">
                         <div class="card">
                             <div class="card-body">
                             	<div class="row gx-3">
                                    	<label for="" class="col-sm-1 col-form-label fw-bolder text-center">검색</label>
                                    	<div class="col-md-2">
-                                   		<select class="form-select" name="key" disabled>
+                                   		<select class="form-select" name="key">
                                    			<option value="">--- 선택 ---</option>
-                                   			<option value="company" selected>회사명</option>
-                                   			
+                                   			<option value="company">회사명</option>
                                    		</select>
                                     </div>
                                    	<div class="col-md-3">
@@ -162,7 +160,7 @@
                                     
                                    <!--  <div class="col-md-2">
                                    		<select class="form-select" name="sbs_grade" disabled>
-                                   			<option value="">--- 등급 ---</option>
+                                   			<option value="">--- 선택 ---</option>
                                    			<option value="standard" selected>standard</option>
                                    		</select>
                                     </div>
@@ -180,8 +178,6 @@
                             </div>
                         </div>
                     </div>
-                
-                    
                     <!-- Main page content-->
                     <div class="container-fluid px-4">
                         <div class="card">
@@ -189,40 +185,38 @@
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
+                                        	<th>No.</th>
                                             <th>회사명</th>
                                             <th>연락처</th>
-                                            <th>아이디</th>
                                             <th>이메일</th>
-                                            <th>가입일</th>
-                                            <th>구독 수</th>
-                                            <th>수정 / 삭제</th>
+                                            <th>내용</th>
+                                            <th>날짜</th>
+                                            <th>확인</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
+                                        
+                                        	<th>No.</th>
                                             <th>회사명</th>
                                             <th>연락처</th>
-                                            <th>아이디</th>
                                             <th>이메일</th>
-                                            <th>가입일</th>
-                                            <th>구독 수</th>
-                                            <th>수정 / 삭제</th>
+                                            <th>내용</th>
+                                            <th>날짜</th>
+                                            <th>확인</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                         <tr>
+                                        <!-- for문 돌릴 곳!! -->
+                                       		<td>1</td>
                                             <td>서울교통공사</td>
                                             <td>02-000-0000</td>
-                                            <td>is2u111</td>
                                             <td>kkk@kkkk.kk</td>
+                                            <td>집에 보내줘</td>
                                             <td>2023-05-01</td>
-                                            <td>4</td>
-                                            <td>
-                                                <!-- 회원 수정 -->
-                                                <a class="btn btn-datatable btn-icon btn-transparent-dark me-2" href="#!"><i data-feather="edit"></i></a>
-                                                <!-- 회원 삭제 -->
-                                                <a class="btn btn-datatable btn-icon btn-transparent-dark" href="#!"><i data-feather="trash-2"></i></a>
-                                            </td>
+                                            <td>Y</td>
+                                            
                                         </tr>
                                     </tbody>
                                 </table>
