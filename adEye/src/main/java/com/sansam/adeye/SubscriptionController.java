@@ -1,6 +1,7 @@
 package com.sansam.adeye;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sansam.adeye.domain.Criteria;
 import com.sansam.adeye.domain.DeviceDTO;
 import com.sansam.adeye.domain.MemberDTO;
 import com.sansam.adeye.domain.SubscriptionDTO;
@@ -26,6 +28,31 @@ public class SubscriptionController {
 	 @Autowired
 	 ISubscriptionService service;
 	
+	 // 전체 구독 조회
+	 @RequestMapping(value = "/", method = RequestMethod.GET)
+	 public @ResponseBody Map<String, Object> sbsList(Criteria cri) throws Exception {
+		 log.info("/subscription/list " + cri);
+		 Map<String,Object> paramMap = new HashMap<String, Object>();
+		 
+		 try {
+				// 회원 목록 정보 불러오기
+				List<SubscriptionDTO> sList = service.sbsList(cri);
+				System.out.println(sList);
+			    // paramMap 담을 객체 생성
+			    Map<String,Object> paramMapsub = new HashMap<String, Object>();
+			    
+			    paramMapsub.put("data", sList);		    
+			    paramMap.put("result", paramMapsub);
+			    paramMap.put("code", "200");
+			    paramMap.put("message", "조회 성공");
+			} catch (Exception e) {
+				paramMap.put("code", "500");
+			    paramMap.put("message", "서버 문제");
+			}
+		 
+		 return paramMap;
+	 }
+	 
 	// 구독 등록
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> insert(SubscriptionDTO data) throws Exception {
@@ -37,28 +64,22 @@ public class SubscriptionController {
 	    
 	    try {
 	    	
-	    	System.out.println("test1");
 	    	int cnt = service.sbsInsert(data);
-	    	System.out.println("test2");
+
 	    	if(cnt > 0 ) {
 		    	
 		    	paramMap.put("code", "201");
 			    paramMap.put("message", "등록 성공");
-			    
-			    System.out.println("test3");
 		    }else {
 		    	
 		    	paramMap.put("code", "203");
 			    paramMap.put("message", "처리 실패");
-			    System.out.println("test4");
-			    
 		    }
 		} catch (Exception e) {
+			
 			paramMap.put("code", "500");
 		    paramMap.put("message", "서버 문제");
-		    System.out.println("test5");
 		}
-	    System.out.println("test6");
 		return paramMap;
 	}
 	
@@ -72,25 +93,22 @@ public class SubscriptionController {
 		
 		try {
 			
-			// SubscriptionDTO dto = service.subscriptionDetail(data);
+			SubscriptionDTO dto = service.sbsDetail(Integer.parseInt(data));
+			System.out.println(dto.toString());
 			// 보내줄 맵 객체 생성,
 		    
 		    // paramMap 담을 객체 생성 
 		    Map<String,Object> paramMapSub = new HashMap<String, Object>();
 
-		    paramMapSub.put("sbs_seq", 1);
-		    paramMapSub.put("mem-pw", 0000);
-		    paramMapSub.put("mem_id", "test012123");
-		    paramMapSub.put("mem_company", "애드컴퍼니");
-		    paramMapSub.put("device_seq", 1);
-		    paramMapSub.put("sbs_loc", "광주 동구 예술길 31_15");
-		    paramMapSub.put("sbs_alias", "별칭");
-		    paramMapSub.put("sbs_start_dt", "2023-04-01");
-		    paramMapSub.put("sbs_end_dt", "2023-04-01");
-		    paramMapSub.put("sbs_end_dt", "2023-04-01");
-		    paramMapSub.put("sbs_reg_dt", "2023-04-01");
-		    paramMapSub.put("sbs_grade", "standard");
-		    paramMapSub.put("sbs_status ", "Y");
+		    paramMapSub.put("sbs_seq", dto.getSbs_seq());
+		    paramMapSub.put("mem_id", dto.getMem_id());
+		    paramMapSub.put("mem_company", dto.getMem_company());
+		    paramMapSub.put("device_seq", dto.getDevice_seq());
+		    paramMapSub.put("sbs_loc", dto.getSbs_loc());
+		    paramMapSub.put("sbs_alias", dto.getSbs_alias());
+		    paramMapSub.put("sbs_start_dt", dto.getSbs_start_dt());
+		    paramMapSub.put("sbs_end_dt", dto.getSbs_end_dt());
+		    paramMapSub.put("sbs_grade", dto.getSbs_grade());
 		    paramMap.put("result", paramMapSub);
 		    paramMap.put("code", "200");
 		    paramMap.put("message", "조회 성공");
@@ -114,7 +132,7 @@ public class SubscriptionController {
 	    
 	    try {
 	    	
-	    	// int cnt = service.subscriptionUpdate(data);
+	    	int cnt = service.sbsUpdate(data);
 
 		    if(1 > 0) {
 		    	paramMap.put("code", "202");
@@ -136,14 +154,14 @@ public class SubscriptionController {
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public @ResponseBody Map<String, String> delete(@RequestParam("sbs_seq") String data) throws Exception {
 		
-		log.info("/subscription/delete..................");
+		log.info("/subscription/delete.................." + data);
 		
 		// 보내줄 맵 객체 생성
 	    Map<String, String> paramMap = new HashMap<String, String>();
 	    
 	    try {
 	    	
-	    	// int cnt = service.subscriptionDelete(Integer.parseInt(data));
+	    	int cnt = service.sbsDelete(Integer.parseInt(data));
 		    
 		    if(1 > 0 ) {
 		    	paramMap.put("code", "201");
@@ -152,17 +170,11 @@ public class SubscriptionController {
 		    	paramMap.put("code", "203");
 			    paramMap.put("message", "삭제 실패");
 		    }
-		    
 		} catch (Exception e) {
 			paramMap.put("code", "500");
 		    paramMap.put("message", "서버 문제");
 		}
-	    
 		return paramMap;
 	}
-	
-	
-	
-	
 	
 }
