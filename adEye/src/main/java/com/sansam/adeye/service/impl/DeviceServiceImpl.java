@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.sansam.adeye.domain.Criteria;
 import com.sansam.adeye.domain.DeviceDTO;
+import com.sansam.adeye.domain.LogDTO;
 import com.sansam.adeye.persistence.IDeviceDAO;
+import com.sansam.adeye.persistence.ILogDAO;
 import com.sansam.adeye.service.IDeviceService;
 
 @Service
@@ -15,6 +17,9 @@ public class DeviceServiceImpl implements IDeviceService{
 
 	@Autowired
 	private IDeviceDAO dDao;
+	
+	@Autowired
+	private ILogDAO lDao;
 	
 	// 전체 기기 조회
 	@Override
@@ -54,9 +59,9 @@ public class DeviceServiceImpl implements IDeviceService{
 	}
 	//특정 기기 로그 조회
 	@Override
-	public List<DeviceDTO> deviceLog(Criteria cri) throws Exception {
-		
-		return dDao.deviceLog(cri);
+	public List<LogDTO> deviceLog(Criteria cri) throws Exception {
+		System.out.println("Service 접속");
+		return lDao.deviceLog(cri);
 	}
 
 }

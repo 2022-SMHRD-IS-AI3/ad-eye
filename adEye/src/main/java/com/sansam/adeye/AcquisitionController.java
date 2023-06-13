@@ -37,6 +37,7 @@ public class AcquisitionController {
 	String message = "";
 	String reboot_code = "0";
 	
+	// 데이터 수집
 	@RequestMapping(value = "/submit", method = RequestMethod.POST)
 	public @ResponseBody Map<String,String> submit(@RequestBody List<AcquisitionSubmitDTO> data) throws Exception {
 		System.out.println(data.toString());
@@ -73,6 +74,7 @@ public class AcquisitionController {
 		return paramMap;
 	}
 	
+	// 로그 수집
 	@RequestMapping(value = "/log", method = RequestMethod.POST)
 	public @ResponseBody Map<String,Object> log(@RequestBody List<LogDTO> data) throws Exception { // @ResponseBody : 응답할 때 JSON 데이터로 반환
 		
@@ -93,6 +95,7 @@ public class AcquisitionController {
 		
 	}
 	
+	// 분석 페이지 화면 구성
 	@RequestMapping(value = "/acqDashboard", method = RequestMethod.GET)
 	public @ResponseBody Map<String,Object> acqDashboard(@RequestParam("sbs_seq") String sbs_seq,@RequestParam("search_date") String search_date) { // @ResponseBody : 응답할 때 JSON 데이터로 반환
 		
@@ -167,6 +170,7 @@ public class AcquisitionController {
 		return paramMap;
 	}
 	
+	// 데이터 중복값 제거(최댓값만 남기고)
 	@RequestMapping(value = "/max_tid", method = RequestMethod.POST)
 	public @ResponseBody Map<String,Object> acqMaxTid(@RequestBody String data) { // @ResponseBody : 응답할 때 JSON 데이터로 반환
 		
