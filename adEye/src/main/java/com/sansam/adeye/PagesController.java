@@ -83,6 +83,15 @@ public class PagesController {
 		return "pages/contact_detail";
 	}
 	
+	// contact_detail
+	@RequestMapping(value = "/admin_user_dashboard", method = RequestMethod.GET)
+	public String admin_user_dashboard()throws Exception{
+		
+		log.info("/admin_user_dashboard.................");
+		
+		return "pages/admin_user_dashboard";
+	}
+	
 //	// Login 을 위한 HTML 파일 내려주기
 //    @GetMapping("/pages/user_dash_list")
 //    public String loginPage() {
