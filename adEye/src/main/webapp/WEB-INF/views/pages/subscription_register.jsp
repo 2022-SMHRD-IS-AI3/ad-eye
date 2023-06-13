@@ -356,9 +356,9 @@
             function memberCheck(){
 
                 if($('#mem_id').val() === '11test01') {
-                	$('#member_check').text('애드컴퍼니')
+                	$('#member_check').html('애드컴퍼니')
                 }else{
-                	$('#member_check').text('존재하지 않는 아이디입니다')
+                	$('#member_check').html('<span style="color:#f44336;">존재하지 않는 아이디입니다</span>')
                 }
                 
             }

@@ -104,6 +104,17 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="container-xl px-4">
+                            <div class=" pt-4">
+                                <div class="row align-items-center justify-content-between">
+                                    <div class="col-md-12 text-end text-muted small">
+		                                <span>최근 업데이트 날짜</span>
+		                                ·
+		                                <span id="updateDate">2023년 06월 13일 15:56:24</span>
+		                            </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="container-xl px-4 text-lg mb-3">
                             <div class="text-center">
                                 <div class="">
@@ -127,7 +138,12 @@
                                 <div class="chart-area">
                                     <canvas id="myCombinedChart" width="100%" height="30"></canvas>
                                 </div>
-                                <div class="mt-5 text-muted text-center fw-700">시간 별 유동인구 & 주요 시청 횟수</div>
+                                <div class="mt-5 text-muted text-center fw-700">
+                                    <span style="color: #0061f2;">■</span> 
+                                	<span>시간 별 광고 노출 인구 (명)</span>
+                                    <span style="color: #a9cd3e;">■</span>
+                                    <span>시간 별 광고 주목 인구 (명)</span>
+                                </div>
                             </div>
                         </div>
                         <!-- 멀티 그래프 끝 -->
@@ -140,15 +156,18 @@
                                 <div class="card mb-4">
                                     <div class="card-body">
                                         <div class="chart-pie">
-                                            <canvas id="myPieChart" width="100%"
-                                                height="50"></canvas>
-                                            </div>
+                                            <canvas id="myPieChart" width="100%" height="50"></canvas>
+                                        </div>
+                                        <div class="mt-5 text-muted text-center fw-500">
+		                                	<span>총 인구 남녀 비율</span>
+		                                </div>
+                                        
                                     </div>
                                     <div class="card-footer small text-center text-muted">
-                                        <span>남</span>
                                         <span style="color: rgb(54, 162, 235);">■</span> 
-                                        <span>여</span>
+                                        <span>남</span>
                                         <span style="color: rgb(255, 128, 122);">■</span> 
+                                        <span>여</span>
                                     </div>
                                 </div>
                             </div>
@@ -156,8 +175,8 @@
 
                             <!-- 총 유동인구 주요시청횟수 -->
                             <div class="col-lg-6 mb-4">
-                                <div class="card row h-100 pt-4 p-3">
-                                    <div class="col-12 mb-4">
+                                <div class="card h-100 pt-4 p-3">
+                                    <div class="mb-4">
 
                                         <div class="card border-start-lg border-start-primary h-100">
                                             <div class="card-body">
@@ -175,7 +194,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12">
+                                    <div class="">
 
                                         <div class="card border-start-lg border-start-primary h-100">
                                             <div class="card-body">
@@ -209,11 +228,7 @@
                     <div class="container-xl px-4">
                         <div class="row">
                             <div class="col-md-6 small">Copyright &copy; Ad-EYE 2023</div>
-                            <div class="col-md-6 text-md-end small">
-                                <span>최근 업데이트 날짜</span>
-                                &middot;
-                                <span id="updateDate"></span>
-                            </div>
+                            
                         </div>
                     </div>
                 </footer>

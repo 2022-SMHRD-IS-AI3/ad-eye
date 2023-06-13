@@ -172,11 +172,11 @@
                                             <div class="row gx-3 mb-3">
                                                 <div class="col-md-6">
                                                     <label class="small mb-1" for="mem_pw">* 비밀번호</label>
-                                                    <input class="form-control" id="mem_pw" type="password" name="mem_pw" placeholder="비밀번호" value="0000" />
+                                                    <input class="form-control" id="mem_pw" type="password" name="mem_pw" placeholder="비밀번호" value="1234" />
                                                 </div>
                                                 <div class="col-md-6">
                                                     <br>
-                                                    <span class="text-muted small">* 기본 비밀번호는 0000 입니다.</span>
+                                                    <span class="text-muted small">* 기본 비밀번호는 1234 입니다.</span>
                                                     
                                                 </div>
                                             </div>
@@ -306,7 +306,6 @@
                     console.log(data)
                 }
             }).open();
-            
         }
 
         // 쿼리스트링 값 가져오기
