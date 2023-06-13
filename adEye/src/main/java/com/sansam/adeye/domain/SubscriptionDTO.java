@@ -30,6 +30,7 @@ public class SubscriptionDTO {
 	private int sbs_female_per;
 	
 	private int sbs_total;
+	private int d_day;
 	
 	// 회원 구독 전체 조회 : sbsList 용 생성자
 	public SubscriptionDTO(int sbs_seq, String sbs_alias, String sbs_loc, int sbs_total_man, int sbs_total_interest,
@@ -41,6 +42,18 @@ public class SubscriptionDTO {
 		this.sbs_total_interest = sbs_total_interest;
 		this.sbs_male_per = sbs_male_per;
 		this.sbs_female_per = sbs_female_per;
+	}
+	
+	// 구독 수정 용 생성자
+	public SubscriptionDTO(int sbs_seq, int device_seq, String sbs_loc, String sbs_alias,
+			Date sbs_end_dt, String sbs_grade, char sbs_status) {
+		this.sbs_seq = sbs_seq;
+		this.device_seq = device_seq;
+		this.sbs_loc = sbs_loc;
+		this.sbs_alias = sbs_alias;
+		this.sbs_end_dt = sbs_end_dt;
+		this.sbs_grade = sbs_grade;
+		this.sbs_status = sbs_status;
 	}
 	
 }

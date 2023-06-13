@@ -18,10 +18,10 @@ public class SubscriptionDAO implements ISubscriptionDAO{
 	
 	// 전체 구독 조회 : /
 	@Override
-	public List<SubscriptionDTO> sdsList(Criteria cri) throws Exception{
+	public List<SubscriptionDTO> sbsList(Criteria cri) throws Exception{
 		return session.selectList("SubscriptionMapper.list", cri);
 	}
-	// 특정 회원 전체 구독 조회 : sbs_list
+	// 특정 회원 전체 구독 조회 : deviceList
 	public List<SubscriptionDTO> devicelist(Criteria cri) throws Exception {
 		System.out.println("DAO 접속");
 		return session.selectList("SubscriptionMapper.memSbsList", cri);

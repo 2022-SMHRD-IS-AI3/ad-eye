@@ -8,10 +8,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>회원등록 - admin</title>
+        <title>구독등록 - admin</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="${path}/resources/css/styles.css" rel="stylesheet" />
         <link rel="icon" type="image/x-icon" href="${path}/resources/assets/img/logo.png" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
         <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
 </head>
@@ -130,7 +131,7 @@
                                     <div class="col-auto mb-3">
                                         <h1 class="page-header-title">
                                             <div class="page-header-icon"><i data-feather="user-plus"></i></div>
-                                            회원 등록
+                                            구독 등록
                                         </h1>
                                     </div>
                                 </div>
@@ -144,64 +145,62 @@
                             <div class="col-xl-12">
                                 <!-- Account details card-->
                                 <div class="card mb-4">
-                                    <div class="card-header">회원 정보</div>
+                                    <div class="card-header">구독 정보</div>
                                     <div class="card-body">
                                         <form>
-                                            <!-- 회사명-->
-                                            <div class="row gx-3 mb-3">
-                                                <div class="col-md-6">
-                                                    <label class="small mb-1" for="mem_company">* 회사명</label>
-                                                    <input class="form-control" id="mem_company" type="text" name="mem_company" placeholder="회사명" value="" />
-                                                </div>
-                                            </div>
 
                                             <!-- 아이디-->
                                             <div class="row gx-3 mb-3">
-                                                <div class="col-md-7">
+                                                <div class="col-md-12">
                                                     <label class="small mb-1" for="mem_id">* 아이디</label>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
                                                     <input class="form-control" id="mem_id"  type="text" name="mem_id" placeholder="아이디" value="" />
                                                 </div>
                                                 <div class="col-md-2">
-                                                    <button onclick="generateUUID('mem_id')" class="btn btn-warning w-100 refresh-btn d-none" type="button">새로고침</button>
+                                                    <button onclick="memberCheck()" class="btn btn-warning w-100 refresh-btn" type="button">계정 확인</button>
                                                 </div>
+                                                <label for="" id="member_check" class="col-sm-6 col-form-label fw-bolder "></label>
                                             </div>
 
-                                            <!-- 비밀번호-->
+                                            <!-- 기기 번호-->
                                             <div class="row gx-3 mb-3">
-                                                <div class="col-md-6">
-                                                    <label class="small mb-1" for="mem_pw">* 비밀번호</label>
-                                                    <input class="form-control" id="mem_pw" type="password" name="mem_pw" placeholder="비밀번호" value="0000" />
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <br>
-                                                    <span class="text-muted small">* 기본 비밀번호는 0000 입니다.</span>
+                                                <div class="col-md-4">
+                                                	<label class="small mb-1" for="device_seq">* 기기</label>
+                                                    <select class="form-select" name="device_seq" id="device_seq">
+			                                   			<option value="">--- 기기선택 ---</option>
+			                                   			<option value="1">cam_device_001</option>
+			                                   			<option value="2">cam_device_002</option>
+			                                   		</select>
                                                     
                                                 </div>
                                             </div>
 
-                                            <!-- 연락처-->
+                                            <!-- 구독 등급-->
                                             <div class="row gx-3 mb-3">
-                                                <div class="col-md-6">
-                                                    <label class="small mb-1" for="mem_phone">* 연락처</label>
-                                                    <input class="form-control" id="mem_phone" type="text" name="mem_phone" placeholder="010-1234-1234" value="" />
+                                                <div class="col-md-4">
+                                                	<label class="small mb-1" for="sbs_grade">* 구독등급</label>
+                                                    <select class="form-select" name="sbs_grade" disabled>
+			                                   			<option value="">--- 등급 ---</option>
+			                                   			<option value="standard" selected>standard</option>
+			                                   		</select>
+                                                    
                                                 </div>
                                             </div>
 
-                                            <!-- 이메일-->
+                                            <!-- 매체 이름 -->
                                             <div class="row gx-3 mb-3">
                                                 <div class="col-md-6">
-                                                    <label class="small mb-1" for="mem_email">* 이메일</label>
-                                                    <input class="form-control" id="mem_email" type="text" name="mem_email" placeholder="abc123@abc.com" value="" />
+                                                    <label class="small mb-1" for="sbs_alias">* 매체이름</label>
+                                                    <input class="form-control" id="sbs_alias" type="text" name="sbs_alias" placeholder="매체 이름" value="" />
                                                 </div>
                                             </div>
 
-                                            <!-- 주소 -->
+                                            <!-- 매체 위치 -->
                                             <div class="row gx-3 mb-4">
                                                 
                                                 <div class="col-md-12">
-                                                    <label class="small mb-1" for="">* 주소</label>
+                                                    <label class="small mb-1" for="">* 매체위치</label>
                                                 </div>
                                                 
                                                 <div class="col-md-4">
@@ -218,36 +217,35 @@
                                                 </div>
                                             </div>
                                             
-                                            <!-- 계정구분 -->
-                                            <div class="mb-3">
-                                                <label class="small mb-1">* 계정구분</label>
-                                                <br>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" id="admin_n" name="admin_yn" type="radio" value="N" checked/>
-                                                    <label class="form-check-label" for="admin_n">사용자(N)</label>
+                                            <!-- 구독 기간 -->
+                                            <div class="row gx-3 mb-3">
+                                                <label class="col-md-12 small mb-1" for="">* 구독기간</label>
+                                                <div class="col-md-7">
+                                                	<div class="d-flex flex-row">
+                                                		<input class="form-control w-50" id="sbs_start_dt" type="text" name="sbs_alias" placeholder="0000-00-00" value="" />
+                                                		<label class="col-form-label fw-bolder me-3 ms-3"> ~ </label>
+                                                    	<input class="form-control w-50" id="sbs_end_dt" type="text" name="sbs_alias" placeholder="0000-00-00" value="" />
+                                                	</div>
+                                                	
                                                 </div>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" id="admin_y" name="admin_yn" type="radio" value="Y" />
-                                                    <label class="form-check-label" for="admin_y">관리자(Y)</label>
-                                                </div>
-                                                
-                                            </div>
-
-                                            <!-- 계정상태 -->
-                                            <div class="mb-3">
-                                                <label class="small mb-1">* 계정구분</label>
-                                                <br>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" id="mem_status_y" name="mem_status" type="radio" value="Y" checked/>
-                                                    <label class="form-check-label" for="mem_status_y">사용중</label>
-                                                </div>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" id="mem_status_n" name="mem_status" type="radio" value="N" />
-                                                    <label class="form-check-label" for="mem_status_n">사용중지</label>
-                                                </div>
-                                                
                                             </div>
                                             
+                                            <!-- 구독 상태 -->
+                                            <div class="mb-3">
+                                                <label class="small mb-1">* 구독상태</label>
+                                                <br>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" id="sbs_status_y" name="sbs_status" type="radio" value="Y" checked/>
+                                                    <label class="form-check-label" for="sbs_status_y">구독중</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" id="sbs_status_n" name="sbs_status" type="radio" value="N" />
+                                                    <label class="form-check-label" for="sbs_status_n">구독중지</label>
+                                                </div>
+                                            </div>
+                                            
+                                            
+
                                             <!-- Submit button-->
 
                                             
@@ -283,69 +281,87 @@
         <script src="${path}/resources/js/datatables/datatables-simple-demo.js"></script>
         <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
         <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
         <script>
-     // uuid 생성
-        function generateUUID(id) {
-            const uuid = 'xxxxxxxxxx'.replace(/[xy]/g, function(c) {
-                var r = Math.random() * 16 | 0,
-                v = c == 'x' ? r : (r & 0x3 | 0x8);
-                return v.toString(16);
+     		// 시작일
+     		var sbs_start_dt = document.querySelector('#sbs_start_dt');
+            var sbs_end_dt_f = flatpickr(sbs_start_dt,{
+                defaultDate: new Date(),
+                local: 'ko',
+                dateFormat : "Y-m-d",
+                onChange: function(selectDates, dateStr, instance){
+                    $('#sbs_start_dt').val(dateStr)
+                },
             });
-
-            $('#'+id).val(uuid)
-        }
-
-        // 주소검색 api
-        function postSearch(){
-
-            new daum.Postcode({
-                oncomplete: function(data) {
-                    $('#post_num').val(data.zonecode)
-                    $('#addr1').val(data.address)
-                    $('#addr2').focus()
-                    console.log(data)
-                }
-            }).open();
             
-        }
-
-        // 쿼리스트링 값 가져오기
-        function getQueryParameterValue(parameterName) {
-
-            const queryString = window.location.search;
-            const urlParams = new URLSearchParams(queryString);
-            return urlParams.get(parameterName);
-
-        }
-
-        // 문서준비 완료 되면
-        $(document).ready(function() {
-
-            // 등록, 수정 유무 id 값 가져오기
-            const idValue = getQueryParameterValue('id');
-
-            // id 값 유무로 등록 수정 판단
-            if(idValue){
-
-                // 삭제, 수정 버튼
-                const changebtn = '<button class="btn btn-danger me-2" type="button ">삭제</button>'+
-                        '<button class="btn btn-primary" type="button">수정</button>';
-                $('.submit-btn-wrap').html(changebtn)
+     		var sbs_end_dt = document.querySelector('#sbs_end_dt');
+            var sbs_end_dt_f = flatpickr(sbs_end_dt,{
+                local: 'ko',
+                dateFormat : "Y-m-d",
+                onChange: function(selectDates, dateStr, instance){
+                    $('#sbs_end_dt').val(dateStr)
+                },
+            });
             
-            }else{ // 값 없으면 회원 등록
+        	 // 쿼리스트링 값 가져오기
+            function getQueryParameterValue(parameterName) {
 
-                $('.refresh-btn').removeClass('d-none')
-                // uuid 셋팅
-                generateUUID('mem_id');
+                const queryString = window.location.search;
+                const urlParams = new URLSearchParams(queryString);
+                return urlParams.get(parameterName);
+
             }
+        	 
+         	// 문서준비 완료 되면
+            $(document).ready(function() {
 
-        });
-        
-        function moveUri(path){
+                // 등록, 수정 유무 id 값 가져오기
+                const idValue = getQueryParameterValue('id');
 
-        	// 상대적인 경로를 지정하여 이동
-        	window.location.href = path;
-        }
+                // id 값 유무로 등록 수정 판단
+                if(idValue){
+
+                    // 삭제, 수정 버튼
+                    const changebtn = '<button class="btn btn-danger me-2" type="button ">삭제</button>'+
+                            '<button class="btn btn-primary" type="button">수정</button>';
+                    $('.submit-btn-wrap').html(changebtn)
+                    $('.refresh-btn').addClass('d-none')
+                    
+                    $('#mem_id').val('11test01');
+                    $('#mem_id').prop('disabled',true);
+                
+                }else{ // 값 없으면 회원 등록
+
+                    // uuid 셋팅
+                    generateUUID('mem_id');
+                }
+
+            });
+         	
+            // 주소검색 api
+            function postSearch(){
+
+                new daum.Postcode({
+                    oncomplete: function(data) {
+                        $('#post_num').val(data.zonecode)
+                        $('#addr1').val(data.address)
+                        $('#addr2').focus()
+                        console.log(data)
+                    }
+                }).open();
+                
+            }
+            
+            // 계정유무 확인
+            function memberCheck(){
+
+                if($('#mem_id').val() === '11test01') {
+                	$('#member_check').text('애드컴퍼니')
+                }else{
+                	$('#member_check').text('존재하지 않는 아이디입니다')
+                }
+                
+            }
 	        
         </script>
     </body>

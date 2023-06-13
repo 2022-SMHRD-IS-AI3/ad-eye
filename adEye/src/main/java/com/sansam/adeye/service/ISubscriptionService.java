@@ -8,7 +8,7 @@ import com.sansam.adeye.domain.SubscriptionDTO;
 public interface ISubscriptionService {
 
 	// 전체 구독 조회
-	public List<SubscriptionDTO> sdsList(Criteria cri) throws Exception;
+	public List<SubscriptionDTO> sbsList(Criteria cri) throws Exception;
 	
 	// 구독 생성
 	public int sbsInsert(SubscriptionDTO sDto) throws Exception;

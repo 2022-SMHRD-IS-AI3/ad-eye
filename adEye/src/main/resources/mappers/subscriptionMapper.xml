@@ -4,28 +4,47 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="SubscriptionMapper">
 
-	<sql id="criteria">
-    	<trim prefix="(" suffix=") AND" prefixOverrides="OR">
-        	<foreach collection="typeArr" item="type">
-            	<trim prefix="OR">
-                	<choose>
-                    	<when test="type == 'C'.toString()">
-                     		mem_company LIKE '%'||#{keyword}||'%'
-                  		</when>
-                  		<when test="type == 'I'.toString()">
-                     		mem_id LIKE '%'||#{keyword}||'%'
-                  		</when>
-                  		<when test="type == 'E'.toString()">
-                     		mem_email LIKE '%'||#{keyword}||'%'
-                  		</when>
-                  		<when test="type == 'P'.toString()">
-                     		mem_phone LIKE '%'||#{keyword}||'%'
-                  		</when>
-               		</choose>
-            	</trim>
-         	</foreach>
-      	</trim>
-   	</sql>
+	<sql id="criteria"> </sql>
+	
+   	<select id="list" resultType="com.sansam.adeye.domain.SubscriptionDTO">
+   		<![CDATA[
+			SELECT	sbs_seq,
+					mem_id,
+					device_seq,
+					mem_company,
+					sbs_loc,
+					sbs_alias,
+					sbs_start_dt,
+					sbs_end_dt,
+					sbs_reg_dt,
+					sbs_grade,
+					sbs_status,
+					d_day
+			FROM (
+				SELECT /*+ INDEX_DESC(tb_subscription IDX_tb_subscription_PK) */
+					rownum rn,
+					s.sbs_seq,
+					s.mem_id,
+					s.device_seq,
+					(select mem_company FROM tb_member m WHERE s.mem_id = m.mem_id) AS mem_company,
+					s.sbs_loc,
+					s.sbs_alias,
+					s.sbs_start_dt,
+					s.sbs_end_dt,
+					s.sbs_reg_dt,
+					s.sbs_grade,
+					s.sbs_status,
+					(SELECT TRUNC(s.sbs_end_dt) - TRUNC(SYSDATE) FROM dual) AS d_day
+				FROM tb_subscription s, tb_member m, dual
+				WHERE
+		]]>
+	  	<include refid="criteria"></include>         
+      	<![CDATA[
+      			rownum <= #{pageNum} * #{amount}
+            )
+         	WHERE rn > (#{pageNum} - 1) * #{amount}
+      	]]>
+   	</select>
 
 	<select id="memSbsList" resultType="com.sansam.adeye.domain.SubscriptionDTO">
 		<![CDATA[      	
@@ -67,7 +86,19 @@
 	</select>
 	
 	<insert id="create">
-  		insert into tb_subscription (mem_id,device_seq,sbs_loc,sbs_alias,sbs_start_dt,sbs_end_dt,sbs_reg_dt,sbs_grade,sbs_status) values (#{mem_id},#{device_seq},#{sbs_loc},#{sbs_alias},#{sbs_start_dt},#{sbs_end_dt},sysdate,'standard',#{sbs_status})
+  		insert into tb_subscription (mem_id,device_seq,sbs_loc,sbs_alias,sbs_start_dt,sbs_end_dt,sbs_reg_dt,sbs_grade,sbs_status) values (#{mem_id},#{device_seq},#{sbs_loc},#{sbs_alias},#{sbs_start_dt},#{sbs_end_dt},sysdate,#{sbs_grade},#{sbs_status})
   	</insert>
+  	
+  	<select id="detail" resultType="com.sansam.adeye.domain.SubscriptionDTO">
+  		SELECT s.sbs_seq, s.mem_id, m.mem_company, s.device_seq, s.sbs_loc, s.sbs_alias, s.sbs_start_dt, s.sbs_end_dt, s.sbs_grade FROM tb_subscription s, tb_member m WHERE m.mem_id = s.mem_id AND s.sbs_seq = #{sbs_seq} 
+  	</select>
+
+	<update id="update" parameterType="com.sansam.adeye.domain.SubscriptionDTO">
+		update tb_subscription set device_seq = #{device_seq}, sbs_loc = #{sbs_loc}, sbs_alias = #{sbs_alias}, sbs_end_dt = #{sbs_end_dt}, sbs_grade = #{sbs_grade}, sbs_status = #{sbs_status} WHERE sbs_seq = #{sbs_seq}
+	</update>
+
+	<update id="delete">
+		update tb_subscription set sbs_status = 'Y' where sbs_seq = #{sbs_seq}
+	</update>
 
 </mapper>

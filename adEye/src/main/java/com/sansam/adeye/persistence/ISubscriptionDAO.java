@@ -8,8 +8,8 @@ import com.sansam.adeye.domain.SubscriptionDTO;
 public interface ISubscriptionDAO {
 
 	// 전체 구독 조회
-	public List<SubscriptionDTO> sdsList(Criteria cri) throws Exception;
-	// 특정 회원 전체 구독 조회 : sbs_list
+	public List<SubscriptionDTO> sbsList(Criteria cri) throws Exception;
+	// 특정 회원 전체 구독 조회 : deviceList
 	public List<SubscriptionDTO> devicelist(Criteria cri) throws Exception;
 	// 특정 회원 전체 구독 조회 : 회사명, 구독 수
 	public SubscriptionDTO memSbsData(Criteria cri) throws Exception;

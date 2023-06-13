@@ -339,15 +339,21 @@
 
             changeAPI("userDashboard","37")
 
-	        
+	        var changeCheck = true;
 	       	function dataChange(){
 	        	console.log(dashboardData)
 	        	// 총 유동인구
 	        	$('#man_total').text(dashboardData.man_total.toLocaleString())
 	        	// 총 주요 시청 횟수
 	        	$('#interest_total').text(dashboardData.interest_total.toLocaleString())
-	        	pieChart()
-	        	multiChart()
+	        	if(changeCheck){
+	        		pieChart()
+	        		multiChart()
+	        		changeCheck = false
+	        	}else{
+	        		rePieChart()
+	        		reMultiChart()
+	        	}
 	        	$('#updateDate').text(getNowTime())
 	        }
 	        

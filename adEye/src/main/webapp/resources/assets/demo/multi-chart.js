@@ -34,17 +34,17 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 
 // Combined Chart Example
 var ctxCombined = document.getElementById("myCombinedChart");
-
+var myCombinedChart = null;
 
 function multiChart(){
     var keys = dashboardData.oneH_interest.map((value, index) => index + "시")
-    var myCombinedChart = new Chart(ctxCombined, {
+    myCombinedChart = new Chart(ctxCombined, {
         type: "bar",
         data: {
             labels: keys,
             datasets: [
                 {
-                    label: "Earnings",
+                    label: "광고 앞 노출 인구",
                     type: "line",
                     lineTension: 0.3,
                     backgroundColor: "rgba(0, 0, 0, 0)",
@@ -60,7 +60,7 @@ function multiChart(){
                     data: dashboardData.oneH_interest
                 },
                 {
-                    label: "Revenue",
+                    label: "광고 관심 인구",
                     type: "bar",
                     backgroundColor: "rgba(0, 97, 242, 1)",
                     hoverBackgroundColor: "rgba(0, 97, 242, 0.9)",
@@ -99,8 +99,8 @@ function multiChart(){
                     {
                         ticks: {
                             min: 0,
-                            max: Math.max(...dashboardData.oneH_man_cnt),
-                            maxTicksLimit: 5,
+                            max: Math.ceil(Math.max(...dashboardData.oneH_man_cnt)),
+                            maxTicksLimit: 3,
                             padding: 10,
                             // Include a dollar sign in the ticks
                             callback: function(value, index, values) {
@@ -134,4 +134,12 @@ function multiChart(){
     }
     
     );
+}
+
+function reMultiChart(){
+	console.log(Math.ceil(Math.max(...dashboardData.oneH_man_cnt)))
+	myCombinedChart.options.scales.yAxes[0].ticks.max = Math.ceil(Math.max(...dashboardData.oneH_man_cnt))
+	myCombinedChart.data.datasets[0].data = dashboardData.oneH_interest;
+	myCombinedChart.data.datasets[1].data = dashboardData.oneH_man_cnt;
+	myCombinedChart.update();
 }
