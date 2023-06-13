@@ -8,4 +8,32 @@
  		insert into tb_log (log_msg, log_dt, device_uid) values (#{log_msg},#{log_dt},#{device_uid})
  	</insert>
   
+  	<sql id="criteria"> </sql>
+	<select id="deviceLog" resultType="com.sansam.adeye.domain.LogDTO">
+		<![CDATA[
+			SELECT	log_seq, 
+					log_msg, 
+					log_dt, 
+					device_uid, 
+					sbs_alias
+			FROM (
+				SELECT /*+ INDEX_DESC(tb_log IDX_tb_log_PK) */
+					rownum rn,
+					l.log_seq, 
+					l.log_msg, 
+					l.log_dt, 
+					l.device_uid, 
+					s.sbs_alias
+				FROM tb_log l
+				INNER JOIN tb_device d ON l.device_uid = d.device_uid
+				LEFT OUTER JOIN tb_subscription s ON d.device_seq = s.device_seq AND s.device_seq = #{device_seq}
+				WHERE 
+		]]>
+	  	<include refid="criteria"></include>     
+      	<![CDATA[
+      			rownum <= #{pageNum} * #{amount}
+            )
+         	WHERE rn > (#{pageNum} - 1) * #{amount}
+      	]]>
+	</select>
 </mapper>

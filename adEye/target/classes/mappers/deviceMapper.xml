@@ -4,25 +4,25 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="DeviceMapper">
   
-  <insert id="create">
-		insert into tb_device values(device_seq.nextInt, #{device_uid}, #{device_NM}, #{device_onoff}, #{device_status}, sysdate)
+  	<insert id="create">
+		insert into tb_device (device_uid, device_onoff, device_status, device_dt) values(#{device_uid}, #{device_onoff}, #{device_status}, sysdate)
 	</insert>
 	<select id="list" resultType="com.sansam.adeye.domain.DeviceDTO">
 		<![CDATA[select device_seq,
 						device_uid,
-						device_NM,
 						device_onoff,
 						device_status,
 						device_dt
-		 	     from (select rownum rn
-							  device_seq,
-							  device_uid,
-						   	  device_NM,
-							  device_onoff,
-							  device_status,
-							  device_dt
-		           	   from tb_device
-		           	   where
+		 	     from (
+		 	     	select /*+ INDEX_DESC(tb_device IDX_tb_device_PK) */ 
+		 	     		rownum rn
+						device_seq,
+						device_uid,
+						device_onoff,
+						device_status,
+						device_dt
+		       		from tb_device
+		           	where
 		]]>
 		<include refid="criteria"></include>         
       	<![CDATA[
@@ -32,6 +32,7 @@
       	]]>
 	</select>
 	<sql id="criteria"/>
+	
 	<select id="detail" parameterType="com.sansam.adeye.domain.DeviceDTO">
 		select * from tb_device where device_seq = #{device_seq}
 	</select>
@@ -41,10 +42,10 @@
 	</delete>
 
 	<update id="update" parameterType="com.sansam.adeye.domain.DeviceDTO">
-		update tb_device set device_uid=#{device_uid}, device_NM=#{device_NM}, device_onoff = 'Y', device_status=#{device_status} where device_seq = #{device_seq}
+		update tb_device set device_uid=#{device_uid}, device_onoff = 'Y', device_status=#{device_status} where device_seq = #{device_seq}
 	</update>
 	
-	<select id="getOnoff" resultType="com.sansam.adeye.domain.DeviceDTO" parameterType="com.sansam.adeye.domain.DeviceDTO">
+	<select id="getOnoff" parameterType="com.sansam.adeye.domain.DeviceDTO">
 		select device_seq, device_onoff from tb_device where device_uid = #{device_uid}
 	</select>
 	
