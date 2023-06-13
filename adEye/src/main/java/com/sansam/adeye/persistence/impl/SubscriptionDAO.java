@@ -21,13 +21,21 @@ public class SubscriptionDAO implements ISubscriptionDAO{
 	public List<SubscriptionDTO> sdsList(Criteria cri) throws Exception{
 		return session.selectList("SubscriptionMapper.list", cri);
 	}
+	// 특정 회원 전체 구독 조회 : sbs_list
+	public List<SubscriptionDTO> devicelist(Criteria cri) throws Exception {
+		System.out.println("DAO 접속");
+		return session.selectList("SubscriptionMapper.memSbsList", cri);
+	}
+	// 특정 회원 전체 구독 조회 : 회사명, 구독 수
+	public SubscriptionDTO memSbsData(Criteria cri) throws Exception {
+		System.out.println("DAO 접속");
+		return session.selectOne("SubscriptionMapper.memSbsCompany", cri);
+	}
 	// 구독 생성 : /insert
 	@Override
 	public int sbsInsert(SubscriptionDTO sDto) throws Exception {
 		System.out.println("test11");
 		return session.insert("SubscriptionMapper.create", sDto);
-		
-		
 	}
 	// 특정 구독 정보 조회 : /detail
 	@Override

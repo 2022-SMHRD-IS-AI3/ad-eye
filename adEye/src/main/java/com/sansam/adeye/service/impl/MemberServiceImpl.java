@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.sansam.adeye.domain.Criteria;
 import com.sansam.adeye.domain.MemberDTO;
+import com.sansam.adeye.domain.SubscriptionDTO;
 import com.sansam.adeye.persistence.IMemberDAO;
+import com.sansam.adeye.persistence.ISubscriptionDAO;
 import com.sansam.adeye.service.IMemberService;
 
 @Service
@@ -16,11 +18,25 @@ public class MemberServiceImpl implements IMemberService {
 	@Autowired
 	private IMemberDAO mDao;
 	
+	@Autowired
+	private ISubscriptionDAO sDao;
+	
 	// 회원 목록
 	@Override
 	public List<MemberDTO> memberList(Criteria cri) throws Exception {
 		System.out.println("Service 접속");
 		return mDao.memberList(cri);
+	}
+	
+	// 회원 구독 전체 목록 : sbs_list
+	public List<SubscriptionDTO> devicelist(Criteria cri) throws Exception {
+		System.out.println("Service 접속");
+		return sDao.devicelist(cri);
+	}
+	// 회원 전체 구독 조회 : 회사명, 구독 수
+	public SubscriptionDTO memSbsData(Criteria cri) throws Exception {
+		System.out.println("Service 접속");
+		return sDao.memSbsData(cri);
 	}
 
 	// 회원 등록  
@@ -49,6 +65,13 @@ public class MemberServiceImpl implements IMemberService {
 	public int memberDelete(String mid) throws Exception {
 		System.out.println("Service 접속");
 		return mDao.memberDelete(mid);
+	}
+	
+	// Login
+	@Override
+	public MemberDTO login(MemberDTO mDto) throws Exception {
+		System.out.println("Service 접속");
+		return mDao.login(mDto);
 	}
 	
 }
