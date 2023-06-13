@@ -96,8 +96,8 @@
                             </a>
                             <div class="collapse" id="pagesCollapseAccount" data-bs-parent="#accordionSidenav">
                                 <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
-                                    <a class="nav-link" href="#!">회원 목록</a>
-                                    <a class="nav-link" href="#!">회원 등록</a>
+                                    <a class="nav-link" href="/pages/user_management">회원 목록</a>
+                                    <a class="nav-link" href="/pages/user_register">회원 등록</a>
                                 </nav>
                             </div>
                             <!-- Sidenav Accordion (구독)-->
@@ -150,39 +150,49 @@
                                             <!-- 회사명-->
                                             <div class="row gx-3 mb-3">
                                                 <div class="col-md-6">
-                                                    <label class="small mb-1" for="mem_company">회사명</label>
+                                                    <label class="small mb-1" for="mem_company">* 회사명</label>
                                                     <input class="form-control" id="mem_company" type="text" name="mem_company" placeholder="회사명" value="" />
                                                 </div>
                                             </div>
 
                                             <!-- 아이디-->
                                             <div class="row gx-3 mb-3">
+                                                <div class="col-md-7">
+                                                    <label class="small mb-1" for="mem_id">* 아이디</label>
+                                                </div>
                                                 <div class="col-md-6">
-                                                    <label class="small mb-1" for="mem_id">아이디</label>
                                                     <input class="form-control" id="mem_id"  type="text" name="mem_id" placeholder="아이디" value="" />
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <button onclick="generateUUID('mem_id')" class="btn btn-warning w-100 refresh-btn d-none" type="button">새로고침</button>
                                                 </div>
                                             </div>
 
                                             <!-- 비밀번호-->
                                             <div class="row gx-3 mb-3">
                                                 <div class="col-md-6">
-                                                    <label class="small mb-1" for="mem_pw">비밀번호</label>
-                                                    <input class="form-control" id="mem_pw" type="password" name="mem_pw" placeholder="비밀번호" value="" />
+                                                    <label class="small mb-1" for="mem_pw">* 비밀번호</label>
+                                                    <input class="form-control" id="mem_pw" type="password" name="mem_pw" placeholder="비밀번호" value="0000" />
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <br>
+                                                    <span class="text-muted small">* 기본 비밀번호는 0000 입니다.</span>
+                                                    
                                                 </div>
                                             </div>
 
                                             <!-- 연락처-->
                                             <div class="row gx-3 mb-3">
                                                 <div class="col-md-6">
-                                                    <label class="small mb-1" for="mem_phone">연락처</label>
+                                                    <label class="small mb-1" for="mem_phone">* 연락처</label>
                                                     <input class="form-control" id="mem_phone" type="text" name="mem_phone" placeholder="010-1234-1234" value="" />
                                                 </div>
                                             </div>
 
-                                            <!-- 이메일 -->
+                                            <!-- 이메일-->
                                             <div class="row gx-3 mb-3">
                                                 <div class="col-md-6">
-                                                    <label class="small mb-1" for="mem_email">이메일</label>
+                                                    <label class="small mb-1" for="mem_email">* 이메일</label>
                                                     <input class="form-control" id="mem_email" type="text" name="mem_email" placeholder="abc123@abc.com" value="" />
                                                 </div>
                                             </div>
@@ -191,7 +201,7 @@
                                             <div class="row gx-3 mb-4">
                                                 
                                                 <div class="col-md-12">
-                                                    <label class="small mb-1" for="">주소</label>
+                                                    <label class="small mb-1" for="">* 주소</label>
                                                 </div>
                                                 
                                                 <div class="col-md-4">
@@ -210,7 +220,7 @@
                                             
                                             <!-- 계정구분 -->
                                             <div class="mb-3">
-                                                <label class="small mb-1">계정구분</label>
+                                                <label class="small mb-1">* 계정구분</label>
                                                 <br>
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" id="admin_n" name="admin_yn" type="radio" value="N" checked/>
@@ -225,7 +235,7 @@
 
                                             <!-- 계정상태 -->
                                             <div class="mb-3">
-                                                <label class="small mb-1">계정구분</label>
+                                                <label class="small mb-1">* 계정구분</label>
                                                 <br>
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" id="mem_status_y" name="mem_status" type="radio" value="Y" checked/>
@@ -245,9 +255,8 @@
                                     </div>
                                     <div class="card-footer position-relative">
                                         <div class="d-flex align-items-center justify-content-between">
-                                            <button class="btn btn-secondary" type="button">목록</button>
+                                            <button class="btn btn-secondary" type="button" onclick="moveUri('/pages/user_management')">목록</button>
                                             <div class="submit-btn-wrap">
-                                                <button class="btn btn-danger del-btn" type="button">삭제</button>
                                                 <button class="btn btn-primary del-btn" type="button">등록</button>
                                             </div>
                                         </div>
@@ -273,18 +282,71 @@
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="${path}/resources/js/datatables/datatables-simple-demo.js"></script>
         <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
         <script>
-            function postSearch(){
+     // uuid 생성
+        function generateUUID(id) {
+            const uuid = 'xxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = Math.random() * 16 | 0,
+                v = c == 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
 
-                new daum.Postcode({
-                    oncomplete: function(data) {
-                        $('#post_num').val(data.zonecode)
-                        $('#addr1').val(data.address)
-                        $('#addr2').focus()
-                        console.log(data)
-                    }
-                }).open();
+            $('#'+id).val(uuid)
+        }
+
+        // 주소검색 api
+        function postSearch(){
+
+            new daum.Postcode({
+                oncomplete: function(data) {
+                    $('#post_num').val(data.zonecode)
+                    $('#addr1').val(data.address)
+                    $('#addr2').focus()
+                    console.log(data)
+                }
+            }).open();
+            
+        }
+
+        // 쿼리스트링 값 가져오기
+        function getQueryParameterValue(parameterName) {
+
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            return urlParams.get(parameterName);
+
+        }
+
+        // 문서준비 완료 되면
+        $(document).ready(function() {
+
+            // 등록, 수정 유무 id 값 가져오기
+            const idValue = getQueryParameterValue('id');
+
+            // id 값 유무로 등록 수정 판단
+            if(idValue){
+
+                // 삭제, 수정 버튼
+                const changebtn = '<button class="btn btn-danger me-2" type="button ">삭제</button>'+
+                        '<button class="btn btn-primary" type="button">수정</button>';
+                $('.submit-btn-wrap').html(changebtn)
+            
+            }else{ // 값 없으면 회원 등록
+
+                $('.refresh-btn').removeClass('d-none')
+                // uuid 셋팅
+                generateUUID('mem_id');
             }
+
+        });
+        
+        function moveUri(path){
+
+        	// 상대적인 경로를 지정하여 이동
+        	window.location.href = path;
+        }
+	        
         </script>
     </body>
 </html>
