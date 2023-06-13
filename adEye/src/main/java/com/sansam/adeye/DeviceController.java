@@ -228,5 +228,36 @@ public class DeviceController {
 		return paramMap;
 	}
 	
+	// 기기 전체 목록
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public @ResponseBody Map<String, Object> deviceList(Criteria cri) throws Exception {
+		
+		log.info("/device/log...data : " + cri);
+		
+		// 보내줄 맵 객체 생성
+		Map<String,Object> paramMap = new HashMap<String, Object>();
+		
+		try {
+			
+			List<DeviceDTO> dList = service.deviceList(cri);
+			System.out.println(dList.toString());
+			
+		    // paramMap 담을 객체 생성
+		    Map<String,Object> paramMapSub = new HashMap<String, Object>();
+			
+		    paramMapSub.put("data", dList);
+		    paramMap.put("result", paramMapSub);
+		    paramMap.put("code", "200");
+		    paramMap.put("message", "조회 성공");
+		    
+		} catch (Exception e) {
+			
+			paramMap.put("code", "500");
+		    paramMap.put("message", "서버 문제");
+		    
+		}
+		
+		return paramMap;
+	}
 
 }
