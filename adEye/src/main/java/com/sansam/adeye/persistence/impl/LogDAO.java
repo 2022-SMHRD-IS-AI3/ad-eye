@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sansam.adeye.domain.AcquisitionSubmitDTO;
+import com.sansam.adeye.domain.Criteria;
 import com.sansam.adeye.domain.LogDTO;
 import com.sansam.adeye.persistence.ILogDAO;
 
@@ -41,6 +42,11 @@ public class LogDAO implements ILogDAO{
 		return result;
 	}
 	
-	
+	// 특정 기기 로그 조회
+	public List<LogDTO> deviceLog(Criteria cri) throws Exception {
+		System.out.println("DAO 접속");
+		return session.selectList("LogMapper.deviceLog", cri);
+	}
+
 
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sansam.adeye.domain.Criteria;
 import com.sansam.adeye.domain.DeviceDTO;
+import com.sansam.adeye.domain.LogDTO;
 
 public interface IDeviceService {
 	
@@ -24,5 +25,5 @@ public interface IDeviceService {
 	// 특정 기기 컨트롤
 	public int deviceControl(DeviceDTO dDto) throws Exception;
 	//특정 기기 로그 조회
-	public List<DeviceDTO> deviceLog(Criteria cri) throws Exception;
+	public List<LogDTO> deviceLog(Criteria cri) throws Exception;
 }

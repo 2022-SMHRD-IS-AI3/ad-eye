@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sansam.adeye.domain.Criteria;
 import com.sansam.adeye.domain.DeviceDTO;
+import com.sansam.adeye.domain.LogDTO;
 import com.sansam.adeye.service.IDeviceService;
 
 import lombok.extern.log4j.Log4j;
@@ -197,35 +199,22 @@ public class DeviceController {
 	// 기기 로그 
 	@SuppressWarnings("null")
 	@RequestMapping(value = "/log", method = RequestMethod.GET)
-	public @ResponseBody Map<String, Object> log(@RequestParam("device_seq") String data) throws Exception {
+	public @ResponseBody Map<String, Object> log(Criteria cri) throws Exception {
 
-		log.info("/device/detail..................data : " + data);
+		log.info("/device/log...data : " + cri);
 		
 		// 보내줄 맵 객체 생성
 		Map<String,Object> paramMap = new HashMap<String, Object>();
 		
 		try {
 			
-			//List<DeviceDTO> dto = service.deviceLog(Integer.parseInt(data));
-		    
+			List<LogDTO> lList = service.deviceLog(cri);
+		    System.out.println(lList.toString());
 		    // paramMap 담을 객체 생성
-			
-		    List<Map<String, Object>> paramMapSubList = new ArrayList<>();
-		    for (int i = 0; i < 2; i++) {
-		    	Map<String,Object> paramMapSub = new HashMap<String, Object>();
-		    	paramMapSub.put("device_seq", 1);
-			    paramMapSub.put("device_uid", "device-test");
-			    paramMapSub.put("device_NM", "기기네임");
-			    paramMapSub.put("device_onoff", "Y");
-			    paramMapSub.put("device_status", "Y");
-			    paramMapSub.put("device_dt", "2023-05-05 12:50:12");
-			    
-			    paramMapSubList.add(paramMapSub);
-			}
+		    Map<String,Object> paramMapSub = new HashMap<String, Object>();
 		    
-		    System.out.println(paramMapSubList.toString());
-		    
-		    paramMap.put("result", paramMapSubList);
+		    paramMapSub.put("data", lList);
+		    paramMap.put("result", paramMapSub);
 		    paramMap.put("code", "200");
 		    paramMap.put("message", "조회 성공");
 		    
