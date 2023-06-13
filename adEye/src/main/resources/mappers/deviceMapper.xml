@@ -44,7 +44,7 @@
 		update tb_device set device_uid=#{device_uid}, device_NM=#{device_NM}, device_onoff = 'Y', device_status=#{device_status} where device_seq = #{device_seq}
 	</update>
 	
-	<select id="getOnoff" parameterType="com.sansam.adeye.domain.DeviceDTO">
+	<select id="getOnoff" resultType="com.sansam.adeye.domain.DeviceDTO" parameterType="com.sansam.adeye.domain.DeviceDTO">
 		select device_seq, device_onoff from tb_device where device_uid = #{device_uid}
 	</select>
 	

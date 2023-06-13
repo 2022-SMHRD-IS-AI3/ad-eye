@@ -64,9 +64,7 @@ public class AcquisitionController {
 			code = "500";
 			message = "서버 문제";
 		}
-		
-		System.out.println(code);
-		System.out.println(message);
+		log.info(code+message);
 		
 		paramMap.put("reboot_code", reboot_code);
 		paramMap.put("code", code);

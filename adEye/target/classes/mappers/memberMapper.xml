@@ -58,7 +58,7 @@
 	</select>
 		
 	<insert id="create">
-		insert into tb_member values(#{mem_id}, #{mem_pw}, #{mem_company}, #{mem_phone}, #{mem_email}, #{mem_status},  sysdate, #{company_addr}, 'N')
+		insert into tb_member values(#{mem_id}, #{mem_pw}, #{mem_company}, #{mem_phone}, #{mem_email}, #{mem_status},  sysdate, #{company_addr}, 'Y')
 	</insert>
 	
 	<select id="detail" resultType="com.sansam.adeye.domain.MemberDTO">
