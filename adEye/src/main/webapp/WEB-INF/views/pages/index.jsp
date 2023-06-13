@@ -3,14 +3,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
 <html lang="en">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<title>내 구독 목록 - Ad-EYE</title>
+<title>Ad-EYE</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="${path}/resources/css/styles.css" rel="stylesheet" />
         <link rel="icon" type="image/x-icon" href="${path}/resources/assets/img/logo.png" />
@@ -30,11 +28,11 @@
             <a class="navbar-brand pe-3 ps-4 fs-1 ps-lg-2" href="index.html">Ad - EYE</a>        
             <ul class="navbar-nav align-items-center ms-auto">
             	<li>
-            		<a class="alert-dismissible alert-link" href="">문의하기</a>
+            		<a class="alert-dismissible alert-link" href="#contact">문의하기</a>
             		
             	</li>
             	<li>
-            		<a class="alert-dismissible alert-link" href="LoginView.html">로그인</a>
+            		<a class="alert-dismissible alert-link" href="login">로그인</a>
             	</li>
             </ul>        
             
@@ -42,7 +40,7 @@
       		<main>
                  <header class="pt-10 mb-4 bg-light">
                         <div class="container-xl px-4">
-                        	<img alt="" src="${path}/resources/assets/img/main-img02.jpg" class="col-13"> 
+                        	<img alt="" src="${path}/resources/assets/img/main-img02.jpg" class="col-12"> 
                             <div class="text-center">
                                 <h1 class="text-white">AI 기반 오프라인 광고 효과 분석 서비스</h1>
                                 <p class="lead mb-0 text-white-50">Ad - EYE</p>
