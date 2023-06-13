@@ -196,7 +196,7 @@ public class DeviceController {
 		return paramMap;
 	}
 	
-	// 기기 로그 
+	// 기기 로그 조회
 	@SuppressWarnings("null")
 	@RequestMapping(value = "/log", method = RequestMethod.GET)
 	public @ResponseBody Map<String, Object> log(Criteria cri) throws Exception {
@@ -213,6 +213,7 @@ public class DeviceController {
 		    // paramMap 담을 객체 생성
 		    Map<String,Object> paramMapSub = new HashMap<String, Object>();
 		    
+		    // lList = [{log_seq : , log_msg : , log_dt : , device_uid : , sbs_alias : },{...},{...}]
 		    paramMapSub.put("data", lList);
 		    paramMap.put("result", paramMapSub);
 		    paramMap.put("code", "200");
@@ -228,7 +229,7 @@ public class DeviceController {
 		return paramMap;
 	}
 	
-	// 기기 전체 목록
+	// 기기 전체 목록 조회
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public @ResponseBody Map<String, Object> deviceList(Criteria cri) throws Exception {
 		
@@ -245,6 +246,11 @@ public class DeviceController {
 		    // paramMap 담을 객체 생성
 		    Map<String,Object> paramMapSub = new HashMap<String, Object>();
 			
+		    
+		    // dList = [{device_seq : , device_uid : , device_onoff : , device_status : , device_dt : , 
+		    //           mem_company : , sbs_seq : , sbs_loc : , data_check : },{...},{...}]
+		    // mem_company, sbs_seq, sbs_loc 매퍼에 추가해야 함
+		    // data_check 아직 미구현
 		    paramMapSub.put("data", dList);
 		    paramMap.put("result", paramMapSub);
 		    paramMap.put("code", "200");

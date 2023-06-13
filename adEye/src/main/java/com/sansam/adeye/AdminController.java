@@ -25,7 +25,7 @@ public class AdminController {
 	@Autowired
 	IAdminDashboardService service;
 
-	// 어드민대시보드
+	// 관리자 대시보드 (관리자 페이지 기본 화면 구성)
 	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
 	public @ResponseBody Map<String,Object> adminDashboard(HttpSession session) throws Exception {
 		
@@ -36,11 +36,17 @@ public class AdminController {
 			Map<String,Object> paramMapSub = new HashMap<String, Object>();
 			AdminDashboardDTO dto = service.adminView('Y');				
 			
+			// 미확인 문의글 수
 		    paramMapSub.put("contact_noread_cnt", dto.getContact_noread_cnt());
+		    // 총 문의글 수
 		    paramMapSub.put("contact_total", dto.getContact_total());
+		    // 사용중인 기기 수
 		    paramMapSub.put("device_use_cnt", dto.getDevice_use_cnt());
+		    // 등록 된 기기 수
 		    paramMapSub.put("device_total", dto.getDevice_total());
+		    // 구독 중 계약 만료 5일 이내 수
 		    paramMapSub.put("sbs_dday", dto.getSbs_dday());
+		    // 현재 구독 중 수
 		    paramMapSub.put("sbs_total", dto.getSbs_total());
 		    paramMap.put("result", paramMapSub);
 			paramMap.put("code", "200");

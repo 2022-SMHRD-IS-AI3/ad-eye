@@ -169,6 +169,7 @@ public class MemberController {
 		    // paramMap 담을 객체 생성
 		    Map<String,Object> paramMapsub = new HashMap<String, Object>();
 		    
+		    // mDtoList = [{mem_id : , mem_company : , mem_phone : , mem_email : , mem_status : ,mem_joindate : company_adrr : },{...},{...}] 
 		    paramMapsub.put("data", mDtoList);		    
 		    paramMap.put("result", paramMapsub);
 		    paramMap.put("code", "200");
@@ -199,7 +200,14 @@ public class MemberController {
 			Map<String,Object> paramMapsub = new HashMap<String, Object>();
 
 			paramMapsub.put("mem_company", mem_company);
+			// 해당 회원이 현재 구독 중인 수
 			paramMapsub.put("sbs_total", sbs_total);
+			// sDtoList = [{sbs_seq : , sbs_alias : , sbs_loc : , sbs_total_man : , sbs_total_interest : ,
+			//              sbs_male_per : , sbs_female_per : },{...},{...}]
+			// sbs_total_man = 전체 노출 인구 수
+			// sbs_total_interest = 전체 관심 인구 수
+			// sbs_male_per = 전체 노출 인구 중 남자
+			// sbs_female_per = 전체 노출 인구 중 여자
 			paramMapsub.put("sbs_list", sDtoList);
 			paramMap.put("result", paramMapsub);
 		    paramMap.put("code", "200");

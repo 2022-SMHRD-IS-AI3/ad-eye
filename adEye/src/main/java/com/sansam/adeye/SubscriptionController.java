@@ -41,6 +41,10 @@ public class SubscriptionController {
 			    // paramMap 담을 객체 생성
 			    Map<String,Object> paramMapsub = new HashMap<String, Object>();
 			    
+			    // sList = [{sbs_seq : , mem_id : , device_seq : , mem_company : , sbs_loc : , 
+			    //           sbs_alias : , sbs_start_dt : , sbs_end_dt : , sbs_reg_dt : , sbs_grade : , 
+			    //           sbs_status : , d_day : },{...},{...}]
+			    // d_day : 계약 만료 까지 잔여일
 			    paramMapsub.put("data", sList);		    
 			    paramMap.put("result", paramMapsub);
 			    paramMap.put("code", "200");
