@@ -143,6 +143,7 @@
                                             <canvas id="myPieChart" width="100%"
                                                 height="50"></canvas>
                                             </div>
+                                            
                                     </div>
                                     <div class="card-footer small text-center text-muted">
                                         <span>남</span>
