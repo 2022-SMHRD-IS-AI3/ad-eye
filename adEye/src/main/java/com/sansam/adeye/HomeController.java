@@ -66,12 +66,12 @@ public class HomeController {
 				String mem_id = mDto.getMem_id();
 				
 				if(admin_yn == 'N') {
-					paramMapsub.put("move_url", "/mem/main?mem_id=" + mem_id);
+					paramMapsub.put("move_url", "/pages/user/dashboard?mem_id=" + mem_id);
 					paramMap.put("result", paramMapsub);
 					paramMap.put("code", "200");
 					paramMap.put("message", "로그인 성공");
 				}else if(admin_yn == 'Y'){
-					paramMapsub.put("move_url", "/adm/main");
+					paramMapsub.put("move_url", "/pages/admin");
 					paramMap.put("result", paramMapsub);
 					paramMap.put("code", "200");
 					paramMap.put("message", "로그인 성공");				

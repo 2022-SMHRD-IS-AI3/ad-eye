@@ -60,6 +60,10 @@ function moveCode(code,d){ // 코드, 쿼리스트링
         path = "/pages/admin/log"
     }else if(code === 'contact'){
         path = "/pages/admin/contact"
+    }else if(code === 'main'){
+        path = "/pages/main"
+    }else if(code === 'login'){
+        path = "/pages/login"
     }
 
     movePath(path, op, w, h);
