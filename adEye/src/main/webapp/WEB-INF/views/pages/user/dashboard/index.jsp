@@ -157,6 +157,43 @@
         <script src="${path}/resources/js/scripts.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="${path}/resources/js/datatables/datatables-simple-demo.js"></script>
-        
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+        <script src="${path}/resources/js/cus.js"></script>
+       	<script type="text/javascript">
+       	
+	     	// 문서준비 완료 되면
+	        $(document).ready(function() {
+	
+	            // 유무 page 값 가져오기
+	            const page = getQueryString('page');
+	
+	            // page 값 유무로 페이지체크
+	            getDataList()
+	
+	        });
+	        
+	        // 데이터 목록 가져오기
+	        function getDataList(){
+	        	
+	       		var path = "/member/";
+	       		var type = "GET";
+	       		var data = {
+	    			pageNum : 1,
+	    			amount : 10,
+	    			type : $('#key').val() || "",
+	    			keyword : $('input[name=keyword]').val() || ""
+	    		}
+	       		
+	       		ajaxCallBack(path, type, data, function(response){
+	       			
+	       			conLog(response)
+	       			if(response.code == "200") {
+	       				dataList = response.result;
+	       	            getDataListCreate();
+	       			}
+	       		});
+	       	}
+       	
+       	</script>
     </body>
 </html>
