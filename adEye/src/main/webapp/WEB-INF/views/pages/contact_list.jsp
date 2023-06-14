@@ -139,25 +139,22 @@
                                    		<select class="form-select" name="key">
                                    			<option value="">--- 선택 ---</option>
                                    			<option value="company">회사명</option>
+                                   			<option value="phone">연락처</option>
+                                   			<option value="email">이메일</option>
+                                   			<option value="content">내용</option>
                                    		</select>
+                                   		
                                     </div>
-                                   	<div class="col-md-3">
+                                   	<div class="col-md-2">
                                         <input class="form-control" id="keword" type="text" name="keword" placeholder="내용을 입력해주세요" value="" />
                                     </div>
-                                    
-                                   <!--  <div class="col-md-2">
-                                   		<select class="form-select" name="sbs_grade" disabled>
-                                   			<option value="">--- 선택 ---</option>
-                                   			<option value="standard" selected>standard</option>
-                                   		</select>
-                                    </div>
-                                    <div class="col-md-2">
+                                   <div class="col-md-2">
                                    		<select class="form-select" name="sbs_status">
                                    			<option value="">--- 상태 ---</option>
-                                   			<option value="Y">사용</option>
-                                   			<option value="N">중지</option>
+                                   			<option value="Y">Y</option>
+                                   			<option value="N">N</option>
                                    		</select>
-                                    </div> -->
+                                   		</div>
                                     <div class="col-md-2">
                                    		<button class="btn btn-dark" id="search_btn">검색</button>
                                     </div>

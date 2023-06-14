@@ -136,6 +136,9 @@
                 <div class="col-md-2">
                 <input class="form-control" type="text" name="keyword" placeholder="내용을 입력해주세요">
                 </div>
+                
+                
+            	<div class="row gx-3">
                 <!-- Date Range Picker Example-->
                 <label for="" class="col-sm-1 col-form-label fw-bolder text-center">기간</label>
                 <div class="col-md-2">
@@ -144,8 +147,11 @@
                     <span class="input-group-text">
                         <i data-feather="calendar"></i>
                     </span>
+                
                 </div>
                 </div>
+                </div>
+                
                 <div class="col-md-2">
                 <button class="btn btn-dark" id="search_btn">검색</button>
                 
