@@ -80,5 +80,9 @@
 	<select id="login" resultType="com.sansam.adeye.domain.MemberDTO">
 		SELECT * FROM tb_member WHERE mem_id = #{mem_id} AND mem_pw = #{mem_pw}
 	</select>
+		
+	<select id="sbsIdCheck" resultType="int">
+		SELECT COUNT(mem_id) FROM tb_member WHERE mem_id = #{mem_id}
+	</select>
 	  
 </mapper>

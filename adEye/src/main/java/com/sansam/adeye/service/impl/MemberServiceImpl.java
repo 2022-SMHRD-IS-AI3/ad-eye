@@ -74,4 +74,10 @@ public class MemberServiceImpl implements IMemberService {
 		return mDao.login(mDto);
 	}
 	
+	// 아이디 확인
+	@Override
+	public int sbsIdCheck(String mid) throws Exception {
+		System.out.println("Service 접속");
+		return mDao.sbsIdCheck(mid);
+	}
 }

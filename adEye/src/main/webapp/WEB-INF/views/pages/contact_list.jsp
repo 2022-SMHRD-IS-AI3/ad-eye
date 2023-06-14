@@ -121,7 +121,7 @@
                                     </div>
                                     <!-- <div class="col-12 col-xl-auto mb-3">
                                         <a class="btn btn-sm btn-light text-primary" href="#!">
-                                            <i class="me-1" data-feather="user-plus"></i>
+                                            <i class="me-1" data-feather="plus-circle"></i>
                                             회원 등록
                                         </a>
                                     </div> -->

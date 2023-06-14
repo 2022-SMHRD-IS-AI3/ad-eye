@@ -31,4 +31,6 @@ public interface IMemberService {
 	// 로그인
 	public MemberDTO login(MemberDTO mDto) throws Exception;
 	
+	// 아이디 확인
+	public int sbsIdCheck(String mid) throws Exception;
 }

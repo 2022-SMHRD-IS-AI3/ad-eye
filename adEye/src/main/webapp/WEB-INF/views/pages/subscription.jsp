@@ -121,7 +121,7 @@
                                     </div>
                                     <div class="col-12 col-xl-auto mb-3">
                                         <a class="btn btn-sm btn-light text-primary" href="#!">
-                                            <i class="me-1" data-feather="user-plus"></i>
+                                            <i class="me-1" data-feather="plus-circle"></i>
                                             구독 등록
                                         </a>
                                     </div>
@@ -139,7 +139,7 @@
                                    		<select class="form-select" name="key">
                                    			<option value="">--- 선택 ---</option>
                                    			<option value="company">회사명</option>
-                                   			<option value="alias">매체 이름</option>
+                                   			<option value="alias">매체이름</option>
                                    		</select>
                                     </div>
                                    	<div class="col-md-3">
