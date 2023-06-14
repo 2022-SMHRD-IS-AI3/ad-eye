@@ -12,6 +12,8 @@ public interface ISubscriptionService {
 	
 	// 구독 생성
 	public int sbsInsert(SubscriptionDTO sDto) throws Exception;
+	// 구독 생성 시 등록 된 기기 상태 변경(N -> Y)
+	public int devStatusOn(int seq) throws Exception;
 	
 	// 특정 구독 정보 조회
 	public SubscriptionDTO sbsDetail(int seq) throws Exception;

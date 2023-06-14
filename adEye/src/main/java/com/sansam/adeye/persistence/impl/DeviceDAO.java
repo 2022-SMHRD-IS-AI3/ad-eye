@@ -58,4 +58,9 @@ public class DeviceDAO implements IDeviceDAO{
 	public List<DeviceDTO> deviceLog(Criteria cri) throws Exception {
 		return session.selectList("DeviceMapper.logList", cri);
 	}
+	// 구독 생성 시 등록 된 기기 상태 변경(N -> Y)
+	@Override
+	public int devStatusOn(int seq) throws Exception {
+		return session.update("DeviceMapper.devStatusOn", seq);
+	}
 }

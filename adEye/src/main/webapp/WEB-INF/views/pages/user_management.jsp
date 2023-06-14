@@ -14,6 +14,11 @@
         <link rel="icon" type="image/x-icon" href="${path}/resources/assets/img/logo.png" />
         <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
+        <style type="text/css">
+        	.link-point{
+        		cursor: pointer;
+        	}
+        </style>
     </head>
     <body class="nav-fixed">
         <nav class="topnav navbar navbar-expand shadow justify-content-between justify-content-sm-start navbar-light bg-white" id="sidenavAccordion">
@@ -173,7 +178,7 @@
                     <div class="container-fluid px-4">
                         <div class="card">
                             <div class="card-body">
-                                <table id="datatablesSimple">
+                                <table id="datatable" class="table table-striped table-hover">
                                     <thead>
                                         <tr>
                                             <th>회사명</th>
@@ -182,35 +187,12 @@
                                             <th>이메일</th>
                                             <th>가입일</th>
                                             <th>구독 수</th>
-                                            <th>수정 / 삭제</th>
+                                            <th>삭제</th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>회사명</th>
-                                            <th>연락처</th>
-                                            <th>아이디</th>
-                                            <th>이메일</th>
-                                            <th>가입일</th>
-                                            <th>구독 수</th>
-                                            <th>수정 / 삭제</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        <tr>
-                                            <td>서울교통공사</td>
-                                            <td>02-000-0000</td>
-                                            <td>is2u111</td>
-                                            <td>kkk@kkkk.kk</td>
-                                            <td>2023-05-01</td>
-                                            <td>4</td>
-                                            <td>
-                                                <!-- 회원 수정 -->
-                                                <a class="btn btn-datatable btn-icon btn-transparent-dark me-2" href="#!"><i data-feather="edit"></i></a>
-                                                <!-- 회원 삭제 -->
-                                                <a class="btn btn-datatable btn-icon btn-transparent-dark" href="#!"><i data-feather="trash-2"></i></a>
-                                            </td>
-                                        </tr>
+                                    
+                                    <tbody id="dataList">
+                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -228,7 +210,94 @@
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="${path}/resources/js/scripts.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-        <script src="${path}/resources/js/datatables/datatables-simple-demo.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+        <script src="${path}/resources/js/cus.js"></script>
+        <script type="text/javascript">
+        
+     	// 문서준비 완료 되면
+        $(document).ready(function() {
+
+            // 유무 page 값 가져오기
+            const page = getQueryString('page');
+
+            // page 값 유무로 페이지체크
+            getDataList()
+
+        });
+        
+        // 데이터 목록 가져오기
+        function getDataList(){
+        	
+       		var path = "/member/";
+       		var type = "GET";
+       		var data = {
+    			pageNum : 1,
+    			amount : 10,
+    			type : "",
+    			keyword : ""
+    		}
+       		
+       		ajaxCallBack(path, type, data, function(response){
+       			
+       			conLog(response)
+       			if(response.code == "200") {
+       				dataList = response.result;
+       	            getDataListCreate();
+       			}
+       		});
+       	}
+        
+        // 회원삭제
+        function dataDel(id){
+        	
+        	var checkMSG = "삭제하시겠습니까?";
+        	if(!confirm(checkMSG)){
+        		return
+        	}
+        	
+       		var path = "/member/delete";
+       		var type = "GET";
+       		var data = {
+				mem_id : id
+			}
+       		
+       		ajaxCallBack(path, type, data, function(response){
+       			
+       			conLog(response)
+       			if(response.code == "201") {
+       				getDataList()
+       				alert("처리가 완료 되었습니다.")
+				}
+       		});
+       	}
+        
+        let dataList = [];
+        function getDataListCreate(){
+        	
+            createHTML = '';
+            
+            if (dataList.length === 0) {
+                // 데이터가 없는 경우 처리
+                createHTML = '<tr><td colspan="7">데이터가 없습니다.</td></tr>';
+            } else {
+            	dataList.forEach(function(v ) {
+	                var timestamp = v.mem_joindate; // 밀리초 단위의 시간 값
+	            
+	                var date = new Date(timestamp);
+	                var year = date.getFullYear();
+	                var month = String(date.getMonth() + 1).padStart(2, '0');
+	                var day = String(date.getDate()).padStart(2, '0');
+	            
+	                var formattedDate = year + '-' + month + '-' + day;
+	                console.log(formattedDate);
+	                var delBtn = '<button class="btn btn-danger btn-sm" onClick="dataDel(\''+ v.mem_id +'\')" type="button ">삭제</button>';
+	                createHTML += '<tr><td class="text-primary link-point" style="" onClick="movePath(\'/pages/user_register?id='+v.mem_id+'\')">'+ v.mem_company +'</td><td>'+ v.mem_phone +'</td><td class="text-primary link-point" onClick="movePath(\'/pages/user_register?id='+v.mem_id+'\')">'+ v.mem_id +'</td><td>'+ v.mem_email +'</td><td>'+ formattedDate +'</td><td>'+ 3 +'</td><td>'+ delBtn +'</td></tr>'
+	            });
+            }
+            
+            $('#dataList').html(createHTML)
+            
+        }
+        </script>
     </body>
 </html>
