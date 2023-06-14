@@ -8,13 +8,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>문의 - admin</title>
+        <title>기기 - admin</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="${path}/resources/css/styles.css" rel="stylesheet" />
         <link rel="icon" type="image/x-icon" href="${path}/resources/assets/img/logo.png" />
         <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
-    </head>
+</head>
     <body class="nav-fixed">
         <nav class="topnav navbar navbar-expand shadow justify-content-between justify-content-sm-start navbar-light bg-white" id="sidenavAccordion">
             <!-- Sidenav Toggle Button-->
@@ -32,7 +32,20 @@
            
             <!-- Navbar Items-->
             <ul class="navbar-nav align-items-center ms-auto">
-               
+                <!-- Navbar Search Dropdown-->
+                <!-- * * Note: * * Visible only below the lg breakpoint-->
+                <li class="nav-item dropdown no-caret me-3 d-lg-none">
+                    <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="searchDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="search"></i></a>
+                    <!-- Dropdown - Search-->
+                    <div class="dropdown-menu dropdown-menu-end p-3 shadow animated--fade-in-up" aria-labelledby="searchDropdown">
+                        <form class="form-inline me-auto w-100">
+                            <div class="input-group input-group-joined input-group-solid">
+                                <input class="form-control pe-0" type="text" placeholder="검색어를 입력하세요" aria-label="Search" aria-describedby="basic-addon2" />
+                                <div class="input-group-text"><i data-feather="search"></i></div>
+                            </div>
+                        </form>
+                    </div>
+                </li>
                 <!-- User Dropdown-->
                 <li class="nav-item dropdown no-caret dropdown-user me-3 me-lg-4">
                     <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="img-fluid" src="${path}/resources/assets/img/user-gear.png" /></a>
@@ -81,7 +94,7 @@
                                 회원 관리
                                 <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
-                           	<div class="collapse" id="pagesCollapseAccount" data-bs-parent="#accordionSidenav">
+                            <div class="collapse" id="pagesCollapseAccount" data-bs-parent="#accordionSidenav">
                                 <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
                                     <a class="nav-link" href="/pages/user_management">회원 목록</a>
                                     <a class="nav-link" href="/pages/user_register">회원 등록</a>
@@ -111,110 +124,54 @@
             <div id="layoutSidenav_content">
                 <main>
                     <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
-                        <div class="container-fluid px-4">
+                        <div class="container-xl px-4">
                             <div class="page-header-content">
                                 <div class="row align-items-center justify-content-between pt-3">
                                     <div class="col-auto mb-3">
                                         <h1 class="page-header-title">
-                                            <b>문의 관리</b>
+                                            <div class="page-header-icon"><i data-feather="plus-circle"></i></div>
+                                            기기 등록
                                         </h1>
                                     </div>
-                                    <!-- <div class="col-12 col-xl-auto mb-3">
-                                        <a class="btn btn-sm btn-light text-primary" href="#!">
-                                            <i class="me-1" data-feather="plus-circle"></i>
-                                            회원 등록
-                                        </a>
-                                    </div> -->
                                 </div>
                             </div>
                         </div>
                     </header>
-                    <!-- 검색 -->
-                    <div class="container-fluid px-4 mb-4">
-                        <div class="card">
-                            <div class="card-body">
-                            	<div class="row gx-3">
-                                   	<label for="" class="col-sm-1 col-form-label fw-bolder text-center">검색</label>
-                                   	<div class="col-md-2">
-                                   		<select class="form-select" name="key">
-                                   			<option value="">--- 선택 ---</option>
-                                   			<option value="company">회사명</option>
-                                   			<option value="phone">연락처</option>
-                                   			<option value="email">이메일</option>
-                                   			<option value="content">내용</option>
-                                   		</select>
-                                   		
+                    <!-- Main page content-->
+                    <div class="container-xl px-4 mt-4">
+                        <div class="row">
+                            
+                            <div class="col-xl-12">
+                                <!-- Account details card-->
+                                <div class="card mb-4">
+                                    <div class="card-header">기기 정보</div>
+                                    <div class="card-body">
+                                        <form>
+                                            <!-- 시리얼-->
+                                            <div class="row gx-3 mb-3">
+                                                <div class="col-md-6">
+                                                    <label class="small mb-1" for="mem_company">* 시리얼</label>
+                                                    <input class="form-control" id="mem_company" type="text" name="mem_company" placeholder="시리얼" value="" />
+                                                </div>
+                                            </div>
+
+                                            
+                                            
+                                            <!-- Submit button-->
+
+                                            
+                                        </form>
                                     </div>
-                                   	<div class="col-md-2">
-                                        <input class="form-control" id="keword" type="text" name="keword" placeholder="내용을 입력해주세요" value="" />
-                                    </div>
-                                   <div class="col-md-2">
-                                   		<select class="form-select" name="sbs_status">
-                                   			<option value="">--- 상태 ---</option>
-                                   			<option value="Y">Y</option>
-                                   			<option value="N">N</option>
-                                   		</select>
-                                   		</div>
-                                   		 <!-- Date Range Picker Example-->
-               <label for="" class="col-sm-1 col-form-label fw-bolder text-center">기간</label>
-                <div class="col-md-2">
-                <div class="input-group input-group-joined">
-                    <input class="form-control ps-0" id="litepickerRangePlugin" placeholder="날짜를 선택하세요">
-                    <span class="input-group-text">
-                        <i data-feather="calendar"></i>
-                    </span>
-                
-                </div>
-                </div>
-                                    <div class="col-md-2">
-                                   		<button class="btn btn-dark" id="search_btn">검색</button>
+                                    <div class="card-footer position-relative">
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <button class="btn btn-secondary" type="button" onclick="moveCode('mlist')">목록</button>
+                                            <div class="submit-btn-wrap">
+                                                <button class="btn btn-primary del-btn" onClick="dataSubmit('in')" type="button">등록</button>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Main page content-->
-                    <div class="container-fluid px-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <table id="datatablesSimple">
-                                    <thead>
-                                        <tr>
-                                        	<th>No.</th>
-                                            <th>회사명</th>
-                                            <th>연락처</th>
-                                            <th>이메일</th>
-                                            <th>내용</th>
-                                            <th>날짜</th>
-                                            <th>확인</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                        
-                                        	<th>No.</th>
-                                            <th>회사명</th>
-                                            <th>연락처</th>
-                                            <th>이메일</th>
-                                            <th>내용</th>
-                                            <th>날짜</th>
-                                            <th>확인</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        <tr>
-                                        <!-- for문 돌릴 곳!! -->
-                                       		<td>1</td>
-                                            <td>서울교통공사</td>
-                                            <td>02-000-0000</td>
-                                            <td>kkk@kkkk.kk</td>
-                                            <td>집에 보내줘</td>
-                                            <td>2023-05-01</td>
-                                            <td>Y</td>
-                                            
-                                        </tr>
-                                    </tbody>
-                                </table>
                             </div>
                         </div>
                     </div>
@@ -228,11 +185,205 @@
                 </footer>
             </div>
         </div>
+        
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="${path}/resources/js/scripts.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="${path}/resources/js/datatables/datatables-simple-demo.js"></script>
-    	<script src="https://cdn.jsdelivr.net/npm/litepicker/dist/bundle.js" crossorigin="anonymous"></script>
-    	<script src="${path}/resources/js/litepicker.js"></script>
+        <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+        <script src="${path}/resources/js/cus.js"></script>
+        <script>
+     	// uuid 생성
+        function generateUUID(id) {
+            const uuid = 'xxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = Math.random() * 16 | 0,
+                v = c == 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+
+            $('#'+id).val(uuid)
+        }
+
+        // 주소검색 api
+        function postSearch(){
+
+            new daum.Postcode({
+                oncomplete: function(data) {
+                    // $('#post_num').val(data.zonecode)
+                    $('#addr1').val(data.address)
+                    $('#addr2').val('')
+                    $('#addr2').focus()
+                }
+            }).open();
+        }
+
+        // 문서준비 완료 되면
+        $(document).ready(function() {
+
+            // 등록, 수정 유무 id 값 가져오기
+            const idValue = getQueryString('id');
+
+            // id 값 유무로 등록 수정 판단
+            if(idValue){
+
+                // 삭제, 수정 버튼
+                const changebtn = '<button class="btn btn-danger me-2" onClick="dataSubmit(\'dl\')" type="button ">삭제</button>'+
+                        '<button class="btn btn-primary" onClick="dataSubmit(\'up\')" type="button">수정</button>';
+                $('.submit-btn-wrap').html(changebtn)
+                
+                $('#mem_id').val(idValue)
+                $('input[name=mem_company]').attr('disabled', true);
+                $('input[name=admin_yn]').attr('disabled', true);
+                $('input[name=mem_id]').attr('disabled', true);
+                getDataDetail(idValue);
+            
+            }else{ // 값 없으면 회원 등록
+
+                $('.refresh-btn').removeClass('d-none')
+                // uuid 셋팅
+                generateUUID('mem_id');
+            }
+
+        });
+        
+     	// 데이터 상세 조회
+     	var dataDetail = null;
+        function getDataDetail(id){
+        	
+       		var path = "/member/detail";
+       		var type = "GET";
+       		var data = {
+       			mem_id : id
+    		}
+       		
+       		ajaxCallBack(path, type, data, function(response){
+       			
+       			conLog(response)
+       			if(response.code == "200") {
+       				var info = response.result;
+       				$('#mem_company').val(info.mem_company);
+       				$('#mem_pw').val(info.mem_pw);
+       				$('#mem_phone').val(info.mem_phone);
+       				$('#mem_email').val(info.mem_email);
+       				var addrArr = info.company_addr.split(",");
+       				$('#addr1').val(addrArr[0]);
+       				$('#addr2').val(addrArr[1]);
+       				
+       				if(info.mem_status === 'N') {
+       					$('#mem_status_n').prop("checked", true);
+       				}
+       				
+       				
+       			}
+       		});
+       	}
+        
+		function setDataDetail(){
+        	
+            
+            if (dataDetail == null) {
+                // 데이터가 없는 경우 처리
+                alert("조회가 불가한 회원입니다");
+                moveCode('mlist');
+            } else {
+            	
+            	
+            }
+            
+            $('#dataList').html(createHTML)
+            
+        }
+        
+        // 데이터 전송
+        function dataSubmit(flag){
+        	
+       		var path = "";
+       		var type = "POST";
+       		var data = null;
+       		var msg = "";
+       		
+        	if(flag == 'dl'){ // 삭제
+        		
+        		
+        		path = "/member/delete";
+        		type = "GET";
+        		data =  {
+        			mem_id : $('#mem_id').val()
+              	}
+       		
+        		msg = "삭제하시겠습니까?";
+        	}else if('in' || 'up') { // 등록, 수정
+        		
+        		data = {
+                  	mem_id : $('#mem_id').val(),
+                   	mem_pw : $('#mem_pw').val(),
+                  	mem_company : $('#mem_company').val(),
+                  	mem_phone : $('#mem_phone').val(),
+                  	mem_email : $('#mem_email').val(),
+                   	mem_status : $('input[name=mem_status]:checked').val(),
+                  	company_addr : $('#addr1').val() + "," + $('#addr2').val()
+               	}
+        		
+	       		if(isObjectEmpty(data)){ // 빈 값 체크
+	       			alert("필수 입력정보가 입력되지 않았습니다");
+	       			return
+	       		}
+        	
+        		if(flag=='in') {
+        			path = "/member/insert";
+        		}else{
+        			msg = "수정하시겠습니까?";
+        			path = "/member/update";
+        		}
+        		
+        	}
+        	
+        	var cflag = false
+        	if(msg != ""){
+        		cflag = confirm(msg);
+        	}
+        	
+        	if(!cflag) {
+        		conLog(123)
+        		return
+        	}
+       		
+       		ajaxCallBack(path, type, data, function(response){
+       			
+       			conLog(response)
+       			if(flag == 'in'){
+       				
+	       			if(response.code == "201") {
+	       				alert("회원등록 완료되었습니다")
+	       				moveCode('mlist');
+	       			}else{
+	       				alert("회원등록 실패하였습니다")
+	       			}
+       				
+       			}else if(flag == 'up'){
+       				
+       				if(response.code == "202") {
+	       				alert("회원정보수정 완료되었습니다")
+       				}else{
+	       				alert("회원정보수정 실패하였습니다")
+	       			}
+       				
+       			}else if(flag == 'dl'){
+       				
+       				if(response.code == "202") {
+	       				alert("회원삭제 완료되었습니다")
+	       				moveCode('mlist');
+       				}else{
+	       				alert("회원삭제 실패하였습니다")
+	       			}
+       				
+       			}
+       		});
+       	}
+        
+        </script>
     </body>
+</html>
+
 </html>

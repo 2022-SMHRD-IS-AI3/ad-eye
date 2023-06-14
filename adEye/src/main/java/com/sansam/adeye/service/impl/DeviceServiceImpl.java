@@ -63,5 +63,11 @@ public class DeviceServiceImpl implements IDeviceService{
 		System.out.println("Service 접속");
 		return lDao.deviceLog(cri);
 	}
+	// 전체 로그 조회
+	@Override
+	public List<LogDTO> LogList(Criteria cri) throws Exception {
+		System.out.println("Service 접속");
+		return lDao.LogList(cri);
+	}
 
 }
