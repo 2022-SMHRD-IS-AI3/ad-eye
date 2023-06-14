@@ -70,4 +70,25 @@ public class DeviceServiceImpl implements IDeviceService{
 		return lDao.LogList(cri);
 	}
 
+	// 기기 목록 페이징
+	@Override
+	public int totalCnt(Criteria cri) throws Exception {
+		System.out.println("Service 접속");
+		return dDao.totalCnt(cri);
+	}
+	
+	// 전체 로그 조회 페이징
+	@Override
+	public int logTotalCnt(Criteria cri) throws Exception {
+		System.out.println("Service 접속");
+		return lDao.totalCnt(cri);
+	}
+	
+	// 특정 기기 로그 조회 페이징
+	@Override
+	public int devLogCnt(Criteria cri) throws Exception {
+		System.out.println("Service 접속");
+		return lDao.devLogCnt(cri);
+	}
+	
 }

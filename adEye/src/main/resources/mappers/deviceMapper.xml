@@ -66,5 +66,13 @@
 	<update id="devStatusOn">
 		update tb_device set sbs_status = 'Y' where device_seq = #{device_seq}
 	</update>
+  	
+  	<select id="totalCnt" resultType="int" parameterType="com.sansam.adeye.domain.PageDTO">
+		SELECT COUNT(*) 
+		FROM tb_device 
+		WHERE
+		<include refid="criteria"></include> 
+		device_status != 'D' 
+	</select>
   
 </mapper>

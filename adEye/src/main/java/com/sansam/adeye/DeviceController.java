@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sansam.adeye.domain.Criteria;
 import com.sansam.adeye.domain.DeviceDTO;
 import com.sansam.adeye.domain.LogDTO;
+import com.sansam.adeye.domain.PageDTO;
 import com.sansam.adeye.service.IDeviceService;
 
 import lombok.extern.log4j.Log4j;
@@ -83,16 +84,8 @@ public class DeviceController {
 		try {
 			
 			DeviceDTO dto = service.deviceDetail(Integer.parseInt(data));
-		    
-		    // paramMap 담을 객체 생성
-		    Map<String,Object> paramMapSub = new HashMap<String, Object>();
 
-		    paramMapSub.put("device_seq", dto.getDevice_seq());
-		    paramMapSub.put("device_uid", dto.getDevice_uid());
-		    paramMapSub.put("device_onoff", dto.getDevice_onoff());
-		    paramMapSub.put("device_status", dto.getDevice_status());
-		    paramMapSub.put("device_dt", dto.getDevice_dt());
-		    paramMap.put("result", paramMapSub);
+		    paramMap.put("result", dto);
 		    paramMap.put("code", "200");
 		    paramMap.put("message", "조회 성공");
 		    
@@ -199,9 +192,13 @@ public class DeviceController {
 	// 기기 로그 조회
 	@SuppressWarnings("null")
 	@RequestMapping(value = "/log", method = RequestMethod.GET)
-	public @ResponseBody Map<String, Object> log(Criteria cri) throws Exception {
+	public @ResponseBody Map<String, Object> log(Criteria cri, @RequestParam("device_seq") String data) throws Exception {
 
 		log.info("/device/log...data : " + cri);
+		// device_seq 값을 cri 에 있는 type 이라는 key 값의 value 로 저장
+		// mapper에서 type 이라는 key로 불러서 TO_NUMBER 로 타입변환 후 사용 
+		cri.setType(data);
+		System.out.println(cri);
 		
 		// 보내줄 맵 객체 생성
 		Map<String,Object> paramMap = new HashMap<String, Object>();
@@ -210,12 +207,12 @@ public class DeviceController {
 			
 			List<LogDTO> lList = service.deviceLog(cri);
 		    System.out.println(lList.toString());
-		    // paramMap 담을 객체 생성
-		    Map<String,Object> paramMapSub = new HashMap<String, Object>();
-		    
 		    // lList = [{log_seq : , log_msg : , log_dt : , device_uid : , sbs_alias : },{...},{...}]
-		    paramMapSub.put("data", lList);
-		    paramMap.put("result", paramMapSub);
+		    int total = service.devLogCnt(cri);
+		    System.out.println(total);
+		    // total : 특정 기기 로그 수
+		    paramMap.put("pageMaker", new PageDTO(cri, total));
+		    paramMap.put("result", lList);
 		    paramMap.put("code", "200");
 		    paramMap.put("message", "조회 성공");
 		    
@@ -242,26 +239,20 @@ public class DeviceController {
 			
 			List<DeviceDTO> dList = service.deviceList(cri);
 			System.out.println(dList.toString());
-			
-		    // paramMap 담을 객체 생성
-		    Map<String,Object> paramMapSub = new HashMap<String, Object>();
-			
-		    
 		    // dList = [{device_seq : , device_uid : , device_onoff : , device_status : , device_dt : , 
 		    //           mem_company : , sbs_seq : , sbs_loc : , data_check : },{...},{...}]
 		    // data_check : 5분간 넘어온 Log 개수
-		    paramMapSub.put("data", dList);
-		    paramMap.put("result", paramMapSub);
+			int total = service.totalCnt(cri);
+			System.out.println(total);
+			// total : 등록된 기기 총 수 (상태값 D가 아닌 것)
+			paramMap.put("pageMaker", new PageDTO(cri, total));
+		    paramMap.put("result", dList);
 		    paramMap.put("code", "200");
 		    paramMap.put("message", "조회 성공");
-		    
 		} catch (Exception e) {
-			
 			paramMap.put("code", "500");
 		    paramMap.put("message", "서버 문제");
-		    
 		}
-		
 		return paramMap;
 	}
 
@@ -278,8 +269,11 @@ public class DeviceController {
 		try {
 			
 			List<LogDTO> logList = service.LogList(cri);
-						
 		    // logList = [{log_seq : , log_msg : , log_dt : , device_uid : , sbs_loc : },{...},{...}]
+			int total = service.logTotalCnt(cri);
+			System.out.println(total);
+			// total : 전체 로그 수
+			paramMap.put("pageMaker", new PageDTO(cri, total));
 		    paramMap.put("result", logList);
 		    paramMap.put("code", "200");
 		    paramMap.put("message", "조회 성공");
