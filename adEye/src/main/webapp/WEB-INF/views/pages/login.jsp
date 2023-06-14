@@ -94,7 +94,7 @@
        			
        			conLog(response)
        			if(response.code == "200") {
-       				
+       				movePath(response.result.move_url)
        			}
        		});
        	}
