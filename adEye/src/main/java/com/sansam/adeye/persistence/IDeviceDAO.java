@@ -21,4 +21,6 @@ public interface IDeviceDAO {
 	public int deviceControl(DeviceDTO dDto) throws Exception;
 	//특정 기기 로그 조회
 	public List<DeviceDTO> deviceLog(Criteria cri) throws Exception;
+	// 구독 생성 시 등록 된 기기 상태 변경(N -> Y)
+	public int devStatusOn(int seq) throws Exception;
 }
