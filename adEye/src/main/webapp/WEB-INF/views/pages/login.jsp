@@ -2,19 +2,19 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>로그인 - Ad-EYE</title>
-        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-        <link href="${path}/resources/css/styles.css" rel="stylesheet" />
-        <link rel="icon" type="image/x-icon" href="${path}/resources/assets/img/logo.png" />
-        <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
+	<head>
+		<meta charset="UTF-8">
+		<title>로그인 - Ad-EYE</title>
+	    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+	    <link href="${path}/resources/css/styles.css" rel="stylesheet" />
+	    <link rel="icon" type="image/x-icon" href="${path}/resources/assets/img/logo.png" />
+	    <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" crossorigin="anonymous"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
 		<style>
-		
+			
 		</style>
-</head>
-<body class="nav-fixed my-10">    
+	</head>
+	<body class="nav-fixed my-10">    
 
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
@@ -34,25 +34,25 @@
                                             <!-- Form Group (email address)-->
                                             <div class="mb-3">
                                                <!--   <label class="text-gray-600 small" for="emailExample">Email address</label> -->
-                                                <input class="form-control form-control-solid" type="text" placeholder="ID" aria-label="Email Address" aria-describedby="emailExample" />
+                                                <input class="form-control form-control-solid" type="text" id="mem_id" name="mem_id" placeholder="ID" aria-label="Email Address" aria-describedby="emailExample" />
                                             </div>
                                             <!-- Form Group (password)-->
                                             <div class="mb-3">
                                                 <!-- <label class="text-gray-600 small" for="passwordExample">Password</label>  -->
-                                                <input class="form-control form-control-solid" type="password" placeholder="Password" aria-label="Password" aria-describedby="passwordExample" />
+                                                <input class="form-control form-control-solid" type="password" id="mem_pw" name="mem_pw" placeholder="Password" aria-label="Password" aria-describedby="passwordExample" />
                                             </div>
                                             <!-- Form Group (forgot password link)-->
                                             <div class="mb-3"><a class="small" href="auth-password-social.html"></a></div>
                                             <!-- Form Group (login box).-->
                                             <div class="text-end align-items-center justify-content-between mb-0">
-                                                <a class="btn btn-primary" href="dashboard-1.html">Login</a>
+                                                <a class="btn btn-primary" onClick="login()">Login</a>
                                             </div>
                                         </form>
                                     </div>
                                     <div class="card-body px-5 py-4">
                                         <div class="small text-center">
                                             아직 회원이 아니시라면 
-                                            <a href="#!">여기</a>를 눌러주세요!
+                                            <a onclick="moveCode('main')">여기</a>를 눌러주세요!
                                         </div>
                                     </div>
                                 </div>
@@ -78,6 +78,28 @@
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="${path}/resources/js/scripts.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+		<script src="${path}/resources/js/cus.js"></script>
+		<script type="text/javascript">
+     	// 데이터 상세 조회
+        function login(){
+        	
+       		var path = "/login";
+       		var type = "POST";
+       		var data = {
+    			mem_id : $('#mem_id').val(),
+    			mem_pw : $('#mem_pw').val()
+    		}
+       		ajaxCallBack(path, type, data, function(response){
+       			
+       			conLog(response)
+       			if(response.code == "200") {
+       				
+       			}
+       		});
+       	}
+			
+		</script>
 
 </body>
 </html>
