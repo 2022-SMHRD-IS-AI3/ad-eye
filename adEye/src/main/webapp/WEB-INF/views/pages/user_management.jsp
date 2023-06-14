@@ -243,5 +243,70 @@
         <script src="${path}/resources/js/scripts.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="${path}/resources/js/datatables/datatables-simple-demo.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+        <script src="${path}/resources/js/cus.js"></script>
+        <script type="text/javascript">
+        
+     	// 문서준비 완료 되면
+        $(document).ready(function() {
+
+            // 유무 page 값 가져오기
+            const page = getQueryString('page');
+
+            // page 값 유무로 페이지체크
+            getDataList()
+            getDataListCreate()
+
+        });
+        
+        // 데이터 목록 가져오기
+        function getDataList(){
+        	
+       		var path = "/member/";
+       		var type = "GET";
+       		var data = {
+    			pageNum : 1,
+    			amount : 10,
+    			type : "",
+    			keyword : ""
+    		}
+       		
+       		ajaxCallBack(path, type, data, function(response){
+       			
+       			conLog(response)
+       			if(response.code == "200") {
+       				dataList = response.result;
+       				getDataListCreate()
+       			}
+       		});
+       	}
+        
+        let dataList = [];
+        function getDataListCreate(){
+        	
+            createHTML = '';
+            
+            if (dataList.length === 0) {
+                // 데이터가 없는 경우 처리
+                createHTML = '<tr><td colspan="7">데이터가 없습니다.</td></tr>';
+            } else {
+            	dataList.forEach(function(v ) {
+	                var timestamp = v.mem_joindate; // 밀리초 단위의 시간 값
+	            
+	                var date = new Date(timestamp);
+	                var year = date.getFullYear();
+	                var month = String(date.getMonth() + 1).padStart(2, '0');
+	                var day = String(date.getDate()).padStart(2, '0');
+	            
+	                var formattedDate = year + '-' + month + '-' + day;
+	                console.log(formattedDate);
+	                var delBtn = '<button class="btn btn-danger me-2" onClick="dataDel(\''+ v.mem_id +'\')" type="button ">삭제</button>';
+	                createHTML += '<tr><td>'+ v.mem_company +'</td><td>'+ v.mem_phone +'</td><td>'+ v.mem_id +'</td><td>'+ v.mem_email +'</td><td>'+ v.mem_company +'</td>'+ formattedDate +'<td>'+ 3 +'</td><td>'+ delBtn +'</td></tr>'
+	            });
+            }
+            conLog(createHTML);
+            
+        }
+        </script>
     </body>
 </html>

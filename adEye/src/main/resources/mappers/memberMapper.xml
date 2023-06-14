@@ -47,7 +47,8 @@
 				   	mem_joindate,
 				   	company_addr
 				FROM tb_member
-				WHERE
+				WHERE mem_status !='D'
+				AND
 		]]>
 	  	<include refid="criteria"></include>         
       	<![CDATA[

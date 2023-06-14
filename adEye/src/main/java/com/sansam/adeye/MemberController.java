@@ -170,8 +170,7 @@ public class MemberController {
 		    Map<String,Object> paramMapsub = new HashMap<String, Object>();
 		    
 		    // mDtoList = [{mem_id : , mem_company : , mem_phone : , mem_email : , mem_status : ,mem_joindate : company_adrr : },{...},{...}] 
-		    paramMapsub.put("data", mDtoList);		    
-		    paramMap.put("result", paramMapsub);
+		    paramMap.put("result", mDtoList);
 		    paramMap.put("code", "200");
 		    paramMap.put("message", "조회 성공");
 		} catch (Exception e) {

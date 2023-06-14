@@ -11,8 +11,8 @@ function pieChart(){
 
 	const data = {
 	    labels: [
-	      'Female',
-	      'Male'
+	      '광고주목 인원 : '+ dashboardData.female_interest_cnt +' 명 / 총 인원',
+	      '광고주목 인원 : '+ dashboardData.male_interest_cnt +' 명 / 총 인원'
 	    ],
 	    datasets: [{
 	      label: 'My First Dataset',
@@ -24,7 +24,8 @@ function pieChart(){
 	      hoverOffset: 4
 	    }]
 	  };
-	  
+	
+	
 	myPieChart = new Chart(ctx, {
 	    type: "pie",
 	    data: data,
@@ -36,16 +37,28 @@ function pieChart(){
 	            borderColor: "#dddfeb",
 	            borderWidth: 1,
 	            displayColors: false,
-	            caretPadding: 0
+	            caretPadding: 0,
+	            callbacks: {
+			        label: function(tooltipItem, data) {
+			         	 var label = data.labels[tooltipItem.index];
+			         	 var value = data.datasets[0].data[tooltipItem.index];
+			         	 return label + ' : ' + value + ' 명';
+			        }
+	      		}
 	        },
 	        legend: {
 	            display: false
-	        },
+	        }
 	    }
 	});
 }
 
 function rePieChart(){
+
+	myPieChart.data.labels = [
+	      '광고주목 인원 : '+ dashboardData.female_interest_cnt +' 명 / 총 인원',
+	      '광고주목 인원 : '+ dashboardData.male_interest_cnt +' 명 / 총 인원'
+	    ];
 	myPieChart.data.datasets[0].data = [dashboardData.female_total_cnt, dashboardData.male_total_cnt];
 	myPieChart.update();
 }
