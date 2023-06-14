@@ -3,12 +3,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<html lang="en">
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<meta name="description" content="" />
-<meta name="author" content="" />
-<title>기기 - Ad-EYE</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+		<meta name="description" content="" />
+		<meta name="author" content="" />
+		<title>기기 - Ad-EYE</title>
     	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="${path}/resources/css/styles.css" rel="stylesheet" />
@@ -164,23 +163,10 @@
 
                 </main>
 
-                <footer class="footer-admin mt-auto footer-light">
-                    <div class="container-xl px-4">
-                        <div class="row">
-                            <div class="col-md-6 small">Copyright &copy; Ad-EYE 2023</div>
-                            
-                        </div>
-                    </div>
-                </footer>
-            </div>
-        
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="${path}/resources/js/scripts.js"></script>
+			<%@ include file="../../../../includes/footer.jsp" %> 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" crossorigin="anonymous"></script>
-        <%-- <script src="${path}/resources/assets/demo/chart-area-demo.js"></script> --%>
-        <%-- <script src="${path}/resources/assets/demo/chart-bar-demo.js"></script> --%>
-
-        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+        <script src="${path}/resources/assets/demo/chart-pie-demo.js"></script>
+        <script src="${path}/resources/assets/demo/multi-chart.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
         <script>
         	var nowDay = ""
@@ -263,8 +249,6 @@
                     aType = "GET"
                     aDatas = "sbs_seq="+$('#sbs_seq').val()+"&search_date="+$('#search_date').val()
                 }
-                console.log(aUri)
-                console.log(aDatas)
                 // ajax문
                 $.ajax({ // url, success, error 는 무조건 있어야한다
                     // 어디랑 통신 할건지
@@ -279,8 +263,6 @@
 	                		dashboardData = response.result;
 	                		dataChange()
 	                	}
-                    	console.log("통신성공")
-                        console.log(response)
                         
                         dataChange()
                     },
@@ -295,7 +277,6 @@
 
 	        var changeCheck = true;
 	       	function dataChange(){
-	        	console.log(dashboardData)
 	        	// 총 유동인구
 	        	$('#man_total').text(dashboardData.man_total.toLocaleString())
 	        	// 총 주요 시청 횟수
@@ -314,7 +295,6 @@
 	        
                 
         </script>
-        <script src="${path}/resources/assets/demo/chart-pie-demo.js"></script>
-        <script src="${path}/resources/assets/demo/multi-chart.js"></script>
+
     </body>
 </html>

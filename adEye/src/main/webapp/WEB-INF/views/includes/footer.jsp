@@ -1,38 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+				<footer class="footer-admin mt-auto footer-light">
+                    <div class="container-xl px-4">
+                        <div class="row">
+                            <div class="col-md-6 small">Copyright &copy; Ad-EYE 2023</div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
         </div>
-        <!-- /#page-wrapper -->
 
-    </div>
-    <!-- /#wrapper -->
-
-    <!-- jQuery -->
-    <!-- <script src="/resources//vendor/jquery/jquery.min.js"></script> -->
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/resources//vendor/bootstrap/js/bootstrap.min.js"></script>
-
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="/resources//vendor/metisMenu/metisMenu.min.js"></script>
-
-    <!-- DataTables JavaScript -->
-    <script src="/resources//vendor/datatables/js/jquery.dataTables.min.js"></script>
-    <script src="/resources//vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
-    <script src="/resources//vendor/datatables-responsive/dataTables.responsive.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="/resources//dist/js/sb-admin-2.js"></script>
-
-    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
-    <script>
-	    $(document).ready(function() {
-	        $('#dataTables-example').DataTable({
-	            responsive: true
-	        });
-	        $(".sidebar-nav")
-	        .attr("class","sidebar-nav navbar-collapse collapse")
-	        .attr("aria-expanded","false")
-	        .attr("style","height:1px");
-	    });
-    </script>
-</body>
-</html>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="${path}/resources/js/scripts.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+<script src="${path}/resources/js/datatables/datatables-simple-demo.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/litepicker/dist/bundle.js" crossorigin="anonymous"></script>
+<script src="${path}/resources/js/litepicker.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="${path}/resources/js/cus.js"></script>

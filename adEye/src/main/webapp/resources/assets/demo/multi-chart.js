@@ -137,7 +137,6 @@ function multiChart(){
 }
 
 function reMultiChart(){
-	console.log(Math.ceil(Math.max(...dashboardData.oneH_man_cnt)))
 	myCombinedChart.options.scales.yAxes[0].ticks.max = Math.ceil(Math.max(...dashboardData.oneH_man_cnt))
 	myCombinedChart.data.datasets[0].data = dashboardData.oneH_interest;
 	myCombinedChart.data.datasets[1].data = dashboardData.oneH_man_cnt;

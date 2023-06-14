@@ -322,8 +322,6 @@
                     aType = "GET"
                     aDatas = "sbs_seq="+$('#sbs_seq').val()+"&search_date="+$('#search_date').val()
                 }
-                console.log(aUri)
-                console.log(aDatas)
                 // ajax문
                 $.ajax({ // url, success, error 는 무조건 있어야한다
                     // 어디랑 통신 할건지
@@ -338,8 +336,6 @@
 	                		dashboardData = response.result;
 	                		dataChange()
 	                	}
-                    	console.log("통신성공")
-                        console.log(response)
                         
                         dataChange()
                     },
@@ -354,7 +350,6 @@
 
 	        var changeCheck = true;
 	       	function dataChange(){
-	        	console.log(dashboardData)
 	        	// 총 유동인구
 	        	$('#man_total').text(dashboardData.man_total.toLocaleString())
 	        	// 총 주요 시청 횟수
