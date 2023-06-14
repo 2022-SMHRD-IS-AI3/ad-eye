@@ -43,10 +43,17 @@ public class LogDAO implements ILogDAO{
 	}
 	
 	// 특정 기기 로그 조회
+	@Override
 	public List<LogDTO> deviceLog(Criteria cri) throws Exception {
 		System.out.println("DAO 접속");
 		return session.selectList("LogMapper.deviceLog", cri);
 	}
 
+	// 전체 로그 조회
+	@Override
+	public List<LogDTO> LogList(Criteria cri) throws Exception {
+		System.out.println("DAO 접속");
+		return session.selectList("LogMapper.logList", cri);
+	}
 
 }

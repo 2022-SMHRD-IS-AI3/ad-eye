@@ -265,4 +265,30 @@ public class DeviceController {
 		return paramMap;
 	}
 
+	
+	// 전체 로그 조회
+	@RequestMapping(value = "/logList", method = RequestMethod.GET)
+	public @ResponseBody Map<String, Object> logList(Criteria cri) throws Exception {
+		
+		log.info("/device/log...data : " + cri);
+		
+		// 보내줄 맵 객체 생성
+		Map<String,Object> paramMap = new HashMap<String, Object>();
+		
+		try {
+			
+			List<LogDTO> logList = service.LogList(cri);
+						
+		    // logList = [{log_seq : , log_msg : , log_dt : , device_uid : , sbs_loc : },{...},{...}]
+		    paramMap.put("result", logList);
+		    paramMap.put("code", "200");
+		    paramMap.put("message", "조회 성공");
+			
+		} catch (Exception e) {
+			paramMap.put("code", "500");
+		    paramMap.put("message", "서버 문제");
+		}
+		
+		return paramMap;
+	}
 }

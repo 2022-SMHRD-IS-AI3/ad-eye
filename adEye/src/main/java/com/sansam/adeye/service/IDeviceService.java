@@ -26,4 +26,6 @@ public interface IDeviceService {
 	public int deviceControl(DeviceDTO dDto) throws Exception;
 	//특정 기기 로그 조회
 	public List<LogDTO> deviceLog(Criteria cri) throws Exception;
+	// 전체 로그 조회
+	public List<LogDTO> LogList(Criteria cri) throws Exception;
 }
