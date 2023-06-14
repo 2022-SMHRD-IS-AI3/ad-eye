@@ -392,15 +392,18 @@
        		var path = "";
        		var type = "POST";
        		var data = null;
-       		
+       		var msg = "";
        		
         	if(flag == 'dl'){ // 삭제
+        		
+        		
         		path = "/member/delete";
         		type = "GET";
         		data =  {
         			mem_id : $('#mem_id').val()
               	}
        		
+        		msg = "삭제하시겠습니까?";
         	}else if('in' || 'up') { // 등록, 수정
         		
         		data = {
@@ -421,17 +424,51 @@
         		if(flag=='in') {
         			path = "/member/insert";
         		}else{
+        			msg = "수정하시겠습니까?";
         			path = "/member/update";
         		}
         		
+        	}
+        	
+        	var cflag = false
+        	if(msg != ""){
+        		cflag = confirm(msg);
+        	}
+        	
+        	if(!cflag) {
+        		conLog(123)
+        		return
         	}
        		
        		ajaxCallBack(path, type, data, function(response){
        			
        			conLog(response)
-       			if(response.code == "201") {
-       				alert("회원등록이 완료되었습니다.")
-       				moveCode('mlist');
+       			if(flag == 'in'){
+       				
+	       			if(response.code == "201") {
+	       				alert("회원등록 완료되었습니다")
+	       				moveCode('mlist');
+	       			}else{
+	       				alert("회원등록 실패하였습니다")
+	       			}
+       				
+       			}else if(flag == 'up'){
+       				
+       				if(response.code == "202") {
+	       				alert("회원정보수정 완료되었습니다")
+       				}else{
+	       				alert("회원정보수정 실패하였습니다")
+	       			}
+       				
+       			}else if(flag == 'dl'){
+       				
+       				if(response.code == "202") {
+	       				alert("회원삭제 완료되었습니다")
+	       				moveCode('mlist');
+       				}else{
+	       				alert("회원삭제 실패하였습니다")
+	       			}
+       				
        			}
        		});
        	}
