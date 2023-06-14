@@ -64,4 +64,13 @@ public class MemberDAO implements IMemberDAO{
 		System.out.println("DAO 접속");
 		return session.selectOne("MemberMapper.login", mDto);
 	}
+	
+	// 아이디 확인
+	@Override
+	public int sbsIdCheck(String mid) throws Exception {
+		System.out.println("DAO 접속");
+		int result = session.selectOne("MemberMapper.sbsIdCheck", mid);
+		System.out.println(result);
+		return result;
+	}
 }
