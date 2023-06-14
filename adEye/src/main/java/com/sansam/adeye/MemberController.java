@@ -186,48 +186,51 @@ public class MemberController {
 	}
 
 	// 회원 구독목록 조회
-	@RequestMapping(value = "/devicelist", method = RequestMethod.GET)
-	public @ResponseBody Map<String, Object> devicelist(Criteria cri) throws Exception {
-		log.info("/devicelist/회원 구독 목록..................");
-		Map<String,Object> paramMap = new HashMap<String, Object>();
+		@RequestMapping(value = "/devicelist", method = RequestMethod.GET)
+		public @ResponseBody Map<String, Object> devicelist(Criteria cri, @RequestParam("mem_id") String data) throws Exception {
+			log.info("/devicelist/회원 구독 목록..................");
+			Map<String,Object> paramMap = new HashMap<String, Object>();
 
-		try {
-			System.out.println(cri.toString());
-			// 회원 구독 목록 불러오기
-			List<SubscriptionDTO> sDtoList = service.devicelist(cri);
-			System.out.println(sDtoList);
-			String mem_company = service.memSbsData(cri).getMem_company();
-			System.out.println(mem_company);
-			int sbs_total = service.memSbsData(cri).getSbs_total();
-			System.out.println(sbs_total);
-		    // paramMap 담을 객체 생성
-			Map<String,Object> paramMapsub = new HashMap<String, Object>();
+			try {
+				// type 이라는 key 값에 mem_id 값을 value 로 담아서 사용
+				cri.setType(data);
+				System.out.println(cri.toString());
+				// 회원 구독 목록 불러오기
+				List<SubscriptionDTO> sDtoList = service.devicelist(cri);
+				System.out.println(sDtoList);
+				String mem_company = service.memSbsData(cri).getMem_company();
+				System.out.println(mem_company);
+				int sbs_total = service.memSbsData(cri).getSbs_total();
+				System.out.println(sbs_total);
+				
+			    // paramMap 담을 객체 생성
+				Map<String,Object> paramMapsub = new HashMap<String, Object>();
 
-			paramMapsub.put("mem_company", mem_company);
-			// 해당 회원이 현재 구독 중인 수
-			paramMapsub.put("sbs_total", sbs_total);
-			// sDtoList = [{sbs_seq : , sbs_alias : , sbs_loc : , sbs_total_man : , sbs_total_interest : ,
-			//              sbs_male_per : , sbs_female_per : },{...},{...}]
-			// sbs_total_man = 전체 노출 인구 수
-			// sbs_total_interest = 전체 관심 인구 수
-			// sbs_male_per = 전체 노출 인구 중 남자
-			// sbs_female_per = 전체 노출 인구 중 여자
-			paramMapsub.put("sbs_list", sDtoList);
-			paramMap.put("result", paramMapsub);
-		    paramMap.put("code", "200");
-		    paramMap.put("message", "조회 성공");
+				paramMapsub.put("mem_company", mem_company);
+				// 해당 회원이 현재 구독 중인 수
+				paramMapsub.put("sbs_total", sbs_total);
+				// sDtoList = [{sbs_seq : , sbs_alias : , sbs_loc : , sbs_total_man : , sbs_total_interest : ,
+				//              sbs_male_per : , sbs_female_per : },{...},{...}]
+				// sbs_total_man = 전체 노출 인구 수
+				// sbs_total_interest = 전체 관심 인구 수
+				// sbs_male_per = 전체 노출 인구 중 남자
+				// sbs_female_per = 전체 노출 인구 중 여자
+				paramMapsub.put("sbs_list", sDtoList);
+				paramMap.put("result", paramMapsub);
+			    paramMap.put("code", "200");
+			    paramMap.put("message", "조회 성공");
+			    
+			} catch (Exception e) {
+				
+				paramMap.put("code", "500");
+			    paramMap.put("message", "서버 문제");
+			    
+			}
 		    
-		} catch (Exception e) {
-			
-			paramMap.put("code", "500");
-		    paramMap.put("message", "서버 문제");
-		    
+			return paramMap;
+					
 		}
-	    
-		return paramMap;
 		
-		
-	}
 	
 	// 회원 아이디 존재 여부 확인
 		@RequestMapping(value = "/sbsIdCheck", method = RequestMethod.GET)
