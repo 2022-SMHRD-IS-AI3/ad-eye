@@ -29,24 +29,27 @@
 
 	<select id="list" resultType="com.sansam.adeye.domain.MemberDTO">
 		<![CDATA[
-			SELECT mem_id,
+			SELECT 
+				   mem_id,
 				   mem_company,
 				   mem_phone,
 				   mem_email,
 				   mem_status,
 				   mem_joindate,
-				   company_addr
+				   company_addr,
+				   mem_pw
 			FROM (
 				SELECT /*+ INDEX_DESC(tb_member IDX_tb_member_PK) */
 					rownum rn,
-					mem_id,
-		     	 	mem_company,
-				   	mem_phone,
-				   	mem_email,
-				   	mem_status,
-				   	mem_joindate,
-				   	company_addr
-				FROM tb_member
+					m.mem_id,
+		     	 	m.mem_company,
+				   	m.mem_phone,
+				   	m.mem_email,
+				   	m.mem_status,
+				   	m.mem_joindate,
+				   	m.company_addr,
+				   	(SELECT COUNT(s.sbs_seq) FROM tb_subscription s WHERE s.mem_id = m.mem_id) AS mem_pw
+				FROM tb_member m
 				WHERE mem_status !='D' AND admin_yn = 'N'
 				AND
 		]]>

@@ -203,15 +203,15 @@
                                                 <div class="col-md-12">
                                                     <label class="small mb-1" for="">* 주소</label>
                                                 </div>
-                                                
+                                                <!-- 
                                                 <div class="col-md-4">
                                                     <input class="form-control" id="post_num" type="text" name="post_num" placeholder="우편번호" value="" />
                                                 </div>
                                                 <div class="col-md-3">
                                                     <button onclick="postSearch()" class="btn btn-info w-100" type="button">우편번호 검색</button>
-                                                </div>
+                                                </div> -->
                                                 <div class="col-md-7 mt-2">
-                                                    <input class="form-control" id="addr1" type="text" name="addr1" placeholder="주소" value="" />
+                                                    <input class="form-control" onclick="postSearch()"  id="addr1" type="text" name="addr1" placeholder="주소 검색" value="" />
                                                 </div>
                                                 <div class="col-md-7 mt-2">
                                                     <input class="form-control" id="addr2" type="text" name="addr2" placeholder="상세주소" value="" />
@@ -324,6 +324,7 @@
                 $('.submit-btn-wrap').html(changebtn)
                 
                 $('#mem_id').val(idValue)
+                getDataDetail(idValue);
             
             }else{ // 값 없으면 회원 등록
 
@@ -333,6 +334,48 @@
             }
 
         });
+        
+     	// 데이터 상세 조회
+     	var dataDetail = null;
+        function getDataDetail(id){
+        	
+       		var path = "/member/detail";
+       		var type = "GET";
+       		var data = {
+       			mem_id : id
+    		}
+       		
+       		ajaxCallBack(path, type, data, function(response){
+       			
+       			conLog(response)
+       			if(response.code == "200") {
+       				var info = response.result;
+       				$('#mem_company').val(info.mem_company);
+       				$('#mem_pw').val(info.mem_pw);
+       				$('#mem_phone').val(info.mem_phone);
+       				$('#mem_email').val(info.mem_email);
+       				var addrArr = 
+       				$('#mem_company').val(info.mem_company);
+       				$('#mem_company').val(info.mem_company);
+       			}
+       		});
+       	}
+        
+		function setDataDetail(){
+        	
+            
+            if (dataDetail == null) {
+                // 데이터가 없는 경우 처리
+                alert("조회가 불가한 회원입니다");
+                moveCode('mlist');
+            } else {
+            	
+            	
+            }
+            
+            $('#dataList').html(createHTML)
+            
+        }
         
         // 데이터 전송
         function dataSubmit(flag){
