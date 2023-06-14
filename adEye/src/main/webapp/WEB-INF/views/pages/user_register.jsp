@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>회원등록 - admin</title>
+        <title>회원 등록 - admin</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="${path}/resources/css/styles.css" rel="stylesheet" />
         <link rel="icon" type="image/x-icon" href="${path}/resources/assets/img/logo.png" />
@@ -235,7 +235,7 @@
 
                                             <!-- 계정상태 -->
                                             <div class="mb-3">
-                                                <label class="small mb-1">* 계정구분</label>
+                                                <label class="small mb-1">* 계정상태</label>
                                                 <br>
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" id="mem_status_y" name="mem_status" type="radio" value="Y" checked/>
@@ -301,10 +301,10 @@
 
             new daum.Postcode({
                 oncomplete: function(data) {
-                    $('#post_num').val(data.zonecode)
+                    // $('#post_num').val(data.zonecode)
                     $('#addr1').val(data.address)
+                    $('#addr2').val('')
                     $('#addr2').focus()
-                    console.log(data)
                 }
             }).open();
         }
@@ -324,6 +324,9 @@
                 $('.submit-btn-wrap').html(changebtn)
                 
                 $('#mem_id').val(idValue)
+                $('input[name=mem_company]').attr('disabled', true);
+                $('input[name=admin_yn]').attr('disabled', true);
+                $('input[name=mem_id]').attr('disabled', true);
                 getDataDetail(idValue);
             
             }else{ // 값 없으면 회원 등록
@@ -354,9 +357,15 @@
        				$('#mem_pw').val(info.mem_pw);
        				$('#mem_phone').val(info.mem_phone);
        				$('#mem_email').val(info.mem_email);
-       				var addrArr = 
-       				$('#mem_company').val(info.mem_company);
-       				$('#mem_company').val(info.mem_company);
+       				var addrArr = info.company_addr.split(",");
+       				$('#addr1').val(addrArr[0]);
+       				$('#addr2').val(addrArr[1]);
+       				
+       				if(info.mem_status === 'N') {
+       					$('#mem_status_n').prop("checked", true);
+       				}
+       				
+       				
        			}
        		});
        	}
@@ -383,15 +392,18 @@
        		var path = "";
        		var type = "POST";
        		var data = null;
-       		
+       		var msg = "";
        		
         	if(flag == 'dl'){ // 삭제
+        		
+        		
         		path = "/member/delete";
         		type = "GET";
         		data =  {
         			mem_id : $('#mem_id').val()
               	}
        		
+        		msg = "삭제하시겠습니까?";
         	}else if('in' || 'up') { // 등록, 수정
         		
         		data = {
@@ -400,7 +412,7 @@
                   	mem_company : $('#mem_company').val(),
                   	mem_phone : $('#mem_phone').val(),
                   	mem_email : $('#mem_email').val(),
-                   	mem_status : $('input[name=mem_status]').val(),
+                   	mem_status : $('input[name=mem_status]:checked').val(),
                   	company_addr : $('#addr1').val() + "," + $('#addr2').val()
                	}
         		
@@ -412,17 +424,51 @@
         		if(flag=='in') {
         			path = "/member/insert";
         		}else{
+        			msg = "수정하시겠습니까?";
         			path = "/member/update";
         		}
         		
+        	}
+        	
+        	var cflag = false
+        	if(msg != ""){
+        		cflag = confirm(msg);
+        	}
+        	
+        	if(!cflag) {
+        		conLog(123)
+        		return
         	}
        		
        		ajaxCallBack(path, type, data, function(response){
        			
        			conLog(response)
-       			if(response.code == "201") {
-       				alert("회원등록이 완료되었습니다.")
-       				moveCode('mlist');
+       			if(flag == 'in'){
+       				
+	       			if(response.code == "201") {
+	       				alert("회원등록 완료되었습니다")
+	       				moveCode('mlist');
+	       			}else{
+	       				alert("회원등록 실패하였습니다")
+	       			}
+       				
+       			}else if(flag == 'up'){
+       				
+       				if(response.code == "202") {
+	       				alert("회원정보수정 완료되었습니다")
+       				}else{
+	       				alert("회원정보수정 실패하였습니다")
+	       			}
+       				
+       			}else if(flag == 'dl'){
+       				
+       				if(response.code == "202") {
+	       				alert("회원삭제 완료되었습니다")
+	       				moveCode('mlist');
+       				}else{
+	       				alert("회원삭제 실패하였습니다")
+	       			}
+       				
        			}
        		});
        	}

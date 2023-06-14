@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>회원관리 - admin</title>
+        <title>회원 목록 - admin</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="${path}/resources/css/styles.css" rel="stylesheet" />
         <link rel="icon" type="image/x-icon" href="${path}/resources/assets/img/logo.png" />
@@ -126,10 +126,10 @@
                                         </h1>
                                     </div>
                                     <div class="col-12 col-xl-auto mb-3">
-                                        <a class="btn btn-sm btn-light text-primary" href="#!">
-                                            <i class="me-1" data-feather="user-plus"></i>
+                                        <button class="btn btn-sm btn-light text-primary" onClick="moveCode('minsert')">
+                                            <i class="me-1" data-feather="plus-circle"></i>
                                             회원 등록
-                                        </a>
+                                        </button>
                                     </div>
                                 </div>
                             </div>

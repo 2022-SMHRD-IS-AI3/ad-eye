@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>구독 - admin</title>
+        <title>기기 목록 - admin</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="${path}/resources/css/styles.css" rel="stylesheet" />
         <link rel="icon" type="image/x-icon" href="${path}/resources/assets/img/logo.png" />
@@ -116,13 +116,13 @@
                                 <div class="row align-items-center justify-content-between pt-3">
                                     <div class="col-auto mb-3">
                                         <h1 class="page-header-title">
-                                            <b>구독 관리</b>
+                                            <b>기기 목록</b>
                                         </h1>
                                     </div>
                                     <div class="col-12 col-xl-auto mb-3">
                                         <a class="btn btn-sm btn-light text-primary" href="#!">
                                             <i class="me-1" data-feather="plus-circle"></i>
-                                            구독 등록
+                                            기기 등록
                                         </a>
                                     </div>
                                 </div>
@@ -138,6 +138,7 @@
                                    	<div class="col-md-2">
                                    		<select class="form-select" name="key">
                                    			<option value="">--- 선택 ---</option>
+                                   			<option value="device_num">기기번호</option>
                                    			<option value="company">회사명</option>
                                    			<option value="alias">매체이름</option>
                                    		</select>
@@ -146,19 +147,6 @@
                                         <input class="form-control" id="keword" type="text" name="keword" placeholder="내용을 입력해주세요" value="" />
                                     </div>
                                     
-                                    <div class="col-md-2">
-                                   		<select class="form-select" name="sbs_grade" disabled>
-                                   			<option value="">--- 등급 ---</option>
-                                   			<option value="standard" selected>standard</option>
-                                   		</select>
-                                    </div>
-                                    <div class="col-md-2">
-                                   		<select class="form-select" name="sbs_status">
-                                   			<option value="">--- 상태 ---</option>
-                                   			<option value="Y">사용</option>
-                                   			<option value="N">중지</option>
-                                   		</select>
-                                    </div>
                                     <div class="col-md-2">
                                    		<button class="btn btn-dark" id="search_btn">검색</button>
                                     </div>
@@ -173,44 +161,44 @@
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
+                                            <th>기기 번호</th>
+                                            <th>시리얼</th>
                                             <th>회사명</th>
                                             <th>매체 이름</th>
-                                            <th>구독 등급</th>
-                                            <th>상태</th>
-                                            <th>시작일</th>
-                                            <th>종료일</th>
-                                            <th>남은 일자</th>
+                                            <th>전원 상태</th>
+                                            <th>로그 확인</th>
+                                            
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
+                                            <th>기기 번호</th>
+                                            <th>시리얼</th>
                                             <th>회사명</th>
                                             <th>매체 이름</th>
-                                            <th>구독 등급</th>
-                                            <th>상태</th>
-                                            <th>시작일</th>
-                                            <th>종료일</th>
-                                            <th>남은 일자</th>
+                                            <th>전원 상태</th>
+                                            <th>로그 확인</th>
+                                            
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                         <tr>
+                                            <td>1</td>
+                                            <td>010101</td>
                                             <td>서울교통공사</td>
-                                            <td>입구역광고매체</td>
-                                            <td>standard</td>
-                                            <td>사용</td>
-                                            <td>2023-05-01</td>
-                                            <td>2024-05-01</td>
-                                            <td>211</td>
+                                            <td>암튼입구역1번출구1</td>
+                                            <td>off</td>
+                                            <td>0</td>
+                                            
                                         </tr>
                                         <tr>
-                                            <td>서울교통공사</td>
-                                            <td>입구역광고매체</td>
-                                            <td>standard</td>
-                                            <td>사용</td>
-                                            <td>2023-05-01</td>
-                                            <td>2024-05-01</td>
-                                            <td>211</td>
+                                            <td>2</td>
+                                            <td>020202</td>
+                                            <td>애드</td>
+                                            <td>출구1</td>
+                                            <td>on</td>
+                                            <td>553</td>
+                                            
                                         </tr>
                                     </tbody>
                                 </table>
