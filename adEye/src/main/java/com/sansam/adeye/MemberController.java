@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sansam.adeye.domain.Criteria;
 import com.sansam.adeye.domain.MemberDTO;
+import com.sansam.adeye.domain.PageDTO;
 import com.sansam.adeye.domain.SubscriptionDTO;
 import com.sansam.adeye.service.IMemberService;
 
@@ -169,7 +170,11 @@ public class MemberController {
 			System.out.println(mDtoList);
 		    // mDtoList = [{mem_id : , mem_company : , mem_phone : , mem_email : , 
 			//              mem_status : ,mem_joindate : company_adrr : , mem_pw : },{...},{...}]
-			// mem_pw : 해당 회원이 현재 구독 중인 수 
+			// mem_pw : 해당 회원이 현재 구독 중인 수
+			int total = service.totalCnt(cri);
+			System.out.println(total);
+			// total : 총 회원 수 (상태 값 Y 인 경우만)
+			paramMap.put("pageMaker", new PageDTO(cri, total));
 		    paramMap.put("result", mDtoList);
 		    paramMap.put("code", "200");
 		    paramMap.put("message", "조회 성공");
