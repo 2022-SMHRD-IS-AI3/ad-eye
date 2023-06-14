@@ -167,7 +167,9 @@ public class MemberController {
 			// 회원 목록 정보 불러오기
 			List<MemberDTO> mDtoList = service.memberList(cri);
 			System.out.println(mDtoList);
-		    // mDtoList = [{mem_id : , mem_company : , mem_phone : , mem_email : , mem_status : ,mem_joindate : company_adrr : },{...},{...}] 
+		    // mDtoList = [{mem_id : , mem_company : , mem_phone : , mem_email : , 
+			//              mem_status : ,mem_joindate : company_adrr : , mem_pw : },{...},{...}]
+			// mem_pw : 해당 회원이 현재 구독 중인 수 
 		    paramMap.put("result", mDtoList);
 		    paramMap.put("code", "200");
 		    paramMap.put("message", "조회 성공");

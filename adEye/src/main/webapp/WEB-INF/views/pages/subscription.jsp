@@ -102,7 +102,7 @@
                             <a class="nav-link" href="#!">
                                 로그 관리
                             <!-- Sidenav Link (문의)-->
-                            <a class="nav-link" href="#!">
+                            <a class="nav-link" href="/pages/contact_list">
                                 문의 관리
                             </a>
                         </nav>

@@ -64,13 +64,15 @@ public class SubscriptionController {
 		log.info("/subscription/insert.................."+ data.toString());
 		// 보내줄 맵 객체 생성
 	    Map<String,Object> paramMap = new HashMap<String, Object>();
-	    
+	    int seq = data.getDevice_seq();
+	    System.out.println(seq);
 	    
 	    try {
 	    	
 	    	int cnt = service.sbsInsert(data);
+	    	int dev_cnt = service.devStatusOn(seq); 
 
-	    	if(cnt > 0 ) {
+	    	if(cnt > 0 && dev_cnt > 0) {
 		    	
 		    	paramMap.put("code", "201");
 			    paramMap.put("message", "등록 성공");

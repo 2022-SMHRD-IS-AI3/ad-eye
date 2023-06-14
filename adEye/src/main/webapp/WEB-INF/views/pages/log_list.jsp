@@ -8,17 +8,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>회원관리 - admin</title>
+        <title>로그관리 - admin</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="${path}/resources/css/styles.css" rel="stylesheet" />
         <link rel="icon" type="image/x-icon" href="${path}/resources/assets/img/logo.png" />
         <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
-        <style type="text/css">
-        	.link-point{
-        		cursor: pointer;
-        	}
-        </style>
     </head>
     <body class="nav-fixed">
         <nav class="topnav navbar navbar-expand shadow justify-content-between justify-content-sm-start navbar-light bg-white" id="sidenavAccordion">
@@ -50,10 +45,6 @@
                             </div>
                         </h6>
                         <div class="dropdown-divider"></div>
-                        <!-- <a class="dropdown-item" href="#!">
-                            <div class="dropdown-item-icon"><i data-feather="settings"></i></div>
-                            정보수정
-                        </a> -->
                         <a class="dropdown-item" href="#!">
                             <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
                             로그아웃
@@ -122,14 +113,8 @@
                                 <div class="row align-items-center justify-content-between pt-3">
                                     <div class="col-auto mb-3">
                                         <h1 class="page-header-title">
-                                            <b>회원 관리</b>
+                                            <b>로그 관리</b>
                                         </h1>
-                                    </div>
-                                    <div class="col-12 col-xl-auto mb-3">
-                                        <a class="btn btn-sm btn-light text-primary" href="#!">
-                                            <i class="me-1" data-feather="user-plus"></i>
-                                            회원 등록
-                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -139,62 +124,70 @@
                 <div class="container-fluid px-4 mb-4">
                         <div class="card">
                             <div class="card-body">
-                            	<div class="row gx-3">
-                                   	<label for="" class="col-sm-1 col-form-label fw-bolder text-center">검색</label>
-                                   	<div class="col-md-2">
-                                   		<select class="form-select" name="key" id="key" disabled>
-                                   			<option value="">--- 선택 ---</option>
-                                   			<option value="C" selected>회사명</option>
-                                   			
-                                   		</select>
-                                    </div>
-                                   	<div class="col-md-3">
-                                        <input class="form-control" id="keyword" type="text" name="keyword" placeholder="내용을 입력해주세요" value="" />
-                                    </div>
-                                    
-                                   <!--  <div class="col-md-2">
-                                   		<select class="form-select" name="sbs_grade" disabled>
-                                   			<option value="">--- 등급 ---</option>
-                                   			<option value="standard" selected>standard</option>
-                                   		</select>
-                                    </div>
-                                    <div class="col-md-2">
-                                   		<select class="form-select" name="sbs_status">
-                                   			<option value="">--- 상태 ---</option>
-                                   			<option value="Y">사용</option>
-                                   			<option value="N">중지</option>
-                                   		</select>
-                                    </div> -->
-                                    <div class="col-md-2">
-                                   		<button class="btn btn-dark" onClick="getDataList()" id="search_btn">검색</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            	<div class="row gx-3">
+            	<label for="" class="col-sm-1 col-form-label fw-bolder text-center">검색</label>
+                <div class="col-md-2">
+                <select class="form-select" name="key">
+                    <option value="">--- 선택 ---</option>
+                    <option value="device_num">기기번호</option>
+                    <option value="location">매체위치</option>
+                </select>
+                </div>
+                <div class="col-md-2">
+                <input class="form-control" type="text" name="keyword" placeholder="내용을 입력해주세요">
+                </div>
+                <!-- Date Range Picker Example-->
+                <label for="" class="col-sm-1 col-form-label fw-bolder text-center">기간</label>
+                <div class="col-md-2">
+                <div class="input-group input-group-joined">
+                    <input class="form-control ps-0" id="litepickerRangePlugin" placeholder="날짜를 선택하세요">
+                    <span class="input-group-text">
+                        <i data-feather="calendar"></i>
+                    </span>
+                </div>
+                </div>
+                <div class="col-md-2">
+                <button class="btn btn-dark" id="search_btn">검색</button>
                 
-                    
+            	</div>
+        </div>
+       </div>
+      </div>
+     </div>
                     <!-- Main page content-->
                     <div class="container-fluid px-4">
                         <div class="card">
                             <div class="card-body">
-                                <table id="datatable" class="table table-striped table-hover">
+                                <table id="datatablesSimple">
                                     <thead>
                                         <tr>
-                                            <th>회사명</th>
-                                            <th>연락처</th>
-                                            <th>아이디</th>
-                                            <th>이메일</th>
-                                            <th>가입일</th>
-                                            <th>구독 수</th>
-                                            <th>삭제</th>
+                                            <th>기기번호</th>
+                                            <th>매체위치</th>
+                                            <th>로그시간</th>
+                                            <th>로그내용</th>
                                         </tr>
                                     </thead>
-                                    
-                                    <tbody id="dataList">
-                                        
+                                    <tfoot>
+                                        <tr>
+                                            <th>기기번호</th>
+                                            <th>매체위치</th>
+                                            <th>로그시간</th>
+                                            <th>로그내용</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>서울 성북구 삼선동1가</td>
+                                            <td>2023-05-01 10:12:03</td>
+                                            <td>졸려요</td>
+                                        </tr>
                                     </tbody>
+                                    
                                 </table>
+                                <div class="d-flex justify-content-end">
+                                <button class="btn btn-dark d-none" id="reboot_btn">Reboot</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -208,97 +201,27 @@
                 </footer>
             </div>
         </div>
+        
+        <script>
+        // 검색시 reboot 버튼 생성
+         document.getElementById('search_btn').addEventListener('click', function() {
+            var key = document.querySelector('select[name="key"]').value;
+            var keyword = document.querySelector('input[name="keyword"]').value;
+
+            if (key === 'device_num' || key === 'location') {
+                document.getElementById('reboot_btn').classList.remove('d-none');
+            } else {
+                document.getElementById('reboot_btn').classList.add('d-none');
+            }
+
+            // Perform search or other actions...
+        });
+         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="${path}/resources/js/scripts.js"></script>
-        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-        <script src="${path}/resources/js/cus.js"></script>
-        <script type="text/javascript">
-        
-     	// 문서준비 완료 되면
-        $(document).ready(function() {
-
-            // 유무 page 값 가져오기
-            const page = getQueryString('page');
-
-            // page 값 유무로 페이지체크
-            getDataList()
-
-        });
-        
-        // 데이터 목록 가져오기
-        function getDataList(){
-        	
-       		var path = "/member/";
-       		var type = "GET";
-       		var data = {
-    			pageNum : 1,
-    			amount : 10,
-    			type : $('#key').val() || "",
-    			keyword : $('input[name=keyword]').val() || ""
-    		}
-       		
-       		ajaxCallBack(path, type, data, function(response){
-       			
-       			conLog(response)
-       			if(response.code == "200") {
-       				dataList = response.result;
-       	            getDataListCreate();
-       			}
-       		});
-       	}
-        
-        // 회원삭제
-        function dataDel(id){
-        	
-        	var checkMSG = "삭제하시겠습니까?";
-        	if(!confirm(checkMSG)){
-        		return
-        	}
-        	
-       		var path = "/member/delete";
-       		var type = "GET";
-       		var data = {
-				mem_id : id
-			}
-       		
-       		ajaxCallBack(path, type, data, function(response){
-       			
-       			if(response.code == "201") {
-       				getDataList()
-       				alert("처리가 완료 되었습니다.")
-				}
-       		});
-       	}
-        
-        let dataList = [];
-        function getDataListCreate(){
-        	
-            createHTML = '';
-            
-            if (dataList.length === 0) {
-                // 데이터가 없는 경우 처리
-                createHTML = '<tr><td colspan="7">데이터가 없습니다.</td></tr>';
-            } else {
-            	dataList.forEach(function(v ) {
-	                var timestamp = v.mem_joindate; // 밀리초 단위의 시간 값
-	            
-	                var date = new Date(timestamp);
-	                var year = date.getFullYear();
-	                var month = String(date.getMonth() + 1).padStart(2, '0');
-	                var day = String(date.getDate()).padStart(2, '0');
-	            
-	                var formattedDate = year + '-' + month + '-' + day;
-	                
-	                var sbs_count = v.mem_pw == null ? 0 : v.mem_pw;
-	                
-	                var delBtn = '<button class="btn btn-danger btn-sm" onClick="dataDel(\''+ v.mem_id +'\')" type="button ">삭제</button>';
-	                createHTML += '<tr><td class="text-primary link-point" style="" onClick="movePath(\'/pages/user_register?id='+v.mem_id+'\')">'+ v.mem_company +'</td><td>'+ v.mem_phone +'</td><td class="text-primary link-point" onClick="movePath(\'/pages/user_register?id='+v.mem_id+'\')">'+ v.mem_id +'</td><td>'+ v.mem_email +'</td><td>'+ formattedDate +'</td><td>'+ sbs_count +'</td><td>'+ delBtn +'</td></tr>'
-	            });
-            }
-            
-            $('#dataList').html(createHTML)
-            
-        }
-        </script>
+        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+        <script src="${path}/resources/js/datatables/datatables-simple-demo.js"></script>
+    	<script src="https://cdn.jsdelivr.net/npm/litepicker/dist/bundle.js" crossorigin="anonymous"></script>
+    	<script src="${path}/resources/js/litepicker.js"></script>
     </body>
 </html>
