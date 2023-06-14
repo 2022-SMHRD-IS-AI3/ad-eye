@@ -35,7 +35,7 @@
 					s.sbs_grade,
 					s.sbs_status,
 					(SELECT TRUNC(s.sbs_end_dt) - TRUNC(SYSDATE) FROM dual) AS d_day
-				FROM tb_subscription s, tb_member m, dual
+				FROM tb_subscription s
 				WHERE
 		]]>
 	  	<include refid="criteria"></include>         
