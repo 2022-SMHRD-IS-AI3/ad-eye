@@ -35,7 +35,7 @@
             <!-- * * Tip * * You can use text or an image for your navbar brand.-->
             <!-- * * * * * * When using an image, we recommend the SVG format.-->
             <!-- * * * * * * Dimensions: Maximum height: 32px, maximum width: 240px-->
-            <a class="navbar-brand pe-3 ps-4 ps-lg-2"  href="#!">
+            <a class="navbar-brand pe-3 ps-4 ps-lg-2" onClick="moveCode('main')">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stack" viewBox="0 0 16 16">
                     <path d="m14.12 10.163 1.715.858c.22.11.22.424 0 .534L8.267 15.34a.598.598 0 0 1-.534 0L.165 11.555a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0l5.317-2.66zM7.733.063a.598.598 0 0 1 .534 0l7.568 3.784a.3.3 0 0 1 0 .535L8.267 8.165a.598.598 0 0 1-.534 0L.165 4.382a.299.299 0 0 1 0-.535L7.733.063z"/>
                     <path d="m14.12 6.576 1.715.858c.22.11.22.424 0 .534l-7.568 3.784a.598.598 0 0 1-.534 0L.165 7.968a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0l5.317-2.659z"/>
@@ -50,8 +50,8 @@
                         <h6 class="dropdown-header d-flex align-items-center">
                             <img class="dropdown-user-img" src="${path}/resources/assets/img/user.png" />
                             <div class="dropdown-user-details">
-                                <div class="dropdown-user-details-name">서울교통공사</div>
-                                <div class="dropdown-user-details-email">is2u111</div>
+                                <div class="dropdown-user-details-name mem_company"></div>
+                                <div class="dropdown-user-details-email mem_id"></div>
                             </div>
                         </h6>
                         <div class="dropdown-divider"></div>
@@ -59,7 +59,7 @@
                             <div class="dropdown-item-icon"><i data-feather="settings"></i></div>
                             정보수정
                         </a>
-                        <a class="dropdown-item" href="#!">
+                        <a class="dropdown-item" onClick="logout()">
                             <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
                             로그아웃
                         </a>
@@ -78,10 +78,6 @@
                             <!-- Sidenav Menu Heading (내 구독 확인)-->
                             <div class="sidenav-menu-heading">내 구독 확인</div>
                             <!-- Sidenav Accordion (Dashboard)-->
-                            <a class="nav-link collapsed" href="#!" data-bs-toggle="collapse" data-bs-target="#collapseDashboards" aria-expanded="false" aria-controls="collapseDashboards">
-                                한성대 입구역 1번 출구 1
-                                <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
                            </div>
                       </div>
                 </nav>
@@ -97,9 +93,7 @@
                             <div class="page-header-content pt-4">
                                 <div class="row align-items-center justify-content-between">
                                     <div class="col-auto mt-4">
-                                        <h1 class="page-header-title">
-                                            한성대 입구역 1번 출구 12
-                                        </h1>
+                                        <h1 class="page-header-title sbs_alias"></h1>
                                     </div>
                                 </div>
                             </div>
@@ -236,11 +230,11 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="${path}/resources/js/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" crossorigin="anonymous"></script>
-        <%-- <script src="${path}/resources/assets/demo/chart-area-demo.js"></script> --%>
-        <%-- <script src="${path}/resources/assets/demo/chart-bar-demo.js"></script> --%>
-
         <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        <script src="${path}/resources/assets/demo/chart-pie-demo.js"></script>
+        <script src="${path}/resources/assets/demo/multi-chart.js"></script>
+        <script src="${path}/resources/js/cus.js"></script>
         <script>
         	var nowDay = ""
             getNowTime()
@@ -255,7 +249,7 @@
                 onChange: function(selectDates, dateStr, instance){
                 	
                     $('#search_date').val(dateStr)
-                    changeAPI('userDashboard')
+                    changeAPI('userDashboard', getQueryString('sbs_seq'))
                 },
             });
 
@@ -272,7 +266,7 @@
                 }
                 search_date.val(getYMD(gDate));
                 te.setDate(getYMD(gDate))
-                changeAPI('userDashboard')
+                changeAPI('userDashboard', getQueryString('sbs_seq'))
                 
             }
 
@@ -312,7 +306,79 @@
             
             document.getElementById('updateDate').innerText = getNowTime()
 			var dashboardData = {}
+
+            // 문서준비 완료 되면
+            $(document).ready(function() {
+            	const idValue = getQueryString('sbs_seq');
+
+                // id 값 유무로 등록 수정 판단
+                if(idValue){
+                	getDashboardData(idValue);
+       				$('.mem_id').text(getQueryString('mem_id'))
+                	
+                }
+            });
+            
+         	// 데이터 상세 조회
+            function getDashboardData(id){
+            	
+	       		var path = "/member/devicelist";
+	       		var type = "GET";
+	       		var data = {
+	    			pageNum : 1,
+	    			amount : 5,
+	    			mem_id : getQueryString('mem_id')
+	    		}
+           		
+           		ajaxCallBack(path, type, data, function(response){
+           			
+           			if(response.code == "200") {
+           				$('.mem_company').text(response.result.mem_company)
+	       				$('.mem_id').text(id)
+
+           				dataList = response.result.sbs_list;
+           				getDataListCreate()
+           				
+           				if (dataList.length > 0) {
+
+           					var sbs_alias = "";
+           					dataList.forEach(function(v) {
+           						
+           						if(v.sbs_seq == id){
+           							sbs_alias = v.sbs_alias
+           						}
+                                    
+        		            });
+           					
+           					$('.sbs_alias').text(sbs_alias);
+        	            	
+        	            }
+           				
+           			}
+           		});
+           	}
+         	
+            let dataList = [];
+	        function getDataListCreate(){
+	        	
+	            var createNavHTML = '';
+		        var mem_id = getQueryString('mem_id');
+	            
+	            if (dataList.length > 0) {
+	                // 데이터가 없는 경우 처리
+	            	dataList.forEach(function(v) {
+		                
+		                createNavHTML += '<a class="nav-link collapsed" onClick="movePath(\'/pages/user?mem_id='+ mem_id +'&sbs_seq='+ v.sbs_seq +'\')" data-bs-toggle="collapse" data-bs-target="#collapseDashboards" aria-expanded="false" aria-controls="collapseDashboards">'+ v.sbs_alias + '<div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div></a>';
+                            
+		            });
+	            }
+	            
+	            $('#accordionSidenav').append(createNavHTML)
+	            
+	        }
+            
             const changeAPI = (code,val) => {
+            	
                 let aDatas
                 let aUri = ""
                 let aType = ""
@@ -320,7 +386,7 @@
                 if(code == "userDashboard"){
                     aUri = "/acq/acqDashboard"
                     aType = "GET"
-                    aDatas = "sbs_seq="+$('#sbs_seq').val()+"&search_date="+$('#search_date').val()
+                    aDatas = "sbs_seq="+ val +"&search_date="+$('#search_date').val()
                 }
                 // ajax문
                 $.ajax({ // url, success, error 는 무조건 있어야한다
@@ -330,7 +396,7 @@
                     data: aDatas,
                     // 통신에 성공했을 때 실행할 로직
                     success: function (response) {
-                    	
+                    	conLog(response)
 	                	if(response.code == "200") {
 	                		
 	                		dashboardData = response.result;
@@ -346,7 +412,7 @@
                 })
             }
 
-            changeAPI("userDashboard","37")
+            changeAPI("userDashboard",getQueryString('sbs_seq'))
 
 	        var changeCheck = true;
 	       	function dataChange(){
@@ -368,7 +434,6 @@
 	        
                 
         </script>
-        <script src="${path}/resources/assets/demo/chart-pie-demo.js"></script>
-        <script src="${path}/resources/assets/demo/multi-chart.js"></script>
+
     </body>
 </html>

@@ -116,3 +116,27 @@ function formatDate(timestamp){
         
  	return year + '-' + month + '-' + day;
 }
+
+// 로그아웃
+function logout() {
+
+	var path = "/logout";
+	var type = "GET";
+	var data = '';
+	
+	if(!confirm('로그아웃 하시겠습니까?')){
+		return
+	}
+
+	ajaxCallBack(path, type, data, function(response){
+	       			
+	 	conLog(response)
+	   	if(response.code == "202") {
+	   		
+	   		moveCode('login');
+	       				
+	 	}
+	});
+}
+
+
