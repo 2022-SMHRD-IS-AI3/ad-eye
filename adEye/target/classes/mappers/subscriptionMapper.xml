@@ -87,6 +87,7 @@
     		FROM tb_subscription)
 	</select>
 	
+	
 	<insert id="create">
   		insert into tb_subscription (mem_id,device_seq,sbs_loc,sbs_alias,sbs_start_dt,sbs_end_dt,sbs_reg_dt,sbs_grade,sbs_status) values (#{mem_id},#{device_seq},#{sbs_loc},#{sbs_alias},#{sbs_start_dt},#{sbs_end_dt},sysdate,#{sbs_grade},#{sbs_status})
   	</insert>
