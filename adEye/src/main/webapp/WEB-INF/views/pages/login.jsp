@@ -42,7 +42,6 @@
                                                 <input class="form-control form-control-solid" type="password" id="mem_pw" name="mem_pw" placeholder="Password" aria-label="Password" aria-describedby="passwordExample" />
                                             </div>
                                             <!-- Form Group (forgot password link)-->
-                                            <div class="mb-3"><a class="small" href="auth-password-social.html"></a></div>
                                             <!-- Form Group (login box).-->
                                             <div class="text-end align-items-center justify-content-between mb-0">
                                                 <a class="btn btn-primary" onClick="login()">Login</a>

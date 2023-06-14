@@ -36,7 +36,7 @@
 					s.sbs_status,
 					(SELECT TRUNC(s.sbs_end_dt) - TRUNC(SYSDATE) FROM dual) AS d_day
 				FROM tb_subscription s
-				WHERE s.sbs_status != 'D'
+				WHERE s.sbs_status != 'D' AND
 		]]>
 	  	<include refid="criteria"></include>         
       	<![CDATA[
