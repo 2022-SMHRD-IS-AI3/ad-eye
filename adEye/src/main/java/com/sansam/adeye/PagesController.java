@@ -11,25 +11,17 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/pages")
 @Log4j
 public class PagesController {
-	// user dash list
-	@RequestMapping(value = "/user_dash_list", method = RequestMethod.GET)
-	public String userDashList()throws Exception{
+	
+	// main
+	@RequestMapping(value = "/main", method = RequestMethod.GET)
+	public String main()throws Exception{
 		
-		log.info("/user_dashboard.................");
+		log.info("/main.................");
 		
-		return "pages/user_dash_list";
+		return "pages/main";
 	}
 	
-	// user dashboard
-	@RequestMapping(value = "/user_dashboard", method = RequestMethod.GET)
-	public String userDash()throws Exception{
-		
-		log.info("/user_dashboard.................");
-		
-		return "pages/user_dashboard";
-	}
-
-	// login	
+	// 로그인	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login()throws Exception{
 		
@@ -38,126 +30,134 @@ public class PagesController {
 		return "pages/login";
 	}
 	
-	// main
-	@RequestMapping(value = "/index", method = RequestMethod.GET)
-	public String main()throws Exception{
+	// 유저 ---------------------------------------------------------
+
+	// 유저 로그인 후 구독 목록
+	@RequestMapping(value = "/user/dashboard", method = RequestMethod.GET)
+	public String userDashList()throws Exception{
 		
-		log.info("/index.................");
+		log.info("/user/dashboard.................");
 		
-		return "pages/index";
+		return "pages/user/dashboard/index";
 	}
 	
-	// admin_user_register
-	@RequestMapping(value = "/user_register", method = RequestMethod.GET)
-	public String user_register()throws Exception{
+	// 유저 분석 대시보드
+	@RequestMapping(value = "/user", method = RequestMethod.GET)
+	public String userDashboard()throws Exception{
 		
-		log.info("/user_register.................");
+		log.info("/user.................");
 		
-		return "pages/user_register";
+		return "pages/user/index";
 	}
 
-	// admin_user_management_list
-	@RequestMapping(value = "/user_management", method = RequestMethod.GET)
-	public String user_management()throws Exception{
-			
-		log.info("/user_management.................");
-			
-		return "pages/user_management";
+	// 유저 내 정보 수정
+	@RequestMapping(value = "/user/register", method = RequestMethod.GET)
+	public String userRegister()throws Exception{
+		
+		log.info("/user/register.................");
+		
+		return "pages/user/register/index";
 	}
 	
-	// admin_dashboard
-	@RequestMapping(value = "/admin_dashboard", method = RequestMethod.GET)
-	public String admin_dashboard()throws Exception{
-		
-		log.info("/admin_dashboard.................");
-		
-		return "pages/admin_dashboard";
+	// 관리자 ---------------------------------------------------------
+
+	// 관리자 유저 목록
+	@RequestMapping(value = "/admin/member", method = RequestMethod.GET)
+	public String adminMemberList()throws Exception{
+			
+		log.info("/admin/member.................");
+			
+		return "pages/admin/member/index";
 	}
 	
-	// contact_detail
-	@RequestMapping(value = "/contact_detail", method = RequestMethod.GET)
+	// 관리자 유저 정보
+	@RequestMapping(value = "/admin/member/push", method = RequestMethod.GET)
+	public String adminMemberPush()throws Exception{
+		
+		log.info("/admin/member/push.................");
+		
+		return "pages/admin/member/push/index";
+	}
+	
+	// 관리자 대시보드
+	@RequestMapping(value = "/admin", method = RequestMethod.GET)
+	public String adminDashboard()throws Exception{
+		
+		log.info("/admin.................");
+		
+		return "pages/admin/index";
+	}
+	
+	// 관리자 문의 목록
+	@RequestMapping(value = "/admin/contact", method = RequestMethod.GET)
+	public String contact_list()throws Exception{
+		
+		log.info("/admin/contact.................");
+		
+		return "pages/admin/contact/index";
+	}
+	
+	// 관리자 문의 상세
+	@RequestMapping(value = "/admin/contact/detail", method = RequestMethod.GET)
 	public String contact_detail()throws Exception{
 		
-		log.info("/contact_detail.................");
+		log.info("/admin/contact/detail.................");
 		
-		return "pages/contact_detail";
+		return "pages/admin/contact/detail/index";
 	}
 	
-
-	// contact_list
-		@RequestMapping(value = "/contact_list", method = RequestMethod.GET)
-		public String contact_list()throws Exception{
-			
-			log.info("/contact_list.................");
-			
-			return "pages/contact_list";
-		}
+	// 관리자 기기 목록
+	@RequestMapping(value = "/admin/device", method = RequestMethod.GET)
+	public String device_list()throws Exception{
+		
+		log.info("/admin/device.................");
+		
+		return "pages/admin/device/index";
+	}
 	
-	// admin_user_dashboard
-	@RequestMapping(value = "/admin_user_dashboard", method = RequestMethod.GET)
+	// 관리자 기기 정보
+	@RequestMapping(value = "/admin/device/push", method = RequestMethod.GET)
+	public String device_register()throws Exception{
+		
+		log.info("/admin/device/push.................");
+		
+		return "pages/admin/device/push/index";
+	}
+	
+	// 관리자 기기 팝업
+	@RequestMapping(value = "/admin/device/pop", method = RequestMethod.GET)
 	public String admin_user_dashboard()throws Exception{
 		
-		log.info("/admin_user_dashboard.................");
+		log.info("/admin/device/pop.................");
 		
-		return "pages/admin_user_dashboard";
+		return "pages/admin/device/pop/index";
 	}
 	
-		
-	
-	// subscription
-	@RequestMapping(value = "/subscription", method = RequestMethod.GET)
+	// 관리자 구독 목록
+	@RequestMapping(value = "/admin/sbs", method = RequestMethod.GET)
 	public String subscription()throws Exception{
 		
-		log.info("/subscription.................");
+		log.info("/admin/sbs.................");
 		
-		return "pages/subscription";
+		return "pages/admin/sbs/index";
 	}
 	
-	// subscription_register
-	@RequestMapping(value = "/subscription_register", method = RequestMethod.GET)
+	// 관리자 구독 정보
+	@RequestMapping(value = "/admin/sbs/push", method = RequestMethod.GET)
 	public String subscription_register()throws Exception{
 		
-		log.info("/subscription_register.................");
+		log.info("/admin/sbs/push.................");
 		
-		return "pages/subscription_register";
+		return "pages/admin/sbs/push/index";
 	}
 	
-	
-	// log_list
-		@RequestMapping(value = "/log_list", method = RequestMethod.GET)
-		public String log_list()throws Exception{
-			
-			log.info("/log_list.................");
-			
-			return "pages/log_list";
-		}
+	// 관리자 로그 목록
+	@RequestMapping(value = "/admin/log", method = RequestMethod.GET)
+	public String log_list()throws Exception{
 		
-	// device_list
-		@RequestMapping(value = "/device_list", method = RequestMethod.GET)
-		public String device_list()throws Exception{
-					
-			log.info("/device_list.................");
-					
-			return "pages/device_list";
-		}
+		log.info("/admin/log.................");
 		
-	// device_register
-		@RequestMapping(value = "/device_register", method = RequestMethod.GET)
-		public String device_register()throws Exception{
-							
-			log.info("/device_register.................");
-							
-			return "pages/device_register";
-		}
-		
-		
-	
-//	// Login 을 위한 HTML 파일 내려주기
-//    @GetMapping("/pages/user_dash_list")
-//    public String loginPage() {
-//    	
-//    	log.info("/user_dash_list.................");
-//        return "/pages/user_dash_list";
-//    }
+		return "pages/admin/log/index";
+	}
 
 }

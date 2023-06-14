@@ -42,14 +42,24 @@ function moveCode(code,d){ // 코드, 쿼리스트링
 
     var path = "", op = "", w = "", h = "";
 
-    if(code === 'mlist'){
-        path = "/pages/user_management"
+    if(code === 'home'){
+        path = "/pages/admin"
+    }else if(code === 'mlist'){
+        path = "/pages/admin/member"
     }else if(code === 'minsert'){
-        path = "/pages/user_register"
+        path = "/pages/admin/member/push"
     }else if(code === 'slist'){
-        path = "/pages/subscription"
+        path = "/pages/admin/sbs"
     }else if(code === 'sinsert'){
-        path = "/pages/subscription_register"
+        path = "/pages/admin/sbs/push"
+    }else if(code === 'dlist'){
+        path = "/pages/admin/device"
+    }else if(code === 'dinsert'){
+        path = "/pages/admin/device/push"
+    }else if(code === 'log'){
+        path = "/pages/admin/log"
+    }else if(code === 'contact'){
+        path = "/pages/admin/contact"
     }
 
     movePath(path, op, w, h);
