@@ -29,7 +29,7 @@
 
 	<select id="list" resultType="com.sansam.adeye.domain.MemberDTO">
 		<![CDATA[
-			SELECT DISTINCT
+			SELECT 
 				   mem_id,
 				   mem_company,
 				   mem_phone,
@@ -50,7 +50,6 @@
 				   	m.company_addr,
 				   	(SELECT COUNT(s.sbs_seq) FROM tb_subscription s WHERE s.mem_id = m.mem_id) AS mem_pw
 				FROM tb_member m
-				JOIN tb_subscription s ON s.mem_id = m.mem_id
 				WHERE mem_status !='D' AND admin_yn = 'N'
 				AND
 		]]>
