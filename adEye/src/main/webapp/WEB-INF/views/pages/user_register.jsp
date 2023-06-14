@@ -235,7 +235,7 @@
 
                                             <!-- 계정상태 -->
                                             <div class="mb-3">
-                                                <label class="small mb-1">* 계정구분</label>
+                                                <label class="small mb-1">* 계정상태</label>
                                                 <br>
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" id="mem_status_y" name="mem_status" type="radio" value="Y" checked/>
@@ -301,10 +301,10 @@
 
             new daum.Postcode({
                 oncomplete: function(data) {
-                    $('#post_num').val(data.zonecode)
+                    // $('#post_num').val(data.zonecode)
                     $('#addr1').val(data.address)
+                    $('#addr2').val('')
                     $('#addr2').focus()
-                    console.log(data)
                 }
             }).open();
         }
@@ -324,6 +324,9 @@
                 $('.submit-btn-wrap').html(changebtn)
                 
                 $('#mem_id').val(idValue)
+                $('input[name=mem_company]').attr('disabled', true);
+                $('input[name=admin_yn]').attr('disabled', true);
+                $('input[name=mem_id]').attr('disabled', true);
                 getDataDetail(idValue);
             
             }else{ // 값 없으면 회원 등록
@@ -354,9 +357,15 @@
        				$('#mem_pw').val(info.mem_pw);
        				$('#mem_phone').val(info.mem_phone);
        				$('#mem_email').val(info.mem_email);
-       				var addrArr = 
-       				$('#mem_company').val(info.mem_company);
-       				$('#mem_company').val(info.mem_company);
+       				var addrArr = info.company_addr.split(",");
+       				$('#addr1').val(addrArr[0]);
+       				$('#addr2').val(addrArr[1]);
+       				
+       				if(info.mem_status === 'N') {
+       					$('#mem_status_n').prop("checked", true);
+       				}
+       				
+       				
        			}
        		});
        	}
@@ -400,7 +409,7 @@
                   	mem_company : $('#mem_company').val(),
                   	mem_phone : $('#mem_phone').val(),
                   	mem_email : $('#mem_email').val(),
-                   	mem_status : $('input[name=mem_status]').val(),
+                   	mem_status : $('input[name=mem_status]:checked').val(),
                   	company_addr : $('#addr1').val() + "," + $('#addr2').val()
                	}
         		
