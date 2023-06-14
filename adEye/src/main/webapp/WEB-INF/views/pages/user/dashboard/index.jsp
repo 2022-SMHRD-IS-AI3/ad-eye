@@ -70,10 +70,6 @@
                             <!-- Sidenav Menu Heading (내 구독 확인)-->
                             <div class="sidenav-menu-heading">내 구독 확인</div>
                             <!-- Sidenav Accordion (Dashboard)-->
-                            <a class="nav-link collapsed" href="#!" data-bs-toggle="collapse" data-bs-target="#collapseDashboards" aria-expanded="false" aria-controls="collapseDashboards">
-                                한성대 입구역 1번 출구 1
-                                <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
                            </div>
                       </div>
                 </nav>
@@ -89,10 +85,9 @@
                                 <div class="row align-items-center justify-content-between">
                                     <div class="col-auto mt-4">
                                         <h1 class="page-header-title">
-                                            <div class="page-header"></div>
-                                            서울교통공사
+                                            <div class="page-header mem_company"></div>
                                         </h1>
-                                        <div class="page-header-subtitle">총 구독 수 : 개</div>
+                                        <div class="page-header-subtitle">총 구독 수 : <span class="sbs_total"></span> 개</div>
                                     </div>
                                 </div>
                             </div>
@@ -103,7 +98,7 @@
                         <div class="card mb-4">
                             <div class="card-header">내 구독 확인</div>
                             <div class="card-body">
-                                <table id="datatablesSimple">
+                                <table id="datatable" class="table table-striped table-hover">
                                     <thead>
                                         <tr>
                                             <th>매체 위치</th>
@@ -111,27 +106,11 @@
                                             <th>광고 노출 인구(명)</th>
                                             <th>광고 주목 인구(명)</th>
                                             <th>전체 남녀 비율(%)</th>
-                                            
                                         </tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>매체 위치</th>
-                                            <th>매체 이름</th>
-                                            <th>광고 노출 인구(명)</th>
-                                            <th>광고 주목 인구(명)</th>
-                                            <th>전체 남녀 비율(%)</th>
-                                            
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        <tr>
-                                            <td>서울 성북구 삼선동1가</td>
-                                            <td>한성대입구역 1번출구 1</td>
-                                            <td>55,712</td>
-                                            <td>32,011</td>
-                                            <td>52.1 : 47.9</td>  
-                                        </tr>
+                                    
+                                    <tbody id="dataList">
+                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -187,9 +166,48 @@
 	       			
 	       			conLog(response)
 	       			if(response.code == "200") {
+	       				
+	       				$('.mem_company').text(response.result.mem_company)
+	       				$('.sbs_total').text(response.result.sbs_total)
+	       				dataList = response.result.sbs_list;
+	       	            getDataListCreate();
 	       			}
 	       		});
-	       	}
+	        }
+	        
+	        let dataList = [];
+	        function getDataListCreate(){
+	        	
+	            var createHTML = '';
+	            var createNavHTML = '';
+	            
+	            if (dataList.length === 0) {
+	                // 데이터가 없는 경우 처리
+	                createHTML = '<tr><td colspan="5">데이터가 없습니다.</td></tr>';
+	            } else {
+	            	dataList.forEach(function(v) {
+		                
+		                var sbs_count = v.mem_pw == null ? 0 : v.mem_pw;
+		                
+		                var total = v.sbs_total_man;
+		                var count1 = v.sbs_female_per;
+		                var count2 = v.sbs_male_per;
+
+		                var percentage1 = ((count1 / total) * 100) || 0;
+		                var percentage2 = ((count2 / total) * 100) || 0;
+		                var per = percentage1.toFixed(1) + ' : ' + percentage2.toFixed(1);
+		                
+		                createHTML += '<tr><td>'+ v.sbs_loc +'</td><td class="text-primary link-point" onClick="movePath(\'/pages/user?sbs_seq='+v.sbs_seq+'\')">'+ v.sbs_alias +'</td><td >'+ v.sbs_total_man +'</td><td>'+ v.sbs_total_interest +'</td><td>'+ per +'</td></tr>'
+		                
+		                createNavHTML += '<a class="nav-link collapsed" onClick="movePath(\'/pages/user?sbs_seq='+v.sbs_seq+'\')" data-bs-toggle="collapse" data-bs-target="#collapseDashboards" aria-expanded="false" aria-controls="collapseDashboards">'+ v.sbs_alias + '<div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div></a>';
+                            
+		            });
+	            }
+	            
+	            $('#dataList').html(createHTML)
+	            $('#accordionSidenav').append(createNavHTML)
+	            
+	        }
        	
        	</script>
     </body>

@@ -157,13 +157,13 @@
         let dataList = [];
         function getDataListCreate(){
         	
-            createHTML = '';
+            var createHTML = '';
             
             if (dataList.length === 0) {
                 // 데이터가 없는 경우 처리
                 createHTML = '<tr><td colspan="7">데이터가 없습니다.</td></tr>';
             } else {
-            	dataList.forEach(function(v ) {
+            	dataList.forEach(function(v) {
 	                var timestamp = v.mem_joindate; // 밀리초 단위의 시간 값
 	            
 	                var date = new Date(timestamp);
