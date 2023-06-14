@@ -47,7 +47,7 @@
 				   	mem_joindate,
 				   	company_addr
 				FROM tb_member
-				WHERE mem_status !='D'
+				WHERE mem_status !='D' AND admin_yn = 'N'
 				AND
 		]]>
 	  	<include refid="criteria"></include>         
