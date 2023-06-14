@@ -77,12 +77,14 @@
 	</select>
 	
 	<select id="memSbsData" resultType="com.sansam.adeye.domain.SubscriptionDTO">
-		SELECT DISTINCT mem_company, sbs_total
+		SELECT DISTINCT
+				mem_company, 
+				sbs_total
 		FROM (
-    		SELECT
-        		(SELECT DISTINCT mem_company FROM tb_subscription s, tb_member m WHERE m.mem_id = '11test01' AND s.mem_id = '11test01') AS mem_company,
-        		(SELECT COUNT(sbs_seq) FROM tb_subscription WHERE mem_id = '11test01') AS sbs_total
-    		FROM tb_subscription);
+    		SELECT DISTINCT
+        		(SELECT m.mem_company FROM tb_subscription s INNER JOIN tb_member m ON s.mem_id = m.mem_id WHERE m.mem_id = #{type} AND ROWNUM = 1) AS mem_company,
+        		(SELECT COUNT(sbs_seq) FROM tb_subscription WHERE mem_id = #{type}) AS sbs_total
+    		FROM tb_subscription)
 	</select>
 	
 	<insert id="create">
