@@ -132,14 +132,23 @@ public class PagesController {
 			return "pages/log_list";
 		}
 		
-		// device_list
-				@RequestMapping(value = "/device_list", method = RequestMethod.GET)
-				public String device_list()throws Exception{
+	// device_list
+		@RequestMapping(value = "/device_list", method = RequestMethod.GET)
+		public String device_list()throws Exception{
 					
-					log.info("/device_list.................");
+			log.info("/device_list.................");
 					
-					return "pages/device_list";
-				}
+			return "pages/device_list";
+		}
+		
+	// device_register
+		@RequestMapping(value = "/device_register", method = RequestMethod.GET)
+		public String device_register()throws Exception{
+							
+			log.info("/device_register.................");
+							
+			return "pages/device_register";
+		}
 	
 //	// Login 을 위한 HTML 파일 내려주기
 //    @GetMapping("/pages/user_dash_list")
