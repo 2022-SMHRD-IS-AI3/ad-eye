@@ -28,4 +28,6 @@ public interface IDeviceService {
 	public List<LogDTO> deviceLog(Criteria cri) throws Exception;
 	// 전체 로그 조회
 	public List<LogDTO> LogList(Criteria cri) throws Exception;
+	// 기기 목록 페이징
+	public int totalCnt(Criteria cri) throws Exception;
 }

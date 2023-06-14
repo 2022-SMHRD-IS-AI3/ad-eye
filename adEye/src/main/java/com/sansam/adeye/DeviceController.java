@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sansam.adeye.domain.Criteria;
 import com.sansam.adeye.domain.DeviceDTO;
 import com.sansam.adeye.domain.LogDTO;
+import com.sansam.adeye.domain.PageDTO;
 import com.sansam.adeye.service.IDeviceService;
 
 import lombok.extern.log4j.Log4j;
@@ -242,26 +243,20 @@ public class DeviceController {
 			
 			List<DeviceDTO> dList = service.deviceList(cri);
 			System.out.println(dList.toString());
-			
-		    // paramMap 담을 객체 생성
-		    Map<String,Object> paramMapSub = new HashMap<String, Object>();
-			
-		    
 		    // dList = [{device_seq : , device_uid : , device_onoff : , device_status : , device_dt : , 
 		    //           mem_company : , sbs_seq : , sbs_loc : , data_check : },{...},{...}]
 		    // data_check : 5분간 넘어온 Log 개수
-		    paramMapSub.put("data", dList);
-		    paramMap.put("result", paramMapSub);
+			int total = service.totalCnt(cri);
+			System.out.println(total);
+			// total : 등록된 기기 총 수 (상태값 D가 아닌 것)
+			paramMap.put("pageMaker", new PageDTO(cri, total));
+		    paramMap.put("result", dList);
 		    paramMap.put("code", "200");
 		    paramMap.put("message", "조회 성공");
-		    
 		} catch (Exception e) {
-			
 			paramMap.put("code", "500");
 		    paramMap.put("message", "서버 문제");
-		    
 		}
-		
 		return paramMap;
 	}
 

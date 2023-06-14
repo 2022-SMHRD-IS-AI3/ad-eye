@@ -63,4 +63,10 @@ public class DeviceDAO implements IDeviceDAO{
 	public int devStatusOn(int seq) throws Exception {
 		return session.update("DeviceMapper.devStatusOn", seq);
 	}
+	// 기기 목록 페이징
+	@Override
+	public int totalCnt(Criteria cri) throws Exception {
+		System.out.println("DAO 접속");
+		return session.selectOne("DeviceMapper.totalCnt", cri);
+	}
 }
