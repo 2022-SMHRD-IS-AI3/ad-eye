@@ -149,6 +149,8 @@ public class PagesController {
 							
 			return "pages/device_register";
 		}
+		
+		
 	
 //	// Login 을 위한 HTML 파일 내려주기
 //    @GetMapping("/pages/user_dash_list")

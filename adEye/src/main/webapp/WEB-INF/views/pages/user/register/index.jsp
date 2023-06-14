@@ -215,7 +215,7 @@
                                     </div>
                                     <div class="card-footer position-relative">
                                         <div class="d-flex align-items-center justify-content-between">
-                                            <button class="btn btn-secondary" type="button" onclick="moveCode('mlist')">목록</button>
+                                            <button class="btn btn-secondary" type="button" onclick=>취소</button>
                                             <div class="submit-btn-wrap">
                                                 <button class="btn btn-primary del-btn" onClick="dataSubmit('in')" type="button">등록</button>
                                             </div>
@@ -244,6 +244,20 @@
         <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
         <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
         <script src="${path}/resources/js/cus.js"></script>
+        <script>
+     	// 주소검색 api
+        function postSearch(){
+
+            new daum.Postcode({
+                oncomplete: function(data) {
+                    // $('#post_num').val(data.zonecode)
+                    $('#addr1').val(data.address)
+                    $('#addr2').val('')
+                    $('#addr2').focus()
+                }
+            }).open();
+        }
+        </script>
         
     </body>
 </html>
