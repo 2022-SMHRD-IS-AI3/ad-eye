@@ -339,7 +339,6 @@
         });
         
      	// 데이터 상세 조회
-     	var dataDetail = null;
         function getDataDetail(id){
         	
        		var path = "/member/detail";
@@ -369,22 +368,6 @@
        			}
        		});
        	}
-        
-		function setDataDetail(){
-        	
-            
-            if (dataDetail == null) {
-                // 데이터가 없는 경우 처리
-                alert("조회가 불가한 회원입니다");
-                moveCode('mlist');
-            } else {
-            	
-            	
-            }
-            
-            $('#dataList').html(createHTML)
-            
-        }
         
         // 데이터 전송
         function dataSubmit(flag){

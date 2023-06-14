@@ -46,6 +46,10 @@ function moveCode(code,d){ // 코드, 쿼리스트링
         path = "/pages/user_management"
     }else if(code === 'minsert'){
         path = "/pages/user_register"
+    }else if(code === 'slist'){
+        path = "/pages/subscription"
+    }else if(code === 'sinsert'){
+        path = "/pages/subscription_register"
     }
 
     movePath(path, op, w, h);

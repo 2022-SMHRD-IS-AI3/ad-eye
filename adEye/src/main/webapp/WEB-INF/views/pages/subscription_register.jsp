@@ -312,11 +312,11 @@
 
             }
         	 
-         	// 문서준비 완료 되면
+            // 문서준비 완료 되면
             $(document).ready(function() {
 
                 // 등록, 수정 유무 id 값 가져오기
-                const idValue = getQueryParameterValue('id');
+                const idValue = getQueryString('id');
 
                 // id 값 유무로 등록 수정 판단
                 if(idValue){
@@ -327,30 +327,61 @@
                     $('.submit-btn-wrap').html(changebtn)
                     $('.refresh-btn').addClass('d-none')
                     
-                    $('#mem_id').val('11test01');
+                    $('#mem_id').val(idValue);
                     $('#mem_id').prop('disabled',true);
                 
                 }else{ // 값 없으면 회원 등록
 
                     // uuid 셋팅
-                    generateUUID('mem_id');
+                    generateUUID('sbs_seq');
                 }
 
             });
+            
+         	// 데이터 상세 조회
+            function getDataDetail(id){
+            	
+           		var path = "/subscription/detail";
+           		var type = "GET";
+           		var data = {
+           			sbs_seq : id
+        		}
+           		
+           		ajaxCallBack(path, type, data, function(response){
+           			
+           			conLog(response)
+           			if(response.code == "200") {
+           				var info = response.result;
+           				$('#mem_company').val(info.mem_company);
+           				$('#mem_pw').val(info.mem_pw);
+           				$('#mem_phone').val(info.mem_phone);
+           				$('#mem_email').val(info.mem_email);
+           				var addrArr = info.company_addr.split(",");
+           				$('#addr1').val(addrArr[0]);
+           				$('#addr2').val(addrArr[1]);
+           				
+           				if(info.mem_status === 'N') {
+           					$('#mem_status_n').prop("checked", true);
+           				}
+           				
+           				
+           			}
+           		});
+           	}
+            
          	
-            // 주소검색 api
-            function postSearch(){
-
-                new daum.Postcode({
-                    oncomplete: function(data) {
-                        $('#post_num').val(data.zonecode)
-                        $('#addr1').val(data.address)
-                        $('#addr2').focus()
-                        console.log(data)
-                    }
-                }).open();
-                
-            }
+	        // 주소검색 api
+	        function postSearch(){
+	
+	            new daum.Postcode({
+	                oncomplete: function(data) {
+	                    // $('#post_num').val(data.zonecode)
+	                    $('#addr1').val(data.address)
+	                    $('#addr2').val('')
+	                    $('#addr2').focus()
+	                }
+	            }).open();
+	        }
             
             // 계정유무 확인
             function memberCheck(){
