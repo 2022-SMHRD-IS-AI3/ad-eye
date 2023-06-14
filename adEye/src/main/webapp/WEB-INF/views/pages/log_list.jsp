@@ -45,10 +45,6 @@
                             </div>
                         </h6>
                         <div class="dropdown-divider"></div>
-                        <!-- <a class="dropdown-item" href="#!">
-                            <div class="dropdown-item-icon"><i data-feather="settings"></i></div>
-                            정보수정
-                        </a> -->
                         <a class="dropdown-item" href="#!">
                             <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
                             로그아웃
@@ -128,50 +124,36 @@
                 <div class="container-fluid px-4 mb-4">
                         <div class="card">
                             <div class="card-body">
-                            	<div class="row gx-3">
-                                   	<label for="" class="col-sm-1 col-form-label fw-bolder text-center">검색</label>
-                                   	<div class="col-md-2">
-                                   		<select class="form-select" name="key">
-                                   			<option value="">--- 선택 ---</option>
-                                   			<option value="device_num">기기번호</option>
-                                   			<option value="location">회사명</option>
-                                   			
-                                   		</select>
-                                    </div>
-                                   	<div class="col-md-2">
-                                        <input class="form-control" id="keword" type="text" name="keword" placeholder="내용을 입력해주세요" value="" />
-                                    </div>
-                                    <!-- Date Range Picker Example-->
-                                    <label for="" class="col-sm-1 col-form-label fw-bolder text-center">기간선택</label>
-									<div class="input-group input-group-joined" style="width: 16.5rem;">
-									    <span class="input-group-text">
-									        <i data-feather="calendar"></i>
-									    </span>
-									    <input class="form-control ps-0" id="litepickerRangePlugin" placeholder="날짜를 선택하세요" />
-									</div>
-                                    
-                                   <!-- <div class="col-md-2">
-                                   		<select class="form-select" name="sbs_grade" disabled>
-                                   			<option value="">---  ---</option>
-                                   			<option value="standard" selected>standard</option>
-                                   		</select>
-                                    </div> -->
-                                    <!-- <div class="col-md-2">
-                                   		<select class="form-select" name="sbs_status">
-                                   			<option value="">--- 상태 ---</option>
-                                   			<option value="Y">사용</option>
-                                   			<option value="N">중지</option>
-                                   		</select>
-                                    </div> -->
-                                    <div cass="col-md-2">
-                                   		<button class="btn btn-dark" id="search_btn">검색</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            	<div class="row gx-3">
+            	<label for="" class="col-sm-1 col-form-label fw-bolder text-center">검색</label>
+                <div class="col-md-2">
+                <select class="form-select" name="key">
+                    <option value="">--- 선택 ---</option>
+                    <option value="device_num">기기번호</option>
+                    <option value="location">매체위치</option>
+                </select>
+                </div>
+                <div class="col-md-2">
+                <input class="form-control" type="text" name="keyword" placeholder="내용을 입력해주세요">
+                </div>
+                <!-- Date Range Picker Example-->
+                <label for="" class="col-sm-1 col-form-label fw-bolder text-center">기간</label>
+                <div class="col-md-2">
+                <div class="input-group input-group-joined">
+                    <input class="form-control ps-0" id="litepickerRangePlugin" placeholder="날짜를 선택하세요">
+                    <span class="input-group-text">
+                        <i data-feather="calendar"></i>
+                    </span>
+                </div>
+                </div>
+                <div class="col-md-2">
+                <button class="btn btn-dark" id="search_btn">검색</button>
                 
-                    
+            	</div>
+        </div>
+       </div>
+      </div>
+     </div>
                     <!-- Main page content-->
                     <div class="container-fluid px-4">
                         <div class="card">
@@ -179,43 +161,33 @@
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
-                                            <th>회사명</th>
-                                            <th>연락처</th>
-                                            <th>아이디</th>
-                                            <th>이메일</th>
-                                            <th>가입일</th>
-                                            <th>구독 수</th>
-                                            <th>수정 / 삭제</th>
+                                            <th>기기번호</th>
+                                            <th>매체위치</th>
+                                            <th>로그시간</th>
+                                            <th>로그내용</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>회사명</th>
-                                            <th>연락처</th>
-                                            <th>아이디</th>
-                                            <th>이메일</th>
-                                            <th>가입일</th>
-                                            <th>구독 수</th>
-                                            <th>수정 / 삭제</th>
+                                            <th>기기번호</th>
+                                            <th>매체위치</th>
+                                            <th>로그시간</th>
+                                            <th>로그내용</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                         <tr>
-                                            <td>서울교통공사</td>
-                                            <td>02-000-0000</td>
-                                            <td>is2u111</td>
-                                            <td>kkk@kkkk.kk</td>
-                                            <td>2023-05-01</td>
-                                            <td>4</td>
-                                            <td>
-                                                <!-- 회원 수정 -->
-                                                <a class="btn btn-datatable btn-icon btn-transparent-dark me-2" href="#!"><i data-feather="edit"></i></a>
-                                                <!-- 회원 삭제 -->
-                                                <a class="btn btn-datatable btn-icon btn-transparent-dark" href="#!"><i data-feather="trash-2"></i></a>
-                                            </td>
+                                            <td>1</td>
+                                            <td>서울 성북구 삼선동1가</td>
+                                            <td>2023-05-01 10:12:03</td>
+                                            <td>졸려요</td>
                                         </tr>
                                     </tbody>
+                                    
                                 </table>
+                                <div class="d-flex justify-content-end">
+                                <button class="btn btn-dark d-none" id="reboot_btn">Reboot</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -229,6 +201,22 @@
                 </footer>
             </div>
         </div>
+        
+        <script>
+        // 검색시 reboot 버튼 생성
+         document.getElementById('search_btn').addEventListener('click', function() {
+            var key = document.querySelector('select[name="key"]').value;
+            var keyword = document.querySelector('input[name="keyword"]').value;
+
+            if (key === 'device_num' || key === 'location') {
+                document.getElementById('reboot_btn').classList.remove('d-none');
+            } else {
+                document.getElementById('reboot_btn').classList.add('d-none');
+            }
+
+            // Perform search or other actions...
+        });
+         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="${path}/resources/js/scripts.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
