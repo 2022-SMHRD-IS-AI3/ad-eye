@@ -170,7 +170,7 @@
                     <div class="container-fluid px-4">
                         <div class="card">
                             <div class="card-body">
-                                <table id="datatablesSimple">
+                                <table id="datatable" class="table table-striped table-hover">
                                     <thead>
                                         <tr>
                                             <th>회사명</th>
@@ -182,36 +182,9 @@
                                             <th>남은 일자</th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>회사명</th>
-                                            <th>매체 이름</th>
-                                            <th>구독 등급</th>
-                                            <th>상태</th>
-                                            <th>시작일</th>
-                                            <th>종료일</th>
-                                            <th>남은 일자</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        <tr>
-                                            <td>서울교통공사</td>
-                                            <td>입구역광고매체</td>
-                                            <td>standard</td>
-                                            <td>사용</td>
-                                            <td>2023-05-01</td>
-                                            <td>2024-05-01</td>
-                                            <td>211</td>
-                                        </tr>
-                                        <tr>
-                                            <td>서울교통공사</td>
-                                            <td>입구역광고매체</td>
-                                            <td>standard</td>
-                                            <td>사용</td>
-                                            <td>2023-05-01</td>
-                                            <td>2024-05-01</td>
-                                            <td>211</td>
-                                        </tr>
+                                    
+                                    <tbody id="dataList">
+                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -232,5 +205,71 @@
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="${path}/resources/js/datatables/datatables-simple-demo.js"></script>
         <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+                <script src="${path}/resources/js/cus.js"></script>
+        <script type="text/javascript">
+        
+     	// 문서준비 완료 되면
+        $(document).ready(function() {
+
+            // 유무 page 값 가져오기
+            const page = getQueryString('page');
+
+            // page 값 유무로 페이지체크
+            getDataList()
+
+        });
+        
+        // 데이터 목록 가져오기
+        function getDataList(){
+        	
+       		var path = "/subscription/";
+       		var type = "GET";
+       		var data = {
+    			pageNum : 1,
+    			amount : 10,
+    			type : $('#key').val() || "",
+    			keyword : $('input[name=keyword]').val() || ""
+    		}
+       		
+       		ajaxCallBack(path, type, data, function(response){
+       			
+       			conLog(response)
+       			if(response.code == "200") {
+       				dataList = response.result;
+       	            getDataListCreate();
+       			}
+       		});
+       	}
+        
+        let dataList = [];
+        function getDataListCreate(){
+        	
+            createHTML = '';
+            
+            if (dataList.length === 0) {
+                // 데이터가 없는 경우 처리
+                createHTML = '<tr><td colspan="7">데이터가 없습니다.</td></tr>';
+            } else {
+            	dataList.forEach(function(v ) {
+	                var timestamp = v.mem_joindate; // 밀리초 단위의 시간 값
+	            
+	                var date = new Date(timestamp);
+	                var year = date.getFullYear();
+	                var month = String(date.getMonth() + 1).padStart(2, '0');
+	                var day = String(date.getDate()).padStart(2, '0');
+	            
+	                var formattedDate = year + '-' + month + '-' + day;
+	                
+	                var sbs_count = v.mem_pw == null ? 0 : v.mem_pw;
+	                
+	                var delBtn = '<button class="btn btn-danger btn-sm" onClick="dataDel(\''+ v.mem_id +'\')" type="button ">삭제</button>';
+	                createHTML += '<tr><td class="text-primary link-point" style="" onClick="movePath(\'/pages/user_register?id='+v.mem_id+'\')">'+ v.mem_company +'</td><td>'+ v.mem_phone +'</td><td class="text-primary link-point" onClick="movePath(\'/pages/user_register?id='+v.mem_id+'\')">'+ v.mem_id +'</td><td>'+ v.mem_email +'</td><td>'+ formattedDate +'</td><td>'+ sbs_count +'</td><td>'+ delBtn +'</td></tr>'
+	            });
+            }
+            
+            $('#dataList').html(createHTML)
+            
+        }
+        </script>
     </body>
 </html>

@@ -19,4 +19,6 @@ public interface IMemberDAO {
 	public int memberDelete(String mId) throws Exception;	
 	// Login
 	public MemberDTO login(MemberDTO mDto) throws Exception;
+	// 아이디 확인
+	public int sbsIdCheck(String mid) throws Exception;
 }

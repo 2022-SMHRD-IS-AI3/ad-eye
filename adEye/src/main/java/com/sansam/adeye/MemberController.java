@@ -223,4 +223,32 @@ public class MemberController {
 		
 		
 	}
+	
+	// 회원 아이디 존재 여부 확인
+		@RequestMapping(value = "/sbsIdCheck", method = RequestMethod.GET)
+		public @ResponseBody Map<String, Object> idCheck(@RequestParam("mem_id") String data) throws Exception {
+			log.info("/sbsIdCheck/아이디 확인하기.....");
+			Map<String,Object> paramMap = new HashMap<String, Object>();
+			
+			try {
+				
+				int cnt = service.sbsIdCheck(data);
+				
+				if (cnt > 0) {
+					
+				    paramMap.put("code", "200");
+				    paramMap.put("message", "조회 성공");
+					
+				}else {
+					paramMap.put("code", "204");
+				    paramMap.put("message", "존재하지 않는 아이디");
+				}
+				
+			} catch (Exception e) {
+				paramMap.put("code", "500");
+			    paramMap.put("message", "서버 문제");
+			}
+			
+			return paramMap;
+		}
 }
