@@ -175,21 +175,18 @@
 	        // 데이터 목록 가져오기
 	        function getDataList(){
 	        	
-	       		var path = "/member/";
+	       		var path = "/member/devicelist";
 	       		var type = "GET";
 	       		var data = {
 	    			pageNum : 1,
-	    			amount : 10,
-	    			type : $('#key').val() || "",
-	    			keyword : $('input[name=keyword]').val() || ""
+	    			amount : 5,
+	    			mem_id : getQueryString('mem_id')
 	    		}
 	       		
 	       		ajaxCallBack(path, type, data, function(response){
 	       			
 	       			conLog(response)
 	       			if(response.code == "200") {
-	       				dataList = response.result;
-	       	            getDataListCreate();
 	       			}
 	       		});
 	       	}
