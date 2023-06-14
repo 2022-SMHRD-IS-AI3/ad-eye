@@ -195,6 +195,8 @@ public class DeviceController {
 	public @ResponseBody Map<String, Object> log(Criteria cri, @RequestParam("device_seq") String data) throws Exception {
 
 		log.info("/device/log...data : " + cri);
+		// device_seq 값을 cri 에 있는 type 이라는 key 값의 value 로 저장
+		// mapper에서 type 이라는 key로 불러서 TO_NUMBER 로 타입변환 후 사용 
 		cri.setType(data);
 		System.out.println(cri);
 		
