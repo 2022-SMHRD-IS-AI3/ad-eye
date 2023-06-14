@@ -49,7 +49,7 @@ window.addEventListener('DOMContentLoaded', event => {
             singleMode: false,
             numberOfMonths: 2,
             numberOfColumns: 2,
-            format: 'MMM DD, YYYY',
+            format: 'YYYY-MMM-DD',
             plugins: ['ranges']
         });
     }

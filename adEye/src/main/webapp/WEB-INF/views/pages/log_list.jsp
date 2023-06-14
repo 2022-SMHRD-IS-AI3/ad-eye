@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>회원관리 - admin</title>
+        <title>로그관리 - admin</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="${path}/resources/css/styles.css" rel="stylesheet" />
         <link rel="icon" type="image/x-icon" href="${path}/resources/assets/img/logo.png" />
@@ -117,14 +117,8 @@
                                 <div class="row align-items-center justify-content-between pt-3">
                                     <div class="col-auto mb-3">
                                         <h1 class="page-header-title">
-                                            <b>회원 관리</b>
+                                            <b>로그 관리</b>
                                         </h1>
-                                    </div>
-                                    <div class="col-12 col-xl-auto mb-3">
-                                        <a class="btn btn-sm btn-light text-primary" href="#!">
-                                            <i class="me-1" data-feather="user-plus"></i>
-                                            회원 등록
-                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -137,30 +131,39 @@
                             	<div class="row gx-3">
                                    	<label for="" class="col-sm-1 col-form-label fw-bolder text-center">검색</label>
                                    	<div class="col-md-2">
-                                   		<select class="form-select" name="key" disabled>
+                                   		<select class="form-select" name="key">
                                    			<option value="">--- 선택 ---</option>
-                                   			<option value="company" selected>회사명</option>
+                                   			<option value="device_num">기기번호</option>
+                                   			<option value="location">회사명</option>
                                    			
                                    		</select>
                                     </div>
-                                   	<div class="col-md-3">
+                                   	<div class="col-md-2">
                                         <input class="form-control" id="keword" type="text" name="keword" placeholder="내용을 입력해주세요" value="" />
                                     </div>
+                                    <!-- Date Range Picker Example-->
+                                    <label for="" class="col-sm-1 col-form-label fw-bolder text-center">기간선택</label>
+									<div class="input-group input-group-joined" style="width: 16.5rem;">
+									    <span class="input-group-text">
+									        <i data-feather="calendar"></i>
+									    </span>
+									    <input class="form-control ps-0" id="litepickerRangePlugin" placeholder="날짜를 선택하세요" />
+									</div>
                                     
-                                   <!--  <div class="col-md-2">
+                                   <!-- <div class="col-md-2">
                                    		<select class="form-select" name="sbs_grade" disabled>
-                                   			<option value="">--- 등급 ---</option>
+                                   			<option value="">---  ---</option>
                                    			<option value="standard" selected>standard</option>
                                    		</select>
-                                    </div>
-                                    <div class="col-md-2">
+                                    </div> -->
+                                    <!-- <div class="col-md-2">
                                    		<select class="form-select" name="sbs_status">
                                    			<option value="">--- 상태 ---</option>
                                    			<option value="Y">사용</option>
                                    			<option value="N">중지</option>
                                    		</select>
                                     </div> -->
-                                    <div class="col-md-2">
+                                    <div cass="col-md-2">
                                    		<button class="btn btn-dark" id="search_btn">검색</button>
                                     </div>
                                 </div>
@@ -230,5 +233,7 @@
         <script src="${path}/resources/js/scripts.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="${path}/resources/js/datatables/datatables-simple-demo.js"></script>
+    	<script src="https://cdn.jsdelivr.net/npm/litepicker/dist/bundle.js" crossorigin="anonymous"></script>
+    	<script src="${path}/resources/js/litepicker.js"></script>
     </body>
 </html>
