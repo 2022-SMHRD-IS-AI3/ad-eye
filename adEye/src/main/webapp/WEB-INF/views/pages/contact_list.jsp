@@ -139,25 +139,33 @@
                                    		<select class="form-select" name="key">
                                    			<option value="">--- 선택 ---</option>
                                    			<option value="company">회사명</option>
+                                   			<option value="phone">연락처</option>
+                                   			<option value="email">이메일</option>
+                                   			<option value="content">내용</option>
                                    		</select>
+                                   		
                                     </div>
-                                   	<div class="col-md-3">
+                                   	<div class="col-md-2">
                                         <input class="form-control" id="keword" type="text" name="keword" placeholder="내용을 입력해주세요" value="" />
                                     </div>
-                                    
-                                   <!--  <div class="col-md-2">
-                                   		<select class="form-select" name="sbs_grade" disabled>
-                                   			<option value="">--- 선택 ---</option>
-                                   			<option value="standard" selected>standard</option>
-                                   		</select>
-                                    </div>
-                                    <div class="col-md-2">
+                                   <div class="col-md-2">
                                    		<select class="form-select" name="sbs_status">
                                    			<option value="">--- 상태 ---</option>
-                                   			<option value="Y">사용</option>
-                                   			<option value="N">중지</option>
+                                   			<option value="Y">Y</option>
+                                   			<option value="N">N</option>
                                    		</select>
-                                    </div> -->
+                                   		</div>
+                                   		 <!-- Date Range Picker Example-->
+               <label for="" class="col-sm-1 col-form-label fw-bolder text-center">기간</label>
+                <div class="col-md-2">
+                <div class="input-group input-group-joined">
+                    <input class="form-control ps-0" id="litepickerRangePlugin" placeholder="날짜를 선택하세요">
+                    <span class="input-group-text">
+                        <i data-feather="calendar"></i>
+                    </span>
+                
+                </div>
+                </div>
                                     <div class="col-md-2">
                                    		<button class="btn btn-dark" id="search_btn">검색</button>
                                     </div>
@@ -224,5 +232,7 @@
         <script src="${path}/resources/js/scripts.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="${path}/resources/js/datatables/datatables-simple-demo.js"></script>
+    	<script src="https://cdn.jsdelivr.net/npm/litepicker/dist/bundle.js" crossorigin="anonymous"></script>
+    	<script src="${path}/resources/js/litepicker.js"></script>
     </body>
 </html>
