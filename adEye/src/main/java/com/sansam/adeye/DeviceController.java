@@ -249,8 +249,7 @@ public class DeviceController {
 		    
 		    // dList = [{device_seq : , device_uid : , device_onoff : , device_status : , device_dt : , 
 		    //           mem_company : , sbs_seq : , sbs_loc : , data_check : },{...},{...}]
-		    // mem_company, sbs_seq, sbs_loc 매퍼에 추가해야 함
-		    // data_check 아직 미구현
+		    // data_check : 5분간 넘어온 Log 개수
 		    paramMapSub.put("data", dList);
 		    paramMap.put("result", paramMapSub);
 		    paramMap.put("code", "200");

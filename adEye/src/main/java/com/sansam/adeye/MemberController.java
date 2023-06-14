@@ -160,15 +160,13 @@ public class MemberController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public @ResponseBody Map<String, Object> memberList(Criteria cri) throws Exception {
 		log.info("/member/목록..................");
+	    // paramMap 담을 객체 생성
 		Map<String,Object> paramMap = new HashMap<String, Object>();
 
 		try {
 			// 회원 목록 정보 불러오기
 			List<MemberDTO> mDtoList = service.memberList(cri);
 			System.out.println(mDtoList);
-		    // paramMap 담을 객체 생성
-		    Map<String,Object> paramMapsub = new HashMap<String, Object>();
-		    
 		    // mDtoList = [{mem_id : , mem_company : , mem_phone : , mem_email : , mem_status : ,mem_joindate : company_adrr : },{...},{...}] 
 		    paramMap.put("result", mDtoList);
 		    paramMap.put("code", "200");
