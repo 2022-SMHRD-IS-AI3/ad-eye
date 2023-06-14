@@ -122,6 +122,16 @@ public class PagesController {
 		return "pages/subscription_register";
 	}
 	
+	
+	// log_list
+		@RequestMapping(value = "/log_list", method = RequestMethod.GET)
+		public String log_list()throws Exception{
+			
+			log.info("/log_list.................");
+			
+			return "pages/log_list";
+		}
+	
 //	// Login 을 위한 HTML 파일 내려주기
 //    @GetMapping("/pages/user_dash_list")
 //    public String loginPage() {
