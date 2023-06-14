@@ -155,14 +155,14 @@
                             	<div class="row gx-3">
                                    	<label for="" class="col-sm-1 col-form-label fw-bolder text-center">검색</label>
                                    	<div class="col-md-2">
-                                   		<select class="form-select" name="key" disabled>
+                                   		<select class="form-select" name="key" id="key" disabled>
                                    			<option value="">--- 선택 ---</option>
-                                   			<option value="company" selected>회사명</option>
+                                   			<option value="C" selected>회사명</option>
                                    			
                                    		</select>
                                     </div>
                                    	<div class="col-md-3">
-                                        <input class="form-control" id="keword" type="text" name="keword" placeholder="내용을 입력해주세요" value="" />
+                                        <input class="form-control" id="keyword" type="text" name="keyword" placeholder="내용을 입력해주세요" value="" />
                                     </div>
                                     
                                    <!--  <div class="col-md-2">
@@ -179,7 +179,7 @@
                                    		</select>
                                     </div> -->
                                     <div class="col-md-2">
-                                   		<button class="btn btn-dark" id="search_btn">검색</button>
+                                   		<button class="btn btn-dark" onClick="getDataList()" id="search_btn">검색</button>
                                     </div>
                                 </div>
                             </div>
@@ -246,8 +246,8 @@
        		var data = {
     			pageNum : 1,
     			amount : 10,
-    			type : "",
-    			keyword : ""
+    			type : $('#key').val() || "",
+    			keyword : $('input[name=keyword]').val() || ""
     		}
        		
        		ajaxCallBack(path, type, data, function(response){
@@ -276,7 +276,6 @@
        		
        		ajaxCallBack(path, type, data, function(response){
        			
-       			conLog(response)
        			if(response.code == "201") {
        				getDataList()
        				alert("처리가 완료 되었습니다.")
@@ -302,9 +301,11 @@
 	                var day = String(date.getDate()).padStart(2, '0');
 	            
 	                var formattedDate = year + '-' + month + '-' + day;
-	                console.log(formattedDate);
+	                
+	                var sbs_count = v.mem_pw == null ? 0 : v.mem_pw;
+	                
 	                var delBtn = '<button class="btn btn-danger btn-sm" onClick="dataDel(\''+ v.mem_id +'\')" type="button ">삭제</button>';
-	                createHTML += '<tr><td class="text-primary link-point" style="" onClick="movePath(\'/pages/user_register?id='+v.mem_id+'\')">'+ v.mem_company +'</td><td>'+ v.mem_phone +'</td><td class="text-primary link-point" onClick="movePath(\'/pages/user_register?id='+v.mem_id+'\')">'+ v.mem_id +'</td><td>'+ v.mem_email +'</td><td>'+ formattedDate +'</td><td>'+ 3 +'</td><td>'+ delBtn +'</td></tr>'
+	                createHTML += '<tr><td class="text-primary link-point" style="" onClick="movePath(\'/pages/user_register?id='+v.mem_id+'\')">'+ v.mem_company +'</td><td>'+ v.mem_phone +'</td><td class="text-primary link-point" onClick="movePath(\'/pages/user_register?id='+v.mem_id+'\')">'+ v.mem_id +'</td><td>'+ v.mem_email +'</td><td>'+ formattedDate +'</td><td>'+ sbs_count +'</td><td>'+ delBtn +'</td></tr>'
 	            });
             }
             
