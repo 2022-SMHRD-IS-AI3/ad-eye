@@ -180,7 +180,7 @@
                                             <div class="row gx-3 mb-3">
                                                 <div class="col-md-4">
                                                 	<label class="small mb-1" for="sbs_grade">* 구독등급</label>
-                                                    <select class="form-select" name="sbs_grade" disabled>
+                                                    <select class="form-select" id="sbs_grade" name="sbs_grade" disabled>
 			                                   			<option value="">--- 등급 ---</option>
 			                                   			<option value="standard" selected>standard</option>
 			                                   		</select>
@@ -202,15 +202,15 @@
                                                 <div class="col-md-12">
                                                     <label class="small mb-1" for="">* 매체위치</label>
                                                 </div>
-                                                
+                                                <!-- 
                                                 <div class="col-md-4">
                                                     <input class="form-control" id="post_num" type="text" name="post_num" placeholder="우편번호" value="" />
                                                 </div>
                                                 <div class="col-md-3">
                                                     <button onclick="postSearch()" class="btn btn-info w-100" type="button">우편번호 검색</button>
-                                                </div>
+                                                </div> -->
                                                 <div class="col-md-7 mt-2">
-                                                    <input class="form-control" id="addr1" type="text" name="addr1" placeholder="주소" value="" />
+                                                    <input class="form-control" onclick="postSearch()"  id="addr1" type="text" name="addr1" placeholder="주소 검색" value="" />
                                                 </div>
                                                 <div class="col-md-7 mt-2">
                                                     <input class="form-control" id="addr2" type="text" name="addr2" placeholder="상세주소" value="" />
@@ -222,9 +222,9 @@
                                                 <label class="col-md-12 small mb-1" for="">* 구독기간</label>
                                                 <div class="col-md-7">
                                                 	<div class="d-flex flex-row">
-                                                		<input class="form-control w-50" id="sbs_start_dt" type="text" name="sbs_alias" placeholder="0000-00-00" value="" />
+                                                		<input class="form-control w-50" id="sbs_start_dt" type="text" name="sbs_start_dt" placeholder="0000-00-00" value="" />
                                                 		<label class="col-form-label fw-bolder me-3 ms-3"> ~ </label>
-                                                    	<input class="form-control w-50" id="sbs_end_dt" type="text" name="sbs_alias" placeholder="0000-00-00" value="" />
+                                                    	<input class="form-control w-50" id="sbs_end_dt" type="text" name="sbs_end_dt" placeholder="0000-00-00" value="" />
                                                 	</div>
                                                 	
                                                 </div>
@@ -235,7 +235,7 @@
                                                 <label class="small mb-1">* 구독상태</label>
                                                 <br>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" id="sbs_status_y" name="sbs_status" type="radio" value="Y" checked/>
+                                                    <input class="form-check-input" id="sbs_status_y" name="sbs_status" type="radio" value="Y" checked />
                                                     <label class="form-check-label" for="sbs_status_y">구독중</label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
@@ -253,9 +253,9 @@
                                     </div>
                                     <div class="card-footer position-relative">
                                         <div class="d-flex align-items-center justify-content-between">
-                                            <button class="btn btn-secondary" type="button" onclick="moveUri('/pages/user_management')">목록</button>
+                                            <button class="btn btn-secondary" type="button" onclick="moveCode('slist')">목록</button>
                                             <div class="submit-btn-wrap">
-                                                <button class="btn btn-primary del-btn" type="button">등록</button>
+                                                <button class="btn btn-primary del-btn" onClick="dataSubmit('in')" type="button">등록</button>
                                             </div>
                                         </div>
 
@@ -282,6 +282,7 @@
         <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
         <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+		<script src="${path}/resources/js/cus.js"></script>
         <script>
      		// 시작일
      		var sbs_start_dt = document.querySelector('#sbs_start_dt');
@@ -312,45 +313,79 @@
 
             }
         	 
-         	// 문서준비 완료 되면
+            // 문서준비 완료 되면
             $(document).ready(function() {
 
                 // 등록, 수정 유무 id 값 가져오기
-                const idValue = getQueryParameterValue('id');
+                const idValue = getQueryString('id');
 
                 // id 값 유무로 등록 수정 판단
                 if(idValue){
 
                     // 삭제, 수정 버튼
-                    const changebtn = '<button class="btn btn-danger me-2" type="button ">삭제</button>'+
-                            '<button class="btn btn-primary" type="button">수정</button>';
+                    const changebtn = '<button class="btn btn-danger me-2" onClick="dataSubmit(\'dl\')" type="button ">삭제</button>'+
+                      	'<button class="btn btn-primary" onClick="dataSubmit(\'up\')" type="button">수정</button>';
                     $('.submit-btn-wrap').html(changebtn)
                     $('.refresh-btn').addClass('d-none')
                     
-                    $('#mem_id').val('11test01');
                     $('#mem_id').prop('disabled',true);
-                
-                }else{ // 값 없으면 회원 등록
-
-                    // uuid 셋팅
-                    generateUUID('mem_id');
+                    getDataDetail(idValue);
+                    
                 }
 
             });
+            
+         	// 데이터 상세 조회
+            function getDataDetail(id){
+            	
+           		var path = "/subscription/detail";
+           		var type = "GET";
+           		var data = {
+           			sbs_seq : id
+        		}
+           		
+           		ajaxCallBack(path, type, data, function(response){
+           			
+           			conLog(response)
+           			if(response.code == "200") {
+           				var info = response.result;
+           				$('#mem_id').val(info.mem_id);
+           				$("#device_seq").val('1').prop("selected", true);
+           				$("#sbs_grade").val(info.sbs_grade).prop("selected", true);
+           				$('#sbs_alias').val(info.sbs_alias);
+           				var addrArr = info.sbs_loc.split(",");
+           				$('#addr1').val(addrArr[0]);
+           				$('#addr2').val(addrArr[1]);
+           				
+           				if(info.sbs_status === 'N') {
+           					conLog(213)
+           					$('#sbs_status_n').prop("checked", true);
+           				}
+           				
+    	                var sbs_start_dt = formatDate(info.sbs_start_dt); // 밀리초 단위의 시간 값
+    	                var sbs_end_dt = formatDate(info.sbs_end_dt); // 밀리초 단위의 시간 값
+    	                $('#sbs_start_dt').val(sbs_start_dt);
+           				$('#sbs_end_dt').val(sbs_end_dt);
+           				
+           				$('#sbs_start_dt').prop('disabled',true);
+           				
+           			}
+           		});
+           	}
+            
          	
-            // 주소검색 api
-            function postSearch(){
-
-                new daum.Postcode({
-                    oncomplete: function(data) {
-                        $('#post_num').val(data.zonecode)
-                        $('#addr1').val(data.address)
-                        $('#addr2').focus()
-                        console.log(data)
-                    }
-                }).open();
-                
-            }
+	        // 주소검색 api
+	        function postSearch(){
+	
+	            new daum.Postcode({
+	                oncomplete: function(data) {
+	                    // $('#post_num').val(data.zonecode)
+	                    $('#addr1').val(data.address)
+	                    $('#addr2').val('')
+	                    $('#addr2').focus()
+	                }
+	            }).open();
+	        }
             
             // 계정유무 확인
             function memberCheck(){
@@ -362,6 +397,97 @@
                 }
                 
             }
+            
+            // 데이터 전송
+            function dataSubmit(flag){
+            	
+           		var path = "";
+           		var type = "POST";
+           		var data = null;
+           		var msg = "";
+           		
+            	if(flag == 'dl'){ // 삭제
+            		
+            		
+            		path = "/subscription/delete";
+            		type = "GET";
+            		data =  {
+            			sbs_seq : getQueryString('id')
+                  	}
+           		
+            		msg = "삭제하시겠습니까?";
+            	}else if('in' || 'up') { // 등록, 수정
+            		
+            		data = {
+                      	mem_id : $('#mem_id').val(),
+                      	sbs_seq : getQueryString('id'),
+                      	device_seq : $('#device_seq option:selected').val(),
+                      	sbs_grade : $('#sbs_grade option:selected').val(),
+                      	sbs_alias : $('#sbs_alias').val(),
+                      	sbs_loc : $('#addr1').val() + "," + $('#addr2').val(),
+                      	sbs_start_dt : $('#sbs_start_dt').val(),
+                      	sbs_end_dt : $('#sbs_end_dt').val(),
+                      	sbs_status : $('input[name=sbs_status]:checked').val()
+                   	}
+            		conLog(data)
+            		
+    	       		if(isObjectEmpty(data)){ // 빈 값 체크
+    	       			alert("필수 입력정보가 입력되지 않았습니다");
+    	       			return
+    	       		}
+            	
+            		if(flag=='in') {
+            			path = "/subscription/insert";
+            		}else{
+            			msg = "수정하시겠습니까?";
+            			path = "/subscription/update";
+            		}
+            		
+            	}
+            	
+            	var cflag = false
+            	if(msg != ""){
+            		cflag = confirm(msg);
+            	}
+            	
+            	if(!cflag) {
+            		conLog(123)
+            		return
+            	}
+           		
+           		ajaxCallBack(path, type, data, function(response){
+           			
+           			conLog(response)
+           			if(flag == 'in'){
+           				
+    	       			if(response.code == "201") {
+    	       				alert("등록 완료되었습니다")
+    	       				moveCode('slist');
+    	       			}else{
+    	       				alert("등록 실패하였습니다")
+    	       			}
+           				
+           			}else if(flag == 'up'){
+           				
+           				if(response.code == "202") {
+    	       				alert("정보수정 완료되었습니다")
+    	       				
+           				}else{
+    	       				alert("정보수정 실패하였습니다")
+    	       			}
+           				
+           			}else if(flag == 'dl'){
+           				
+           				if(response.code == "202") {
+    	       				alert("삭제 완료되었습니다")
+    	       				moveCode('slist');
+           				}else{
+    	       				alert("삭제 실패하였습니다")
+    	       			}
+           				
+           			}
+           		});
+           	}
 	        
         </script>
     </body>
