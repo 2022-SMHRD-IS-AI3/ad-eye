@@ -84,5 +84,14 @@
 	<select id="sbsIdCheck" resultType="int">
 		SELECT COUNT(mem_id) FROM tb_member WHERE mem_id = #{mem_id}
 	</select>
+	
+	<select id="totalCnt" resultType="int" parameterType="com.sansam.adeye.domain.PageDTO">
+		SELECT COUNT(*) 
+		FROM tb_member 
+		WHERE
+		<include refid="criteria"></include> 
+		mem_status !='D' 
+		AND admin_yn = 'N'
+	</select>
 	  
 </mapper>

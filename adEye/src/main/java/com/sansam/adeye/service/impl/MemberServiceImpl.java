@@ -80,4 +80,11 @@ public class MemberServiceImpl implements IMemberService {
 		System.out.println("Service 접속");
 		return mDao.sbsIdCheck(mid);
 	}
+	
+	// 회원 목록 페이징
+	@Override
+	public int totalCnt(Criteria cri) throws Exception {
+		System.out.println("Service 접속");
+		return mDao.totalCnt(cri);
+	}
 }

@@ -21,4 +21,6 @@ public interface IMemberDAO {
 	public MemberDTO login(MemberDTO mDto) throws Exception;
 	// 아이디 확인
 	public int sbsIdCheck(String mid) throws Exception;
+	// 회원 목록 페이징
+	public int totalCnt(Criteria cri) throws Exception;
 }

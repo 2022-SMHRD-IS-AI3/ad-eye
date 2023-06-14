@@ -73,4 +73,11 @@ public class MemberDAO implements IMemberDAO{
 		System.out.println(result);
 		return result;
 	}
+	
+	// 회원 목록 페이징
+	@Override
+	public int totalCnt(Criteria cri) throws Exception {
+		System.out.println("DAO 접속");
+		return session.selectOne("MemberMapper.totalCnt", cri);
+	}
 }
