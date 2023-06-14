@@ -55,5 +55,19 @@ public class LogDAO implements ILogDAO{
 		System.out.println("DAO 접속");
 		return session.selectList("LogMapper.logList", cri);
 	}
+	
+	// 전체 로그 조회 페이징
+	@Override
+	public int totalCnt(Criteria cri) throws Exception {
+		System.out.println("DAO 접속");
+		return session.selectOne("LogMapper.totalCnt", cri);
+	}
+	
+	// 특정 기기 로그 조회 페이징
+	@Override
+	public int devLogCnt(Criteria cri) throws Exception {
+		System.out.println("DAO 접속");
+		return session.selectOne("LogMapper.devLogCnt", cri);
+	}
 
 }

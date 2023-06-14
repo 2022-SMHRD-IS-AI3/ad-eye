@@ -27,7 +27,7 @@
 				FROM tb_log l, tb_subscription s, tb_device d
 				WHERE l.device_uid = d.device_uid
                 AND d.device_seq = s.device_seq
-                AND d.device_seq = #{device_seq}
+                AND d.device_seq = TO_NUMBER(#{type})
                 AND
 		]]>
 	  	<include refid="criteria"></include>     
@@ -64,5 +64,22 @@
             )
          	WHERE rn > (#{pageNum} - 1) * #{amount}
       	]]>
+	</select>
+	
+	<select id="totalCnt" resultType="int" parameterType="com.sansam.adeye.domain.PageDTO">
+		SELECT COUNT(*) 
+		FROM tb_log 
+		WHERE
+		<include refid="criteria"></include> 
+		log_seq &gt; 0
+	</select>
+	
+	<select id="devLogCnt" resultType="int" parameterType="com.sansam.adeye.domain.PageDTO">
+		SELECT COUNT(l.log_seq) 
+		FROM tb_log l, tb_device d
+		WHERE
+		<include refid="criteria"></include> 
+			l.device_uid = d.device_uid
+		AND d.device_seq = TO_NUMBER(#{type})
 	</select>
 </mapper>

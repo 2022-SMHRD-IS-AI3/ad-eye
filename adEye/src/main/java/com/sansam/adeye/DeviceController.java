@@ -84,16 +84,8 @@ public class DeviceController {
 		try {
 			
 			DeviceDTO dto = service.deviceDetail(Integer.parseInt(data));
-		    
-		    // paramMap 담을 객체 생성
-		    Map<String,Object> paramMapSub = new HashMap<String, Object>();
 
-		    paramMapSub.put("device_seq", dto.getDevice_seq());
-		    paramMapSub.put("device_uid", dto.getDevice_uid());
-		    paramMapSub.put("device_onoff", dto.getDevice_onoff());
-		    paramMapSub.put("device_status", dto.getDevice_status());
-		    paramMapSub.put("device_dt", dto.getDevice_dt());
-		    paramMap.put("result", paramMapSub);
+		    paramMap.put("result", dto);
 		    paramMap.put("code", "200");
 		    paramMap.put("message", "조회 성공");
 		    
@@ -200,9 +192,11 @@ public class DeviceController {
 	// 기기 로그 조회
 	@SuppressWarnings("null")
 	@RequestMapping(value = "/log", method = RequestMethod.GET)
-	public @ResponseBody Map<String, Object> log(Criteria cri) throws Exception {
+	public @ResponseBody Map<String, Object> log(Criteria cri, @RequestParam("device_seq") String data) throws Exception {
 
 		log.info("/device/log...data : " + cri);
+		cri.setType(data);
+		System.out.println(cri);
 		
 		// 보내줄 맵 객체 생성
 		Map<String,Object> paramMap = new HashMap<String, Object>();
@@ -211,12 +205,12 @@ public class DeviceController {
 			
 			List<LogDTO> lList = service.deviceLog(cri);
 		    System.out.println(lList.toString());
-		    // paramMap 담을 객체 생성
-		    Map<String,Object> paramMapSub = new HashMap<String, Object>();
-		    
 		    // lList = [{log_seq : , log_msg : , log_dt : , device_uid : , sbs_alias : },{...},{...}]
-		    paramMapSub.put("data", lList);
-		    paramMap.put("result", paramMapSub);
+		    int total = service.devLogCnt(cri);
+		    System.out.println(total);
+		    // total : 특정 기기 로그 수
+		    paramMap.put("pageMaker", new PageDTO(cri, total));
+		    paramMap.put("result", lList);
 		    paramMap.put("code", "200");
 		    paramMap.put("message", "조회 성공");
 		    
@@ -273,8 +267,11 @@ public class DeviceController {
 		try {
 			
 			List<LogDTO> logList = service.LogList(cri);
-						
 		    // logList = [{log_seq : , log_msg : , log_dt : , device_uid : , sbs_loc : },{...},{...}]
+			int total = service.logTotalCnt(cri);
+			System.out.println(total);
+			// total : 전체 로그 수
+			paramMap.put("pageMaker", new PageDTO(cri, total));
 		    paramMap.put("result", logList);
 		    paramMap.put("code", "200");
 		    paramMap.put("message", "조회 성공");
