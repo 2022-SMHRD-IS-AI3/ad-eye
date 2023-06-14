@@ -120,10 +120,10 @@
                                         </h1>
                                     </div>
                                     <div class="col-12 col-xl-auto mb-3">
-                                        <a class="btn btn-sm btn-light text-primary" href="#!">
+                                        <button class="btn btn-sm btn-light text-primary" onClick="moveCode('minsert')">
                                             <i class="me-1" data-feather="plus-circle"></i>
                                             구독 등록
-                                        </a>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -250,25 +250,26 @@
                 // 데이터가 없는 경우 처리
                 createHTML = '<tr><td colspan="7">데이터가 없습니다.</td></tr>';
             } else {
-            	dataList.forEach(function(v ) {
-	                var timestamp = v.mem_joindate; // 밀리초 단위의 시간 값
+            	dataList.forEach(function(v) {
+	                var sbs_start_dt = formatDate(v.sbs_start_dt); // 밀리초 단위의 시간 값
+	                var sbs_end_dt = formatDate(v.sbs_end_dt); // 밀리초 단위의 시간 값
 	            
-	                var date = new Date(timestamp);
-	                var year = date.getFullYear();
-	                var month = String(date.getMonth() + 1).padStart(2, '0');
-	                var day = String(date.getDate()).padStart(2, '0');
-	            
-	                var formattedDate = year + '-' + month + '-' + day;
-	                
-	                var sbs_count = v.mem_pw == null ? 0 : v.mem_pw;
-	                
-	                var delBtn = '<button class="btn btn-danger btn-sm" onClick="dataDel(\''+ v.mem_id +'\')" type="button ">삭제</button>';
-	                createHTML += '<tr><td class="text-primary link-point" style="" onClick="movePath(\'/pages/user_register?id='+v.mem_id+'\')">'+ v.mem_company +'</td><td>'+ v.mem_phone +'</td><td class="text-primary link-point" onClick="movePath(\'/pages/user_register?id='+v.mem_id+'\')">'+ v.mem_id +'</td><td>'+ v.mem_email +'</td><td>'+ formattedDate +'</td><td>'+ sbs_count +'</td><td>'+ delBtn +'</td></tr>'
+	                // var delBtn = '<button class="btn btn-danger btn-sm" onClick="dataDel(\''+ v.mem_id +'\')" type="button ">삭제</button>';
+	                createHTML += '<tr><td>'+ v.mem_company +'</td><td class="text-primary" style="cursor: pointer;" onClick="movePath(\'/pages/subscription_register?id='+v.sbs_seq+'\')">'+ v.sbs_alias +'</td><td>'+ v.sbs_grade +'</td><td>'+ v.sbs_status +'</td><td>'+ sbs_start_dt +'</td><td>'+ sbs_end_dt +'</td><td>'+ v.d_day +'</td></tr>'
 	            });
             }
             
             $('#dataList').html(createHTML)
             
+        }
+        
+        function formatDate(timestamp){
+        	var date = new Date(timestamp);
+            var year = date.getFullYear();
+            var month = String(date.getMonth() + 1).padStart(2, '0');
+            var day = String(date.getDate()).padStart(2, '0');
+        
+            return year + '-' + month + '-' + day;
         }
         </script>
     </body>
