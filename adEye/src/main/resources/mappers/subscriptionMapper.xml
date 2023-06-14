@@ -66,7 +66,7 @@
         			(SELECT COUNT(acq_gender) FROM tb_acquisition WHERE sbs_seq = s.sbs_seq AND acq_gender = 'M') AS sbs_male_per,
         			(SELECT COUNT(acq_gender) FROM tb_acquisition WHERE sbs_seq = s.sbs_seq AND acq_gender = 'W') AS sbs_female_per
     			FROM tb_subscription s, dual
-    			WHERE mem_id = #{mem_id} AND 
+    			WHERE mem_id = #{type} AND 
     	]]>
 		<include refid="criteria"></include>         
       	<![CDATA[
