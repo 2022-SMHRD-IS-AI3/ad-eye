@@ -102,19 +102,7 @@ public class SubscriptionController {
 			System.out.println(dto.toString());
 			// 보내줄 맵 객체 생성,
 		    
-		    // paramMap 담을 객체 생성 
-		    Map<String,Object> paramMapSub = new HashMap<String, Object>();
-
-		    paramMapSub.put("sbs_seq", dto.getSbs_seq());
-		    paramMapSub.put("mem_id", dto.getMem_id());
-		    paramMapSub.put("mem_company", dto.getMem_company());
-		    paramMapSub.put("device_seq", dto.getDevice_seq());
-		    paramMapSub.put("sbs_loc", dto.getSbs_loc());
-		    paramMapSub.put("sbs_alias", dto.getSbs_alias());
-		    paramMapSub.put("sbs_start_dt", dto.getSbs_start_dt());
-		    paramMapSub.put("sbs_end_dt", dto.getSbs_end_dt());
-		    paramMapSub.put("sbs_grade", dto.getSbs_grade());
-		    paramMap.put("result", paramMapSub);
+		    paramMap.put("result", dto);
 		    paramMap.put("code", "200");
 		    paramMap.put("message", "조회 성공");
 		    
@@ -151,6 +139,8 @@ public class SubscriptionController {
 			paramMap.put("code", "500");
 		    paramMap.put("message", "서버 문제");
 		}
+	    
+	    System.out.println();
 		return paramMap;
 		
 	}
