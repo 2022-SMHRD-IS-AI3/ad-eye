@@ -81,8 +81,8 @@ function movePath(path, op, w, h){ // 경로, 페이지 타입, width, height
 
     if(op === 'pop'){ // 팝업창으로 띄우기
 
-        var popupWidth = width || 500;
-        var popupHeight = height || 500;
+        var popupWidth = w || 1300;
+        var popupHeight = h || 900;
         var left = (window.innerWidth - popupWidth) / 2;
         var top = (window.innerHeight - popupHeight) / 2;
 
