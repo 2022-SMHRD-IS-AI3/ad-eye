@@ -181,7 +181,7 @@ public class MemberController {
 		
 		try {
 			// type 이라는 key 값에 mem_id 값을 value 로 담아서 사용
-			cri.setType(data);
+			cri.setSeq(data);
 			System.out.println(cri.toString());
 			// 회원 구독 목록 불러오기
 			List<SubscriptionDTO> sDtoList = service.devicelist(cri);
