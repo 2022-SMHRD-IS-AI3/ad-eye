@@ -71,14 +71,23 @@
 			FROM (
 				SELECT /*+ INDEX_DESC(tb_log IDX_tb_log_PK) */
 					rownum rn,
-					l.log_seq, 
-					l.log_msg, 
-					l.log_dt, 
-					l.device_uid, 
-					s.sbs_alias
-				FROM tb_log l
-				INNER JOIN tb_device d ON l.device_uid = d.device_uid
-				LEFT OUTER JOIN tb_subscription s ON d.device_seq = s.device_seq
+					ls.log_seq, 
+					ls.log_msg, 
+					ls.log_dt, 
+					ls.device_uid, 
+					ls.sbs_alias
+				FROM (
+					SELECT
+						l.log_seq, 
+						l.log_msg, 
+						l.log_dt, 
+						l.device_uid, 
+						s.sbs_alias
+					FROM tb_log l
+					INNER JOIN tb_device d ON l.device_uid = d.device_uid
+					LEFT OUTER JOIN tb_subscription s ON d.device_seq = s.device_seq
+					ORDER BY log_dt DESC
+				) ls
 				WHERE
 		]]>
 		<include refid="criteria"></include>     
@@ -98,11 +107,11 @@
 	</select>
 	
 	<select id="devLogCnt" resultType="int" parameterType="com.sansam.adeye.domain.PageDTO">
-		SELECT COUNT(l.log_seq) 
-		FROM tb_log l, tb_device d
+		SELECT COUNT(l.log_seq)
+		FROM tb_log l
+		INNER JOIN tb_device d ON l.device_uid = d.device_uid
 		WHERE
 		<include refid="criteria"></include> 
-			l.device_uid = d.device_uid
-		AND d.device_seq = TO_NUMBER(#{type})
+			d.device_seq = TO_NUMBER(#{seq})
 	</select>
 </mapper>
