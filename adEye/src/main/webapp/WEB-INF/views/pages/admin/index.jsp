@@ -79,17 +79,7 @@
 		// 문서준비 완료 되면
         $(document).ready(function() {
 
-
-                // 삭제, 수정 버튼
-                const changebtn = '<button class="btn btn-danger me-2" onClick="dataSubmit(\'dl\')" type="button ">삭제</button>'+
-                   	'<button class="btn btn-primary" onClick="dataSubmit(\'up\')" type="button">수정</button>';
-                $('.submit-btn-wrap').html(changebtn)
-                
                 getDataDetail();
-                $('#mem_id').val(idValue)
-                $('input[name=mem_company]').attr('disabled', true);
-                $('input[name=admin_yn]').attr('disabled', true);
-                $('input[name=mem_id]').attr('disabled', true);
 
         });
         
