@@ -93,15 +93,14 @@ public class SubscriptionController {
 	public @ResponseBody Map<String, Object> detail(@RequestParam("sbs_seq") String data) throws Exception {
 		
 		log.info("/subscription/detail..................data : " + data);
-		
+		// 보내줄 맵 객체 생성
 		Map<String,Object> paramMap = new HashMap<String, Object>();
 		
 		try {
 			
 			SubscriptionDTO dto = service.sbsDetail(Integer.parseInt(data));
 			System.out.println(dto.toString());
-			// 보내줄 맵 객체 생성,
-		    
+
 		    paramMap.put("result", dto);
 		    paramMap.put("code", "200");
 		    paramMap.put("message", "조회 성공");
@@ -139,8 +138,6 @@ public class SubscriptionController {
 			paramMap.put("code", "500");
 		    paramMap.put("message", "서버 문제");
 		}
-	    
-	    System.out.println();
 		return paramMap;
 		
 	}

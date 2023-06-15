@@ -43,18 +43,7 @@
 		FROM tb_acquisition a
 		WHERE TRUNC(a.acq_start_dt) = TRUNC(TO_DATE(#{search_date}, 'YYYY-MM-DD'))
   	</select>
-  	
-<!--   	<select id="totalCnt" resultType="com.sansam.adeye.domain.AcquisitionDashboardDTO" parameterType="com.sansam.adeye.domain.AcquisitionDTO">
-    	SELECT
-	        NVL(SUM(CASE WHEN a.acq_gender = 'M' THEN 1 ELSE 0 END), 0) AS male_total_cnt,
-        	NVL(SUM(CASE WHEN a.acq_interest &gt; 0 AND a.acq_gender = 'M' THEN 1 ELSE 0 END), 0) AS male_interest_cnt,
-        	NVL(SUM(CASE WHEN a.acq_gender = 'W' THEN 1 ELSE 0 END), 0) AS female_total_cnt,
-        	NVL(SUM(CASE WHEN a.acq_interest &gt; 0 AND a.acq_gender = 'W' THEN 1 ELSE 0 END), 0) AS female_interest_cnt
-    	FROM tb_acquisition a
-    	WHERE TRUNC(a.acq_start_dt) = TRUNC(TO_DATE(#{search_date}, 'YYYY-MM-DD'))
-	        AND a.sbs_seq = #{sbs_seq}
-	</select> -->
-  	  	
+  	  	  	
   	<!-- 수집 데이터 등록 -->
   	<insert id="create" parameterType="com.sansam.adeye.domain.AcquisitionSubmitDTO">
   		insert into tb_acquisition (acq_gender, acq_interest, acq_start_dt, acq_end_dt, acq_tid, sbs_seq) values(#{acq_gender}, #{acq_interest}, TO_DATE(#{acq_start_dt},'YYYY-MM-DD HH24:MI:SS'), TO_DATE(#{acq_end_dt},'YYYY-MM-DD HH24:MI:SS'), #{acq_tid},
