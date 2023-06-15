@@ -71,9 +71,12 @@
                         <div class="row">
                           <div class="col-lg-6">
                             <h1 class="mt-10 mb-5" style="font-weight: bold;">AI 솔루션을 통한 옥외 광고 효과 측정</h1>
-                            <p>애드아이는 단순히 유동인구로 광고효과를 파악하지 않습니다.</p>
-                              <p>유동인구 뿐만 아니라 보행자의 성별과 주목도를 수치화하여</p> 
+                            <p>&#60;애드아이&#62;는 단순히 유동인구로 광고효과를 파악하지 않습니다.</p>
+                              <p>유동인구 뿐만 아니라 보행자의 성별과 주목도를 정규화하여</p> 
                               <p>더욱 정확한 광고 효과를 측정합니다.</p>
+                              <br>
+                              <p style="font-weight:bold;">&#60;애드아이&#62;를 통해 데이터를 수집하고
+                               당신의 광고 매체의 가치를 증명하세요!</p>
                           </div>
                           <div class="col-lg-6">
                             <img class="img-fluid" src="${path}/resources/assets/img/main/main-img.png" alt="...">
@@ -87,7 +90,19 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <h1 class="text-xl">CONTACT</h1>
+                                    <h3>궁금한 사항은 언제든지 문의주세요!</h3>
+                                    <br>
+                                    <br>
+                                    &#60;애드아이&#62;는 구독 서비스입니다.<br>
+                                    서비스에 대해 더욱 자세히 알고 싶으신 분은 문의 바랍니다.
+                                    
+                                	<!-- 주의사항 -->
+   									<div style="font-size: 12px; margin-top: 20px;">
+        								회사명과 연락처, 목적이 기재되지 않을 시 답변이 어려울 수 있음을 고지합니다.
+    								</div>
+                     	
                                 </div>
+                                <!-- contact form -->
                                     <div class="col-lg-6">
                                     <form>
                                         <div class="mb-3">
@@ -118,7 +133,7 @@
                 </div>
                     </main>
                 
-                <footer class="footer-admin mt-auto footer-light">
+                <footer class="footer-admin mt-auto footer-light mt-4">
                     <div class="container-xl px-4">
                         <div class="row">
                             <div class="col-md-6 small">Copyright &copy; Ad-EYE 2023</div>
