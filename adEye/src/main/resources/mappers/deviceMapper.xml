@@ -26,13 +26,26 @@
          			d.device_onoff,
          			d.device_status,
          			d.device_dt,
-         			(SELECT mem_company FROM tb_member m WHERE m.mem_id = s.mem_id AND s.device_seq = d.device_seq) AS mem_company,
-         			(SELECT sbs_seq FROM tb_subscription s WHERE s.device_seq = d.device_seq) AS sbs_seq,
-         			(SELECT sbs_loc FROM tb_subscription s WHERE s.device_seq = d.device_seq) AS sbs_loc,
-         			(SELECT COUNT(log_seq) FROM tb_log l WHERE l.device_uid = d.device_uid AND l.log_dt >= SYSDATE - INTERVAL '5' MINUTE) AS data_check
-  				FROM tb_device d
-  				JOIN tb_subscription s ON s.device_seq = d.device_seq
-  				JOIN tb_member m ON m.mem_id = s.mem_id
+         			d.mem_company,
+        			d.sbs_seq,
+        			d.sbs_loc,
+        			d.data_check
+  				FROM (
+  					SELECT
+  						d.device_seq,
+            			d.device_uid,
+            			d.device_onoff,
+            			d.device_status,
+            			d.device_dt,
+            			(SELECT mem_company FROM tb_member m WHERE m.mem_id = s.mem_id AND s.device_seq = d.device_seq) AS mem_company,
+            			(SELECT sbs_seq FROM tb_subscription s WHERE s.device_seq = d.device_seq  AND s.sbs_status = 'Y') AS sbs_seq,
+            			(SELECT sbs_loc FROM tb_subscription s WHERE s.device_seq = d.device_seq AND s.sbs_status = 'Y') AS sbs_loc,
+            			(SELECT COUNT(log_seq) FROM tb_log l WHERE l.device_uid = d.device_uid AND l.log_dt >= SYSDATE - INTERVAL '5' MINUTE) AS data_check
+        			FROM tb_device d
+        			JOIN tb_subscription s ON s.device_seq = d.device_seq 
+        			JOIN tb_member m ON m.mem_id = s.mem_id
+        			ORDER BY device_status DESC, device_seq DESC
+  				) d
 		        WHERE
 		]]>
 		<include refid="criteria"></include>         
