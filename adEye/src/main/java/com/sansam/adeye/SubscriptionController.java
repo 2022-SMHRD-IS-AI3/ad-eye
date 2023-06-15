@@ -38,9 +38,6 @@ public class SubscriptionController {
 				// 회원 목록 정보 불러오기
 				List<SubscriptionDTO> sList = service.sbsList(cri);
 				System.out.println(sList);
-			    // paramMap 담을 객체 생성
-			    Map<String,Object> paramMapsub = new HashMap<String, Object>();
-			    
 			    // sList = [{sbs_seq : , mem_id : , device_seq : , mem_company : , sbs_loc : , 
 			    //           sbs_alias : , sbs_start_dt : , sbs_end_dt : , sbs_reg_dt : , sbs_grade : , 
 			    //           sbs_status : , d_day : },{...},{...}]
