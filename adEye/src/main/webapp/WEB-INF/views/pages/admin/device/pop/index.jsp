@@ -37,9 +37,7 @@
                             <div class="page-header-content pt-4">
                                 <div class="row align-items-center justify-content-between">
                                     <div class="col-auto mt-4">
-                                        <h1 class="page-header-title">
-                                            한성대 입구역 1번 출구 12
-                                        </h1>
+                                        <h1 class="page-header-title sbs_alias"></h1>
                                     </div>
                                 </div>
                             </div>
@@ -100,8 +98,7 @@
                                         </div>
                                         <div class="mt-5 text-muted text-center fw-500">
 		                                	<span>총 인구 남녀 비율</span>
-		                                </div>
-                                        
+		                                </div>                                        
                                     </div>
                                     <div class="card-footer small text-center text-muted">
                                         <span style="color: rgb(54, 162, 235);">■</span> 
@@ -153,6 +150,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                
 
                             </div>
                             <!-- 총 유동인구 주요시청횟수 끝 -->
@@ -169,7 +167,7 @@
         <script src="${path}/resources/assets/demo/multi-chart.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
         <script>
-        	var nowDay = ""
+    		var nowDay = ""
             getNowTime()
             var search_date = $('#search_date')
             search_date.val(nowDay)
@@ -182,7 +180,7 @@
                 onChange: function(selectDates, dateStr, instance){
                 	
                     $('#search_date').val(dateStr)
-                    changeAPI('userDashboard')
+                    changeAPI('userDashboard', getQueryString('sbs_seq'))
                 },
             });
 
@@ -199,7 +197,7 @@
                 }
                 search_date.val(getYMD(gDate));
                 te.setDate(getYMD(gDate))
-                changeAPI('userDashboard')
+                changeAPI('userDashboard', getQueryString('sbs_seq'))
                 
             }
 
@@ -239,7 +237,79 @@
             
             document.getElementById('updateDate').innerText = getNowTime()
 			var dashboardData = {}
+
+            // 문서준비 완료 되면
+            $(document).ready(function() {
+            	const idValue = getQueryString('sbs_seq');
+
+                // id 값 유무로 등록 수정 판단
+                if(idValue){
+                	getDashboardData(idValue);
+       				$('.mem_id').text(getQueryString('mem_id'))
+                	
+                }
+            });
+            
+         	// 데이터 상세 조회
+            function getDashboardData(id){
+            	
+	       		var path = "/member/devicelist";
+	       		var type = "GET";
+	       		var data = {
+	    			pageNum : 1,
+	    			amount : 5,
+	    			mem_id : getQueryString('mem_id')
+	    		}
+           		
+           		ajaxCallBack(path, type, data, function(response){
+           			
+           			if(response.code == "200") {
+           				$('.mem_company').text(response.result.mem_company)
+	       				$('.mem_id').text(id)
+
+           				dataList = response.result.sbs_list;
+           				getDataListCreate()
+           				
+           				if (dataList.length > 0) {
+
+           					var sbs_alias = "";
+           					dataList.forEach(function(v) {
+           						
+           						if(v.sbs_seq == id){
+           							sbs_alias = v.sbs_alias
+           						}
+                                    
+        		            });
+           					
+           					$('.sbs_alias').text(sbs_alias);
+        	            	
+        	            }
+           				
+           			}
+           		});
+           	}
+         	
+            let dataList = [];
+	        function getDataListCreate(){
+	        	
+	            var createNavHTML = '';
+		        var mem_id = getQueryString('mem_id');
+	            
+	            if (dataList.length > 0) {
+	                // 데이터가 없는 경우 처리
+	            	dataList.forEach(function(v) {
+		                
+		                createNavHTML += '<a class="nav-link collapsed" onClick="movePath(\'/pages/user?mem_id='+ mem_id +'&sbs_seq='+ v.sbs_seq +'\')" data-bs-toggle="collapse" data-bs-target="#collapseDashboards" aria-expanded="false" aria-controls="collapseDashboards">'+ v.sbs_alias + '<div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div></a>';
+                            
+		            });
+	            }
+	            
+	            $('#accordionSidenav').append(createNavHTML)
+	            
+	        }
+            
             const changeAPI = (code,val) => {
+            	
                 let aDatas
                 let aUri = ""
                 let aType = ""
@@ -247,7 +317,7 @@
                 if(code == "userDashboard"){
                     aUri = "/acq/acqDashboard"
                     aType = "GET"
-                    aDatas = "sbs_seq="+$('#sbs_seq').val()+"&search_date="+$('#search_date').val()
+                    aDatas = "sbs_seq="+ val +"&search_date="+$('#search_date').val()
                 }
                 // ajax문
                 $.ajax({ // url, success, error 는 무조건 있어야한다
@@ -257,7 +327,7 @@
                     data: aDatas,
                     // 통신에 성공했을 때 실행할 로직
                     success: function (response) {
-                    	
+                    	conLog(response)
 	                	if(response.code == "200") {
 	                		
 	                		dashboardData = response.result;
@@ -273,7 +343,7 @@
                 })
             }
 
-            changeAPI("userDashboard","37")
+            changeAPI("userDashboard",getQueryString('sbs_seq'))
 
 	        var changeCheck = true;
 	       	function dataChange(){
