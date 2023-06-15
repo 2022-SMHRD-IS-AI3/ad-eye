@@ -240,7 +240,7 @@ public class DeviceController {
 			List<DeviceDTO> dList = service.deviceList(cri);
 			System.out.println(dList.toString());
 		    // dList = [{device_seq : , device_uid : , device_onoff : , device_status : , device_dt : , 
-		    //           mem_company : , sbs_seq : , sbs_loc : , data_check : },{...},{...}]
+		    //           mem_company : , sbs_seq : , sbs_alias : , data_check : },{...},{...}]
 		    // data_check : 5분간 넘어온 Log 개수
 			int total = service.totalCnt(cri);
 			System.out.println(total);
