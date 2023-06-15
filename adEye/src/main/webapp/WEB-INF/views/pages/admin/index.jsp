@@ -38,7 +38,7 @@
                                         <div class="align-items-center text-center">
                                             <div class="text-center">
                                                 <p class="fs-4 fw-bolder">읽지 않은 문의 글</p>
-                                                <p class="cnt_size contact" style="color: #8572b3;">1/18</p>
+                                                <p class="cnt_size contact" style="color: #8572b3;font-weight: 600;"></p>
                                             </div>
                                         </div>
                                     </div>
@@ -51,7 +51,7 @@
                                         <div class="align-items-center text-center">
                                             <div class="text-center">
                                                 <p class="fs-4 fw-bolder">사용 중인 기기</p>
-                                                <p class="cnt_size device" style="color: #3a91dd;">1/18</p>
+                                                <p class="cnt_size device" style="color: #3a91dd;font-weight: 600;"></p>
                                             </div>
                                         </div>
                                     </div>
@@ -64,7 +64,7 @@
                                         <div class="align-items-center text-center">
                                             <div class="text-center">
                                                 <p class="fs-4 fw-bolder">만료 예정 구독 (5일 전)</p>
-                                                <p class="cnt_size sbs" style="color: #ff6868;">1/18</p>
+                                                <p class="cnt_size sbs" style="color: #ff6868;font-weight: 600;"></p>
                                             </div>
                                         </div>
                                     </div>

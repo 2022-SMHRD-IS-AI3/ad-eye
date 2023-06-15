@@ -123,7 +123,7 @@
 	            } else {
 	            	dataList.forEach(function(v) {
 		                
-		                createHTML += '<tr><td>'+ v.device_seq +'</td><td class="text-primary link-point" onClick="movePath(\'/pages/admin/member/push?id='+v.mem_id+'\')">'+ v.device_uid +'</td><td>'+ v.mem_company +'</td><td>'+ v.sbs_alias +'</td><td>'+ v.device_onoff +'</td><td>'+ v.data_check +'</td></tr>'
+		                createHTML += '<tr><td>'+ v.device_seq +'</td><td class="text-primary link-point" onClick="movePath(\'/pages/admin/device/pop?sbs_seq='+v.sbs_seq+'\',\'pop\')">'+ v.device_uid +'</td><td>'+ v.mem_company +'</td><td>'+ v.sbs_alias +'</td><td>'+ v.device_onoff +'</td><td>'+ v.data_check +'</td></tr>'
 		            });
 	            }
 	            
