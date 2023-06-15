@@ -4,7 +4,47 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="SubscriptionMapper">
 
-	<sql id="criteria"> </sql>
+	<sql id="criteria">
+		<trim prefix="(" suffix=") AND" prefixOverrides="OR">
+        	<foreach collection="typeArr" item="type">
+            	<trim prefix="OR">
+                	<choose>
+                    	<when test="type == 'C'.toString()">
+                     		mem_company LIKE '%'||#{keyword}||'%'
+                  		</when>
+                  		<when test="type == 'A'.toString()">
+                     		sbs_alias LIKE '%'||#{keyword}||'%'
+                  		</when>
+               		</choose>
+            	</trim>
+         	</foreach>
+      	</trim>
+<!--       	<trim prefix="(" suffix=") AND" prefixOverrides="OR">
+        	<foreach collection="gradeArr" item="grade">
+            	<trim prefix="OR">
+                	<choose>
+                    	<when test="grade == 'standard'.toString()">
+                     		sbs_status LIKE '%standard%'
+                  		</when>
+               		</choose>
+            	</trim>
+         	</foreach>
+      	</trim> -->
+      	<trim prefix="(" suffix=") AND" prefixOverrides="OR">
+        	<foreach collection="statusArr" item="status">
+            	<trim prefix="OR">
+                	<choose>
+                    	<when test="status == 'Y'.toString()">
+                     		sbs_status LIKE '%Y%'
+                  		</when>
+                  		<when test="status == 'N'.toString()">
+                     		sbs_status LIKE '%N%'
+                  		</when>
+               		</choose>
+            	</trim>
+         	</foreach>
+      	</trim>
+	</sql>
 	
    	<select id="list" resultType="com.sansam.adeye.domain.SubscriptionDTO">
    		<![CDATA[

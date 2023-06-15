@@ -51,7 +51,7 @@
                                     <div class="card-body px-5 py-4">
                                         <div class="small text-center">
                                             아직 회원이 아니시라면 
-                                            <a onclick="moveCode('main')">여기</a>를 눌러주세요!
+                                            <a onclick="moveCode('main')" style="color : #034efc">여기</a>를 눌러주세요!
                                         </div>
                                     </div>
                                 </div>

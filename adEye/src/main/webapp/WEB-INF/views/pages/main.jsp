@@ -20,38 +20,17 @@
     			font-weight: 700;
     			font-style: normal;
 				}
-
-			@font-face {
-    			font-family: 'Pretendard-Regular';
-    			src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-    			font-weight: 600;
-    			font-style: normal;
-				}
-				
-				@font-face {
-    font-family: 'KOTRA_BOLD-Bold';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.1/KOTRA_BOLD-Bold.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'LINESeedKR-Bd';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
-    font-weight: 700;
-    font-style: normal;
-}
-
         </style>
     </head>
-    <body class="nav-fixed">
-        <div class="topnav navbar navbar-expand shadow justify-content-between justify-content-sm-start navbar-dark bg-black bg-opacity-25">
+    <body class="nav-fixed" data-bs-spy="scroll" data-bs-target="#navbar">
+        <div class="topnav navbar navbar-expand shadow justify-content-between justify-content-sm-start navbar-dark bg-black bg-opacity-25" id="navbar">
             <!-- Sidenav Toggle Button-->
             <!-- <button class="btn btn-icon btn-transparent-dark order-1 order-lg-0 me-2 ms-lg-2 me-lg-0" id="sidebarToggle"><i data-feather="menu"></i></button> -->
             <!-- Navbar Brand-->
             <!-- * * Tip * * You can use text or an image for your navbar brand.-->
             <!-- * * * * * * When using an image, we recommend the SVG format.-->
             <!-- * * * * * * Dimensions: Maximum height: 32px, maximum width: 240px-->
-            <a class="navbar-brand pe-3 ps-4 ps-lg-4" href="index.html">
+            <a class="navbar-brand pe-3 ps-4 ps-lg-4" href="main">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stack" viewBox="0 0 16 16">
                     <path d="m14.12 10.163 1.715.858c.22.11.22.424 0 .534L8.267 15.34a.598.598 0 0 1-.534 0L.165 11.555a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0l5.317-2.66zM7.733.063a.598.598 0 0 1 .534 0l7.568 3.784a.3.3 0 0 1 0 .535L8.267 8.165a.598.598 0 0 1-.534 0L.165 4.382a.299.299 0 0 1 0-.535L7.733.063z"/>
                     <path d="m14.12 6.576 1.715.858c.22.11.22.424 0 .534l-7.568 3.784a.598.598 0 0 1-.534 0L.165 7.968a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0l5.317-2.659z"/>
@@ -72,10 +51,10 @@
                   </ul>
                 </div>
                 
-            <div id="layoutSidenav_content">
+            	<div id="layoutSidenav_content">
                 <main>
                     <!-- 헤더 이미지 -->
-                    <header class="page-header page-header-light bg-white mb-5">
+                    <header class="page-header page-header-light bg-white mb-10">
                         <div class="py-15 mb-4 bg-img-cover overlay overlay-50" style="background-image: url('${path}/resources/assets/img/main/header-img.jpg')">
                         <div class="container-xl px-4">
                             <!-- ****style="position: relative; z-index: 1;" 추가**** -->
@@ -86,7 +65,6 @@
                             </div>
                         </div>
                         </div>
-                    </div>
                     </header>
                     <!-- Main page content-->
                     <div class="container-xl px-4">
@@ -103,25 +81,25 @@
                         </div>
                       </div>
                        <!-- Form section -->
-                        <div class="col-lg-12 mt-15">
+                        <div class="col-lg-12 mt-15" id="contact">
                             <div class="container-xl px-4">
-                        <section >
+                        <section>
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <h2>문의하기</h2>
+                                    <h1 class="text-xl">CONTACT</h1>
                                 </div>
                                     <div class="col-lg-6">
                                     <form>
                                         <div class="mb-3">
-                                            <label for="companyName" class="form-label">회사명</label>
+                                            <label for="companyName" class="form-label">* 회사명</label>
                                             <input type="text" class="form-control" id="companyName" placeholder="회사명">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="contactNumber" class="form-label">연락처</label>
+                                            <label for="contactNumber" class="form-label">* 연락처</label>
                                             <input type="tel" class="form-control" id="contactNumber" placeholder="연락처">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="email" class="form-label">이메일</label>
+                                            <label for="email" class="form-label">* 이메일</label>
                                             <input type="email" class="form-control" id="email" placeholder="이메일">
                                         </div>
                                         <div class="mb-3">
@@ -135,7 +113,6 @@
                                         <button type="submit" class="btn btn-primary form-control mt-3">문의하기</button>
                                     </form>
                                 </div>
-                                
                         </section>
                     </div>
                 </div>
@@ -149,8 +126,29 @@
                     </div>
                 </footer>
             </div>
+            
+            <!-- <script>
+            
+            // Get the contact link element
+            const contactLink = document.getElementById("contactLink");
+
+            // Add a click event listener to the link
+            contactLink.addEventListener("click", function (event) {
+                // Prevent the default link behavior
+                event.preventDefault();
+
+                // Scroll to the contact section
+                const contactSection = document.getElementById("contact");
+                contactSection.scrollIntoView({ behavior: "smooth" });
+            });
         
+            </script>
+         -->
+         <script>history.scrollRestoration = "manual"</script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="${path}/resources/js/scripts.js"></script>
-    </body>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js" crossorigin="anonymous"></script>
+        
+	</body>
 </html>

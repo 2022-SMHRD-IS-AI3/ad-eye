@@ -12,15 +12,6 @@
                     	<when test="type == 'C'.toString()">
                      		mem_company LIKE '%'||#{keyword}||'%'
                   		</when>
-                  		<when test="type == 'I'.toString()">
-                     		mem_id LIKE '%'||#{keyword}||'%'
-                  		</when>
-                  		<when test="type == 'E'.toString()">
-                     		mem_email LIKE '%'||#{keyword}||'%'
-                  		</when>
-                  		<when test="type == 'P'.toString()">
-                     		mem_phone LIKE '%'||#{keyword}||'%'
-                  		</when>
                		</choose>
             	</trim>
          	</foreach>
