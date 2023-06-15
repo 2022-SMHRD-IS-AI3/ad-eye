@@ -53,7 +53,7 @@ public class HomeController {
 	
 	// 로그인
 		@RequestMapping(value = "/login", method = RequestMethod.POST)
-		public @ResponseBody Map<String, Object> login(MemberDTO data) {
+		public @ResponseBody Map<String, Object> login(MemberDTO data, HttpSession session) {
 			
 			System.out.println("로그인 아이디 "+data.toString());
 			Map<String,Object> paramMap = new HashMap<String, Object>();
@@ -76,7 +76,7 @@ public class HomeController {
 					paramMap.put("code", "200");
 					paramMap.put("message", "로그인 성공");				
 				}
-				
+				session.setAttribute("LoginId", mDto.getMem_id());
 			} catch (Exception e) {
 				paramMap.put("code", "204");
 				paramMap.put("message", "로그인 실패");		

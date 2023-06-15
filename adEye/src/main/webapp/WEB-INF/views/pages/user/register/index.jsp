@@ -51,7 +51,7 @@
                             <div class="dropdown-item-icon"><i data-feather="settings"></i></div>
                             정보수정
                         </a>
-                        <a class="dropdown-item" href="#!">
+                        <a class="dropdown-item" onClick="logout()">
                             <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
                             로그아웃
                         </a>
@@ -245,6 +245,7 @@
         <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
         <script src="${path}/resources/js/cus.js"></script>
         <script>
+        loginSession()
      	// 주소검색 api
         function postSearch(){
 
@@ -257,6 +258,8 @@
                 }
             }).open();
         }
+     	
+     	
         </script>
         
     </body>
