@@ -13,17 +13,22 @@ import lombok.RequiredArgsConstructor;
 @NoArgsConstructor
 public class DeviceDTO {
 
-	
-	private int device_seq;
-	private String device_uid;
-	private char device_onoff;
-	private char device_status;
-	private Date device_dt;
-	
-	public DeviceDTO(int device_seq, char device_onoff) {
-		this.device_seq = device_seq;
-		this.device_onoff = device_onoff;
+	   
+	   private int device_seq;
+	   private String device_uid;
+	   private char device_onoff;
+	   private char device_status;
+	   private Date device_dt;
+	   
+	   private String mem_company;
+	   private int   sbs_seq;
+	   private String sbs_loc;
+	   private int data_check;
+	   
+	   public DeviceDTO(int device_seq, char device_onoff) {
+	      this.device_seq = device_seq;
+	      this.device_onoff = device_onoff;
+	   }
 	}
-}
 
 

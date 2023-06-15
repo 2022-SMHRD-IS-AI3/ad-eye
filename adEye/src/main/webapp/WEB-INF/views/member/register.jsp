@@ -194,7 +194,7 @@
         // ajax문
         $.ajax({ // url, success, error 는 무조건 있어야한다
             // 어디랑 통신 할건지
-            url: 'http://218.157.24.2:9000' + aUri,
+            url: 'http://211.223.37.186/:9000' + aUri,
             type: aType,
             data: aDatas,
             // 통신에 성공했을 때 실행할 로직
@@ -378,7 +378,7 @@
         // ajax문
         $.ajax({ // url, success, error 는 무조건 있어야한다
             // 어디랑 통신 할건지
-            url: 'http://218.157.24.2:9000' + aUri,
+            url: 'http://211.223.37.186:9000' + aUri,
             type: aType,
             data: aDatas,
             contentType : 'application/json',

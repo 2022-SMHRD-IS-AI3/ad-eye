@@ -80,7 +80,7 @@
 		SELECT COUNT(mem_id) FROM tb_member WHERE mem_id = #{mem_id}
 	</select>
 	
-	<select id="totalCnt" resultType="int" parameterType="com.sansam.adeye.domain.PageDTO">
+	<select id="totalCnt" resultType="int">
 		SELECT COUNT(*) 
 		FROM tb_member 
 		WHERE
