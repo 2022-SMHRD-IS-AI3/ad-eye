@@ -44,7 +44,7 @@
                             <div class="dropdown-item-icon"><i data-feather="settings"></i></div>
                             정보수정
                         </a> -->
-                        <a class="dropdown-item" href="#!">
+                        <a class="dropdown-item" onClick="logout()">
                             <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
                             로그아웃
                         </a>
