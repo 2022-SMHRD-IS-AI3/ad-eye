@@ -44,9 +44,8 @@
                                    	<div class="col-md-3">
                                         <input class="form-control" id="keyword" type="text" name="keyword" placeholder="내용을 입력해주세요" value="" />
                                     </div>
-                                    
                                     <div class="col-md-2">
-                                   		<button class="btn btn-dark" id="search_btn">검색</button>
+                                   		<button class="btn btn-dark" onClick="getDataList()" id="search_btn">검색</button>
                                     </div>
                                 </div>
                             </div>
@@ -122,8 +121,11 @@
 	                createHTML = '<tr><td colspan="6">데이터가 없습니다.</td></tr>';
 	            } else {
 	            	dataList.forEach(function(v) {
+	            		
+	            		var red = v.data_check > 0 ? '' : 'style="background: #ffc7c7;""';
+	            		var device_onoff = v.device_onoff == 'Y' ? '<span style="color: #9ecd73;font-weight: bolder;">ON</span>' : '<span style="color: #ff5353;font-weight: bolder;">OFF</span>';
 		                
-		                createHTML += '<tr><td>'+ v.device_seq +'</td><td class="text-primary link-point" onClick="movePath(\'/pages/admin/device/pop?sbs_seq='+v.sbs_seq+'\',\'pop\')">'+ v.device_uid +'</td><td>'+ v.mem_company +'</td><td>'+ v.sbs_alias +'</td><td>'+ v.device_onoff +'</td><td>'+ v.data_check +'</td></tr>'
+		                createHTML += '<tr '+ red +'><td>'+ v.device_seq +'</td><td class="text-primary link-point" onClick="movePath(\'/pages/admin/device/pop?sbs_seq='+v.sbs_seq+'\',\'pop\')">'+ v.device_uid +'</td><td>'+ v.mem_company +'</td><td>'+ v.sbs_alias +'</td><td>'+ device_onoff +'</td><td class="text-primary link-point" onClick="movePath(\'/pages/admin/log?uid='+v.device_uid+'\')">'+ v.data_check +'</td></tr>'
 		            });
 	            }
 	            
