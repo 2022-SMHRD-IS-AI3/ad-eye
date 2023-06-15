@@ -78,7 +78,7 @@
 	</update>
 
 	<select id="login" resultType="com.sansam.adeye.domain.MemberDTO">
-		SELECT * FROM tb_member WHERE mem_id = #{mem_id} AND mem_pw = #{mem_pw}
+		SELECT * FROM tb_member WHERE mem_id = #{mem_id} AND mem_pw = #{mem_pw} AND mem_status = 'Y'
 	</select>
 		
 	<select id="sbsIdCheck" resultType="int">
