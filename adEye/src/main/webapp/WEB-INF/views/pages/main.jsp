@@ -62,8 +62,8 @@
                         <div class="container-xl px-4">
                             <!-- ****style="position: relative; z-index: 1;" 추가**** -->
                             <div class="text-center" style="position: relative; z-index: 1;">
-                                <h1 class="lead mb-2 text-white-50">AI 기반 오프라인 광고 효과 분석 서비스</h1>
-                                <h1 class="text-white" style="font-family: 'KBO-Dia-Gothic_bold';">애드아이 Ad-EYE</h1>
+                                <h1 class="lead mb-2 text-white-50 text-lg">AI 기반 오프라인 광고 효과 분석 서비스</h1>
+                                <h1 class="text-white text-xl" style="font-family: 'KBO-Dia-Gothic_bold';">애드아이 Ad-EYE</h1>
                                 <a class="text-white" href="#contact"><i class="fa-solid fa-angles-down"></i></a>
                             </div>
                         </div>
@@ -72,16 +72,19 @@
                     </header>
                     <!-- Main page content-->
                     <div class="container-xl px-4">
-                        	<h1 class="mt-4 mb-2">AI 솔루션을 통한 옥외 광고 효과 측정</h1>
-                        	<p>애드아이는 단순히 유동인구로 광고효과를 파악하지 않습니다.
-                        	유동인구 뿐만 아니라 성별과 주요 시청 횟수를
-                        	수치화하여 더욱 정확한 광고 효과를 측정합니다.</p>
-                        <!-- Detailed pricing column 1-->
-                        <div class="col-lg-6 z-1 mb-4 mb-lg-0">
-                            <div class="card text-center border-0">
-                                <img class="card-img" src="${path}/resources/assets/img/main/main-img.png" alt="...">    
-                            </div>     
+                        <div class="row">
+                          <div class="col-lg-6">
+                            <h1 class="mt-4 mb-3">AI 솔루션을 통한 옥외 광고 효과 측정</h1>
+                            <p>애드아이는 단순히 유동인구로 광고효과를 파악하지 않습니다.</p>
+                              <p>유동인구 뿐만 아니라 성별과 주요 시청 횟수를 수치화하여 더욱 정확한 광고
+                              효과를 측정합니다.</p>
+                            
+                          </div>
+                          <div class="col-lg-6">
+                            <img class="img-fluid" src="${path}/resources/assets/img/main/main-img.png" alt="...">
+                          </div>
                         </div>
+                      </div>
                       
                 </main>
                 <footer class="footer-admin mt-auto footer-light">
