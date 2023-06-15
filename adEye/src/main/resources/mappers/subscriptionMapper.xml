@@ -21,12 +21,12 @@
 					sbs_status,
 					d_day
 			FROM (
-				SELECT /*+ INDEX_DESC(tb_subscription IDX_tb_subscription_PK) */
+				SELECT
 					rownum rn,
 					s.sbs_seq,
 					s.mem_id,
 					s.device_seq,
-					(select mem_company FROM tb_member m WHERE s.mem_id = m.mem_id) AS mem_company,
+					s.mem_company,
 					s.sbs_loc,
 					s.sbs_alias,
 					s.sbs_start_dt,
@@ -34,9 +34,26 @@
 					s.sbs_reg_dt,
 					s.sbs_grade,
 					s.sbs_status,
-					(SELECT TRUNC(s.sbs_end_dt) - TRUNC(SYSDATE) FROM dual) AS d_day
-				FROM tb_subscription s
-				WHERE s.sbs_status != 'D' AND
+					s.d_day
+				FROM  (
+					SELECT
+            			s.sbs_seq,
+            			s.mem_id,
+            			s.device_seq,
+            			(select mem_company FROM tb_member m WHERE s.mem_id = m.mem_id) AS mem_company,
+            			s.sbs_loc,
+        				s.sbs_alias,
+    					s.sbs_start_dt,
+            			s.sbs_end_dt,
+            			s.sbs_reg_dt,
+            			s.sbs_grade,
+            			s.sbs_status,
+            			(SELECT TRUNC(s.sbs_end_dt) - TRUNC(SYSDATE) FROM dual) AS d_day
+					FROM tb_subscription s
+					WHERE s.sbs_status != 'D'
+					ORDER BY sbs_status DESC, mem_company ASC, d_day ASC
+				) s
+				WHERE
 		]]>
 	  	<include refid="criteria"></include>         
       	<![CDATA[
