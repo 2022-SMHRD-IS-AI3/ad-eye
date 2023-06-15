@@ -34,31 +34,31 @@
                             	<div class="row gx-3">
                                    	<label for="" class="col-sm-1 col-form-label fw-bolder text-center">검색</label>
                                    	<div class="col-md-2">
-                                   		<select class="form-select" name="key">
+                                   		<select class="form-select" name="key" id="key">
                                    			<option value="">--- 선택 ---</option>
-                                   			<option value="company">회사명</option>
-                                   			<option value="alias">매체이름</option>
+                                   			<option value="C">회사명</option>
+                                   			<option value="A">매체이름</option>
                                    		</select>
                                     </div>
                                    	<div class="col-md-3">
-                                        <input class="form-control" id="keword" type="text" name="keword" placeholder="내용을 입력해주세요" value="" />
+                                        <input class="form-control" id="keyword" type="text" name="keyword" placeholder="내용을 입력해주세요" value="" />
                                     </div>
                                     
                                     <div class="col-md-2">
-                                   		<select class="form-select" name="sbs_grade" disabled>
+                                   		<select class="form-select" name="sbs_grade" id="sbs_grade" disabled>
                                    			<option value="">--- 등급 ---</option>
                                    			<option value="standard" selected>standard</option>
                                    		</select>
                                     </div>
                                     <div class="col-md-2">
-                                   		<select class="form-select" name="sbs_status">
+                                   		<select class="form-select" name="sbs_status" id="sbs_status">
                                    			<option value="">--- 상태 ---</option>
                                    			<option value="Y">사용</option>
                                    			<option value="N">중지</option>
                                    		</select>
                                     </div>
                                     <div class="col-md-2">
-                                   		<button class="btn btn-dark" id="search_btn">검색</button>
+                                   		<button class="btn btn-dark" onClick="getDataList()" id="search_btn">검색</button>
                                     </div>
                                 </div>
                             </div>
@@ -112,9 +112,12 @@
     			pageNum : 1,
     			amount : 10,
     			type : $('#key').val() || "",
-    			keyword : $('input[name=keyword]').val() || ""
+    			keyword : $('input[name=keyword]').val() || "",
+    			status : $('#sbs_status').val() || "",
+    			grade : $('#sbs_grade').val() || ""
     		}
        		
+       		conLog(data)
        		ajaxCallBack(path, type, data, function(response){
        			
        			conLog(response)

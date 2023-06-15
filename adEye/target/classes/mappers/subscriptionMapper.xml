@@ -9,7 +9,7 @@
         	<foreach collection="typeArr" item="type">
             	<trim prefix="OR">
                 	<choose>
-                    	<when test="type == 'C'.toString()">
+                    	<when test="type == 'C'.toString()"> 
                      		mem_company LIKE '%'||#{keyword}||'%'
                   		</when>
                   		<when test="type == 'A'.toString()">
