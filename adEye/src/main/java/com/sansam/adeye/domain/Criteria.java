@@ -34,8 +34,8 @@ public class Criteria {
 		    return status == null ? new String[] {} : status.split("");
 		}
 		
-		public String[] getDateArr() {
-		    return date == null ? new String[] {} : date.split("");
+		public String getDateArr() {
+		    return date == null ? "" : date;
 		}
 		
 		public String[] getGradeArr() {

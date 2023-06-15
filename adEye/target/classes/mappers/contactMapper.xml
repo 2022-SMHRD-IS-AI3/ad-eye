@@ -39,7 +39,7 @@
             	</trim>
          	</foreach>
       	</trim>
-      			<trim prefix="(" suffix=") AND" prefixOverrides="OR">
+      	<trim prefix="(" suffix=") AND" prefixOverrides="OR">
         	<foreach collection="dateArr" item="date">
             	<trim prefix="OR">
                 	<choose>
