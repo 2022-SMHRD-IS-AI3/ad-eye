@@ -90,7 +90,7 @@ public class HomeController {
 		
 		logger.info("/logout................."+session.getAttribute("LoginId"));
 		System.out.println("삭제할 세션 "+session.getAttributeNames());
-		
+		session.invalidate();
 		Map<String,String> paramMap = new HashMap<String, String>();
 		paramMap.put("code", "202");
 		paramMap.put("message", "로그아웃 성공");
