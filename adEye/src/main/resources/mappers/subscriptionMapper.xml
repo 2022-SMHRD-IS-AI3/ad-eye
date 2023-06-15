@@ -101,7 +101,7 @@
 	</update>
 
 	<update id="delete">
-		update tb_subscription set sbs_status = 'D' where sbs_seq = 37
+		update tb_subscription set sbs_status = 'D' where sbs_seq = #{sbs_seq}
 	</update>
 
 </mapper>
