@@ -236,6 +236,7 @@
         <script src="${path}/resources/assets/demo/multi-chart.js"></script>
         <script src="${path}/resources/js/cus.js"></script>
         <script>
+        	loginSession()
         	var nowDay = ""
             getNowTime()
             var search_date = $('#search_date')
@@ -431,7 +432,7 @@
 	        	$('#updateDate').text(getNowTime())
 	        }
 	        
-	        
+	       	
                 
         </script>
 
