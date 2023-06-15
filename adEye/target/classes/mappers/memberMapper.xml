@@ -49,9 +49,13 @@
 				   	m.mem_joindate,
 				   	m.company_addr,
 				   	(SELECT COUNT(s.sbs_seq) FROM tb_subscription s WHERE s.mem_id = m.mem_id) AS mem_pw
-				FROM tb_member m
-				WHERE mem_status !='D' AND admin_yn = 'N'
-				AND
+				FROM (
+					SELECT *
+                    FROM tb_member
+                    WHERE mem_status !='D' AND admin_yn = 'N'
+                    ORDER BY mem_status DESC, mem_joindate DESC
+				) m
+				WHERE
 		]]>
 	  	<include refid="criteria"></include>         
       	<![CDATA[
