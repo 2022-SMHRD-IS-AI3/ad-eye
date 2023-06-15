@@ -34,7 +34,7 @@
 					contact_dt,
 					contact_open
 			FROM (
-				SELECT /*+ INDEX_DESC(tb_contact IDX_tb_contact_PK) */
+				SELECT
 					rownum rn,
 					contact_seq,
 					email,
@@ -43,7 +43,11 @@
 					contact_content,
 					contact_dt,
 					contact_open
-				FROM tb_contact
+				FROM (
+					SELECT *
+					FROM tb_contact
+					ORDER BY contact_open ASC, contact_dt DESC 
+				)
 				WHERE
 		]]>
 		<include refid="criteria"></include>
