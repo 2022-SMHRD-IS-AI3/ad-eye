@@ -132,7 +132,12 @@ function logout() {
 	       			
 	 	conLog(response)
 	   	if(response.code == "202") {
-	   		
+	   		history.pushState(null, null, '/pages/login');
+			window.addEventListener('popstate', function () {
+			    history.pushState(null, null, '/pages/login');
+			    moveCode('login');
+			});
+			
 	   		moveCode('login');
 	       				
 	 	}
