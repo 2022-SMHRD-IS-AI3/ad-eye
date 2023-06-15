@@ -15,12 +15,31 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
         <style>
             @font-face {
-    font-family: 'KBO-Dia-Gothic_bold';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/KBO-Dia-Gothic_bold.woff') format('woff');
+    			font-family: 'KBO-Dia-Gothic_bold';
+    			src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/KBO-Dia-Gothic_bold.woff') format('woff');
+    			font-weight: 700;
+    			font-style: normal;
+				}
+
+			@font-face {
+    			font-family: 'Pretendard-Regular';
+    			src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    			font-weight: 600;
+    			font-style: normal;
+				}
+				
+				@font-face {
+    font-family: 'KOTRA_BOLD-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.1/KOTRA_BOLD-Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'LINESeedKR-Bd';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
     font-weight: 700;
     font-style: normal;
 }
-
 
         </style>
     </head>
@@ -56,8 +75,7 @@
             <div id="layoutSidenav_content">
                 <main>
                     <!-- 헤더 이미지 -->
-                    <header class="page-header page-header-compact page-header-light bg-white mb-5">
-                        
+                    <header class="page-header page-header-light bg-white mb-5">
                         <div class="py-15 mb-4 bg-img-cover overlay overlay-50" style="background-image: url('${path}/resources/assets/img/main/header-img.jpg')">
                         <div class="container-xl px-4">
                             <!-- ****style="position: relative; z-index: 1;" 추가**** -->
@@ -74,19 +92,55 @@
                     <div class="container-xl px-4">
                         <div class="row">
                           <div class="col-lg-6">
-                            <h1 class="mt-4 mb-3">AI 솔루션을 통한 옥외 광고 효과 측정</h1>
+                            <h1 class="mt-10 mb-5" style="font-weight: bold;">AI 솔루션을 통한 옥외 광고 효과 측정</h1>
                             <p>애드아이는 단순히 유동인구로 광고효과를 파악하지 않습니다.</p>
-                              <p>유동인구 뿐만 아니라 성별과 주요 시청 횟수를 수치화하여 더욱 정확한 광고
-                              효과를 측정합니다.</p>
-                            
+                              <p>유동인구 뿐만 아니라 보행자의 성별과 주목도를 수치화하여</p> 
+                              <p>더욱 정확한 광고 효과를 측정합니다.</p>
                           </div>
                           <div class="col-lg-6">
                             <img class="img-fluid" src="${path}/resources/assets/img/main/main-img.png" alt="...">
                           </div>
                         </div>
                       </div>
-                      
-                </main>
+                       <!-- Form section -->
+                        <div class="col-lg-12 mt-15">
+                            <div class="container-xl px-4">
+                        <section >
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <h2>문의하기</h2>
+                                </div>
+                                    <div class="col-lg-6">
+                                    <form>
+                                        <div class="mb-3">
+                                            <label for="companyName" class="form-label">회사명</label>
+                                            <input type="text" class="form-control" id="companyName" placeholder="회사명">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="contactNumber" class="form-label">연락처</label>
+                                            <input type="tel" class="form-control" id="contactNumber" placeholder="연락처">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="email" class="form-label">이메일</label>
+                                            <input type="email" class="form-control" id="email" placeholder="이메일">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="message" class="form-label">내용</label>
+                                            <textarea class="form-control" id="message" rows="5" style="height: 200px; resize: none;" placeholder="내용"></textarea>
+                                        </div>
+                                        <div class="mb-3 form-check">
+                                            <input type="checkbox" class="form-check-input" id="privacyCheck">
+                                            <label class="form-check-label" for="privacyCheck">개인정보처리방침에 동의합니다.</label>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary form-control mt-3">문의하기</button>
+                                    </form>
+                                </div>
+                                
+                        </section>
+                    </div>
+                </div>
+                    </main>
+                
                 <footer class="footer-admin mt-auto footer-light">
                     <div class="container-xl px-4">
                         <div class="row">
