@@ -64,6 +64,12 @@ function moveCode(code,d){ // 코드, 쿼리스트링
         path = "/pages/main"
     }else if(code === 'login'){
         path = "/pages/login"
+    }else if(code === 'noread'){
+        path = "/pages/admin/contact/?cs=Y"
+    }else if(code === 'use'){
+        path = "/pages/admin/device/?ds=Y"
+    }else if(code === 'dday'){
+        path = "/pages/admin/sbs/?ss=Y"
     }
 
     movePath(path, op, w, h);

@@ -34,11 +34,11 @@
                             <!-- 읽지 않은 문의글-->
                             <div class="col-xl-4 mb-4">
                                 <a class="card lift h-100" href="#!">
-                                    <div class="card-body d-flex justify-content-center flex-column">
+                                    <div class="card-body d-flex justify-content-center flex-column" onClick="moveCode('noread')">
                                         <div class="align-items-center text-center">
                                             <div class="text-center">
                                                 <p class="fs-4 fw-bolder">읽지 않은 문의 글</p>
-                                                <p class="cnt_size" style="color: #8572b3;">1/18</p>
+                                                <p class="cnt_size contact" style="color: #8572b3;">1/18</p>
                                             </div>
                                         </div>
                                     </div>
@@ -47,11 +47,11 @@
                             <!-- 사용 중인 기기-->
                             <div class="col-xl-4 mb-4">
                                 <a class="card lift h-100" href="#!">
-                                    <div class="card-body d-flex justify-content-center flex-column">
+                                    <div class="card-body d-flex justify-content-center flex-column" onClick="moveCode('use')">
                                         <div class="align-items-center text-center">
                                             <div class="text-center">
                                                 <p class="fs-4 fw-bolder">사용 중인 기기</p>
-                                                <p class="cnt_size" style="color: #3a91dd;">1/18</p>
+                                                <p class="cnt_size device" style="color: #3a91dd;">1/18</p>
                                             </div>
                                         </div>
                                     </div>
@@ -60,11 +60,11 @@
                             <!-- 만료 예정 구독 (5일 전)-->
                             <div class="col-xl-4 mb-4">
                                 <a class="card lift h-100" href="#!">
-                                    <div class="card-body d-flex justify-content-center flex-column">
+                                    <div class="card-body d-flex justify-content-center flex-column" onClick="moveCode('dday')">
                                         <div class="align-items-center text-center">
                                             <div class="text-center">
                                                 <p class="fs-4 fw-bolder">만료 예정 구독 (5일 전)</p>
-                                                <p class="cnt_size" style="color: #ff6868;">1/18</p>
+                                                <p class="cnt_size sbs" style="color: #ff6868;">1/18</p>
                                             </div>
                                         </div>
                                     </div>
@@ -76,7 +76,42 @@
                 </main>
 		<%@ include file="../../includes/footer.jsp" %>
 		<script type="text/javascript">
-			
+		// 문서준비 완료 되면
+        $(document).ready(function() {
+
+
+                // 삭제, 수정 버튼
+                const changebtn = '<button class="btn btn-danger me-2" onClick="dataSubmit(\'dl\')" type="button ">삭제</button>'+
+                   	'<button class="btn btn-primary" onClick="dataSubmit(\'up\')" type="button">수정</button>';
+                $('.submit-btn-wrap').html(changebtn)
+                
+                getDataDetail();
+                $('#mem_id').val(idValue)
+                $('input[name=mem_company]').attr('disabled', true);
+                $('input[name=admin_yn]').attr('disabled', true);
+                $('input[name=mem_id]').attr('disabled', true);
+
+        });
+        
+     	// 데이터 상세 조회
+        function getDataDetail(){
+        	
+       		var path = "/admin/dashboard";
+       		var type = "GET";
+       		var data = '';
+       		
+       		ajaxCallBack(path, type, data, function(response){
+       			
+       			conLog(response)
+       			if(response.code == "200") {
+       				var info = response.result;
+       			    
+       				$('.contact').text(info.contact_noread_cnt +' / '+ info.contact_total);
+       				$('.device').text(info.device_use_cnt +' / '+ info.device_total);
+       				$('.sbs').text(info.sbs_dday +' / '+ info.sbs_total);
+       			}
+       		});
+       	}
 		</script>
     </body>
 </html>
