@@ -67,7 +67,7 @@
 					log_msg, 
 					log_dt, 
 					device_uid, 
-					sbs_alias
+					sbs_loc
 			FROM (
 				SELECT /*+ INDEX_DESC(tb_log IDX_tb_log_PK) */
 					rownum rn,
@@ -75,14 +75,14 @@
 					ls.log_msg, 
 					ls.log_dt, 
 					ls.device_uid, 
-					ls.sbs_alias
+					ls.sbs_loc
 				FROM (
 					SELECT
 						l.log_seq, 
 						l.log_msg, 
 						l.log_dt, 
 						l.device_uid, 
-						s.sbs_alias
+						s.sbs_loc
 					FROM tb_log l
 					INNER JOIN tb_device d ON l.device_uid = d.device_uid
 					LEFT OUTER JOIN tb_subscription s ON d.device_seq = s.device_seq
