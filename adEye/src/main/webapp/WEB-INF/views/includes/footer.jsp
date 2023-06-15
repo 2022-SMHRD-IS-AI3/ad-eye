@@ -17,3 +17,6 @@
 <script src="${path}/resources/js/litepicker.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="${path}/resources/js/cus.js"></script>
+<script>
+	loginSession();
+</script>

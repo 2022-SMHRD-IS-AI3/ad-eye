@@ -139,4 +139,23 @@ function logout() {
 	});
 }
 
+function loginSession(){
+
+	var path = "/loginSession";
+	var type = "GET";
+	var data = '';
+	
+	ajaxCallBack(path, type, data, function(response){
+	       			
+	 	conLog(response)
+	   	if(response.code != "200") {
+	   		
+	   		moveCode('login');
+	       				
+	 	}
+	});
+}
+
+
+
 
