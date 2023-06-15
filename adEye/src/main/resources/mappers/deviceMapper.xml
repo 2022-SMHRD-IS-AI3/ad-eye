@@ -112,12 +112,17 @@
 		update tb_device set sbs_status = 'Y' where device_seq = #{device_seq}
 	</update>
   	
-  	<select id="totalCnt" resultType="int">
+	<select id="totalCnt" resultType="int" parameterType="com.sansam.adeye.domain.PageDTO">
 		SELECT COUNT(*) 
-		FROM tb_device 
+		FROM (
+			SELECT *
+			FROM tb_device d
+			JOIN tb_subscription s ON s.device_seq = d.device_seq 
+        	JOIN tb_member m ON m.mem_id = s.mem_id
+			)
 		WHERE
 		<include refid="criteria"></include> 
-		device_status != 'D' 
+			device_status != 'D' 
 	</select>
   
 </mapper>
