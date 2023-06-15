@@ -22,7 +22,7 @@ public class DeviceDTO {
 	   
 	   private String mem_company;
 	   private int   sbs_seq;
-	   private String sbs_loc;
+	   private String sbs_alias;
 	   private int data_check;
 	   
 	   public DeviceDTO(int device_seq, char device_onoff) {
