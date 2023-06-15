@@ -49,10 +49,8 @@ public class ContactController {
 			// 
 			List<ContactDTO> cDtoList = service.contactList(cri);
 			log.info(cDtoList);
-			Map<String,Object> paramMapsub = new HashMap<String, Object>();
 
-			paramMapsub.put("data", cDtoList);
-		    paramMap.put("result", paramMapsub);
+		    paramMap.put("result", cDtoList);
 		    paramMap.put("code", "200");
 		    paramMap.put("message", "조회 성공");			
 		} catch (Exception e) {

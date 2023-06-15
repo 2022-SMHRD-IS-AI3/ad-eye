@@ -4,6 +4,7 @@
 <html>
     <head>
         <title>문의 - admin</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 		<%@ include file="../../../includes/header.jsp" %>
 		<!-- content -->
             <div id="layoutSidenav_content">
@@ -34,38 +35,27 @@
                             	<div class="row gx-3">
                                    	<label for="" class="col-sm-1 col-form-label fw-bolder text-center">검색</label>
                                    	<div class="col-md-2">
-                                   		<select class="form-select" name="key">
+                                   		<select class="form-select" id="key" name="key">
                                    			<option value="">--- 선택 ---</option>
-                                   			<option value="company">회사명</option>
-                                   			<option value="phone">연락처</option>
-                                   			<option value="email">이메일</option>
-                                   			<option value="content">내용</option>
+                                   			<option value="C">회사명</option>
+                                   			<option value="P">연락처</option>
+                                   			<option value="E">이메일</option>
+                                   			<option value="T">내용</option>
                                    		</select>
                                    		
                                     </div>
                                    	<div class="col-md-2">
-                                        <input class="form-control" id="keword" type="text" name="keword" placeholder="내용을 입력해주세요" value="" />
+                                        <input class="form-control" id="keyword" type="text" name="keyword" placeholder="내용을 입력해주세요" value="" />
                                     </div>
-                                   <div class="col-md-2">
-                                   		<select class="form-select" name="sbs_status">
+                                   	<div class="col-md-2">
+                                   		<select class="form-select" id="contact_open" name="contact_open">
                                    			<option value="">--- 상태 ---</option>
                                    			<option value="Y">Y</option>
                                    			<option value="N">N</option>
                                    		</select>
-                                   		</div>
-                                   		 <!-- Date Range Picker Example-->
-               <label for="" class="col-sm-1 col-form-label fw-bolder text-center">기간</label>
-                <div class="col-md-2">
-                <div class="input-group input-group-joined">
-                    <input class="form-control ps-0" id="litepickerRangePlugin" placeholder="날짜를 선택하세요">
-                    <span class="input-group-text">
-                        <i data-feather="calendar"></i>
-                    </span>
-                
-                </div>
-                </div>
+                                   	</div>
                                     <div class="col-md-2">
-                                   		<button class="btn btn-dark" id="search_btn">검색</button>
+                                   		<button class="btn btn-dark" onClick="getDataList()" id="search_btn">검색</button>
                                     </div>
                                 </div>
                             </div>
@@ -75,7 +65,7 @@
                     <div class="container-fluid px-4">
                         <div class="card">
                             <div class="card-body">
-                                <table id="datatablesSimple">
+                                <table id="datatable" class="table table-striped table-hover">
                                     <thead>
                                         <tr>
                                         	<th>No.</th>
@@ -87,30 +77,9 @@
                                             <th>확인</th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr>
+                                    
+                                    <tbody id="dataList">
                                         
-                                        	<th>No.</th>
-                                            <th>회사명</th>
-                                            <th>연락처</th>
-                                            <th>이메일</th>
-                                            <th>내용</th>
-                                            <th>날짜</th>
-                                            <th>확인</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        <tr>
-                                        <!-- for문 돌릴 곳!! -->
-                                       		<td>1</td>
-                                            <td>서울교통공사</td>
-                                            <td>02-000-0000</td>
-                                            <td>kkk@kkkk.kk</td>
-                                            <td>집에 보내줘</td>
-                                            <td>2023-05-01</td>
-                                            <td>Y</td>
-                                            
-                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -118,5 +87,67 @@
                     </div>
                 </main>
 	<%@ include file="../../../includes/footer.jsp" %> 
+	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+	<script>
+	
+ 	// 문서준비 완료 되면
+    $(document).ready(function() {
+
+        // 유무 page 값 가져오기
+        const page = getQueryString('page');
+
+        // page 값 유무로 페이지체크
+        getDataList()
+
+    });
+    var page = getQueryString('page') || 1;
+    // 데이터 목록 가져오기
+    function getDataList(){
+    	
+   		var path = "/contact/";
+   		var type = "GET";
+   		var data = {
+			pageNum : page,
+			amount : 10,
+			type : $('#key').val() || "",
+			keyword : $('input[name=keyword]').val() || "",
+			status : $('#contact_open').val() || ""
+		}
+   		
+   		conLog(data)
+   		ajaxCallBack(path, type, data, function(response){
+   			
+   			conLog(response)
+   			if(response.code == "200") {
+   				dataList = response.result;
+   	            getDataListCreate();
+   			}
+   		});
+   	}
+    
+    let dataList = [];
+    function getDataListCreate(){
+    	
+        createHTML = '';
+        
+        if (dataList.length === 0) {
+            // 데이터가 없는 경우 처리
+            createHTML = '<tr><td colspan="7">데이터가 없습니다.</td></tr>';
+        } else {
+        	dataList.forEach(function(v,idx) {
+	        		var no = (page - 1) > 0 ? (page - 1) * 10 + (idx+1) : (idx+1);
+
+        		var contact_dt = formatDate(v.contact_dt);
+                var contact_open = v.contact_open == 'Y' ? "<span>확인</span>" : "<span style='color:#ff6262;'>미확인</span>";
+            
+                // var delBtn = '<button class="btn btn-danger btn-sm" onClick="dataDel(\''+ v.mem_id +'\')" type="button ">삭제</button>';
+                createHTML += '<tr><td>'+ no +'</td><td>'+ v.company +'</td><td>'+ v.phone +'</td><td>'+ v.email +'</td><td class="text-primary" style="cursor: pointer;" onClick="movePath(\'/pages/admin/contact/detail?id='+v.contact_seq+'\')">'+ v.contact_content +'</td><td>'+ contact_dt +'</td><td>'+ contact_open +'</td></tr>'
+            });
+        }
+        
+        $('#dataList').html(createHTML)
+        
+    }
+	</script>
 	</body>
 </html>

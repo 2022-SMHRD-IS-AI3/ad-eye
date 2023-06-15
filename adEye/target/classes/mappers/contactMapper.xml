@@ -39,6 +39,7 @@
             	</trim>
          	</foreach>
       	</trim>
+<<<<<<< HEAD
       	<trim prefix="(" suffix=") AND" prefixOverrides="OR">
         	<foreach collection="dateArr" item="date">
             	<trim prefix="OR">
@@ -50,6 +51,8 @@
             	</trim>
          	</foreach>
       	</trim>
+=======
+>>>>>>> branch 'master' of https://github.com/2022-SMHRD-IS-AI3/ad-eye.git
 	</sql>
 	
 	<select id="list" resultType="com.sansam.adeye.domain.ContactDTO">
