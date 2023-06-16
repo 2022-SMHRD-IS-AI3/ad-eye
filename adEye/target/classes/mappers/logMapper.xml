@@ -100,7 +100,9 @@
 	
 	<select id="totalCnt" resultType="int" parameterType="com.sansam.adeye.domain.PageDTO">
 		SELECT COUNT(*) 
-		FROM tb_log 
+		FROM tb_log l
+		INNER JOIN tb_device d ON l.device_uid = d.device_uid
+		LEFT OUTER JOIN tb_subscription s ON d.device_seq = s.device_seq
 		WHERE
 		<include refid="criteria"></include> 
 		log_seq &gt; 0
