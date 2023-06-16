@@ -67,109 +67,17 @@
         // 문서준비 완료 되면
         $(document).ready(function() {
 
-            // 등록, 수정 유무 id 값 가져오기
-            const idValue = getQueryString('id');
-
-            // id 값 유무로 등록 수정 판단
-            if(idValue){
-
-                // 삭제, 수정 버튼
-                const changebtn = '<button class="btn btn-danger me-2" onClick="dataSubmit(\'dl\')" type="button ">삭제</button>'+
-                        '<button class="btn btn-primary" onClick="dataSubmit(\'up\')" type="button">수정</button>';
-                $('.submit-btn-wrap').html(changebtn)
-                
-                $('#mem_id').val(idValue)
-                $('input[name=mem_company]').attr('disabled', true);
-                $('input[name=admin_yn]').attr('disabled', true);
-                $('input[name=mem_id]').attr('disabled', true);
-                getDataDetail(idValue);
-            
-            }else{ // 값 없으면 회원 등록
-
-                $('.refresh-btn').removeClass('d-none')
-                // uuid 셋팅
-                generateUUID('mem_id');
-            }
-
         });
-        
-     	// 데이터 상세 조회
-     	var dataDetail = null;
-        function getDataDetail(id){
-        	
-       		var path = "/member/detail";
-       		var type = "GET";
-       		var data = {
-       			mem_id : id
-    		}
-       		
-       		ajaxCallBack(path, type, data, function(response){
-       			
-       			conLog(response)
-       			if(response.code == "200") {
-       				var info = response.result;
-       				$('#mem_company').val(info.mem_company);
-       				$('#mem_pw').val(info.mem_pw);
-       				$('#mem_phone').val(info.mem_phone);
-       				$('#mem_email').val(info.mem_email);
-       				var addrArr = info.company_addr.split(",");
-       				$('#addr1').val(addrArr[0]);
-       				$('#addr2').val(addrArr[1]);
-       				
-       				if(info.mem_status === 'N') {
-       					$('#mem_status_n').prop("checked", true);
-       				}
-       				
-       				
-       			}
-       		});
-       	}
-        
-		function setDataDetail(){
-        	
-            
-            if (dataDetail == null) {
-                // 데이터가 없는 경우 처리
-                alert("조회가 불가한 회원입니다");
-                moveCode('mlist');
-            } else {
-            	
-            	
-            }
-            
-            $('#dataList').html(createHTML)
-            
-        }
         
         // 데이터 전송
         function dataSubmit(flag){
         	
        		var path = "";
        		var type = "POST";
-       		var data = null;
-       		var msg = "";
-       		
-        	if(flag == 'dl'){ // 삭제
-        		
-        		
-        		path = "/member/delete";
-        		type = "GET";
-        		data =  {
-        			mem_id : $('#mem_id').val()
-              	}
-       		
-        		msg = "삭제하시겠습니까?";
-        	}else if('in' || 'up') { // 등록, 수정
-        		
-        		data = {
-                  	mem_id : $('#mem_id').val(),
-                   	mem_pw : $('#mem_pw').val(),
-                  	mem_company : $('#mem_company').val(),
-                  	mem_phone : $('#mem_phone').val(),
-                  	mem_email : $('#mem_email').val(),
-                   	mem_status : $('input[name=mem_status]:checked').val(),
-                  	company_addr : $('#addr1').val() + "," + $('#addr2').val()
-               	}
+       		var data = {
+       			device_uid : $('#device_uid').val(),
+                device_onoff : 'Y'
+            }
         		
 	       		if(isObjectEmpty(data)){ // 빈 값 체크
 	       			alert("필수 입력정보가 입력되지 않았습니다");
@@ -183,7 +91,7 @@
         			path = "/member/update";
         		}
         		
-        	}
+        	
         	
         	var cflag = false
         	if(msg != ""){
