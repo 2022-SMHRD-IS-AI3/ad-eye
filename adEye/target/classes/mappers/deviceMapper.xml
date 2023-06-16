@@ -14,9 +14,9 @@
        				device_onoff,
        				device_status,
        				device_dt,
-       				mem_company,
-       				sbs_seq,
-       				sbs_alias,
+       				NVL(mem_company, '없음'),
+       				NVL(sbs_seq, 0),
+       				NVL(sbs_alias, '없음'),
        				data_check
 		 	FROM (
   				SELECT /*+ INDEX_DESC(tb_device IDX_tb_device_PK) */
@@ -42,8 +42,9 @@
             			(SELECT sbs_alias FROM tb_subscription s WHERE s.device_seq = d.device_seq AND s.sbs_status = 'Y') AS sbs_alias,
             			(SELECT COUNT(log_seq) FROM tb_log l WHERE l.device_uid = d.device_uid AND l.log_dt >= SYSDATE - INTERVAL '5' MINUTE) AS data_check
         			FROM tb_device d
-        			JOIN tb_subscription s ON s.device_seq = d.device_seq 
-        			JOIN tb_member m ON m.mem_id = s.mem_id
+        			LEFT JOIN tb_subscription s on d.device_seq = s.device_seq and s.sbs_status = 'Y'
+                    LEFT JOIN tb_member m on s.mem_id = m.mem_id
+                    WHERE device_status != 'D'
         			ORDER BY device_status DESC, device_seq DESC
   				) d
 		        WHERE
@@ -116,9 +117,9 @@
 		SELECT COUNT(*) 
 		FROM (
 			SELECT *
-			FROM tb_device d
-			JOIN tb_subscription s ON s.device_seq = d.device_seq 
-        	JOIN tb_member m ON m.mem_id = s.mem_id
+			FROM tb_device d 
+            LEFT JOIN tb_subscription s on d.device_seq = s.device_seq and s.sbs_status = 'Y'
+            LEFT JOIN tb_member m on s.mem_id = m.mem_id
 			)
 		WHERE
 		<include refid="criteria"></include> 
