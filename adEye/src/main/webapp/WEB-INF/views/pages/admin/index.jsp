@@ -33,8 +33,8 @@
                         <div class="row">
                             <!-- 읽지 않은 문의글-->
                             <div class="col-xl-4 mb-4">
-                                <a class="card lift h-100" href="#!">
-                                    <div class="card-body d-flex justify-content-center flex-column" onClick="moveCode('noread')">
+                                <a class="card lift h-100" onClick="moveCode('noread')">
+                                    <div class="card-body d-flex justify-content-center flex-column">
                                         <div class="align-items-center text-center">
                                             <div class="text-center">
                                                 <p class="fs-4 fw-bolder">읽지 않은 문의 글</p>
@@ -46,8 +46,8 @@
                             </div>
                             <!-- 사용 중인 기기-->
                             <div class="col-xl-4 mb-4">
-                                <a class="card lift h-100" href="#!">
-                                    <div class="card-body d-flex justify-content-center flex-column" onClick="moveCode('use')">
+                                <a class="card lift h-100" onClick="moveCode('use')">
+                                    <div class="card-body d-flex justify-content-center flex-column">
                                         <div class="align-items-center text-center">
                                             <div class="text-center">
                                                 <p class="fs-4 fw-bolder">사용 중인 기기</p>
@@ -59,8 +59,8 @@
                             </div>
                             <!-- 만료 예정 구독 (5일 전)-->
                             <div class="col-xl-4 mb-4">
-                                <a class="card lift h-100" href="#!">
-                                    <div class="card-body d-flex justify-content-center flex-column" onClick="moveCode('dday')">
+                                <a class="card lift h-100" onClick="moveCode('dday')">
+                                    <div class="card-body d-flex justify-content-center flex-column">
                                         <div class="align-items-center text-center">
                                             <div class="text-center">
                                                 <p class="fs-4 fw-bolder">만료 예정 구독 (5일 전)</p>

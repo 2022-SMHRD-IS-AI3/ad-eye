@@ -95,6 +95,7 @@
 
         // 유무 page 값 가져오기
         const page = getQueryString('page');
+        $('#contact_open').val(getQueryString('cs') || '').prop("selected", true);
 
         // page 값 유무로 페이지체크
         getDataList()

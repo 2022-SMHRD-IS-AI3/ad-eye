@@ -99,7 +99,8 @@
 	    			pageNum : page,
 	    			amount : 10,
 	    			type : $('#key').val() || "",
-	    			keyword : $('input[name=keyword]').val() || ""
+	    			keyword : $('input[name=keyword]').val() || "",
+	    			status : getQueryString('ds') || ""
 	    		}
 	       		
 	       		ajaxCallBack(path, type, data, function(response){

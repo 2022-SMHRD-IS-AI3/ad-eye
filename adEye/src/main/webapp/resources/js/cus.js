@@ -65,11 +65,11 @@ function moveCode(code,d){ // 코드, 쿼리스트링
     }else if(code === 'login'){
         path = "/pages/login"
     }else if(code === 'noread'){
-        path = "/pages/admin/contact/?cs=Y"
+        path = "/pages/admin/contact/?cs=N"
     }else if(code === 'use'){
         path = "/pages/admin/device/?ds=Y"
     }else if(code === 'dday'){
-        path = "/pages/admin/sbs/?ss=Y"
+        path = "/pages/admin/sbs/?ss=5"
     }
 
     movePath(path, op, w, h);
