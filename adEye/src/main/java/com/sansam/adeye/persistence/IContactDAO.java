@@ -13,4 +13,6 @@ public interface IContactDAO {
 	public int contactSend(ContactDTO cDto) throws Exception;
 	// 특정 문의 내역 조회
 	public ContactDTO contactDetail(int seq) throws Exception;
+	// 특정 문의 내역 조회 시 열람 확인 값 자동 변경
+	public int openYn(int seq) throws Exception;
 }
