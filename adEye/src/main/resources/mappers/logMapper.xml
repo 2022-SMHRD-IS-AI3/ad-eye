@@ -14,7 +14,7 @@
             	<trim prefix="OR">
                 	<choose>
                     	<when test="type == 'D'.toString()">
-                     		l.device_uid LIKE '%'||#{keyword}||'%'
+                     		ls.device_uid LIKE '%'||#{keyword}||'%'
                   		</when>
                   		<when test="type == 'L'.toString()">
                      		s.sbs_loc LIKE '%'||#{keyword}||'%'
