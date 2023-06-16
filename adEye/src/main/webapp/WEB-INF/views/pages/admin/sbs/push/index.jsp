@@ -173,15 +173,6 @@
                     $('#sbs_end_dt').val(dateStr)
                 },
             });
-            
-        	 // 쿼리스트링 값 가져오기
-            function getQueryParameterValue(parameterName) {
-
-                const queryString = window.location.search;
-                const urlParams = new URLSearchParams(queryString);
-                return urlParams.get(parameterName);
-
-            }
         	 
             // 문서준비 완료 되면
             $(document).ready(function() {
@@ -200,8 +191,11 @@
                     
                     $('#mem_id').prop('disabled',true);
                     getDataDetail(idValue);
-                    
+                }else{
+                	
                 }
+                
+                
 
             });
             
@@ -220,7 +214,9 @@
            			if(response.code == "200") {
            				var info = response.result;
            				$('#mem_id').val(info.mem_id);
-           				$("#device_seq").val('1').prop("selected", true);
+           				device_seq = info.device_seq;
+           				getDeviceList()
+           				
            				$("#sbs_grade").val(info.sbs_grade).prop("selected", true);
            				$('#sbs_alias').val(info.sbs_alias);
            				var addrArr = info.sbs_loc.split(",");
@@ -228,9 +224,10 @@
            				$('#addr2').val(addrArr[1]);
            				
            				if(info.sbs_status === 'N') {
-           					conLog(213)
            					$('#sbs_status_n').prop("checked", true);
            				}
+           				
+
            				
     	                var sbs_start_dt = formatDate(info.sbs_start_dt); // 밀리초 단위의 시간 값
     	                var sbs_end_dt = formatDate(info.sbs_end_dt); // 밀리초 단위의 시간 값
@@ -242,6 +239,64 @@
            			}
            		});
            	}
+         	
+         	// 기기 미사용 리스트 조회
+         	var deviceList = [];
+         	var device_seq = 0;
+            function getDeviceList(){
+            	
+            	var path = "/device/list";
+	       		var type = "GET";
+	       		var data = {
+	    			status : ""
+	    		}
+           		
+           		ajaxCallBack(path, type, data, function(response){
+           			
+           			conLog(response)
+           			if(response.code == "200") {
+           				deviceList = [];
+           				response.result.forEach(function(v){
+           						conLog(v.device_status)
+           					if(v.device_status == 'N' || v.device_seq == device_seq){
+           						
+           						deviceList.append({device_seq:v.device_seq, device_uid:v.device_uid});
+           					}
+           					conLog(deviceList)
+           				})
+           				
+           				if(deviceList.length > 0){
+           					deviceListCreate()
+           				}
+           				
+           			}
+           		});
+           	}
+            
+            // 기기목록 만들기
+            function deviceListCreate(){
+            	
+            	var deviceHTML = '';
+            	if(deviceList.length > 0){
+            		deviceList.forEach(function(v){
+            			
+	            		deviceHTML += '<option value="'+ v.device_seq +'">'+ v.device_uid +'</option>';
+            		})
+            		
+            		if(d != null && d != undefined){
+            			deviceHTML += '<option value="'+ d.device_seq +'" selected>'+ v.device_uid +'</option>';
+            		}
+            		conLog(deviceHTML)
+            		if(deviceHTML != ''){
+            			$('#device_seq').append(deviceHTML);
+            			
+            			$("#device_seq").val(device_seq).prop("selected", true);
+            			
+            		}
+            	}
+            	
+            }
+            
             
          	
 	        // 주소검색 api
