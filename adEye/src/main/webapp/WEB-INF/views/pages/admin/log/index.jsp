@@ -104,7 +104,7 @@
        			if(response.code == "200") {
        				dataList = response.result;
        	            getDataListCreate();
-	       	        if($('#key').val() != '') {
+	       	        if($('#key').val() == 'D' && $('#keyword').val() == dataList[0].device_uid) {
 	                 	$('#reboot_btn').removeClass('d-none')
 	                }else{
 	                	$('#reboot_btn').addClass('d-none')	
