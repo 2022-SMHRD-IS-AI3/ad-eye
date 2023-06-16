@@ -34,4 +34,6 @@ public interface IDeviceService {
 	public int logTotalCnt(Criteria cri) throws Exception;
 	// 특정 기기 로그 조회 페이징
 	public int devLogCnt(Criteria cri) throws Exception;
+	// 기기 간단 목록
+	public List<DeviceDTO> deviceSimpleList() throws Exception;
 }

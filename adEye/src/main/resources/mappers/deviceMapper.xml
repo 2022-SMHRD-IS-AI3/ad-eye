@@ -124,5 +124,9 @@
 		<include refid="criteria"></include> 
 			device_status != 'D' 
 	</select>
+	
+	<select id="deviceSimpleList" resultType="com.sansam.adeye.domain.DeviceDTO">
+		SELECT device_seq, device_uid, device_status FROM tb_device WHERE device_status != 'D'
+	</select>
   
 </mapper>

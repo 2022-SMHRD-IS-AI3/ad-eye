@@ -25,4 +25,6 @@ public interface IDeviceDAO {
 	public int devStatusOn(int seq) throws Exception;
 	// 기기 목록 페이징
 	public int totalCnt(Criteria cri) throws Exception;
+	// 기기 간단 목록
+	public List<DeviceDTO> deviceSimpleList() throws Exception;
 }

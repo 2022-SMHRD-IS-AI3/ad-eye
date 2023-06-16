@@ -285,4 +285,30 @@ public class DeviceController {
 		
 		return paramMap;
 	}
+	
+	// 기기 간단 목록 조회
+	@RequestMapping(value = "/simple", method = RequestMethod.GET)
+	public @ResponseBody Map<String, Object> deviceSimpleList() throws Exception {
+		
+		log.info("/device/simple... : ");
+		
+		// 보내줄 맵 객체 생성
+		Map<String,Object> paramMap = new HashMap<String, Object>();
+		
+		try {
+			
+			List<DeviceDTO> dList = service.deviceSimpleList();
+			System.out.println(dList.toString());
+		    paramMap.put("result", dList);
+		    paramMap.put("code", "200");
+		    paramMap.put("message", "조회 성공");
+		} catch (Exception e) {
+			paramMap.put("code", "500");
+		    paramMap.put("message", "서버 문제");
+		}
+		return paramMap;
+	}
+	
+	
+	
 }

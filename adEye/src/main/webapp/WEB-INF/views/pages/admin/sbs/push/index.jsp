@@ -245,7 +245,7 @@
          	var device_seq = 0;
             function getDeviceList(){
             	
-            	var path = "/device/list";
+            	var path = "/device/simple";
 	       		var type = "GET";
 	       		var data = {
 	    			status : ""
@@ -255,14 +255,14 @@
            			
            			conLog(response)
            			if(response.code == "200") {
-           				deviceList = [];
+           				var deviceList2 = [];
            				response.result.forEach(function(v){
-           						conLog(v.device_status)
+           					conLog(device_seq)
            					if(v.device_status == 'N' || v.device_seq == device_seq){
            						
-           						deviceList.append({device_seq:v.device_seq, device_uid:v.device_uid});
+           						conLog(deviceList)
+           						deviceList2.append({device_seq:v.device_seq, device_uid:v.device_uid});
            					}
-           					conLog(deviceList)
            				})
            				
            				if(deviceList.length > 0){

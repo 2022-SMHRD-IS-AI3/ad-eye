@@ -30,6 +30,13 @@ public class DeviceDTO {
 	      this.device_uid = device_uid;
 	      this.device_onoff = device_onoff;
 	   }
+	   
+	   public DeviceDTO(int device_seq, String device_uid, char device_status) {
+
+		      this.device_seq = device_seq;
+		      this.device_uid = device_uid;
+		      this.device_status = device_status;
+	   }
 	}
 
 

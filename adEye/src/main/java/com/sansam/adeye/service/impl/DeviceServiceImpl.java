@@ -90,5 +90,10 @@ public class DeviceServiceImpl implements IDeviceService{
 		System.out.println("Service 접속");
 		return lDao.devLogCnt(cri);
 	}
+	@Override
+	public List<DeviceDTO> deviceSimpleList() throws Exception {
+		System.out.println("Service 접속");
+		return dDao.deviceSimpleList();
+	}
 	
 }

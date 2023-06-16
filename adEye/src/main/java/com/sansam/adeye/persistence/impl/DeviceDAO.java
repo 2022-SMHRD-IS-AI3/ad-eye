@@ -69,4 +69,9 @@ public class DeviceDAO implements IDeviceDAO{
 		System.out.println("DAO 접속");
 		return session.selectOne("DeviceMapper.totalCnt", cri);
 	}
+	@Override
+	public List<DeviceDTO> deviceSimpleList() throws Exception {
+		
+		return session.selectList("DeviceMapper.deviceSimpleList");
+	}
 }
