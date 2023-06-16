@@ -14,10 +14,10 @@
             	<trim prefix="OR">
                 	<choose>
                     	<when test="type == 'D'.toString()">
-                     		ls.device_uid LIKE '%'||#{keyword}||'%'
+                     		device_uid LIKE '%'||#{keyword}||'%'
                   		</when>
                   		<when test="type == 'L'.toString()">
-                     		ls.sbs_loc LIKE '%'||#{keyword}||'%'
+                     		sbs_loc LIKE '%'||#{keyword}||'%'
                   		</when>
                		</choose>
             	</trim>
