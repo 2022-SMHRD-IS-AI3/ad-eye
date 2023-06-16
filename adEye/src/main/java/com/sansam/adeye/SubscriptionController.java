@@ -34,10 +34,11 @@ public class SubscriptionController {
 	 public @ResponseBody Map<String, Object> sbsList(Criteria cri) throws Exception {
 		 log.info("/subscription/list " + cri);
 		 Map<String,Object> paramMap = new HashMap<String, Object>();
+		 int seq = Integer.parseInt(cri.getSeq()); 
 		 
 		 try {
 		 	 
-			 	if (cri.getSeq() != null) {
+			 	if (seq > 0) {
 			 		// 구독 만료 5일 이내 목록 정보 불러오기
 			 		List<SubscriptionDTO> sList = service.sbsListExpiry(cri);
 			 		System.out.println(sList);

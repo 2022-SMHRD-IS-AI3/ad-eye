@@ -150,7 +150,7 @@
 					WHERE s.sbs_status != 'D'
 					ORDER BY sbs_status DESC, mem_company ASC, d_day ASC
 				) s
-				WHERE s.d_day <= TO_NUMBER(#{seq})
+				WHERE s.d_day <= TO_NUMBER(#{seq}) AND
 		]]>
 	  	<include refid="criteria"></include>         
       	<![CDATA[
