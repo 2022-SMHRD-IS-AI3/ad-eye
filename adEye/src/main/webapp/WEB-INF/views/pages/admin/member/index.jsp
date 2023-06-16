@@ -108,14 +108,14 @@
             getDataList()
 
         });
-        
+        var page = getQueryString('page') || 1;
         // 데이터 목록 가져오기
         function getDataList(){
         	
        		var path = "/member/";
        		var type = "GET";
        		var data = {
-    			pageNum : 1,
+    			pageNum : page,
     			amount : 10,
     			type : $('#key').val() || "",
     			keyword : $('input[name=keyword]').val() || ""
