@@ -82,5 +82,9 @@
   	<select id="detail" resultType="com.sansam.adeye.domain.ContactDTO" parameterType="int">
 		SELECT * from tb_contact WHERE contact_seq = #{contact_seq}
   	</select>
+  	
+  	<update id="openYn">
+  		UPDATE tb_contact set contact_open = 'Y' where contact_seq = #{contact_seq}
+  	</update>
  
 </mapper>

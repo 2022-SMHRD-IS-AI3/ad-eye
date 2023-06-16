@@ -52,4 +52,10 @@ public class SubscriptionDAO implements ISubscriptionDAO{
 	public int sbsDelete(int seq) throws Exception {
 		return session.update("SubscriptionMapper.delete", seq);
 	}
+	// 전체 구독 목록 페이징
+	@Override
+	public int totalCnt(Criteria cri) throws Exception {
+		System.out.println("DAO 접속");
+		return session.selectOne("SubscriptionMapper.totalCnt", cri);
+	}
 }

@@ -100,6 +100,10 @@ public class ContactController {
 		try {
 			
 			ContactDTO cDto = service.contactDetail(Integer.parseInt(data));
+			System.out.println(data);
+			int open_yn = service.openYn(Integer.parseInt(data));
+			System.out.println(open_yn);
+			
 			// paramMap 에 담을 객체 생성
 			Map<String, Object> paramMapsub = new HashMap<String, Object>();
 			
