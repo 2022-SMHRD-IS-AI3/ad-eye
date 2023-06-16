@@ -70,10 +70,6 @@
                             <!-- Sidenav Menu Heading (내 구독 확인)-->
                             <div class="sidenav-menu-heading">내 구독 확인</div>
                             <!-- Sidenav Accordion (Dashboard)-->
-                            <a class="nav-link collapsed" href="#!" data-bs-toggle="collapse" data-bs-target="#collapseDashboards" aria-expanded="false" aria-controls="collapseDashboards">
-                                한성대 입구역 1번 출구 1
-                                <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
                            </div>
                       </div>
                 </nav>
@@ -257,6 +253,76 @@
                     $('#addr2').focus()
                 }
             }).open();
+        }
+
+        // 문서준비 완료 되면
+        $(document).ready(function() {
+        	const idValue = getQueryString('mem_id');
+
+            // id 값 유무로 등록 수정 판단
+            if(idValue){
+            	getDashboardData(idValue);
+   				$('.mem_id').text(getQueryString('mem_id'))
+            	
+            }
+        });
+
+     	// 데이터 상세 조회
+        function getDashboardData(id){
+        	
+       		var path = "/member/devicelist";
+       		var type = "GET";
+       		var data = {
+    			pageNum : 1,
+    			amount : 500,
+    			mem_id : getQueryString('mem_id')
+    		}
+       		
+       		ajaxCallBack(path, type, data, function(response){
+       			
+       			if(response.code == "200") {
+       				$('.mem_company').text(response.result.mem_company)
+       				$('.mem_id').text(id)
+
+       				dataList = response.result.sbs_list;
+       				getDataListCreate()
+       				
+       				if (dataList.length > 0) {
+
+       					var sbs_alias = "";
+       					dataList.forEach(function(v) {
+       						
+       						if(v.sbs_seq == id){
+       							sbs_alias = v.sbs_alias
+       						}
+                                
+    		            });
+       					
+       					$('.sbs_alias').text(sbs_alias);
+    	            	
+    	            }
+       				
+       			}
+       		});
+       	}
+     	
+        let dataList = [];
+        function getDataListCreate(){
+        	
+            var createNavHTML = '';
+	        var mem_id = getQueryString('mem_id');
+            
+            if (dataList.length > 0) {
+                // 데이터가 없는 경우 처리
+            	dataList.forEach(function(v) {
+	                
+	                createNavHTML += '<a class="nav-link collapsed" onClick="movePath(\'/pages/user?mem_id='+ mem_id +'&sbs_seq='+ v.sbs_seq +'\')" data-bs-toggle="collapse" data-bs-target="#collapseDashboards" aria-expanded="false" aria-controls="collapseDashboards">'+ v.sbs_alias + '<div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div></a>';
+                        
+	            });
+            }
+            
+            $('#accordionSidenav').append(createNavHTML)
+            
         }
         
         // 내 정보 수정 페이지 이동
