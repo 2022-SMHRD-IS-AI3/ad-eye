@@ -90,6 +90,7 @@
             			s.sbs_status,
             			(SELECT TRUNC(s.sbs_end_dt) - TRUNC(SYSDATE) FROM dual) AS d_day
 					FROM tb_subscription s
+					LEFT JOIN tb_member m ON s.mem_id = m.mem_id
 					WHERE s.sbs_status != 'D'
 					ORDER BY sbs_status DESC, mem_company ASC, d_day ASC
 				) s
@@ -220,7 +221,8 @@
 	
 	<select id="totalCnt" resultType="int">
 		SELECT COUNT(*)
-		FROM tb_subscription s, tb_member m
+		FROM tb_subscription s
+		LEFT JOIN tb_member m ON s.mem_id = m.mem_id
 		WHERE 
 		<include refid="criteria"></include>
 		s.sbs_status != 'D'
