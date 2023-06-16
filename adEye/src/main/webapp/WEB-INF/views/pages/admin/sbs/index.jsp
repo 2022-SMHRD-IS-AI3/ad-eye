@@ -106,6 +106,7 @@
         // 데이터 목록 가져오기
         function getDataList(){
         	
+        	
        		var path = "/subscription/";
        		var type = "GET";
        		var data = {
@@ -114,7 +115,8 @@
     			type : $('#key').val() || "",
     			keyword : $('input[name=keyword]').val() || "",
     			status : $('#sbs_status').val() || "",
-    			grade : $('#sbs_grade').val() || ""
+    			grade : $('#sbs_grade').val() || "",
+    			seq : getQueryString('ss') || ""
     		}
        		
        		conLog(data)

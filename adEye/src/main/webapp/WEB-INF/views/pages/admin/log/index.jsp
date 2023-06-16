@@ -64,7 +64,7 @@
                                     </tbody>
                                 </table>
                                 <div class="d-flex justify-content-end">
-                                <button class="btn btn-danger d-none" id="reboot_btn">Reboot</button>
+                                <button class="btn btn-danger d-none" id="reboot_btn" onClick="rebootOn()">Reboot</button>
                                 </div>
                             </div>
                         </div>
@@ -77,8 +77,10 @@
         $(document).ready(function() {
 
             // page 값 유무로 페이지체크
+            
             $("#key").val(getQueryString('key') || '').prop("selected", true);
             $('#keyword').val(getQueryString('uid') || '');
+            
             getDataList()
 
         });
@@ -102,6 +104,11 @@
        			if(response.code == "200") {
        				dataList = response.result;
        	            getDataListCreate();
+	       	        if($('#key').val() != '') {
+	                 	$('#reboot_btn').removeClass('d-none')
+	                }else{
+	                	$('#reboot_btn').addClass('d-none')	
+	                }
        			}
        		});
        	}
@@ -128,19 +135,28 @@
             
         }
         
-        // 검색시 reboot 버튼 생성
-         document.getElementById('search_btn').addEventListener('click', function() {
-            var key = document.querySelector('select[name="key"]').value;
-            var keyword = document.querySelector('input[name="keyword"]').value;
-
-            if (key === 'device_num' || key === 'location') {
-                document.getElementById('reboot_btn').classList.remove('d-none');
-            } else {
-                document.getElementById('reboot_btn').classList.add('d-none');
-            }
-
-            // Perform search or other actions...
-        });
+		// 재가동 버튼 클릭        
+        function rebootOn(seq){
+        	var path = "/device/onoff";
+       		var type = "POST";
+       		var data = {
+    			device_seq : seq,
+    			device_onoff : "R"
+    		}
+       		
+       		conLog(data)
+       		ajaxCallBack(path, type, data, function(response){
+       			
+       			conLog(response)
+       			if(response.code == "202") {
+       				alert("기기가 재시작 됩니다.")
+       			}else{
+       				alert("기기 재시작 실패")
+       			}
+       		});
+        }
+        
+        
          </script>
 	</body>
 </html>
