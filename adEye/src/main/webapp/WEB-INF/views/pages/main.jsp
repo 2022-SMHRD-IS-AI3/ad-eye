@@ -104,7 +104,7 @@
                                 </div>
                                 <!-- contact form -->
                                     <div class="col-lg-6">
-                                    <form action="/contact/send" method="POST" id="contactForm">
+                                    <form>
                                         <div class="mb-3">
                                             <label for="company" class="form-label">* 회사명</label>
                                             <input type="text" class="form-control" id="company" placeholder="회사명">
