@@ -76,7 +76,7 @@
 	</select>
 	
 	<insert id="create">
-		INSERT INTO tb_contact (email, phone, company, contact_content, contact_dt, contact_open, admin_id) values('email_5@sansam.com', '010-0000-0000', '산삼들_7', '우리들은 산삼들_7이다', sysdate, 'N', 'test01')
+		INSERT INTO tb_contact (email, phone, company, contact_content, contact_dt, contact_open, admin_id) values(#{email}, #{phone}, #{company}, #{contact_content}, sysdate, 'N', 'admin')
 	</insert>
   
   	<select id="detail" resultType="com.sansam.adeye.domain.ContactDTO" parameterType="int">
