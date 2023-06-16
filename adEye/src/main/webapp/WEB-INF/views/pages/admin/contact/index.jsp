@@ -50,8 +50,8 @@
                                    	<div class="col-md-2">
                                    		<select class="form-select" id="contact_open" name="contact_open">
                                    			<option value="">--- 상태 ---</option>
-                                   			<option value="Y">Y</option>
-                                   			<option value="N">N</option>
+                                   			<option value="Y">확인</option>
+                                   			<option value="N">미확인</option>
                                    		</select>
                                    	</div>
                                     <div class="col-md-2">

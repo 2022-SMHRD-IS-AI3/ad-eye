@@ -126,7 +126,7 @@
 	            		var red = v.data_check > 0 ? '' : 'style="background: #ffc7c7;""';
 	            		var device_onoff = v.device_onoff == 'Y' ? '<span style="color: #9ecd73;font-weight: bolder;">ON</span>' : '<span style="color: #ff5353;font-weight: bolder;">OFF</span>';
 		                
-		                createHTML += '<tr '+ red +'><td>'+ v.device_seq +'</td><td class="text-primary link-point" onClick="movePath(\'/pages/admin/device/pop?sbs_seq='+v.sbs_seq+'\',\'pop\')">'+ v.device_uid +'</td><td>'+ v.mem_company +'</td><td>'+ v.sbs_alias +'</td><td>'+ device_onoff +'</td><td class="text-primary link-point" onClick="movePath(\'/pages/admin/log?uid='+v.device_uid+'\')">'+ v.data_check +'</td></tr>'
+		                createHTML += '<tr '+ red +'><td>'+ v.device_seq +'</td><td class="text-primary link-point" onClick="movePath(\'/pages/admin/device/pop?sbs_seq='+v.sbs_seq+'\',\'pop\')">'+ v.device_uid +'</td><td>'+ v.mem_company +'</td><td>'+ v.sbs_alias +'</td><td>'+ device_onoff +'</td><td class="text-primary link-point" onClick="movePath(\'/pages/admin/log?key=D&uid='+v.device_uid+'\')">'+ v.data_check +'</td></tr>'
 		            });
 	            }
 	            
