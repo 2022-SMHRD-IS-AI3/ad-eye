@@ -160,5 +160,13 @@
 	<update id="delete">
 		update tb_subscription set sbs_status = 'D' where sbs_seq = #{sbs_seq}
 	</update>
+	
+	<select id="totalCnt" resultType="int">
+		SELECT COUNT(*)
+		FROM tb_subscription
+		WHERE 
+		<include refid="criteria"></include>
+		sbs_status != 'D'
+	</select>
 
 </mapper>
