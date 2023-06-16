@@ -42,4 +42,9 @@ public class ContactDAO implements IContactDAO{
 		System.out.println(123);
 		return session.selectOne("ContactMapper.detail", seq);
 	}
+	// 특정 문의 내역 조회 시 열람 확인 값 자동 변경
+	@Override
+	public int openYn(int seq) throws Exception{
+		return session.update("ContactMapper.openYn", seq);
+	}
 }

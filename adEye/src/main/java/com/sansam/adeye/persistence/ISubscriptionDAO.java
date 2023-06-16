@@ -21,4 +21,6 @@ public interface ISubscriptionDAO {
 	public int sbsUpdate(SubscriptionDTO sDto) throws Exception;
 	// 특정 구독 삭제 (상태 변경)
 	public int sbsDelete(int seq) throws Exception;
+	// 전체 구독 목록 페이징
+	public int totalCnt(Criteria cri) throws Exception;
 }

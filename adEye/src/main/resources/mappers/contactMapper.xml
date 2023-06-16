@@ -39,17 +39,6 @@
             	</trim>
          	</foreach>
       	</trim>
-      			<trim prefix="(" suffix=") AND" prefixOverrides="OR">
-        	<foreach collection="dateArr" item="date">
-            	<trim prefix="OR">
-                	<choose>
-                    	<when test="date != '' ">
-                     		contact_dt = TRUNC(to_date(#{date}, 'YYYY-MM-DD'))
-                  		</when>
-               		</choose>
-            	</trim>
-         	</foreach>
-      	</trim>
 	</sql>
 	
 	<select id="list" resultType="com.sansam.adeye.domain.ContactDTO">
@@ -87,11 +76,15 @@
 	</select>
 	
 	<insert id="create">
-		INSERT INTO tb_contact (email, phone, company, contact_content, contact_dt, contact_open, admin_id) values('email_5@sansam.com', '010-0000-0000', '산삼들_7', '우리들은 산삼들_7이다', sysdate, 'N', 'test01')
+		INSERT INTO tb_contact (email, phone, company, contact_content, contact_dt, contact_open, admin_id) values(#{email}, #{phone}, #{company}, #{contact_content}, sysdate, 'N', 'admin')
 	</insert>
   
   	<select id="detail" resultType="com.sansam.adeye.domain.ContactDTO" parameterType="int">
 		SELECT * from tb_contact WHERE contact_seq = #{contact_seq}
   	</select>
+  	
+  	<update id="openYn">
+  		UPDATE tb_contact set contact_open = 'Y' where contact_seq = #{contact_seq}
+  	</update>
  
 </mapper>

@@ -58,5 +58,11 @@ public class SubscriptionServiceImpl implements ISubscriptionService{
 		System.out.println("Service 접속");
 		return sDao.sbsDelete(seq);
 	}
+	// 전체 구독 목록 페이징
+	@Override
+	public int totalCnt(Criteria cri) throws Exception {
+		System.out.println("Service 접속");
+		return sDao.totalCnt(cri);
+	}
 
 }

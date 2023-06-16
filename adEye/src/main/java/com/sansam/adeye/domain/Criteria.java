@@ -13,9 +13,7 @@ public class Criteria {
 		private String keyword; // type 에 해당하는 키워드
 		private String seq; // 특정 조회 시 사용 할 seq 값
 		private String status; // 상태값
-		private String date; // 일자값
 		private String grade; // 등급값
-		
 		
 		public Criteria() {
 			this(1,10); // 자기 자신 생성자
@@ -34,10 +32,6 @@ public class Criteria {
 		    return status == null ? new String[] {} : status.split("");
 		}
 		
-		public String[] getDateArr() {
-		    return date == null ? new String[] {} : date.split("");
-		}
-		
 		public String[] getGradeArr() {
 		    return grade == null ? new String[] {} : grade.split("");
 		}
@@ -49,7 +43,6 @@ public class Criteria {
 			this.keyword = keyword;
 			this.seq = seq;
 			this.status = status;
-			this.date = date;
 			this.grade = grade;
 		}
 }
