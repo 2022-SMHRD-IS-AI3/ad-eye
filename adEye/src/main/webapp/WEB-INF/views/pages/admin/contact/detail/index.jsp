@@ -40,15 +40,15 @@
                                             <tbody>
                                                 <tr>
                                                     <th class="border-start-0 text-center w-25 con_th">회사명</th>
-                                                    <td>adcompany</td>
+                                                    <td id="company">adcompany</td>
                                                 </tr>
                                                 <tr>
                                                     <th class="border-start-0 text-center con_th">연락처</th>
-                                                    <td>adcompany</td>
+                                                    <td id="phone">adcompany</td>
                                                 </tr>
                                                 <tr>
                                                     <th class="border-start-0 text-center con_th">이메일</th>
-                                                    <td>adcompany</td>
+                                                    <td id="email">adcompany</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -60,9 +60,7 @@
                                                     <td>
                                                         <div id="contact_content" class="text-break">
                                                             
-                                                        </div> 
-                                                        집에보내줘 집에보내줘 집에보내줘 집에보내줘 집에보내줘 집에보내줘 집에보내줘 집에보내줘 집에보내줘 집에보내줘
-                                                        </div>
+                                                        </div > 
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -83,5 +81,47 @@
                     </div>
                 </main>
 			<%@ include file="../../../../includes/footer.jsp" %> 
+			
+			<script type="text/javascript">
+       	 
+            // 문서준비 완료 되면
+            $(document).ready(function() {
+
+                // 등록, 수정 유무 id 값 가져오기
+                const idValue = getQueryString('id');
+
+                // id 값 유무로 등록 수정 판단
+                if(idValue){
+
+                    getDataDetail(idValue);
+                    
+                }
+
+            });
+            
+         	// 데이터 상세 조회
+            function getDataDetail(id){
+            	
+           		var path = "/contact/detail";
+           		var type = "GET";
+           		var data = {
+           			contact_seq : id
+        		}
+           		
+           		ajaxCallBack(path, type, data, function(response){
+           			
+           			conLog(response)
+           			if(response.code == "200") {
+           				var info = response.result;
+           				$('#company').text(info.company);
+           				$('#phone').text(info.phone);
+           				$('#email').text(info.email);
+           				$('#contact_content').text(info.contact_content);
+           				
+           			}
+           		});
+           	}
+            
+			</script>
 	</body>
 </html>
