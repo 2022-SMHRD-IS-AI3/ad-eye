@@ -141,7 +141,7 @@
                 var contact_open = v.contact_open == 'Y' ? "<span>확인</span>" : "<span style='color:#ff6262;'>미확인</span>";
             
                 // var delBtn = '<button class="btn btn-danger btn-sm" onClick="dataDel(\''+ v.mem_id +'\')" type="button ">삭제</button>';
-                createHTML += '<tr><td>'+ no +'</td><td>'+ v.company +'</td><td>'+ v.phone +'</td><td>'+ v.email +'</td><td class="text-primary" style="cursor: pointer;" onClick="movePath(\'/pages/admin/contact/detail?id='+v.contact_seq+'\')">'+ v.contact_content +'</td><td>'+ contact_dt +'</td><td>'+ contact_open +'</td></tr>'
+                createHTML += '<tr><td>'+ no +'</td><td>'+ v.company +'</td><td>'+ v.phone +'</td><td>'+ v.email +'</td><td class="link-point text-primary text-break w-25" onClick="movePath(\'/pages/admin/contact/detail?id='+v.contact_seq+'\')">'+ v.contact_content +'</td><td>'+ contact_dt +'</td><td>'+ contact_open +'</td></tr>'
             });
         }
         

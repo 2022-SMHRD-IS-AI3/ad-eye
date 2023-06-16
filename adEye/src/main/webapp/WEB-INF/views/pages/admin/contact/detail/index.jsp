@@ -40,15 +40,15 @@
                                             <tbody>
                                                 <tr>
                                                     <th class="border-start-0 text-center w-25 con_th">회사명</th>
-                                                    <td id="company">adcompany</td>
+                                                    <td id="company"></td>
                                                 </tr>
                                                 <tr>
                                                     <th class="border-start-0 text-center con_th">연락처</th>
-                                                    <td id="phone">adcompany</td>
+                                                    <td id="phone"></td>
                                                 </tr>
                                                 <tr>
                                                     <th class="border-start-0 text-center con_th">이메일</th>
-                                                    <td id="email">adcompany</td>
+                                                    <td id="email"></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -71,7 +71,7 @@
                                     </div>
                                     <div class="card-footer position-relative">
                                         <div class="d-flex align-items-center justify-content-between">
-                                            <button class="btn btn-secondary" type="button">목록</button>
+                                            <button class="btn btn-secondary" type="button" onclick="moveCode('contact')">목록</button>
                                         </div>
 
                                     </div>
