@@ -14,10 +14,10 @@
             	<trim prefix="OR">
                 	<choose>
                     	<when test="type == 'D'.toString()">
-                     		device_uid LIKE '%'||#{keyword}||'%'
+                     		l.device_uid LIKE '%'||#{keyword}||'%'
                   		</when>
                   		<when test="type == 'L'.toString()">
-                     		sbs_loc LIKE '%'||#{keyword}||'%'
+                     		s.sbs_loc LIKE '%'||#{keyword}||'%'
                   		</when>
                		</choose>
             	</trim>
@@ -49,7 +49,7 @@
 					FROM tb_log l, tb_subscription s, tb_device d
 					WHERE l.device_uid = d.device_uid
                 	AND d.device_seq = s.device_seq
-                	AND d.device_seq = TO_NUMBER(#{type})
+                	AND d.device_seq = TO_NUMBER(#{seq})
 				) ls
                 WHERE
 		]]>
