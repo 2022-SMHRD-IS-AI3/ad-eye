@@ -255,13 +255,11 @@
            			
            			conLog(response)
            			if(response.code == "200") {
-           				var deviceList2 = [];
+           				deviceList = [];
            				response.result.forEach(function(v){
-           					conLog(device_seq)
            					if(v.device_status == 'N' || v.device_seq == device_seq){
            						
-           						conLog(deviceList)
-           						deviceList2.append({device_seq:v.device_seq, device_uid:v.device_uid});
+           						deviceList.push({device_seq:v.device_seq, device_uid:v.device_uid});
            					}
            				})
            				
@@ -283,9 +281,6 @@
 	            		deviceHTML += '<option value="'+ v.device_seq +'">'+ v.device_uid +'</option>';
             		})
             		
-            		if(d != null && d != undefined){
-            			deviceHTML += '<option value="'+ d.device_seq +'" selected>'+ v.device_uid +'</option>';
-            		}
             		conLog(deviceHTML)
             		if(deviceHTML != ''){
             			$('#device_seq').append(deviceHTML);
