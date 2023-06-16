@@ -331,7 +331,7 @@
 	       		var type = "GET";
 	       		var data = {
 	    			pageNum : 1,
-	    			amount : 5,
+	    			amount : 500,
 	    			mem_id : getQueryString('mem_id')
 	    		}
            		
@@ -339,7 +339,7 @@
            			
            			if(response.code == "200") {
            				$('.mem_company').text(response.result.mem_company)
-	       				$('.mem_id').text(id)
+	       				$('.mem_id').text(getQueryString('mem_id'))
 
            				dataList = response.result.sbs_list;
            				getDataListCreate()
