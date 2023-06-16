@@ -17,7 +17,7 @@
                      		ls.device_uid LIKE '%'||#{keyword}||'%'
                   		</when>
                   		<when test="type == 'L'.toString()">
-                     		s.sbs_loc LIKE '%'||#{keyword}||'%'
+                     		ls.sbs_loc LIKE '%'||#{keyword}||'%'
                   		</when>
                		</choose>
             	</trim>
