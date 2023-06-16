@@ -77,7 +77,7 @@ public class AcquisitionDAO implements IAcquisitionDAO{
 		if(d.getDevice_onoff() == 'R') {
 			
 			// 상태를 다시 Y로 변경
-			session.update("DeviceMapper.control", new DeviceDTO(d.getDevice_seq(),'Y'));
+			session.update("DeviceMapper.control", new DeviceDTO(d.getDevice_uid(),'Y'));
 			// result 재부팅 요청 ai 쪽에 알려주 코드
 		}
 		

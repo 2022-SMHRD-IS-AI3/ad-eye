@@ -25,10 +25,10 @@ public class DeviceDTO {
 	   private String sbs_alias;
 	   private int data_check;
 	   
-	   public DeviceDTO(int device_seq, char device_onoff) {
-	      this.device_seq = device_seq;
-	      this.device_onoff = device_onoff;
-	   }
+	   public DeviceDTO(String device_uid, char device_onoff) {
+		      this.device_uid = device_uid;
+		      this.device_onoff = device_onoff;
+		   }
 	}
 
 

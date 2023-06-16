@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sansam.adeye.domain.Criteria;
 import com.sansam.adeye.domain.DeviceDTO;
 import com.sansam.adeye.domain.MemberDTO;
+import com.sansam.adeye.domain.PageDTO;
 import com.sansam.adeye.domain.SubscriptionDTO;
 import com.sansam.adeye.service.ISubscriptionService;
 
@@ -35,17 +36,34 @@ public class SubscriptionController {
 		 Map<String,Object> paramMap = new HashMap<String, Object>();
 		 
 		 try {
-				// 회원 목록 정보 불러오기
-				List<SubscriptionDTO> sList = service.sbsList(cri);
-				System.out.println(sList);
-			    // sList = [{sbs_seq : , mem_id : , device_seq : , mem_company : , sbs_loc : , 
-			    //           sbs_alias : , sbs_start_dt : , sbs_end_dt : , sbs_reg_dt : , sbs_grade : , 
-			    //           sbs_status : , d_day : },{...},{...}]
-			    // d_day : 계약 만료 까지 잔여일
-				int total = service.totalCnt(cri);
-				System.out.println(total);
+		 	 
+			 	if (cri.getSeq() != null) {
+			 		// 구독 만료 5일 이내 목록 정보 불러오기
+			 		List<SubscriptionDTO> sList = service.sbsListExpiry(cri);
+			 		System.out.println(sList);
+				    // sList = [{sbs_seq : , mem_id : , device_seq : , mem_company : , sbs_loc : , 
+				    //           sbs_alias : , sbs_start_dt : , sbs_end_dt : , sbs_reg_dt : , sbs_grade : , 
+				    //           sbs_status : , d_day : },{...},{...}]
+				    // d_day : 계약 만료 까지 잔여일
+					int total = service.totalCnt(cri);
+					System.out.println(total);
+					paramMap.put("pageMaker", new PageDTO(cri, total));
+				    paramMap.put("result", sList);
+			 	}else {
+			 		// 구독 목록 정보 불러오기
+					List<SubscriptionDTO> sList = service.sbsList(cri);
+					System.out.println(sList);
+				    // sList = [{sbs_seq : , mem_id : , device_seq : , mem_company : , sbs_loc : , 
+				    //           sbs_alias : , sbs_start_dt : , sbs_end_dt : , sbs_reg_dt : , sbs_grade : , 
+				    //           sbs_status : , d_day : },{...},{...}]
+				    // d_day : 계약 만료 까지 잔여일
+					int total = service.totalCnt(cri);
+					System.out.println(total);
+					paramMap.put("pageMaker", new PageDTO(cri, total));
+				    paramMap.put("result", sList);
+			 	}
 				
-			    paramMap.put("result", sList);
+
 			    paramMap.put("code", "200");
 			    paramMap.put("message", "조회 성공");
 			} catch (Exception e) {

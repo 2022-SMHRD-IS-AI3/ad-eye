@@ -9,6 +9,8 @@ public interface ISubscriptionDAO {
 
 	// 전체 구독 조회
 	public List<SubscriptionDTO> sbsList(Criteria cri) throws Exception;
+	// 구독 만료 5일 이내 조회
+	public List<SubscriptionDTO> sbsListExpiry(Criteria cri) throws Exception;
 	// 특정 회원 전체 구독 조회 : deviceList
 	public List<SubscriptionDTO> devicelist(Criteria cri) throws Exception;
 	// 특정 회원 전체 구독 조회 : 회사명, 구독 수

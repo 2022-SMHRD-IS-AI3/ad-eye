@@ -9,6 +9,8 @@ public interface ISubscriptionService {
 
 	// 전체 구독 조회
 	public List<SubscriptionDTO> sbsList(Criteria cri) throws Exception;
+	// 구독 만료 5일 이내 조회 sbsListExpiry
+	public List<SubscriptionDTO> sbsListExpiry(Criteria cri) throws Exception;
 	
 	// 구독 생성
 	public int sbsInsert(SubscriptionDTO sDto) throws Exception;

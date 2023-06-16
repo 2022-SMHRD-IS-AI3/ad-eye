@@ -102,6 +102,63 @@
          	WHERE rn > (#{pageNum} - 1) * #{amount}
       	]]>
    	</select>
+   	
+   	<select id="sbsListExpiry" resultType="com.sansam.adeye.domain.SubscriptionDTO">
+   		<![CDATA[
+			SELECT	sbs_seq,
+					mem_id,
+					device_seq,
+					mem_company,
+					sbs_loc,
+					sbs_alias,
+					sbs_start_dt,
+					sbs_end_dt,
+					sbs_reg_dt,
+					sbs_grade,
+					sbs_status,
+					d_day
+			FROM (
+				SELECT
+					rownum rn,
+					s.sbs_seq,
+					s.mem_id,
+					s.device_seq,
+					s.mem_company,
+					s.sbs_loc,
+					s.sbs_alias,
+					s.sbs_start_dt,
+					s.sbs_end_dt,
+					s.sbs_reg_dt,
+					s.sbs_grade,
+					s.sbs_status,
+					s.d_day
+				FROM  (
+					SELECT
+            			s.sbs_seq,
+            			s.mem_id,
+            			s.device_seq,
+            			(select mem_company FROM tb_member m WHERE s.mem_id = m.mem_id) AS mem_company,
+            			s.sbs_loc,
+        				s.sbs_alias,
+    					s.sbs_start_dt,
+            			s.sbs_end_dt,
+            			s.sbs_reg_dt,
+            			s.sbs_grade,
+            			s.sbs_status,
+            			(SELECT TRUNC(s.sbs_end_dt) - TRUNC(SYSDATE) FROM dual) AS d_day
+					FROM tb_subscription s
+					WHERE s.sbs_status != 'D'
+					ORDER BY sbs_status DESC, mem_company ASC, d_day ASC
+				) s
+				WHERE s.d_day <= TO_NUMBER(#{seq})
+		]]>
+	  	<include refid="criteria"></include>         
+      	<![CDATA[
+      			rownum <= #{pageNum} * #{amount}
+            )
+         	WHERE rn > (#{pageNum} - 1) * #{amount}
+      	]]>
+   	</select>
 
 	<select id="memSbsList" resultType="com.sansam.adeye.domain.SubscriptionDTO" parameterType="com.sansam.adeye.domain.Criteria">
       <![CDATA[         

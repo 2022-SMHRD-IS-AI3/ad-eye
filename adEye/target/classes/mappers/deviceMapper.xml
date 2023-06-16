@@ -61,7 +61,7 @@
             	<trim prefix="OR">
                 	<choose>
                 		<when test="type == 'D'.toString()">
-                     		device_uid LIKE '%'||#{keyword}||'%'
+                     		SELECT device_uid FROM your_table WHERE device_uid LIKE '%'||#{keyword}||'%'
                   		</when>
                     	<when test="type == 'C'.toString()">
                      		mem_company LIKE '%'||#{keyword}||'%'
@@ -102,11 +102,11 @@
 	</update>
 	
 	<select id="getOnoff" resultType="com.sansam.adeye.domain.DeviceDTO">
-		select device_onoff from tb_device where device_uid = #{device_uid}
+		select device_onoff, device_uid from tb_device where device_uid = #{device_uid}
 	</select>
 	
 	<update id="control" parameterType="com.sansam.adeye.domain.DeviceDTO">
-		update tb_device set device_onoff = #{device_onoff} where device_seq = #{device_seq}
+		update tb_device set device_onoff = #{device_onoff} where device_uid = #{device_uid}
 	</update>
 	<update id="devStatusOn">
 		update tb_device set sbs_status = 'Y' where device_seq = #{device_seq}

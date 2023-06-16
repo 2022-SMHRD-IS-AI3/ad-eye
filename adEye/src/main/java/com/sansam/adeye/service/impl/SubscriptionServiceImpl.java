@@ -26,6 +26,12 @@ public class SubscriptionServiceImpl implements ISubscriptionService{
 		System.out.println("Service 접속");
 		return sDao.sbsList(cri);
 	}
+	// 구독 만료 5일 이내 조회
+	@Override
+	public List<SubscriptionDTO> sbsListExpiry(Criteria cri) throws Exception{
+		System.out.println("Service 접속");
+		return sDao.sbsListExpiry(cri);
+	}
 	// 구독 생성
 	@Override
 	public int sbsInsert(SubscriptionDTO sDto) throws Exception {
