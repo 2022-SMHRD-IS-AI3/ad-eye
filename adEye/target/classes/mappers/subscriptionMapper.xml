@@ -148,6 +148,7 @@
             			s.sbs_status,
             			(SELECT TRUNC(s.sbs_end_dt) - TRUNC(SYSDATE) FROM dual) AS d_day
 					FROM tb_subscription s
+					LEFT JOIN tb_member m ON s.mem_id = m.mem_id
 					WHERE s.sbs_status != 'D'
 					ORDER BY sbs_status DESC, mem_company ASC, d_day ASC
 				) s
