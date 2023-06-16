@@ -14,9 +14,9 @@
        				device_onoff,
        				device_status,
        				device_dt,
-       				NVL(mem_company, '없음'),
-       				NVL(sbs_seq, 0),
-       				NVL(sbs_alias, '없음'),
+       				NVL(mem_company, '없음') as mem_company,
+       				NVL(sbs_seq, 0) as sbs_seq,
+       				NVL(sbs_alias, '없음') as sbs_alias,
        				data_check
 		 	FROM (
   				SELECT /*+ INDEX_DESC(tb_device IDX_tb_device_PK) */
