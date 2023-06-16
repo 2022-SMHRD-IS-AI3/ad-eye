@@ -106,26 +106,26 @@
                                     <div class="col-lg-6">
                                     <form>
                                         <div class="mb-3">
-                                            <label for="companyName" class="form-label">* 회사명</label>
-                                            <input type="text" class="form-control" id="companyName" placeholder="회사명">
+                                            <label for="company" class="form-label">* 회사명</label>
+                                            <input type="text" class="form-control" id="company" placeholder="회사명">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="contactNumber" class="form-label">* 연락처</label>
-                                            <input type="tel" class="form-control" id="contactNumber" placeholder="연락처">
+                                            <label for="phone" class="form-label">* 연락처</label>
+                                            <input type="tel" class="form-control" id="phone" placeholder="연락처">
                                         </div>
                                         <div class="mb-3">
                                             <label for="email" class="form-label">* 이메일</label>
                                             <input type="email" class="form-control" id="email" placeholder="이메일">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="message" class="form-label">내용</label>
-                                            <textarea class="form-control" id="message" rows="5" style="height: 200px; resize: none;" placeholder="내용"></textarea>
+                                            <label for="contact_content" class="form-label">내용</label>
+                                            <textarea class="form-control" id="contact_content" rows="5" style="height: 200px; resize: none;" placeholder="내용"></textarea>
                                         </div>
                                         <div class="mb-3 form-check">
-                                            <input type="checkbox" class="form-check-input" id="privacyCheck">
+                                            <input type="checkbox" class="form-check-input" id="privacyCheck" value="Y">
                                             <label class="form-check-label" for="privacyCheck">개인정보처리방침에 동의합니다.</label>
                                         </div>
-                                        <button type="submit" class="btn btn-primary form-control mt-3">문의하기</button>
+                                        <button type="button" class="btn btn-primary form-control mt-3" onClick="dataSubmit()">문의하기</button>
                                     </form>
                                 </div>
                         </section>
@@ -159,11 +159,57 @@
         
             </script>
          -->
-         <script>history.scrollRestoration = "manual"</script>
+        <script>history.scrollRestoration = "manual"</script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="${path}/resources/js/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js" crossorigin="anonymous"></script>
-        
+		<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+		<script src="${path}/resources/js/cus.js"></script>
+        <script type="text/javascript">
+
+        // 데이터 전송
+        function dataSubmit(){
+        	
+        	var privacyCheck = $("#privacyCheck").prop("checked");
+        	
+        	if($("#company").val()== ""){
+        		alert('회사명을 입력해주세요');
+        	}else if($("#phone").val()== ""){
+        		alert('연락처를 입력해주세요');
+        	}else if($("#email").val()== ""){
+        		alert('이메일을 입력해주세요');
+        	}else if(privacyCheck){
+       			$("#contactForm").submit();
+       		}else{
+       		 	alert('개인정보처리방침에 동의 후 문의 가능합니다')
+       		 	return
+       		}
+        	
+        	var path = "/contact/send";
+        	var type = "POST";
+        	var data = {
+        		company : $('#company').val(),
+        		phone : $('#phone').val(),
+        		email : $('#email').val(),
+        		contact_content : $('#contact_content').val()
+           	}
+        	
+			ajaxCallBack(path, type, data, function(response){
+       			
+       			conLog(response)
+       				
+	       		if(response.code == "201") {
+	       			alert("문의주셔서 감사합니다.\n빠른 시일 내에 연락드리겠습니다")
+	       				location.reload();
+	       		}else{
+	       			alert("문의 전송이 실패하였습니다")
+	       		}
+       			
+       		});
+        	
+       		
+       	}
+        </script>
 	</body>
 </html>

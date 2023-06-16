@@ -77,6 +77,8 @@
         $(document).ready(function() {
 
             // page 값 유무로 페이지체크
+            $("#key").val(getQueryString('key') || '').prop("selected", true);
+            $('#keyword').val(getQueryString('uid') || '');
             getDataList()
 
         });
@@ -118,7 +120,7 @@
 
             		var log_dt = formatDate(v.log_dt);
                 
-                    createHTML += '<tr><td>'+ v.device_uid +'</td><td>'+ v.device_uid +'</td><td>'+ log_dt +'</td><td>'+ v.log_msg +'</td></tr>'
+                    createHTML += '<tr><td>'+ v.device_uid +'</td><td>'+ v.sbs_loc +'</td><td>'+ log_dt +'</td><td>'+ v.log_msg +'</td></tr>'
                 });
             }
             

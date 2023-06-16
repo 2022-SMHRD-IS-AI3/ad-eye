@@ -24,6 +24,10 @@
 	            color: #777777;
 	            outline: none;
 	        }
+	        #man_total, #interest_total {
+	        	font-size: 3.3rem !important;
+    			font-weight: 700 !important;
+	        }
 	    </style>
 </head>
 <body class="nav-fixed">
@@ -90,10 +94,10 @@
                     <!-- 날짜 이동 -->
                     <header class="page-header pb-10">
                         <div class="container-xl px-4">
-                            <div class="page-header-content pt-4">
+                            <div class="pt-2 pb-3">
                                 <div class="row align-items-center justify-content-between">
                                     <div class="col-auto mt-4">
-                                        <h1 class="page-header-title sbs_alias"></h1>
+                                        <h1 class="sbs_alias fw-bolder fs-1"></h1>
                                     </div>
                                 </div>
                             </div>
@@ -153,7 +157,7 @@
                                             <canvas id="myPieChart" width="100%" height="50"></canvas>
                                         </div>
                                         <div class="mt-5 text-muted text-center fw-500">
-		                                	<span>총 인구 남녀 비율</span>
+		                                	<span>총 광고 노출 인구 남녀 비율</span>
 		                                </div>                                        
                                     </div>
                                     <div class="card-footer small text-center text-muted">
@@ -179,7 +183,7 @@
                                                         <div class="h1 text-center">
                                                             <span id="man_total">0</span> 명
                                                         </div>
-                                                        <h4 class="text-success text-center  fw-bolder">총 유동 인구
+                                                        <h4 class="text-success text-center  fw-bolder">총 광고 노출 인구
                                                             </h4>
                                                     </div>
                                                     
@@ -197,7 +201,7 @@
                                                         <div class="h1 text-center">
                                                             <span id="interest_total">0</span> 명
                                                         </div>
-                                                        <h4 class="text-success text-center  fw-bolder">총 주요 시청 횟수
+                                                        <h4 class="text-success text-center  fw-bolder">총 광고 주목 인구
                                                             </h4>
                                                     </div>
                                                     

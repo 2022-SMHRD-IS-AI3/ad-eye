@@ -44,7 +44,7 @@ function multiChart(){
             labels: keys,
             datasets: [
                 {
-                    label: "광고 앞 노출 인구",
+                    label: "시간 별 광고 주목 인구",
                     type: "line",
                     lineTension: 0.3,
                     backgroundColor: "rgba(0, 0, 0, 0)",
@@ -60,7 +60,7 @@ function multiChart(){
                     data: dashboardData.oneH_interest
                 },
                 {
-                    label: "광고 관심 인구",
+                    label: "시간 별 광고 노출 인구",
                     type: "bar",
                     backgroundColor: "rgba(0, 97, 242, 1)",
                     hoverBackgroundColor: "rgba(0, 97, 242, 0.9)",
