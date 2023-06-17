@@ -69,6 +69,7 @@
                             </div>
                         </div>
                     </div>
+                    <nav aria-label="Page navigation" id="page-wrap" class="mt-3"></nav>
                 </main>
 		<%@ include file="../../../includes/footer.jsp" %> 
         <script>
@@ -103,6 +104,7 @@
        			conLog(response)
        			if(response.code == "200") {
        				dataList = response.result;
+       				makePagination(response.pageMaker)
        	            getDataListCreate();
 	       	        if($('#key').val() == 'D' && $('#keyword').val() == dataList[0].device_uid) {
 	                 	$('#reboot_btn').removeClass('d-none')
@@ -156,6 +158,11 @@
        				alert("기기 재시작 실패")
        			}
        		});
+        }
+        
+        function pageMove(p){
+        	page = p
+        	getDataList()
         }
         
         

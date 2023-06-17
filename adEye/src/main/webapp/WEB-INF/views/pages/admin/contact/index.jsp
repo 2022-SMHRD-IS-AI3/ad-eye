@@ -62,7 +62,7 @@
                         </div>
                     </div>
                     <!-- Main page content-->
-                    <div class="container-fluid px-4 mb-3">
+                    <div class="container-fluid px-4">
                         <div class="card">
                             <div class="card-body">
                                 <table id="datatable" class="table table-striped table-hover">
@@ -85,7 +85,7 @@
                             </div>
                         </div>
                     </div>
-                   	<nav aria-label="Page navigation" id="page-wrap" class="mt-3"></nav>
+                    <nav aria-label="Page navigation" id="page-wrap" class="mt-3"></nav>
                 </main>
 	<%@ include file="../../../includes/footer.jsp" %> 
 	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
@@ -124,6 +124,7 @@
    			conLog(response)
    			if(response.code == "200") {
    				dataList = response.result;
+   				makePagination(response.pageMaker)
    	            getDataListCreate();
    			}
    		});
@@ -153,7 +154,10 @@
         
     }
     
-
+    function pageMove(p){
+    	page = p
+    	getDataList()
+    }
 	</script>
 	</body>
 </html>
