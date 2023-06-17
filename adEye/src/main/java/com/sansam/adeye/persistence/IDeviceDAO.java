@@ -23,6 +23,8 @@ public interface IDeviceDAO {
 	public List<DeviceDTO> deviceLog(Criteria cri) throws Exception;
 	// 구독 생성 시 등록 된 기기 상태 변경(N -> Y)
 	public int devStatusOn(int seq) throws Exception;
+	// 구독 생성 시 등록 된 기기 상태 변경(Y -> N)
+	public int devStatusOff(int seq) throws Exception;
 	// 기기 목록 페이징
 	public int totalCnt(Criteria cri) throws Exception;
 	// 기기 간단 목록

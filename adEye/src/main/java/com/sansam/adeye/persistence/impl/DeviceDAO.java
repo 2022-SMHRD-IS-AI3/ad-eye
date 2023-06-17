@@ -63,6 +63,11 @@ public class DeviceDAO implements IDeviceDAO{
 	public int devStatusOn(int seq) throws Exception {
 		return session.update("DeviceMapper.devStatusOn", seq);
 	}
+	// 구독 생성 시 등록 된 기기 상태 변경(Y -> N)
+	@Override
+	public int devStatusOff(int seq) throws Exception {
+		return session.update("DeviceMapper.devStatusOff", seq);
+	}
 	// 기기 목록 페이징
 	@Override
 	public int totalCnt(Criteria cri) throws Exception {
