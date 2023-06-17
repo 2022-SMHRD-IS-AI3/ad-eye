@@ -71,7 +71,7 @@
         
         // 데이터 전송
         function dataSubmit(flag){
-        	
+        	var msg = "";
        		var path = "";
        		var type = "POST";
        		var data = {
@@ -90,15 +90,13 @@
         			msg = "수정하시겠습니까?";
         			path = "/member/update";
         		}
-        		
-        	
         	
         	var cflag = false
         	if(msg != ""){
         		cflag = confirm(msg);
         	}
         	
-        	if(msg == "" || cflag == false) {
+        	if(msg != "" && cflag == false) {
         		return
         	}
        		

@@ -321,7 +321,9 @@
                 	getDashboardData(idValue);
        				$('.mem_id').text(getQueryString('mem_id'))
                 	
+                	
                 }
+                
             });
             
          	// 데이터 상세 조회
@@ -406,6 +408,7 @@
 	                		
 	                		dashboardData = response.result;
 	                		dataChange()
+	                		
 	                	}
                         
                         dataChange()

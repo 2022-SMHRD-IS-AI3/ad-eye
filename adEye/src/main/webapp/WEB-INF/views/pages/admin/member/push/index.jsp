@@ -278,12 +278,13 @@
         	}else if('in' || 'up') { // 등록, 수정
         		
         		data = {
-                  	mem_id : getQueryString('id'),
+                  	mem_id : $('#mem_id').val(),
                    	mem_pw : $('#mem_pw').val(),
                   	mem_company : $('#mem_company').val(),
                   	mem_phone : $('#mem_phone').val(),
                   	mem_email : $('#mem_email').val(),
                    	mem_status : $('input[name=mem_status]:checked').val(),
+                   	admin_yn : $('input[name=admin_yn]:checked').val(),
                   	company_addr : $('#addr1').val() + "," + $('#addr2').val()
                	}
         		
@@ -306,7 +307,7 @@
         		cflag = confirm(msg);
         	}
         	
-        	if(msg == "" || cflag == false) {
+        	if(msg != "" && cflag == false) {
         		return
         	}
        		
@@ -333,7 +334,7 @@
        				
        			}else if(flag == 'dl'){
        				
-       				if(response.code == "202") {
+       				if(response.code == "201") {
 	       				alert("삭제 완료되었습니다")
 	       				moveCode('mlist');
        				}else{

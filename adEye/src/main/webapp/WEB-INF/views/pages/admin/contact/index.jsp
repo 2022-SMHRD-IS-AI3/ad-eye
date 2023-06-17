@@ -5,6 +5,16 @@
     <head>
         <title>문의 - admin</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+		<style>
+			.text-elipsis {
+			    display: inline-block;
+			    width: 20rem;
+			    white-space: nowrap;
+			    overflow: hidden;
+			    text-overflow: ellipsis;
+			}
+			
+		</style>
 		<%@ include file="../../../includes/header.jsp" %>
 		<!-- content -->
             <div id="layoutSidenav_content">
@@ -146,7 +156,7 @@
                 var contact_open = v.contact_open == 'Y' ? "<span>확인</span>" : "<span style='color:#ff6262;'>미확인</span>";
             
                 // var delBtn = '<button class="btn btn-danger btn-sm" onClick="dataDel(\''+ v.mem_id +'\')" type="button ">삭제</button>';
-                createHTML += '<tr><td>'+ no +'</td><td>'+ v.company +'</td><td>'+ v.phone +'</td><td>'+ v.email +'</td><td class="link-point text-primary text-break w-25" onClick="movePath(\'/pages/admin/contact/detail?id='+v.contact_seq+'\')">'+ v.contact_content +'</td><td>'+ contact_dt +'</td><td>'+ contact_open +'</td></tr>'
+                createHTML += '<tr><td>'+ no +'</td><td>'+ v.company +'</td><td>'+ v.phone +'</td><td>'+ v.email +'</td><td class="link-point text-primary" onClick="movePath(\'/pages/admin/contact/detail?id='+v.contact_seq+'\')"><div class="text-elipsis">'+ v.contact_content +'</div></td><td>'+ contact_dt +'</td><td>'+ contact_open +'</td></tr>'
             });
         }
         
