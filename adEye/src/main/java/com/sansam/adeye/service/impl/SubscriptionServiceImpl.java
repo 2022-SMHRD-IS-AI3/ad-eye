@@ -64,6 +64,12 @@ public class SubscriptionServiceImpl implements ISubscriptionService{
 		System.out.println("Service 접속");
 		return sDao.sbsDelete(seq);
 	}
+	// 구독 삭제 시 등록 된 기기 상태 변경(Y -> N)
+	@Override
+	public int devStatusOff(int seq) throws Exception {
+		System.out.println("Service 접속");
+		return dDao.devStatusOff(seq);
+	}
 	// 전체 구독 목록 페이징
 	@Override
 	public int totalCnt(Criteria cri) throws Exception {

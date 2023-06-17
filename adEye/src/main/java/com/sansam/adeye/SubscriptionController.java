@@ -140,12 +140,23 @@ public class SubscriptionController {
 		
 		// 보내줄 맵 객체 생성
 	    Map<String, String> paramMap = new HashMap<String, String>();
+	    int sbs_seq = data.getSbs_seq();
+	    int dev_seq = data.getDevice_seq();
 	    
 	    try {
 	    	
 	    	int cnt = service.sbsUpdate(data);
-
-		    if(1 > 0) {
+	    	int dev_cnt = 0;
+	    	
+	    	char status = service.sbsDetail(sbs_seq).getSbs_status();
+	    	
+	    	if (status == 'N') {
+	    		dev_cnt = service.devStatusOff(dev_seq);
+	    	}else if (status == 'Y') {
+	    		dev_cnt = service.devStatusOn(dev_seq);
+	    	}
+	    	
+		    if(cnt > 0 && dev_cnt > 0) {
 		    	paramMap.put("code", "202");
 			    paramMap.put("message", "수정 완료");
 		    } else {
@@ -169,7 +180,7 @@ public class SubscriptionController {
 		
 		// 보내줄 맵 객체 생성
 	    Map<String, String> paramMap = new HashMap<String, String>();
-	    
+
 	    try {
 	    	
 	    	int cnt = service.sbsDelete(Integer.parseInt(data));

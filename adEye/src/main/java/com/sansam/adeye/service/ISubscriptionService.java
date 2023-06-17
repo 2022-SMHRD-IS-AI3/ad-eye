@@ -25,6 +25,8 @@ public interface ISubscriptionService {
 	
 	// 특정 구독 삭제 (상태 변경)
 	public int sbsDelete(int seq) throws Exception;
+	// 구독 삭제 시 등록 된 기기 상태 변경(Y -> N)
+	public int devStatusOff(int seq) throws Exception;
 	
 	// 전체 구독 목록 페이징
 	public int totalCnt(Criteria cri) throws Exception;
