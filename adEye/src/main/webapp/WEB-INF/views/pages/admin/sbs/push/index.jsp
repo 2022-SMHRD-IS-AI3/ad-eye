@@ -44,6 +44,7 @@
                                                 </div>
                                                 <div class="col-md-2">
                                                     <button onclick="memberCheck()" class="btn btn-warning w-100 refresh-btn" type="button">계정 확인</button>
+                                                    <input class="form-control" id="mem_com_check" type="hidden" name="mem_com_check" value="N" />
                                                 </div>
                                                 <label for="" id="member_check" class="col-sm-6 col-form-label fw-bolder "></label>
                                             </div>
@@ -309,16 +310,31 @@
 	            }).open();
 	        }
             
-            // 계정유무 확인
+         	// 계정 조회
             function memberCheck(){
-
-                if($('#mem_id').val() === '11test01') {
-                	$('#member_check').html('애드컴퍼니')
-                }else{
-                	$('#member_check').html('<span style="color:#f44336;">존재하지 않는 아이디입니다</span>')
-                }
-                
-            }
+            	
+           		var path = "/member/detail";
+           		var type = "GET";
+           		var data = {
+           			mem_id : $('#mem_id').val()
+        		}
+           		
+           		ajaxCallBack(path, type, data, function(response){
+           			
+           			conLog(response)
+           			if(response.code == "200") {
+           				if(response.result == null){
+           					$('#member_check').html('<span style="color:#f44336;">존재하지 않는 아이디입니다</span>')
+           					$('#mem_com_check').val('N')
+           				}else{
+           					if(response.result.mem_id == $('#mem_id').val()){
+           						$('#member_check').html(response.result.mem_company)
+           						$('#mem_com_check').val('Y')
+           					}
+           				}
+           			}
+           		});
+           	}
             
             // 데이터 전송
             function dataSubmit(flag){
@@ -371,7 +387,7 @@
             		cflag = confirm(msg);
             	}
             	
-            	if(msg == "" || cflag == false) {
+            	if(msg != "" && cflag == false) {
             		return
             	}
            		
