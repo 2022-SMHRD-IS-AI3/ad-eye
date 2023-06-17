@@ -28,6 +28,8 @@ public class SubscriptionDTO {
 	private int sbs_total_interest;
 	private int sbs_male_per;
 	private int sbs_female_per;
+	private int today_total_man;
+	private int today_total_interest;
 	
 	private int sbs_total;
 	private int d_day;
