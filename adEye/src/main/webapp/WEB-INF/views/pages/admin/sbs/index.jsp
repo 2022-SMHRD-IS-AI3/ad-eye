@@ -88,6 +88,7 @@
                             </div>
                         </div>
                     </div>
+                   	<nav aria-label="Page navigation" id="page-wrap" class="mt-3"></nav>
                 </main>
 		<%@ include file="../../../includes/footer.jsp" %> 
         <script type="text/javascript">
@@ -125,6 +126,7 @@
        			conLog(response)
        			if(response.code == "200") {
        				dataList = response.result;
+       				makePagination(response.pageMaker)
        	            getDataListCreate();
        			}
        		});
@@ -152,6 +154,11 @@
             
             $('#dataList').html(createHTML)
             
+        }
+        
+        function pageMove(p){
+        	page = p
+        	getDataList()
         }
 
         </script>

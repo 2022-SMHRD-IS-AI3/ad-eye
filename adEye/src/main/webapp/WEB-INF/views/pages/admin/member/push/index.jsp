@@ -306,8 +306,7 @@
         		cflag = confirm(msg);
         	}
         	
-        	if(!cflag) {
-        		conLog(123)
+        	if(msg == "" || cflag == false) {
         		return
         	}
        		
@@ -327,6 +326,7 @@
        				
        				if(response.code == "202") {
 	       				alert("정보수정 완료되었습니다")
+	       				moveCode('mlist');
        				}else{
 	       				alert("정보수정 실패하였습니다")
 	       			}
