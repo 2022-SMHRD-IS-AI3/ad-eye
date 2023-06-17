@@ -86,5 +86,13 @@
   	<update id="openYn">
   		UPDATE tb_contact set contact_open = 'Y' where contact_seq = #{contact_seq}
   	</update>
+  	
+  	<select id="totalCnt" resultType="int">
+  		SELECT COUNT(*)
+  		FROM tb_contact
+  		WHERE
+  		<include refid="criteria"></include>
+  		ORDER BY contact_dt DESC
+  	</select>
  
 </mapper>

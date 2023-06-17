@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sansam.adeye.domain.ContactDTO;
 import com.sansam.adeye.domain.Criteria;
+import com.sansam.adeye.domain.PageDTO;
 import com.sansam.adeye.service.IContactService;
 
 import lombok.extern.java.Log;
@@ -49,7 +50,8 @@ public class ContactController {
 			// 
 			List<ContactDTO> cDtoList = service.contactList(cri);
 			log.info(cDtoList);
-
+			int total = service.totalCnt(cri);
+			paramMap.put("pageMaker", new PageDTO(cri, total));
 		    paramMap.put("result", cDtoList);
 		    paramMap.put("code", "200");
 		    paramMap.put("message", "조회 성공");			
