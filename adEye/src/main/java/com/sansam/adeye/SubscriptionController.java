@@ -184,10 +184,12 @@ public class SubscriptionController {
 		
 		// 보내줄 맵 객체 생성
 	    Map<String, String> paramMap = new HashMap<String, String>();
-
+	    
 	    try {
+	    	int dev_seq = service.sbsDetail(Integer.parseInt(data)).getDevice_seq();
 	    	
 	    	int cnt = service.sbsDelete(Integer.parseInt(data));
+	    	service.devStatusOff(dev_seq);
 		    
 		    if(1 > 0 ) {
 		    	paramMap.put("code", "201");
