@@ -16,7 +16,7 @@
                                     <div class="col-auto mb-3">
                                         <h1 class="page-header-title">
                                             <div class="page-header-icon"><i data-feather="plus-circle"></i></div>
-                                            구독 등록
+                                            구독 <span class="info-text"></span>
                                         </h1>
                                     </div>
                                 </div>
@@ -180,6 +180,7 @@
 
                 // id 값 유무로 등록 수정 판단
                 if(idValue){
+                	$('.info-text').text('정보');
 
                     // 삭제, 수정 버튼
                     const changebtn = '<button class="btn btn-danger me-2" onClick="dataSubmit(\'dl\')" type="button ">삭제</button>'+
@@ -190,6 +191,7 @@
                     $('#mem_id').prop('disabled',true);
                     getDataDetail(idValue);
                 }else{
+                	$('.info-text').text('등록');
                 	getDeviceList()
                 }
                 
