@@ -199,7 +199,7 @@
 		FROM (
     		SELECT DISTINCT
         		(SELECT m.mem_company FROM tb_subscription s INNER JOIN tb_member m ON s.mem_id = m.mem_id WHERE m.mem_id = #{seq} AND ROWNUM = 1) AS mem_company,
-        		(SELECT COUNT(sbs_seq) FROM tb_subscription WHERE mem_id = #{seq}) AS sbs_total
+        		(SELECT COUNT(sbs_seq) FROM tb_subscription WHERE mem_id = #{seq} AND sbs_status = 'Y') AS sbs_total
     		FROM tb_subscription)
 	</select>
 	
