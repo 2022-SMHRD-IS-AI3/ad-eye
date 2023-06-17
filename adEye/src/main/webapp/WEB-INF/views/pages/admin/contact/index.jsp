@@ -8,7 +8,7 @@
 		<%@ include file="../../../includes/header.jsp" %>
 		<!-- content -->
             <div id="layoutSidenav_content">
-                <main>
+                <main class="dataTable-pagination">
                     <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
                         <div class="container-fluid px-4">
                             <div class="page-header-content">
@@ -62,7 +62,7 @@
                         </div>
                     </div>
                     <!-- Main page content-->
-                    <div class="container-fluid px-4">
+                    <div class="container-fluid px-4 mb-3">
                         <div class="card">
                             <div class="card-body">
                                 <table id="datatable" class="table table-striped table-hover">
@@ -85,6 +85,21 @@
                             </div>
                         </div>
                     </div>
+                   <nav aria-label="Page navigation example">
+					  	<ul class="pagination justify-content-center">
+					    	<li class="page-item disabled">
+					      	<span class="page-link">Previous</span>
+					    	</li>
+					    	<li class="page-item"><a class="page-link" href="#">1</a></li>
+					    	<li class="page-item active" aria-current="page">
+					      		<span class="page-link">2</span>
+					    	</li>
+					    	<li class="page-item"><a class="page-link" href="#">3</a></li>
+					    	<li class="page-item">
+					      		<a class="page-link" href="#">Next</a>
+					    	</li>
+					  	</ul>
+					</nav>
                 </main>
 	<%@ include file="../../../includes/footer.jsp" %> 
 	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
