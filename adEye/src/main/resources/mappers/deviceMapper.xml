@@ -110,7 +110,7 @@
 		update tb_device set device_onoff = #{device_onoff} where device_uid = #{device_uid}
 	</update>
 	<update id="devStatusOn">
-		update tb_device set device_status = 'Y' where device_seq = #{device_seq}
+		update tb_device set device_status = 'Y', device_onoff = 'Y' where device_seq = #{device_seq}
 	</update>
 	<update id="devStatusOff">
 		update tb_device set device_status = 'N', device_onoff = 'N' where device_seq = #{device_seq}
