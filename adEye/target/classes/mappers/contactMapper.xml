@@ -92,7 +92,6 @@
   		FROM tb_contact
   		WHERE
   		<include refid="criteria"></include>
-  		ORDER BY contact_dt DESC
   	</select>
  
 </mapper>
