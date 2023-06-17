@@ -74,15 +74,14 @@
                             </div>
                         </div>
                     </div>
+                   	<nav aria-label="Page navigation" id="page-wrap" class="mt-3"></nav>
+					
                 </main>
 			<%@ include file="../../../includes/footer.jsp" %> 
 			<script type="text/javascript">
 	        
 	     	// 문서준비 완료 되면
 	        $(document).ready(function() {
-
-	            // 유무 page 값 가져오기
-	            const page = getQueryString('page');
 
 	            // page 값 유무로 페이지체크
 	            getDataList()
@@ -108,7 +107,9 @@
 	       			conLog(response)
 	       			if(response.code == "200") {
 	       				dataList = response.result;
+	       				makePagination(response.pageMaker)
 	       	            getDataListCreate();
+	       	            
 	       			}
 	       		});
 	       	}
@@ -133,6 +134,11 @@
 	            
 	            $('#dataList').html(createHTML)
 	            
+	        }
+	        
+	        function pageMove(p){
+	        	page = p
+	        	getDataList()
 	        }
 			</script>
 			
