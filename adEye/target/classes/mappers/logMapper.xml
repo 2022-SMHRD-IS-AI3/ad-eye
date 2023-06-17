@@ -86,6 +86,7 @@
 					FROM tb_log l
 					INNER JOIN tb_device d ON l.device_uid = d.device_uid
 					LEFT OUTER JOIN tb_subscription s ON d.device_seq = s.device_seq
+					WHERE sbs_status = 'Y'
 					ORDER BY log_dt DESC
 				) ls
 				WHERE
@@ -103,6 +104,7 @@
 		FROM tb_log l
 		INNER JOIN tb_device d ON l.device_uid = d.device_uid
 		LEFT OUTER JOIN tb_subscription s ON d.device_seq = s.device_seq
+		AND sbs_status = 'Y'
 		WHERE
 		<include refid="criteria"></include> 
 		log_seq &gt; 0
