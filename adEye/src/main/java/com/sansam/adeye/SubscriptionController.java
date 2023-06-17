@@ -142,8 +142,12 @@ public class SubscriptionController {
 	    Map<String, String> paramMap = new HashMap<String, String>();
 	    int sbs_seq = data.getSbs_seq();
 	    int dev_seq = data.getDevice_seq();
-	    
+
 	    try {
+		    int before_dev_seq = service.sbsDetail(sbs_seq).getDevice_seq();
+		    if (before_dev_seq != dev_seq) {
+		    	service.devStatusOff(before_dev_seq);
+		    }
 	    	
 	    	int cnt = service.sbsUpdate(data);
 	    	int dev_cnt = 0;
