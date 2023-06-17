@@ -47,16 +47,16 @@
 			aDatas = "cri"
 		}
 		
-		console.log(aUri)
-		console.log(aDatas)
+		conLog(aUri)
+		conLog(aDatas)
 		$.ajax({
 			// 실행 후 체크 할 때 localhost 부분 꼭 본인 ip로 바꿔서 인터넷창 실행하기!
 			url: 'http://218.157.24.2:9000'+aUri,
 			type: aType,
 			data : aDatas,
 			success: function (response) {
-            	console.log("통신성공")
-            	console.log(response)
+            	conLog("통신성공")
+            	conLog(response)
 			},
 			error: function(){
 				alert('통신실패');
