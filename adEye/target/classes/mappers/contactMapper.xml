@@ -92,6 +92,7 @@
   		FROM tb_contact
   		WHERE
   		<include refid="criteria"></include>
+  		contact_seq &gt; 0
   	</select>
  
 </mapper>
