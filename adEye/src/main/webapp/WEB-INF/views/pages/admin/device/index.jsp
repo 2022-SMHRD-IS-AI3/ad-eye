@@ -74,6 +74,21 @@
                             </div>
                         </div>
                     </div>
+                   <nav aria-label="Page navigation example">
+					  	<ul class="pagination justify-content-center">
+					    	<li class="page-item disabled">
+					      	<span class="page-link">Previous</span>
+					    	</li>
+					    	<li class="page-item"><a class="page-link" href="#">1</a></li>
+					    	<li class="page-item active" aria-current="page">
+					      		<span class="page-link">2</span>
+					    	</li>
+					    	<li class="page-item"><a class="page-link" href="#">3</a></li>
+					    	<li class="page-item">
+					      		<a class="page-link" href="#">Next</a>
+					    	</li>
+					  	</ul>
+					</nav>
                 </main>
 			<%@ include file="../../../includes/footer.jsp" %> 
 			<script type="text/javascript">
@@ -108,7 +123,9 @@
 	       			conLog(response)
 	       			if(response.code == "200") {
 	       				dataList = response.result;
+	       				makePagination(response.pageMaker)
 	       	            getDataListCreate();
+	       	            
 	       			}
 	       		});
 	       	}
@@ -133,6 +150,29 @@
 	            
 	            $('#dataList').html(createHTML)
 	            
+	        }
+	        
+	        function makePagination(pm){
+	        	
+	        	var prev = pm.prev ? '<li class="page-item disabled">' : '<li class="page-item disabled" onClick="pageMove('+(pm.startPage-1)')">'
+	        	if()
+	        	
+	        	var pageHTML = '<ul class="pagination justify-content-center">'; 
+	        	<ul class="pagination justify-content-center">
+		    	<li class="page-item disabled">
+		      	<span class="page-link">Previous</span>
+		    	</li>
+		    	<li class="page-item"><a class="page-link" href="#">1</a></li>
+		    	<li class="page-item active" aria-current="page">
+		      		<span class="page-link">2</span>
+		    	</li>
+		    	<li class="page-item"><a class="page-link" href="#">3</a></li>
+		    	<li class="page-item">
+		      		<a class="page-link" href="#">Next</a>
+		    	</li>
+		  	</ul>
+	        	
+	        	
 	        }
 			</script>
 			

@@ -136,11 +136,13 @@
         }
         
 		// 재가동 버튼 클릭        
-        function rebootOn(seq){
+        function rebootOn(){
+			
+			var device_uid = $('#key').val() && $('input[name=keyword]').val() && $('input[name=keyword]').val() == dataList[0].device_uid ? dataList[0].device_uid : ''
         	var path = "/device/onoff";
        		var type = "POST";
        		var data = {
-    			device_seq : seq,
+    			device_uid : device_uid,
     			device_onoff : "R"
     		}
        		

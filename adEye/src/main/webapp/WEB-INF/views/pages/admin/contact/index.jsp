@@ -116,6 +116,8 @@
         getDataList()
 
     });
+ 	
+ 	
     var page = getQueryString('page') || 1;
     // 데이터 목록 가져오기
     function getDataList(){
@@ -164,6 +166,8 @@
         $('#dataList').html(createHTML)
         
     }
+    
+
 	</script>
 	</body>
 </html>
