@@ -47,4 +47,8 @@ public class ContactDAO implements IContactDAO{
 	public int openYn(int seq) throws Exception{
 		return session.update("ContactMapper.openYn", seq);
 	}
+	// 전체 문의 내역 페이징
+	public int totalCnt(Criteria cri) throws Exception {
+		return session.selectOne("ContactMapper.totalCnt", cri);
+	}
 }

@@ -40,5 +40,9 @@ public class ContactServiceImpl implements IContactService{
 		
 		return cDao.openYn(seq);
 	}
+	// 전체 문의 내역 페이징
+	public int totalCnt(Criteria cri) throws Exception {
+		return cDao.totalCnt(cri);
+	}
 
 }
