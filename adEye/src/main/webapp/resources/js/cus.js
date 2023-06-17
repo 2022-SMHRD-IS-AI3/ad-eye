@@ -167,6 +167,30 @@ function loginSession(){
 	});
 }
 
+// 페이지네이션 생성
+function makePagination(pm){
+	
+	var prev = pm.prev ? '<li class="page-item" onClick="pageMove('+ (pm.startPage-1)+')"><a class="page-link" href="#">Previous</a></li>' : '<li class="page-item disabled"><span class="page-link">Previous</span></li>';
+	var next = pm.next ? '<li class="page-item" onClick="pageMove('+ (pm.endPage+1) +')"><a class="page-link" href="#">Next</a></li>' :  '<li class="page-item disabled"><span class="page-link">Next</span></li>';
+	var page = '';
+	
+	for(var i = pm.startPage; i <= pm.endPage; i++){
+		
+		if(getQueryString('page') == i){
+			page += '<li class="page-item active" aria-current="page">'+ i +'</li>';
+		}else{
+			page += '<li class="page-item"><a class="page-link" onClick="pageMove('+ i +')">'+ i +'</a></li>';
+		}
+	}
+	
+	if(page != ''){
+		
+		var pageHTML = '<ul class="pagination justify-content-center">' + prev + page + next + '</ul>' ; 
+		$('#page-wrap').html(pageHTML);
+	}
+	
+	
+}
 
 
 

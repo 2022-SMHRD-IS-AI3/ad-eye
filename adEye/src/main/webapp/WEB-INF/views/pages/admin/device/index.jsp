@@ -74,30 +74,14 @@
                             </div>
                         </div>
                     </div>
-                   <nav aria-label="Page navigation example">
-					  	<ul class="pagination justify-content-center">
-					    	<li class="page-item disabled">
-					      	<span class="page-link">Previous</span>
-					    	</li>
-					    	<li class="page-item"><a class="page-link" href="#">1</a></li>
-					    	<li class="page-item active" aria-current="page">
-					      		<span class="page-link">2</span>
-					    	</li>
-					    	<li class="page-item"><a class="page-link" href="#">3</a></li>
-					    	<li class="page-item">
-					      		<a class="page-link" href="#">Next</a>
-					    	</li>
-					  	</ul>
-					</nav>
+                   	<nav aria-label="Page navigation" id="page-wrap" class="mt-3"></nav>
+					
                 </main>
 			<%@ include file="../../../includes/footer.jsp" %> 
 			<script type="text/javascript">
 	        
 	     	// 문서준비 완료 되면
 	        $(document).ready(function() {
-
-	            // 유무 page 값 가져오기
-	            const page = getQueryString('page');
 
 	            // page 값 유무로 페이지체크
 	            getDataList()
@@ -152,27 +136,9 @@
 	            
 	        }
 	        
-	        function makePagination(pm){
-	        	
-	        	var prev = pm.prev ? '<li class="page-item disabled">' : '<li class="page-item disabled" onClick="pageMove('+(pm.startPage-1)')">'
-	        	if()
-	        	
-	        	var pageHTML = '<ul class="pagination justify-content-center">'; 
-	        	<ul class="pagination justify-content-center">
-		    	<li class="page-item disabled">
-		      	<span class="page-link">Previous</span>
-		    	</li>
-		    	<li class="page-item"><a class="page-link" href="#">1</a></li>
-		    	<li class="page-item active" aria-current="page">
-		      		<span class="page-link">2</span>
-		    	</li>
-		    	<li class="page-item"><a class="page-link" href="#">3</a></li>
-		    	<li class="page-item">
-		      		<a class="page-link" href="#">Next</a>
-		    	</li>
-		  	</ul>
-	        	
-	        	
+	        function pageMove(p){
+	        	page = p
+	        	getDataList()
 	        }
 			</script>
 			

@@ -85,21 +85,7 @@
                             </div>
                         </div>
                     </div>
-                   <nav aria-label="Page navigation example">
-					  	<ul class="pagination justify-content-center">
-					    	<li class="page-item disabled">
-					      	<span class="page-link">Previous</span>
-					    	</li>
-					    	<li class="page-item"><a class="page-link" href="#">1</a></li>
-					    	<li class="page-item active" aria-current="page">
-					      		<span class="page-link">2</span>
-					    	</li>
-					    	<li class="page-item"><a class="page-link" href="#">3</a></li>
-					    	<li class="page-item">
-					      		<a class="page-link" href="#">Next</a>
-					    	</li>
-					  	</ul>
-					</nav>
+                   	<nav aria-label="Page navigation" id="page-wrap" class="mt-3"></nav>
                 </main>
 	<%@ include file="../../../includes/footer.jsp" %> 
 	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
