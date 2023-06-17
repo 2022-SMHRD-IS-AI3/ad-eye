@@ -14,7 +14,7 @@
             	<trim prefix="OR">
                 	<choose>
                     	<when test="type == 'D'.toString()">
-                     		l.device_uid LIKE '%'||#{keyword}||'%'
+                     		ls.device_uid LIKE '%'||#{keyword}||'%'
                   		</when>
                   		<when test="type == 'L'.toString()">
                      		sbs_loc LIKE '%'||#{keyword}||'%'
@@ -101,8 +101,8 @@
 	
 	<select id="totalCnt" resultType="int" parameterType="com.sansam.adeye.domain.PageDTO">
 		SELECT COUNT(*) 
-		FROM tb_log l
-		INNER JOIN tb_device d ON l.device_uid = d.device_uid
+		FROM tb_log ls
+		INNER JOIN tb_device d ON ls.device_uid = d.device_uid
 		LEFT OUTER JOIN tb_subscription s ON d.device_seq = s.device_seq
 		AND sbs_status = 'Y'
 		WHERE
