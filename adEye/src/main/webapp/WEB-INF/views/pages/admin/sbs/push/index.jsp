@@ -53,9 +53,7 @@
                                                 <div class="col-md-4">
                                                 	<label class="small mb-1" for="device_seq">* 기기</label>
                                                     <select class="form-select" name="device_seq" id="device_seq">
-			                                   			<option value="">--- 기기선택 ---</option>
-			                                   			<option value="1">cam_device_001</option>
-			                                   			<option value="2">cam_device_002</option>
+			                                   			<option value="" selected>--- 기기선택 ---</option>
 			                                   		</select>
                                                     
                                                 </div>
@@ -192,7 +190,7 @@
                     $('#mem_id').prop('disabled',true);
                     getDataDetail(idValue);
                 }else{
-                	
+                	getDeviceList()
                 }
                 
                 
@@ -284,8 +282,10 @@
             		conLog(deviceHTML)
             		if(deviceHTML != ''){
             			$('#device_seq').append(deviceHTML);
-            			
-            			$("#device_seq").val(device_seq).prop("selected", true);
+            			if(device_seq){
+            				
+            				$("#device_seq").val(device_seq).prop("selected", true);
+            			}
             			
             		}
             	}
@@ -367,6 +367,7 @@
             	
             	var cflag = false
             	if(msg != ""){
+            		conLog(msg)
             		cflag = confirm(msg);
             	}
             	
