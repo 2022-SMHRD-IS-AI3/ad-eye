@@ -27,7 +27,7 @@
             <!-- * * Tip * * You can use text or an image for your navbar brand.-->
             <!-- * * * * * * When using an image, we recommend the SVG format.-->
             <!-- * * * * * * Dimensions: Maximum height: 32px, maximum width: 240px-->
-             <a class="navbar-brand pe-3 ps-4 ps-lg-2" onClick="mySbs()">
+             <a class="navbar-brand pe-3 ps-4 ps-lg-2 link-point" onClick="mySbs()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stack" viewBox="0 0 16 16">
                     <path d="m14.12 10.163 1.715.858c.22.11.22.424 0 .534L8.267 15.34a.598.598 0 0 1-.534 0L.165 11.555a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0l5.317-2.66zM7.733.063a.598.598 0 0 1 .534 0l7.568 3.784a.3.3 0 0 1 0 .535L8.267 8.165a.598.598 0 0 1-.534 0L.165 4.382a.299.299 0 0 1 0-.535L7.733.063z"/>
                     <path d="m14.12 6.576 1.715.858c.22.11.22.424 0 .534l-7.568 3.784a.598.598 0 0 1-.534 0L.165 7.968a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0l5.317-2.659z"/>
@@ -96,16 +96,16 @@
                     <!-- Main page content-->
                     <div class="container-xl px-4 mt-n10">
                         <div class="card mb-4">
-                            <div class="card-header">내 구독 확인</div>
+                            <div class="card-header text-dark fw-bolder fs-3">내 구독 확인</div>
                             <div class="card-body">
                                 <table id="datatable" class="table table-striped table-hover">
                                     <thead>
                                         <tr>
-                                            <th>매체 위치</th>
                                             <th>매체 이름</th>
-                                            <th>광고 노출 인구(명)</th>
-                                            <th>광고 주목 인구(명)</th>
-                                            <th>전체 남녀 비율(%)</th>
+                                            <th>매체 위치</th>
+                                            <th class="text-center">광고 노출 인구(명)</br>당일 / 누적</th>
+                                            <th class="text-center">광고 주목 인구(명)</br>당일 / 누적</th>
+                                            <th class="text-center">전체 남녀 비율(%)</br>(남:여)</th>
                                         </tr>
                                     </thead>
                                     
@@ -191,17 +191,32 @@
 	            	dataList.forEach(function(v) {
 		                
 		                var total = v.sbs_total_man;
-		                var count1 = v.sbs_female_per;
-		                var count2 = v.sbs_male_per;
+		                var count1 = v.sbs_male_per;
+		                var count2 = v.sbs_female_per;
 
 		                var percentage1 = ((count1 / total) * 100) || 0;
 		                var percentage2 = ((count2 / total) * 100) || 0;
-		                var per = percentage1.toFixed(1) + ' : ' + percentage2.toFixed(1);
+		                var per = Math.round(percentage1) + '% : ' +  Math.round() + '%';
+		                if(percentage1 == 0) {
+		                	per	= '-';
+		                }
+		                var interest = v.today_total_interest +' / '+ v.sbs_total_interest;
+		                if(v.today_total_interest == 0 && v.sbs_total_interest == 0) {
+		                	interest	= '-';
+		                }
+		                var man = v.today_total_man +' / '+ v.sbs_total_man;
+		                if(v.today_total_man == 0 && v.sbs_total_man == 0) {
+		                	man	= '-';
+		                }
+		                
+		                var addrArr = v.sbs_loc.split(",");
+		                var sbs_loc = addrArr[0] + (addrArr[1]? ' '+ addrArr[1] : '');
+		                
 		                var mem_id = getQueryString('mem_id');
 		                
-		                createHTML += '<tr><td>'+ v.sbs_loc +'</td><td class="text-primary link-point" onClick="movePath(\'/pages/user?mem_id='+ mem_id +'&sbs_seq='+v.sbs_seq+'\')">'+ v.sbs_alias +'</td><td >'+ v.sbs_total_man +'</td><td>'+ v.sbs_total_interest +'</td><td>'+ per +'</td></tr>'
+		                createHTML += '<tr class="link-point" onClick="movePath(\'/pages/user?mem_id='+ mem_id +'&sbs_seq='+v.sbs_seq+'\')"><td>'+ v.sbs_alias +'</td><td>'+ sbs_loc +'</td><td class="text-center">'+ man +'</td><td class="text-center">'+ interest +'</td><td class="text-center">'+ per +'</td></tr>'
 		                
-		                createNavHTML += '<a class="nav-link collapsed" onClick="movePath(\'/pages/user?mem_id='+ mem_id +'&sbs_seq='+ v.sbs_seq +'\')" data-bs-toggle="collapse" data-bs-target="#collapseDashboards" aria-expanded="false" aria-controls="collapseDashboards">'+ v.sbs_alias + '<div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div></a>';
+		                createNavHTML += '<a class="nav-link link-point collapsed" onClick="movePath(\'/pages/user?mem_id='+ mem_id +'&sbs_seq='+ v.sbs_seq +'\')" data-bs-toggle="collapse" data-bs-target="#collapseDashboards" aria-expanded="false" aria-controls="collapseDashboards">'+ v.sbs_alias + '<div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div></a>';
                             
 		            });
 	            }

@@ -21044,3 +21044,7 @@ pre[class*=language-] {
 .token.variable {
   color: #ff6666;
 }
+
+.link-point{
+	cursor: pointer;
+}

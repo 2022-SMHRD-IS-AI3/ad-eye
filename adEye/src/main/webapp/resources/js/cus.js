@@ -3,7 +3,7 @@
 const url = "http://211.223.37.186:9000";
 
 // 콘솔로그 출력 유무
-let logFlag = false;
+let logFlag = true;
 
 // 콘솔출력 유무가 true 일때만 출력
 function conLog(data){

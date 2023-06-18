@@ -4,11 +4,6 @@
 <html>
     <head>
         <title>회원 - admin</title>
-        <style type="text/css">
-        	.link-point{
-        		cursor: pointer;
-        	}
-        </style>
 		<%@ include file="../../../includes/header.jsp" %>
             <div id="layoutSidenav_content">
                 <main>

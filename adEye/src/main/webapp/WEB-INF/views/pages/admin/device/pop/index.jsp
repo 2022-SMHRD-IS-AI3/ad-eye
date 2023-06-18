@@ -23,6 +23,10 @@
 	            color: #777777;
 	            outline: none;
 	        }
+	        #man_total, #interest_total {
+	        	font-size: 3.3rem !important;
+    			font-weight: 700 !important;
+	        }
 	    </style>
 </head>
 <body>
@@ -34,10 +38,11 @@
                     <!-- 날짜 이동 -->
                     <header class="page-header pb-10">
                         <div class="container-xl px-4">
-                            <div class="page-header-content pt-4">
+                            <div class="pt-2 pb-3">
                                 <div class="row align-items-center justify-content-between">
                                     <div class="col-auto mt-4">
-                                        <h1 class="page-header-title sbs_alias"></h1>
+                                        <h1 class="sbs_alias fw-bolder fs-1"></h1>
+                                        <h7 class="sbs_loc"></h7>
                                     </div>
                                 </div>
                             </div>
@@ -48,7 +53,7 @@
                                     <div class="col-md-12 text-end text-muted small">
 		                                <span>최근 업데이트 날짜</span>
 		                                ·
-		                                <span id="updateDate">2023년 06월 13일 15:56:24</span>
+		                                <span id="updateDate"></span>
 		                            </div>
                                 </div>
                             </div>
@@ -59,7 +64,6 @@
                                     <i class="fa-solid fa-chevron-left" onclick="changeDay('m')"></i>
                                     <input type="text" class="dateSelector"/>
                                     <input type="hidden" name="search_date" id="search_date">
-                                    <input type="hidden" name="sbs_seq" id="sbs_seq" value="37">
                                     <i class="fa-solid fa-chevron-right" onclick="changeDay('p')"></i>
                                 </div>
                             </div>
@@ -97,7 +101,7 @@
                                             <canvas id="myPieChart" width="100%" height="50"></canvas>
                                         </div>
                                         <div class="mt-5 text-muted text-center fw-500">
-		                                	<span>총 인구 남녀 비율</span>
+		                                	<span>총 광고 노출 인구 남녀 비율</span>
 		                                </div>                                        
                                     </div>
                                     <div class="card-footer small text-center text-muted">
@@ -123,7 +127,7 @@
                                                         <div class="h1 text-center">
                                                             <span id="man_total">0</span> 명
                                                         </div>
-                                                        <h4 class="text-success text-center  fw-bolder">총 유동 인구
+                                                        <h4 class="text-success text-center  fw-bolder">총 광고 노출 인구
                                                             </h4>
                                                     </div>
                                                     
@@ -141,7 +145,7 @@
                                                         <div class="h1 text-center">
                                                             <span id="interest_total">0</span> 명
                                                         </div>
-                                                        <h4 class="text-success text-center  fw-bolder">총 주요 시청 횟수
+                                                        <h4 class="text-success text-center  fw-bolder">총 광고 주목 인구
                                                             </h4>
                                                     </div>
                                                     
@@ -167,37 +171,34 @@
         <script src="${path}/resources/assets/demo/multi-chart.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
         <script>
-    		var nowDay = ""
-            getNowTime()
-            var search_date = $('#search_date')
-            search_date.val(nowDay)
-            
-            var dateSelector = document.querySelector('.dateSelector');
-            var te = flatpickr(dateSelector,{
-                defaultDate: $('#search_date').val(),
-                local: 'ko',
-                dateFormat : "Y-m-d",
-                onChange: function(selectDates, dateStr, instance){
-                	
-                    $('#search_date').val(dateStr)
-                    changeAPI('userDashboard', getQueryString('sbs_seq'))
-                },
-            });
+    	var nowDay = "" // 1
+            var search_date = $('#search_date') // 2
+            var dateSelector = document.querySelector('.dateSelector'); // 3
+            var te = null;
 
             // 화살표꺽쇠 날짜 변경
             function changeDay(c){
 
                 var cDate = new Date(search_date.val())
-                
+                sDate = new Date(formatDate(sbs_start_dt))
                 var gDate = new Date(cDate);
-                if(c === 'm'){
+                
+                var chflag = false
+                if(c === 'm' && sDate < cDate){
                     gDate.setDate(cDate.getDate() - 1)
-                }else if(c === 'p'){
+                    chflag = true
+                }else if(c === 'p' &&  search_date.val() != nowDay){
                     gDate.setDate(cDate.getDate() + 1)
+                    
+                    chflag = true
                 }
-                search_date.val(getYMD(gDate));
-                te.setDate(getYMD(gDate))
-                changeAPI('userDashboard', getQueryString('sbs_seq'))
+                
+                if(chflag){
+	                search_date.val(getYMD(gDate));
+	                te.setDate(getYMD(gDate))
+	                changeAPI('userDashboard', getQueryString('sbs_seq'))
+                	
+                }
                 
             }
 
@@ -244,69 +245,59 @@
 
                 // id 값 유무로 등록 수정 판단
                 if(idValue){
-                	getDashboardData(idValue);
+                	getDataDetail(idValue);
        				$('.mem_id').text(getQueryString('mem_id'))
+       				
+		            getNowTime() // 4
+		            search_date.val(nowDay) // 5
+		            
                 	
                 }
-            });
+                
+			});
             
+            let sbs_start_dt = ''
+            let sbs_end_dt = ''
          	// 데이터 상세 조회
-            function getDashboardData(id){
+            function getDataDetail(id){
             	
-	       		var path = "/member/devicelist";
-	       		var type = "GET";
-	       		var data = {
-	    			pageNum : 1,
-	    			amount : 5,
-	    			mem_id : getQueryString('mem_id')
-	    		}
+           		var path = "/subscription/detail";
+           		var type = "GET";
+           		var data = {
+           			sbs_seq : id
+        		}
            		
            		ajaxCallBack(path, type, data, function(response){
            			
+           			conLog(response)
            			if(response.code == "200") {
-           				$('.mem_company').text(response.result.mem_company)
-	       				$('.mem_id').text(id)
-
-           				dataList = response.result.sbs_list;
-           				getDataListCreate()
-           				
-           				if (dataList.length > 0) {
-
-           					var sbs_alias = "";
-           					dataList.forEach(function(v) {
-           						
-           						if(v.sbs_seq == id){
-           							sbs_alias = v.sbs_alias
-           						}
-                                    
-        		            });
-           					
-           					$('.sbs_alias').text(sbs_alias);
-        	            	
-        	            }
-           				
+           				var info = response.result;
+           				sbs_start_dt = info.sbs_start_dt;
+       					
+       					var addrArr = info.sbs_loc.split(",");
+       					var sbs_loc = addrArr[0] + (addrArr[1]? ' '+ addrArr[1] : '');
+       					$('.sbs_alias').text(info.sbs_alias);
+       					$('.sbs_loc').text(sbs_loc);
+       					
+           				te = flatpickr(dateSelector,{ // 6
+           	                defaultDate: $('#search_date').val(),
+           	                local: 'ko',
+           	                enable: [
+           	                    {
+           	                      from: formatDate(new Date(sbs_start_dt)),
+           	                      to: new Date()
+           	                    },
+           	                ],
+           	                dateFormat : "Y-m-d",
+           	                onChange: function(selectDates, dateStr, instance){
+           	                	
+           	                    $('#search_date').val(dateStr)
+           	                    changeAPI('userDashboard', getQueryString('sbs_seq'))
+           	                },
+           	            });
            			}
            		});
            	}
-         	
-            let dataList = [];
-	        function getDataListCreate(){
-	        	
-	            var createNavHTML = '';
-		        var mem_id = getQueryString('mem_id');
-	            
-	            if (dataList.length > 0) {
-	                // 데이터가 없는 경우 처리
-	            	dataList.forEach(function(v) {
-		                
-		                createNavHTML += '<a class="nav-link collapsed" onClick="movePath(\'/pages/user?mem_id='+ mem_id +'&sbs_seq='+ v.sbs_seq +'\')" data-bs-toggle="collapse" data-bs-target="#collapseDashboards" aria-expanded="false" aria-controls="collapseDashboards">'+ v.sbs_alias + '<div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div></a>';
-                            
-		            });
-	            }
-	            
-	            $('#accordionSidenav').append(createNavHTML)
-	            
-	        }
             
             const changeAPI = (code,val) => {
             	
@@ -332,6 +323,7 @@
 	                		
 	                		dashboardData = response.result;
 	                		dataChange()
+	                		
 	                	}
                         
                         dataChange()
