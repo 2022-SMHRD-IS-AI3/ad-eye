@@ -87,4 +87,11 @@ public class MemberServiceImpl implements IMemberService {
 		System.out.println("Service 접속");
 		return mDao.totalCnt(cri);
 	}
+	
+	// 회원 구독 목록 페이징 : memSbsCnt
+	@Override
+	public int memSbsCnt(Criteria cri) throws Exception {
+		System.out.println("Service 접속");
+		return sDao.memSbsCnt(cri);
+	}
 }

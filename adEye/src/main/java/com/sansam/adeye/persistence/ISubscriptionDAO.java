@@ -25,4 +25,6 @@ public interface ISubscriptionDAO {
 	public int sbsDelete(int seq) throws Exception;
 	// 전체 구독 목록 페이징
 	public int totalCnt(Criteria cri) throws Exception;
+	// 회원 구독 목록 페이징 : memSbsCnt
+	public int memSbsCnt(Criteria cri) throws Exception;
 }
