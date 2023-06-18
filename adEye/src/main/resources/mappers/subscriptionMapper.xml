@@ -213,7 +213,7 @@
   	</insert>
   	
   	<select id="detail" resultType="com.sansam.adeye.domain.SubscriptionDTO">
-  		SELECT s.sbs_seq, s.mem_id, m.mem_company, s.device_seq, s.sbs_loc, s.sbs_alias, s.sbs_status, s.sbs_start_dt, s.sbs_end_dt, s.sbs_grade FROM tb_subscription s, tb_member m WHERE m.mem_id = s.mem_id AND s.sbs_seq = #{sbs_seq} 
+  		SELECT s.sbs_seq, s.mem_id, m.mem_company, s.device_seq, s.sbs_loc, s.sbs_alias, s.sbs_status, s.sbs_start_dt, s.sbs_end_dt, s.sbs_grade, (SELECT TRUNC(s.sbs_end_dt) - TRUNC(SYSDATE) FROM dual) AS d_day FROM tb_subscription s, tb_member m WHERE m.mem_id = s.mem_id AND s.sbs_seq = #{sbs_seq} 
   	</select>
 
 	<update id="update" parameterType="com.sansam.adeye.domain.SubscriptionDTO">
