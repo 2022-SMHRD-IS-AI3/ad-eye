@@ -33,7 +33,7 @@
                         <div class="row">
                             <!-- 읽지 않은 문의글-->
                             <div class="col-xl-4 mb-4">
-                                <a class="card lift h-100" onClick="moveCode('noread')">
+                                <a class="card lift h-100 link-point" onClick="moveCode('noread')">
                                     <div class="card-body d-flex justify-content-center flex-column">
                                         <div class="align-items-center text-center">
                                             <div class="text-center">
@@ -46,7 +46,7 @@
                             </div>
                             <!-- 사용 중인 기기-->
                             <div class="col-xl-4 mb-4">
-                                <a class="card lift h-100" onClick="moveCode('use')">
+                                <a class="card lift h-100 link-point" onClick="moveCode('use')">
                                     <div class="card-body d-flex justify-content-center flex-column">
                                         <div class="align-items-center text-center">
                                             <div class="text-center">
@@ -59,7 +59,7 @@
                             </div>
                             <!-- 만료 예정 구독 (5일 전)-->
                             <div class="col-xl-4 mb-4">
-                                <a class="card lift h-100" onClick="moveCode('dday')">
+                                <a class="card lift h-100 link-point" onClick="moveCode('dday')">
                                     <div class="card-body d-flex justify-content-center flex-column">
                                         <div class="align-items-center text-center">
                                             <div class="text-center">

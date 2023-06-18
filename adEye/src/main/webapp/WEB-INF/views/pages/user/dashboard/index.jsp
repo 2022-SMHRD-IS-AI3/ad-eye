@@ -172,7 +172,7 @@
 	       		var type = "GET";
 	       		var data = {
 	    			pageNum : 1,
-	    			amount : 5,
+	    			amount : 2,
 	    			mem_id : getQueryString('mem_id'),
 	    			type : 'A',
 	    			keyword : $('#keyword').val()

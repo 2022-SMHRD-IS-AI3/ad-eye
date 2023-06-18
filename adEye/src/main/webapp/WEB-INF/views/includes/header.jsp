@@ -67,8 +67,8 @@
                             </a>
                             <div class="collapse" id="collapseDashboards" data-bs-parent="#accordionSidenav">
                                 <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
-                                    <a class="nav-link" onClick="moveCode('dlist')">기기 목록</a>
-                                    <a class="nav-link" onClick="moveCode('dinsert')">기기 등록</a>
+                                    <a class="nav-link link-point" onClick="moveCode('dlist')">기기 목록</a>
+                                    <a class="nav-link link-point" onClick="moveCode('dinsert')">기기 등록</a>
                                 </nav>
                             </div>
                             <!-- Sidenav Accordion (회원)-->
@@ -78,8 +78,8 @@
                             </a>
                            	<div class="collapse" id="pagesCollapseAccount" data-bs-parent="#accordionSidenav">
                                 <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
-                                    <a class="nav-link" onClick="moveCode('mlist')">회원 목록</a>
-                                    <a class="nav-link" onClick="moveCode('minsert')">회원 등록</a>
+                                    <a class="nav-link link-point" onClick="moveCode('mlist')">회원 목록</a>
+                                    <a class="nav-link link-point" onClick="moveCode('minsert')">회원 등록</a>
                                 </nav>
                             </div>
                             <!-- Sidenav Accordion (구독)-->
@@ -89,15 +89,15 @@
                             </a>
                             <div class="collapse" id="pagesCollapseAuthBasic" data-bs-parent="#accordionSidenav">
                                 <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
-                                    <a class="nav-link" onClick="moveCode('slist')">구독 목록</a>
-                                    <a class="nav-link" onClick="moveCode('sinsert')">구독 등록</a>
+                                    <a class="nav-link link-point" onClick="moveCode('slist')">구독 목록</a>
+                                    <a class="nav-link link-point" onClick="moveCode('sinsert')">구독 등록</a>
                                 </nav>
                             </div>
                             <!-- Sidenav Link (로그)-->
-                            <a class="nav-link" onClick="moveCode('log')">
+                            <a class="nav-link link-point" onClick="moveCode('log')">
                                 로그 관리
                             <!-- Sidenav Link (문의)-->
-                            <a class="nav-link" onClick="moveCode('contact')">
+                            <a class="nav-link link-point" onClick="moveCode('contact')">
                                 문의 관리
                             </a>
                         </nav>
