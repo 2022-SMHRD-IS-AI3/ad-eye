@@ -96,7 +96,17 @@
                     <!-- Main page content-->
                     <div class="container-xl px-4 mt-n10">
                         <div class="card mb-4">
-                            <div class="card-header text-dark fw-bolder fs-3">내 구독 확인</div>
+                            <div class="card-header text-dark fw-bolder fs-3">
+	                            <div class="row">
+	                                <div class="col-7">내 구독 확인</div>
+	                                <div class="col-3">
+	                                    <input type="text" class="form-control" id="keyword" placeholder="매체 이름을 검색하세요" onkeypress="submitEnter(event)">
+	                                </div>
+	                                <div class="col-2 ">
+	                                    <button type="button" class="btn btn-dark bi bi-search" onClick="getDataList()">검색</button>
+	                                </div>
+	                            </div>
+	                        </div>
                             <div class="card-body">
                                 <table id="datatable" class="table table-striped table-hover">
                                     <thead>
@@ -160,7 +170,9 @@
 	       		var data = {
 	    			pageNum : 1,
 	    			amount : 5,
-	    			mem_id : getQueryString('mem_id')
+	    			mem_id : getQueryString('mem_id'),
+	    			type : 'A',
+	    			keyword : $('#keyword').val()
 	    		}
 	       		
 	       		ajaxCallBack(path, type, data, function(response){
@@ -222,9 +234,18 @@
 	            }
 	            
 	            $('#dataList').html(createHTML)
-	            $('#accordionSidenav').append(createNavHTML)
+	            if($('#accordionSidenav').children().length == 1){
+		            $('#accordionSidenav').append(createNavHTML)
+	            }
 	            
 	        }
+	        
+	     	// 엔터 검색
+			function submitEnter(e){
+				if(e.keyCode === 13) {
+					getDataList()
+				}
+			}
 	        
 	        // 내 정보 수정 페이지 이동
 	       	function myInfo(){
