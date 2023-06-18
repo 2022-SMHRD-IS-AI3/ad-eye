@@ -499,6 +499,9 @@
 		        	var ftcSpan = ' - '+ ftc +' ('+ ftc_per +')' ; 
 		        	$('.male_total_cnt').text(mtcSpan)
 		        	$('.female_total_cnt').text(ftcSpan)
+	        	}else{
+	        		$('.male_total_cnt').text('')
+		        	$('.female_total_cnt').text('')
 	        	}
 	        	if(changeCheck){
 	        		pieChart()
