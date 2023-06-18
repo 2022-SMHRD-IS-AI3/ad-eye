@@ -46,7 +46,7 @@ public class SubscriptionController {
 				    //           sbs_alias : , sbs_start_dt : , sbs_end_dt : , sbs_reg_dt : , sbs_grade : , 
 				    //           sbs_status : , d_day : },{...},{...}]
 				    // d_day : 계약 만료 까지 잔여일
-					int total = service.totalCnt(cri);
+					int total = service.dDayCnt(cri);
 					System.out.println(total);
 					paramMap.put("pageMaker", new PageDTO(cri, total));
 				    paramMap.put("result", sList);
