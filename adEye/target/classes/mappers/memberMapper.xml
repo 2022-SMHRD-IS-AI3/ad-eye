@@ -39,7 +39,7 @@
 				   	m.mem_status,
 				   	m.mem_joindate,
 				   	m.company_addr,
-				   	(SELECT COUNT(s.sbs_seq) FROM tb_subscription s WHERE s.mem_id = m.mem_id) AS mem_pw
+				   	(SELECT COUNT(s.sbs_seq) FROM tb_subscription s WHERE s.mem_id = m.mem_id AND s.sbs_status = 'Y') AS mem_pw
 				FROM (
 					SELECT *
                     FROM tb_member

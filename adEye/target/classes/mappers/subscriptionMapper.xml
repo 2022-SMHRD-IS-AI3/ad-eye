@@ -251,12 +251,13 @@
 	</select>
 	
 	<select id="dDayCnt" resultType="int">
-		SELECT COUNT(*)
+		SELECT COUNT(SELECT TRUNC(s.sbs_end_dt) - TRUNC(SYSDATE) FROM dual) AS d_day
 		FROM tb_subscription s
 		LEFT JOIN tb_member m ON s.mem_id = m.mem_id
-		WHERE s.d_day &lt;= TO_NUMBER(#{seq}) AND
+		WHERE
 		<include refid="criteria"></include>
-		s.sbs_status != 'D'
+		s.d_day &lt;= TO_NUMBER(#{seq}) 
+		AND s.sbs_status != 'D'
 	</select>
 	
  	<select id="memSbsCnt" resultType="int">
