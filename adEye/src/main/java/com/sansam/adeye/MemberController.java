@@ -203,6 +203,8 @@ public class MemberController {
 			// sbs_total_interest = 전체 관심 인구 수
 			// sbs_male_per = 전체 노출 인구 중 남자
 			// sbs_female_per = 전체 노출 인구 중 여자
+			// today_total_man = 하루 노출 인구 수
+            // today_total_interest = 하루 관심 인구 수
 			paramMapsub.put("sbs_list", sDtoList);
 			paramMap.put("result", paramMapsub);
 		    paramMap.put("code", "200");
