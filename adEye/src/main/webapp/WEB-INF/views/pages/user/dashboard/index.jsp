@@ -79,12 +79,15 @@
            <!-- content -->
             <div id="layoutSidenav_content">
                 <main>
-                    <header class="page-header pb-10">
+                	<header class="page-header pb-10">
                         <div class="container-xl px-4">
                             <div class="page-header-content pt-4">
                                 <div class="row align-items-center justify-content-between">
                                     <div class="col-auto mt-4">
-                                        <h1 class="page-header-title">
+                                        <h1 class="page-header-title fw-bolder mb-5">
+                                            홈
+                                        </h1>
+                                        <h1 class="fw-bolder">
                                             <div class="page-header mem_company"></div>
                                         </h1>
                                         <div class="page-header-subtitle">총 구독 수 : <span class="sbs_total"></span> 개</div>

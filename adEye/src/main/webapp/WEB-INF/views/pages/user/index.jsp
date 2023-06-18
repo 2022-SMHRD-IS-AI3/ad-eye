@@ -427,8 +427,12 @@
 	            if (dataList.length > 0) {
 	                // 데이터가 없는 경우 처리
 	            	dataList.forEach(function(v) {
-		                
-		                createNavHTML += '<a class="nav-link collapsed" onClick="movePath(\'/pages/user?mem_id='+ mem_id +'&sbs_seq='+ v.sbs_seq +'\')" data-bs-toggle="collapse" data-bs-target="#collapseDashboards" aria-expanded="false" aria-controls="collapseDashboards">'+ v.sbs_alias + '<div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div></a>';
+	            		
+	            		var active = '';
+		                if(v.sbs_seq == getQueryString('sbs_seq')){
+		                	active = 'active';
+		                }
+		                createNavHTML += '<a class="nav-link collapsed '+ active +'" onClick="movePath(\'/pages/user?mem_id='+ mem_id +'&sbs_seq='+ v.sbs_seq +'\')" data-bs-toggle="collapse" data-bs-target="#collapseDashboards" aria-expanded="false" aria-controls="collapseDashboards">'+ v.sbs_alias + '<div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div></a>';
                             
 		            });
 	            }
