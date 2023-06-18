@@ -53,7 +53,7 @@
                   	<div class="nav accordion" id="accordionSidenav">
                             
                        	<!-- (내 구독 확인) -->
-                      	<div class="sidenav-menu-heading">내 구독 확인</div>
+                      	<div class="sidenav-menu-heading text-sm">내 구독 확인</div>
                    	</div>
               	</div>
           	</nav>

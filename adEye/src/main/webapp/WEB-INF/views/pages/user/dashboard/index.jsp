@@ -68,7 +68,7 @@
                         <div class="nav accordion" id="accordionSidenav">
                             
                             <!-- Sidenav Menu Heading (내 구독 확인)-->
-                            <div class="sidenav-menu-heading">내 구독 확인</div>
+                            <div class="sidenav-menu-heading text-sm">내 구독 확인</div>
                             <!-- Sidenav Accordion (Dashboard)-->
                            </div>
                       </div>
@@ -193,10 +193,10 @@
 		                var total = v.sbs_total_man;
 		                var count1 = v.sbs_male_per;
 		                var count2 = v.sbs_female_per;
-
+			
 		                var percentage1 = ((count1 / total) * 100) || 0;
 		                var percentage2 = ((count2 / total) * 100) || 0;
-		                var per = Math.round(percentage1) + '% : ' +  Math.round() + '%';
+		                var per = Math.round(percentage1) + '% : ' +  Math.round(percentage2) + '%';
 		                if(percentage1 == 0) {
 		                	per	= '-';
 		                }

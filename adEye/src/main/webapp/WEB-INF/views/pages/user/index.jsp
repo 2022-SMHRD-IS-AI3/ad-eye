@@ -82,7 +82,7 @@
                         <div class="nav accordion" id="accordionSidenav">
                             
                             <!-- Sidenav Menu Heading (내 구독 확인)-->
-                            <div class="sidenav-menu-heading">내 구독 확인</div>
+                            <div class="sidenav-menu-heading text-sm">내 구독 확인</div>
                             <!-- Sidenav Accordion (Dashboard)-->
                            </div>
                       </div>
