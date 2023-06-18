@@ -46,7 +46,7 @@
       	</trim>
 	</sql>
 	
-<!-- 	<sql id="memCri">
+ 	<sql id="memCri">
 		<trim prefix="(" suffix=") AND" prefixOverrides="OR">
         	<foreach collection="typeArr" item="type">
             	<trim prefix="OR">
@@ -61,7 +61,7 @@
             	</trim>
          	</foreach>
       	</trim>
-	</sql> -->
+	</sql>
 	
    	<select id="list" resultType="com.sansam.adeye.domain.SubscriptionDTO">
    		<![CDATA[
@@ -205,7 +205,7 @@
              FROM tb_subscription s, dual
              WHERE mem_id = #{seq} AND s.sbs_status = 'Y' AND
        ]]>
-      <include refid="criteria"></include>         
+      <include refid="memCri"></include>         
          <![CDATA[
                 rownum <= #{pageNum} * #{amount}
            )
