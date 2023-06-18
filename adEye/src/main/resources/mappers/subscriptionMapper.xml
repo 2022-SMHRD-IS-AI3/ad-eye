@@ -163,7 +163,7 @@
             			s.sbs_reg_dt,
             			s.sbs_grade,
             			s.sbs_status,
-            			(SELECT TRUNC(s.sbs_end_dt) - TRUNC(SYSDATE) FROM dual) AS d_day
+            			(SELECT TRUNC(s.sbs_end_dt) - TRUNC(SYSDATE) FROM dual WHERE s.sbs_status = 'Y') AS d_day
 					FROM tb_subscription s
 					LEFT JOIN tb_member m ON s.mem_id = m.mem_id
 					WHERE s.sbs_status != 'D'
@@ -261,7 +261,7 @@
 		WHERE
 		<include refid="criteria"></include>
 		s.d_day &lt;= TO_NUMBER(#{seq}) 
-		AND s.sbs_status != 'D'
+		AND s.sbs_status != 'Y'
 	</select>
 	
  	<select id="memSbsCnt" resultType="int">
