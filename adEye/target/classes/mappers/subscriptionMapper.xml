@@ -250,7 +250,7 @@
 		s.sbs_status != 'D'
 	</select>
 	
-	<select id="memSbsCnt">
+	<select id="memSbsCnt" resultType="int">
 		SELECT COUNT(*)
 		FROM tb_subscription s, dual
         WHERE   
