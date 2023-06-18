@@ -68,7 +68,7 @@
                         <div class="nav accordion" id="accordionSidenav">
                             
                             <!-- Sidenav Menu Heading (내 구독 확인)-->
-                            <div class="sidenav-menu-heading">내 구독 확인</div>
+                            <div class="sidenav-menu-heading text-sm">내 구독 확인</div>
                             <!-- Sidenav Accordion (Dashboard)-->
                            </div>
                       </div>
@@ -79,12 +79,15 @@
            <!-- content -->
             <div id="layoutSidenav_content">
                 <main>
-                    <header class="page-header pb-10">
+                	<header class="page-header pb-10">
                         <div class="container-xl px-4">
                             <div class="page-header-content pt-4">
                                 <div class="row align-items-center justify-content-between">
                                     <div class="col-auto mt-4">
-                                        <h1 class="page-header-title">
+                                        <h1 class="page-header-title fw-bolder mb-5">
+                                            홈
+                                        </h1>
+                                        <h1 class="fw-bolder">
                                             <div class="page-header mem_company"></div>
                                         </h1>
                                         <div class="page-header-subtitle">총 구독 수 : <span class="sbs_total"></span> 개</div>
@@ -96,7 +99,17 @@
                     <!-- Main page content-->
                     <div class="container-xl px-4 mt-n10">
                         <div class="card mb-4">
-                            <div class="card-header text-dark fw-bolder fs-3">내 구독 확인</div>
+                            <div class="card-header text-dark fw-bolder fs-3">
+	                            <div class="row">
+	                                <div class="col-7">내 구독 확인</div>
+	                                <div class="col-3">
+	                                    <input type="text" class="form-control" id="keyword" placeholder="매체 이름을 검색하세요" onkeypress="submitEnter(event)">
+	                                </div>
+	                                <div class="col-2 ">
+	                                    <button type="button" class="btn btn-dark bi bi-search" onClick="getDataList()">검색</button>
+	                                </div>
+	                            </div>
+	                        </div>
                             <div class="card-body">
                                 <table id="datatable" class="table table-striped table-hover">
                                     <thead>
@@ -160,7 +173,9 @@
 	       		var data = {
 	    			pageNum : 1,
 	    			amount : 5,
-	    			mem_id : getQueryString('mem_id')
+	    			mem_id : getQueryString('mem_id'),
+	    			type : 'A',
+	    			keyword : $('#keyword').val()
 	    		}
 	       		
 	       		ajaxCallBack(path, type, data, function(response){
@@ -193,10 +208,10 @@
 		                var total = v.sbs_total_man;
 		                var count1 = v.sbs_male_per;
 		                var count2 = v.sbs_female_per;
-
+			
 		                var percentage1 = ((count1 / total) * 100) || 0;
 		                var percentage2 = ((count2 / total) * 100) || 0;
-		                var per = Math.round(percentage1) + '% : ' +  Math.round() + '%';
+		                var per = Math.round(percentage1) + '% : ' +  Math.round(percentage2) + '%';
 		                if(percentage1 == 0) {
 		                	per	= '-';
 		                }
@@ -222,9 +237,18 @@
 	            }
 	            
 	            $('#dataList').html(createHTML)
-	            $('#accordionSidenav').append(createNavHTML)
+	            if($('#accordionSidenav').children().length == 1){
+		            $('#accordionSidenav').append(createNavHTML)
+	            }
 	            
 	        }
+	        
+	     	// 엔터 검색
+			function submitEnter(e){
+				if(e.keyCode === 13) {
+					getDataList()
+				}
+			}
 	        
 	        // 내 정보 수정 페이지 이동
 	       	function myInfo(){

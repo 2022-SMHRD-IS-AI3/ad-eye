@@ -54,6 +54,7 @@
                                         <tr>
                                         	<th>No.</th>
                                             <th>기기시리얼</th>
+                                            <th>매체이름</th>
                                             <th>매체위치</th>
                                             <th>로그시간</th>
                                             <th>로그내용</th>
@@ -130,7 +131,7 @@
 
             		var log_dt = formatDate(v.log_dt);
                 
-                    createHTML += '<tr><td>'+ no +'</td><td>'+ v.device_uid +'</td><td>'+ v.sbs_loc +'</td><td>'+ log_dt +'</td><td>'+ v.log_msg +'</td></tr>'
+                    createHTML += '<tr><td>'+ no +'</td><td>'+ v.device_uid +'</td><td>'+ v.sbs_alias +'</td><td>'+ v.sbs_loc +'</td><td>'+ log_dt +'</td><td>'+ v.log_msg +'</td></tr>'
                 });
             }
             
