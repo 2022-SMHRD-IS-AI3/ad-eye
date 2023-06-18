@@ -36,4 +36,7 @@ public interface IMemberService {
 	
 	// 회원 목록 페이징
 	public int totalCnt(Criteria cri) throws Exception;
+	
+	// 회원 구독 목록 페이징 : memSbsCnt
+	public int memSbsCnt(Criteria cri) throws Exception;
 }

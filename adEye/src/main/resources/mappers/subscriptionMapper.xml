@@ -232,5 +232,14 @@
 		<include refid="criteria"></include>
 		s.sbs_status != 'D'
 	</select>
+	
+	<select id="memSbsCnt">
+		SELECT COUNT(*)
+		FROM tb_subscription s, dual
+        WHERE   
+		<include refid="criteria"></include>
+		mem_id = #{seq}
+		AND s.sbs_status = 'Y'
+	</select>
 
 </mapper>

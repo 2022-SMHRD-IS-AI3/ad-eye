@@ -64,4 +64,10 @@ public class SubscriptionDAO implements ISubscriptionDAO{
 		System.out.println("DAO 접속");
 		return session.selectOne("SubscriptionMapper.totalCnt", cri);
 	}
+	// 회원 그독 목록 페이징 : memSbsCnt
+	@Override
+	public int memSbsCnt(Criteria cri) throws Exception {
+		System.out.println("DAO 접속");
+		return session.selectOne("SubscriptionMapper.memSbsCnt", cri);
+	}
 }
