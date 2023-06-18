@@ -17,4 +17,5 @@ public class LogDTO {
 	private String log_msg;
 	private Date log_dt;
 	private String sbs_loc;
+	private String sbs_alias;
 }

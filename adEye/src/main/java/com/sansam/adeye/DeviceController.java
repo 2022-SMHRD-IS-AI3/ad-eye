@@ -269,7 +269,7 @@ public class DeviceController {
 		try {
 			
 			List<LogDTO> logList = service.LogList(cri);
-		    // logList = [{log_seq : , log_msg : , log_dt : , device_uid : , sbs_loc : },{...},{...}]
+		    // logList = [{log_seq : , log_msg : , log_dt : , device_uid : , sbs_loc : , sbs_alias : },{...},{...}]
 			int total = service.logTotalCnt(cri);
 			System.out.println(total);
 			// total : 전체 로그 수
