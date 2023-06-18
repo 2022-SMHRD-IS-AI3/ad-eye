@@ -128,6 +128,7 @@
                                 </table>
                             </div>
                         </div>
+            			<nav aria-label="Page navigation" id="page-wrap" class="mt-3"></nav>
                     </div>
                 </main>
                 <footer class="footer-admin mt-auto footer-light">
@@ -143,7 +144,6 @@
                     </div>
                 </footer>
             </div>
-            <nav aria-label="Page navigation" id="page-wrap" class="mt-3"></nav>
         </div>
         
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
@@ -158,22 +158,20 @@
 	     	// 문서준비 완료 되면
 	        $(document).ready(function() {
 	
-	            // 유무 page 값 가져오기
-	            const page = getQueryString('page');
-	
-	            // page 값 유무로 페이지체크
+	        	getDashboardData()
 	            getDataList()
 	
 	        });
-	        
+        	
+        	var page = getQueryString('page') || 1;
 	        // 데이터 목록 가져오기
 	        function getDataList(){
 	        	
 	       		var path = "/member/devicelist";
 	       		var type = "GET";
 	       		var data = {
-	    			pageNum : 1,
-	    			amount : 2,
+	    			pageNum : page,
+	    			amount : 5,
 	    			mem_id : getQueryString('mem_id'),
 	    			type : 'A',
 	    			keyword : $('#keyword').val()
@@ -188,6 +186,7 @@
 	       				$('.mem_id').text(getQueryString('mem_id'))
 	       				$('.sbs_total').text(response.result.sbs_total)
 	       				dataList = response.result.sbs_list;
+	       				makePagination(response.pageMaker)
 	       	            getDataListCreate();
 	       			}
 	       		});
@@ -197,7 +196,6 @@
 	        function getDataListCreate(){
 	        	
 	            var createHTML = '';
-	            var createNavHTML = '';
 	            
 	            if (dataList.length === 0) {
 	                // 데이터가 없는 경우 처리
@@ -231,17 +229,61 @@
 		                var mem_id = getQueryString('mem_id');
 		                
 		                createHTML += '<tr class="link-point" onClick="movePath(\'/pages/user?mem_id='+ mem_id +'&sbs_seq='+v.sbs_seq+'\')"><td>'+ v.sbs_alias +'</td><td>'+ sbs_loc +'</td><td class="text-center">'+ man +'</td><td class="text-center">'+ interest +'</td><td class="text-center">'+ per +'</td></tr>'
-		                
-		                createNavHTML += '<a class="nav-link link-point collapsed" onClick="movePath(\'/pages/user?mem_id='+ mem_id +'&sbs_seq='+ v.sbs_seq +'\')" data-bs-toggle="collapse" data-bs-target="#collapseDashboards" aria-expanded="false" aria-controls="collapseDashboards">'+ v.sbs_alias + '<div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div></a>';
-                            
+		                 
 		            });
 	            }
 	            
 	            $('#dataList').html(createHTML)
-	            if($('#accordionSidenav').children().length == 1){
-		            $('#accordionSidenav').append(createNavHTML)
-	            }
 	            
+	            
+	        }
+	        
+
+            
+         	// 데이터 상세 조회
+            function getDashboardData(){
+            	
+	       		var path = "/member/devicelist";
+	       		var type = "GET";
+	       		var data = {
+	    			pageNum : 1,
+	    			amount : 500,
+	    			mem_id : getQueryString('mem_id')
+	    		}
+           		
+           		ajaxCallBack(path, type, data, function(response){
+           			
+           			if(response.code == "200") {
+
+           				var sbs_list = response.result.sbs_list;
+           				var createNavHTML = '';
+        		        var mem_id = getQueryString('mem_id');
+           				
+           				
+           				if(sbs_list.length > 0) {
+           					
+           					sbs_list.forEach(function(v) {
+        	            		
+        	            		var active = '';
+        		                if(v.sbs_seq == getQueryString('sbs_seq')){
+        		                	active = 'active';
+        		                }
+        		                createNavHTML += '<a class="nav-link collapsed '+ active +'" onClick="movePath(\'/pages/user?mem_id='+ mem_id +'&sbs_seq='+ v.sbs_seq +'\')" data-bs-toggle="collapse" data-bs-target="#collapseDashboards" aria-expanded="false" aria-controls="collapseDashboards">'+ v.sbs_alias + '<div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div></a>';
+                                    
+        		            });
+           				}
+           				
+           				if($('#accordionSidenav').children().length == 1){
+        		            $('#accordionSidenav').append(createNavHTML)
+        	            }
+           				
+           			}
+           		});
+           	}
+	        
+	        function pageMove(p){
+	        	page = p
+	        	getDataList()
 	        }
 	        
 	     	// 엔터 검색
