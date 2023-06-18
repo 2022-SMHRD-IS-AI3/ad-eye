@@ -193,8 +193,8 @@ public class MemberController {
 			
 		    // paramMap 담을 객체 생성
 			Map<String,Object> paramMapsub = new HashMap<String, Object>();
-			int total = service.memSbsCnt(cri);
-			System.out.println(total);
+//			int total = service.memSbsCnt(cri);
+//			System.out.println(total);
 			
 			paramMapsub.put("mem_company", mem_company);
 			// 해당 회원이 현재 구독 중인 수
@@ -208,7 +208,7 @@ public class MemberController {
 			// today_total_man = 하루 노출 인구 수
             // today_total_interest = 하루 관심 인구 수
 			paramMapsub.put("sbs_list", sDtoList);
-			paramMap.put("pageMaker", new PageDTO(cri, total));
+//			paramMap.put("pageMaker", new PageDTO(cri, total));
 			paramMap.put("result", paramMapsub);
 		    paramMap.put("code", "200");
 		    paramMap.put("message", "조회 성공");
