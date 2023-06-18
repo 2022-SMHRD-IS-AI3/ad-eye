@@ -250,13 +250,13 @@
 		s.sbs_status != 'D'
 	</select>
 	
-<!-- 	<select id="memSbsCnt">
+ 	<select id="memSbsCnt" resultType="int">
 		SELECT COUNT(*)
-		FROM tb_subscription s, dual
+		FROM tb_subscription
         WHERE   
 		<include refid="memCri"></include>
 		mem_id = #{seq}
-		AND s.sbs_status = 'Y'
-	</select> -->
+		AND sbs_status = 'Y'
+	</select>
 
 </mapper>
