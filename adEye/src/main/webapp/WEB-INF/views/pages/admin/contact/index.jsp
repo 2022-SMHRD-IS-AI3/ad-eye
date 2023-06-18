@@ -150,7 +150,7 @@
             createHTML = '<tr><td colspan="7">데이터가 없습니다.</td></tr>';
         } else {
         	dataList.forEach(function(v,idx) {
-	        		var no = (page - 1) > 0 ? (page - 1) * 10 + (idx+1) : (idx+1);
+	        	var no = (page - 1) > 0 ? (page - 1) * 10 + (idx+1) : (idx+1);
 
         		var contact_dt = formatDate(v.contact_dt);
                 var contact_open = v.contact_open == 'Y' ? "<span>확인</span>" : "<span style='color:#ff6262;'>미확인</span>";

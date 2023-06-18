@@ -192,5 +192,24 @@ function makePagination(pm){
 	
 }
 
+// 뒤로가기
+function back(){
+	history.back();
+}
+
+function formatPhoneNumber(input) {
+  // 입력된 값에서 숫자만 추출
+  let phoneNumber = input.value.replace(/\D/g, '');
+
+  // 전화번호 형식을 적용하여 `-` 추가
+  if (phoneNumber.length > 3 && phoneNumber.length <= 6) {
+    phoneNumber = phoneNumber.replace(/(\d{3})(\d+)/, '$1-$2');
+  } else if (phoneNumber.length > 6) {
+    phoneNumber = phoneNumber.replace(/(\d{3})(\d{4})(\d+)/, '$1-$2-$3');
+  }
+
+  // 변환된 전화번호를 입력 필드에 설정
+  input.value = phoneNumber;
+}
 
 

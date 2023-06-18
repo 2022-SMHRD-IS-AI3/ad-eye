@@ -58,7 +58,7 @@
                                 <table id="datatable" class="table table-striped table-hover">
                                     <thead>
                                         <tr>
-                                            <th>기기 번호</th>
+                                            <th>No.</th>
                                             <th>시리얼</th>
                                             <th>회사명</th>
                                             <th>매체 이름</th>
@@ -123,12 +123,12 @@
 	                // 데이터가 없는 경우 처리
 	                createHTML = '<tr><td colspan="6">데이터가 없습니다.</td></tr>';
 	            } else {
-	            	dataList.forEach(function(v) {
-	            		
+	            	dataList.forEach(function(v,idx) {
+	            		var no = (page - 1) > 0 ? (page - 1) * 10 + (idx+1) : (idx+1);
 	            		var red = v.data_check > 0 ? '' : 'style="background: #ffc7c7;""';
 	            		var device_onoff = v.device_onoff == 'Y' ? '<span style="color: #9ecd73;font-weight: bolder;">ON</span>' : '<span style="color: #ff5353;font-weight: bolder;">OFF</span>';
 		                
-		                createHTML += '<tr '+ red +'><td>'+ v.device_seq +'</td><td class="text-primary link-point" onClick="movePath(\'/pages/admin/device/pop?sbs_seq='+v.sbs_seq+'\',\'pop\')">'+ v.device_uid +'</td><td>'+ v.mem_company +'</td><td>'+ v.sbs_alias +'</td><td>'+ device_onoff +'</td><td class="text-primary link-point" onClick="movePath(\'/pages/admin/log?key=D&uid='+v.device_uid+'\')">'+ v.data_check +'</td></tr>'
+		                createHTML += '<tr '+ red +'><td>'+ no +'</td><td class="text-primary link-point" onClick="movePath(\'/pages/admin/device/pop?sbs_seq='+v.sbs_seq+'\',\'pop\')">'+ v.device_uid +'</td><td>'+ v.mem_company +'</td><td>'+ v.sbs_alias +'</td><td>'+ device_onoff +'</td><td class="text-primary link-point" onClick="movePath(\'/pages/admin/log?key=D&uid='+v.device_uid+'\')">'+ v.data_check +'</td></tr>'
 		            });
 	            }
 	            

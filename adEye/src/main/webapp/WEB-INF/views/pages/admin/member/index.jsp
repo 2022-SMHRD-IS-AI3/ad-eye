@@ -77,6 +77,7 @@
                                 <table id="datatable" class="table table-striped table-hover">
                                     <thead>
                                         <tr>
+                                        	<th>No.</th>
                                             <th>회사명</th>
                                             <th>연락처</th>
                                             <th>아이디</th>
@@ -163,9 +164,10 @@
             
             if (dataList.length === 0) {
                 // 데이터가 없는 경우 처리
-                createHTML = '<tr><td colspan="7">데이터가 없습니다.</td></tr>';
+                createHTML = '<tr><td colspan="8">데이터가 없습니다.</td></tr>';
             } else {
-            	dataList.forEach(function(v) {
+            	dataList.forEach(function(v,idx) {
+            		var no = (page - 1) > 0 ? (page - 1) * 10 + (idx+1) : (idx+1);
 	                var timestamp = v.mem_joindate; // 밀리초 단위의 시간 값
 	            
 	                var date = new Date(timestamp);
@@ -178,7 +180,7 @@
 	                var sbs_count = v.mem_pw == null ? 0 : v.mem_pw;
 	                
 	                var delBtn = '<button class="btn btn-danger btn-sm" onClick="dataDel(\''+ v.mem_id +'\')" type="button ">삭제</button>';
-	                createHTML += '<tr><td class="text-primary link-point" style="" onClick="movePath(\'/pages/admin/member/push?id='+v.mem_id+'\')">'+ v.mem_company +'</td><td>'+ v.mem_phone +'</td><td class="text-primary link-point" onClick="movePath(\'/pages/admin/member/push?id='+v.mem_id+'\')">'+ v.mem_id +'</td><td>'+ v.mem_email +'</td><td>'+ formattedDate +'</td><td>'+ sbs_count +'</td><td>'+ delBtn +'</td></tr>'
+	                createHTML += '<tr><td>'+ no +'</td><td class="text-primary link-point" style="" onClick="movePath(\'/pages/admin/member/push?id='+v.mem_id+'\')">'+ v.mem_company +'</td><td>'+ v.mem_phone +'</td><td class="text-primary link-point" onClick="movePath(\'/pages/admin/member/push?id='+v.mem_id+'\')">'+ v.mem_id +'</td><td>'+ v.mem_email +'</td><td>'+ formattedDate +'</td><td>'+ sbs_count +'</td><td>'+ delBtn +'</td></tr>'
 	            });
             }
             

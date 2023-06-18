@@ -130,7 +130,7 @@
 	</select>
 	
 	<select id="deviceSimpleList" resultType="com.sansam.adeye.domain.DeviceDTO">
-		SELECT device_seq, device_uid, device_status FROM tb_device WHERE device_status != 'D'
+		SELECT device_seq, device_uid, device_status FROM tb_device WHERE device_status != 'D' ORDER BY device_seq
 	</select>
   
 </mapper>

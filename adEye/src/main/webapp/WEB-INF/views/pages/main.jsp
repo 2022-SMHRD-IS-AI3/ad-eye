@@ -175,13 +175,14 @@
         	
         	if($("#company").val()== ""){
         		alert('회사명을 입력해주세요');
+        		return
         	}else if($("#phone").val()== ""){
         		alert('연락처를 입력해주세요');
+        		return
         	}else if($("#email").val()== ""){
         		alert('이메일을 입력해주세요');
-        	}else if(privacyCheck){
-       			$("#contactForm").submit();
-       		}else{
+        		return
+        	}else if(!privacyCheck){
        		 	alert('개인정보처리방침에 동의 후 문의 가능합니다')
        		 	return
        		}

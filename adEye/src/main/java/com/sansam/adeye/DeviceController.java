@@ -42,7 +42,7 @@ public class DeviceController {
 	
 	// 관리자 - 기기 등록
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public @ResponseBody Map<String, Object> insert(@RequestBody DeviceDTO data) throws Exception {
+	public @ResponseBody Map<String, Object> insert(DeviceDTO data) throws Exception {
 		
 		log.info("/device/insert.................."+ data.getDevice_uid());
 		

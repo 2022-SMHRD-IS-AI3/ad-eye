@@ -96,7 +96,7 @@
                                             <!-- 아이디-->
                                             <div class="row gx-3 mb-3">
                                                 <div class="col-md-7">
-                                                    <label class="small mb-1" for="mem_id">* 아이디</label>
+                                                    <label class="small mb-1" for="mem_id">아이디</label>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <input class="form-control" id="mem_id"  type="text" name="mem_id" placeholder="아이디" value="" disabled />
@@ -112,18 +112,13 @@
                                                     <label class="small mb-1" for="mem_pw">* 비밀번호</label>
                                                     <input class="form-control" id="mem_pw" type="password" name="mem_pw" placeholder="비밀번호" value="1234" />
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <br>
-                                                    <span class="text-muted small">* 기본 비밀번호는 1234 입니다.</span>
-                                                    
-                                                </div>
                                             </div>
 
                                             <!-- 연락처-->
                                             <div class="row gx-3 mb-3">
                                                 <div class="col-md-6">
                                                     <label class="small mb-1" for="mem_phone">* 연락처</label>
-                                                    <input class="form-control" id="mem_phone" type="text" name="mem_phone" placeholder="010-1234-1234" value="" />
+                                                    <input class="form-control" id="mem_phone" type="text" name="mem_phone" oninput="formatPhoneNumber(this)" placeholder="010-1234-1234" value="" maxlength="13" />
                                                 </div>
                                             </div>
 
@@ -154,7 +149,7 @@
                                     	</div>
 	                                    <div class="card-footer position-relative">
 	                                        <div class="d-flex align-items-center justify-content-between">
-	                                            <button class="btn btn-secondary" type="button" onclick=>취소</button>
+	                                            <button class="btn btn-secondary" type="button" onclick="back()">뒤로</button>
 	                                            <div class="submit-btn-wrap">
 	                                                <button class="btn btn-primary del-btn" onClick="dataSubmit()" type="button">수정</button>
 	                                            </div>
@@ -300,7 +295,24 @@
         // 데이터 전송
         function dataSubmit(){
         	
-        	conLog(123)
+
+        	if($("#mem_pw").val()== ""){
+        		alert('비밀번호를 입력해주세요');
+        		return
+        	}else if($("#mem_phone").val()== ""){
+        		alert('연락처를 입력해주세요');
+        		return
+        	}else if($("#mem_email").val()== ""){
+        		alert('이메일을 입력해주세요');
+        		return
+        	}else if($("#addr1").val()== ""){
+        		alert('주소를 입력해주세요');
+        		return
+       		}
+        	
+        	if(!confirm("수정하시겠습니까?")) {
+        		return
+        	}
         	
        		var path = "/member/update";
        		var type = "POST";
@@ -313,14 +325,6 @@
               	mem_status : $('#mem_status').val(),
                	company_addr : $('#addr1').val() + "," + $('#addr2').val()
            	}
-       		var msg = "";
-       		
-       		if(isObjectEmpty(data)){ // 빈 값 체크
-       			alert("필수 입력정보가 입력되지 않았습니다");
-       			return
-       		}else if(!confirm("수정하시겠습니까?")) {
-        		return
-        	}
        		
        		ajaxCallBack(path, type, data, function(response){
        			
@@ -328,6 +332,7 @@
        				
        			if(response.code == "202") {
 	       			alert("정보수정 완료되었습니다")
+	       			location.reload();
        			}else{
 	       			alert("정보수정 실패하였습니다")
 	       		}

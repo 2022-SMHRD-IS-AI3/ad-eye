@@ -71,6 +71,7 @@
                                 <table id="datatable" class="table table-striped table-hover">
                                     <thead>
                                         <tr>
+                                        	<th>No.</th>
                                             <th>회사명</th>
                                             <th>매체 이름</th>
                                             <th>구독 등급</th>
@@ -139,16 +140,17 @@
             
             if (dataList.length === 0) {
                 // 데이터가 없는 경우 처리
-                createHTML = '<tr><td colspan="7">데이터가 없습니다.</td></tr>';
+                createHTML = '<tr><td colspan="8">데이터가 없습니다.</td></tr>';
             } else {
-            	dataList.forEach(function(v) {
+            	dataList.forEach(function(v,idx) {
+            		var no = (page - 1) > 0 ? (page - 1) * 10 + (idx+1) : (idx+1);
 	                var sbs_start_dt = formatDate(v.sbs_start_dt); // 밀리초 단위의 시간 값
 	                var sbs_end_dt = formatDate(v.sbs_end_dt); // 밀리초 단위의 시간 값
 	                
 	                var dday = v.d_day < 0 ? 0 : v.d_day;
 	            
 	                // var delBtn = '<button class="btn btn-danger btn-sm" onClick="dataDel(\''+ v.mem_id +'\')" type="button ">삭제</button>';
-	                createHTML += '<tr><td>'+ v.mem_company +'</td><td class="text-primary" style="cursor: pointer;" onClick="movePath(\'/pages/admin/sbs/push?id='+v.sbs_seq+'\')">'+ v.sbs_alias +'</td><td>'+ v.sbs_grade +'</td><td>'+ v.sbs_status +'</td><td>'+ sbs_start_dt +'</td><td>'+ sbs_end_dt +'</td><td>'+ dday +'</td></tr>'
+	                createHTML += '<tr><td>'+ no +'</td><td>'+ v.mem_company +'</td><td class="text-primary" style="cursor: pointer;" onClick="movePath(\'/pages/admin/sbs/push?id='+v.sbs_seq+'\')">'+ v.sbs_alias +'</td><td>'+ v.sbs_grade +'</td><td>'+ v.sbs_status +'</td><td>'+ sbs_start_dt +'</td><td>'+ sbs_end_dt +'</td><td>'+ dday +'</td></tr>'
 	            });
             }
             

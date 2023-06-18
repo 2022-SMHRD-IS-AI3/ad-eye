@@ -295,19 +295,27 @@
             	
             }
             
-            
          	
 	        // 주소검색 api
+            var isPopupOpen = false;
 	        function postSearch(){
-	
-	            new daum.Postcode({
-	                oncomplete: function(data) {
-	                    // $('#post_num').val(data.zonecode)
-	                    $('#addr1').val(data.address)
-	                    $('#addr2').val('')
-	                    $('#addr2').focus()
-	                }
-	            }).open();
+	        	
+	        	if (!isPopupOpen) {
+	        	 	 isPopupOpen = true; // 팝업 창이 열린 상태로 변경
+		        		new daum.Postcode({
+		        	        oncomplete: function(data) {
+	        	          	$('#post_num').val(data.zonecode);
+	        	          	$('#addr1').val(data.address);
+	        	          	$('#addr2').val('').focus();
+	        	          	isPopupOpen = false; // 팝업 창이 닫힌 상태로 변경
+	        	        },
+	        	        onclose: function() {
+	        	          	isPopupOpen = false; // 팝업 창이 닫힌 상태로 변경
+	        	        }
+	        	  	}).open({
+	        	        autoClose: false // 팝업 창이 자동으로 닫히지 않도록 설정
+	        	  	});
+	        	}
 	        }
             
          	// 계정 조회
@@ -356,6 +364,8 @@
             		msg = "삭제하시겠습니까?";
             	}else if('in' || 'up') { // 등록, 수정
             		
+            		
+            		
             		data = {
                       	mem_id : $('#mem_id').val(),
                       	sbs_seq : getQueryString('id') || 0,
@@ -369,11 +379,30 @@
                    	}
             		conLog(data)
             		
-    	       		if(isObjectEmpty(data)){ // 빈 값 체크
-    	       			alert("필수 입력정보가 입력되지 않았습니다");
-    	       			return
-    	       		}
-            	
+
+            		if($("#mem_id").val()== ""){
+                		alert('아이디를 입력해주세요');
+                		return
+                	}else if($("#device_seq").val()== ""){
+                		alert('기기를 선택해주세요');
+                		return
+                	}else if($("#sbs_grade").val()== ""){
+                		alert('등급을 선택해주세요');
+                		return
+                	}else if($("#sbs_alias").val()== ""){
+                		alert('매체이름을 입력해주세요');
+                		return
+                	}else if($("#addr1").val()== ""){
+                		alert('매체위치를 입력해주세요');
+                		return
+                	}else if($("#sbs_start_dt").val()== ""){
+                		alert('구독 시작일을 입력해주세요');
+                		return
+                	}else if($("#sbs_end_dt").val()== ""){
+                		alert('구독 종료일을 입력해주세요');
+                		return
+               		}
+            		
             		if(flag=='in') {
             			path = "/subscription/insert";
             		}else{
@@ -382,6 +411,7 @@
             		}
             		
             	}
+            	
             	var cflag = false
             	if(msg != ""){
             		cflag = confirm(msg);
@@ -415,7 +445,7 @@
            				
            			}else if(flag == 'dl'){
            				
-           				if(response.code == "202") {
+           				if(response.code == "201") {
     	       				alert("삭제 완료되었습니다")
     	       				moveCode('slist');
            				}else{
