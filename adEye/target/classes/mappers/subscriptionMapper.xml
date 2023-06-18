@@ -205,7 +205,7 @@
              FROM tb_subscription s, dual
              WHERE mem_id = #{seq} AND s.sbs_status = 'Y' AND
        ]]>
-      <include refid="criteria"></include>         
+      <include refid="memCri"></include>         
          <![CDATA[
                 rownum <= #{pageNum} * #{amount}
            )
