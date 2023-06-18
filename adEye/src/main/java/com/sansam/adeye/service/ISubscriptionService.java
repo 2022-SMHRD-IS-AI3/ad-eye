@@ -30,5 +30,6 @@ public interface ISubscriptionService {
 	
 	// 전체 구독 목록 페이징
 	public int totalCnt(Criteria cri) throws Exception;
-	
+	// 전체 구독 목록 페이징 : dDayCnt
+	public int dDayCnt(Criteria cri) throws Exception;
 }
