@@ -106,9 +106,9 @@
                                                 <label class="col-md-12 small mb-1" for="">* 구독기간</label>
                                                 <div class="col-md-7">
                                                 	<div class="d-flex flex-row">
-                                                		<input class="form-control w-50" id="sbs_start_dt" type="text" name="sbs_start_dt" placeholder="0000-00-00" value="" />
+                                                		<input class="form-control w-50" id="sbs_start_dt" type="text" style="background: #fff;" name="sbs_start_dt" placeholder="0000-00-00" value="" />
                                                 		<label class="col-form-label fw-bolder me-3 ms-3"> ~ </label>
-                                                    	<input class="form-control w-50" id="sbs_end_dt" type="text" name="sbs_end_dt" placeholder="0000-00-00" value="" />
+                                                    	<input class="form-control w-50" id="sbs_end_dt" type="text" style="background: #fff;" name="sbs_end_dt" placeholder="0000-00-00" value="" />
                                                 	</div>
                                                 	
                                                 </div>

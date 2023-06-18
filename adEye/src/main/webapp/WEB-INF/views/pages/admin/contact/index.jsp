@@ -153,7 +153,7 @@
 	        	var no = (page - 1) > 0 ? (page - 1) * 10 + (idx+1) : (idx+1);
 
         		var contact_dt = formatDate(v.contact_dt);
-                var contact_open = v.contact_open == 'Y' ? "<span>확인</span>" : "<span style='color:#ff6262;'>미확인</span>";
+                var contact_open = v.contact_open == 'Y' ? "<b>확인</b>" : "<b style='color:#ff6262;'>미확인</b>";
             
                 // var delBtn = '<button class="btn btn-danger btn-sm" onClick="dataDel(\''+ v.mem_id +'\')" type="button ">삭제</button>';
                 createHTML += '<tr><td>'+ no +'</td><td>'+ v.company +'</td><td>'+ v.phone +'</td><td>'+ v.email +'</td><td class="link-point text-primary" onClick="movePath(\'/pages/admin/contact/detail?id='+v.contact_seq+'\')"><div class="text-elipsis">'+ v.contact_content +'</div></td><td>'+ contact_dt +'</td><td>'+ contact_open +'</td></tr>'
