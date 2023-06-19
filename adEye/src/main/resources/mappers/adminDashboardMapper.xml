@@ -10,7 +10,7 @@
   			(SELECT COUNT(device_seq) FROM tb_device WHERE device_status = 'Y') AS device_use_cnt,
   			(SELECT COUNT(device_seq) FROM tb_device WHERE device_status IN ('Y', 'N')) AS device_total,
   			(SELECT COUNT(sbs_seq) FROM tb_subscription WHERE TRUNC(sbs_end_dt) &lt;= TRUNC(sysdate) + INTERVAL '5' DAY AND sbs_status = 'Y' ) AS sbs_dday,
-  			(SELECT COUNT(sbs_seq) FROM tb_subscription) AS sbs_total
+  			(SELECT COUNT(sbs_seq) FROM tb_subscription WHERE sbs_status = 'Y') AS sbs_total
 		FROM dual
 	</select>	
 </mapper>
