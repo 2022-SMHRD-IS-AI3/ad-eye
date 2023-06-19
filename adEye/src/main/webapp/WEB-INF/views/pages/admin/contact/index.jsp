@@ -49,7 +49,7 @@
                                    		
                                     </div>
                                    	<div class="col-md-2">
-                                        <input class="form-control" id="keyword" type="text" name="keyword" placeholder="내용을 입력해주세요" value="" />
+                                        <input class="form-control" id="keyword" type="text" name="keyword" onkeypress="submitEnter(event)" placeholder="내용을 입력해주세요" value="" />
                                     </div>
                                    	<div class="col-md-2">
                                    		<select class="form-select" id="contact_open" name="contact_open">
@@ -160,6 +160,13 @@
     	page = p
     	getDataList()
     }
+    
+	// input 엔터 이벤트
+	function submitEnter(e){
+		if(e.keyCode === 13) {
+			getDataList()
+		}
+	}
 	</script>
 	</body>
 </html>
