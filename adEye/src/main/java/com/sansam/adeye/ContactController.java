@@ -130,7 +130,7 @@ public class ContactController {
 	// 문의 삭제
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public @ResponseBody Map<String, Object> contactDelete(@RequestParam("contact_seq") String data) throws Exception {
-		log.info("/contact/detail : " + data);
+		log.info("/contact/delete : " + data);
 		// 보내줄 맵 객체 생성
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		int seq = Integer.parseInt(data);
@@ -141,7 +141,7 @@ public class ContactController {
 			
 			if(cnt > 0) {
 				paramMap.put("code", "201");
-				paramMap.put("message", "생성완료");		
+				paramMap.put("message", "처리완료");		
 			}else {
 				paramMap.put("code", "203");
 				paramMap.put("message", "처리실패");

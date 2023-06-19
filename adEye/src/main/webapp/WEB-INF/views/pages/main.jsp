@@ -112,7 +112,7 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="phone" class="form-label">* 연락처</label>
-                                            <input type="tel" class="form-control" id="phone" placeholder="연락처">
+                                            <input type="tel" class="form-control" id="phone" oninput="formatPhoneNumber(this)" placeholder="010-1234-1234" maxlength="13">
                                         </div>
                                         <div class="mb-3">
                                             <label for="email" class="form-label">* 이메일</label>

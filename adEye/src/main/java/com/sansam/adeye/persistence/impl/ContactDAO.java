@@ -55,6 +55,6 @@ public class ContactDAO implements IContactDAO{
 	// 문의 삭제
 	@Override
 	public int delete(int seq) throws Exception {
-		return session.selectOne("ContactMapper.delete", seq);
+		return session.delete("ContactMapper.delete", seq);
 	}
 }
