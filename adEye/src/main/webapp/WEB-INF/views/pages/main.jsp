@@ -70,7 +70,7 @@
                     <div class="container-xl px-4">
                         <div class="row">
                           <div class="col-lg-6">
-                            <h1 class="mt-10 mb-5" style="font-weight: bold;">AI 솔루션을 통한 옥외 광고 효과 측정</h1>
+                            <h1 class="mt-5 mb-5" style="font-weight: bold;">AI 솔루션을 통한 옥외 광고 효과 측정</h1>
                             <p>&#60;애드아이&#62;는 단순히 유동인구로 광고효과를 파악하지 않습니다.</p>
                               <p>유동인구 뿐만 아니라 보행자의 성별과 주목도를 정규화하여</p> 
                               <p>더욱 정확한 광고 효과를 측정합니다.</p>

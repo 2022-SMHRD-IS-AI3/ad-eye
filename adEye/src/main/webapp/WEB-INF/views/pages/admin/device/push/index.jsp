@@ -14,7 +14,6 @@
                                 <div class="row align-items-center justify-content-between pt-3">
                                     <div class="col-auto mb-3">
                                         <h1 class="page-header-title">
-                                            <div class="page-header-icon"><i data-feather="plus-circle"></i></div>
                                             기기 등록
                                         </h1>
                                     </div>
