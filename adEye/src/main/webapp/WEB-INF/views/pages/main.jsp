@@ -148,23 +148,6 @@
                 </footer>
             </div>
             
-            <!-- <script>
-            
-            // Get the contact link element
-            const contactLink = document.getElementById("contactLink");
-
-            // Add a click event listener to the link
-            contactLink.addEventListener("click", function (event) {
-                // Prevent the default link behavior
-                event.preventDefault();
-
-                // Scroll to the contact section
-                const contactSection = document.getElementById("contact");
-                contactSection.scrollIntoView({ behavior: "smooth" });
-            });
-        
-            </script>
-         -->
         <script>history.scrollRestoration = "manual"</script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="${path}/resources/js/scripts.js"></script>
