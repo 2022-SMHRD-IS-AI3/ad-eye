@@ -19,4 +19,5 @@
 <script src="${path}/resources/js/cus.js"></script>
 <script>
 	loginSession();
+	$('.mem_id').text(getQueryString('mem_id'))
 </script>
