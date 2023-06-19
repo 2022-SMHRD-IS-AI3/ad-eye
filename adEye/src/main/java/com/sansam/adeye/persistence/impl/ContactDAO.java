@@ -48,7 +48,13 @@ public class ContactDAO implements IContactDAO{
 		return session.update("ContactMapper.openYn", seq);
 	}
 	// 전체 문의 내역 페이징
+	@Override
 	public int totalCnt(Criteria cri) throws Exception {
 		return session.selectOne("ContactMapper.totalCnt", cri);
+	}
+	// 문의 삭제
+	@Override
+	public int delete(int seq) throws Exception {
+		return session.selectOne("ContactMapper.delete", seq);
 	}
 }

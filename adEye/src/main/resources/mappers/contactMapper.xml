@@ -94,5 +94,9 @@
   		<include refid="criteria"></include>
   		contact_seq &gt; 0
   	</select>
+  	
+  	<delete id="delete">
+  		DELETE FROM tb_contact WHERE contact_seq = #{contact_seq}
+  	</delete>
  
 </mapper>
