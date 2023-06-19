@@ -477,6 +477,8 @@
 	                	if(response.code == "200") {
 	                		
 	                		dashboardData = response.result;
+	                		getNowTime()
+	        	        	$('#updateDate').text(korTimeChange(dashboardData.update_time))
 	                		dataChange()
 	                		
 	                	}
@@ -528,7 +530,7 @@
 	        		rePieChart()
 	        		reMultiChart()
 	        	}
-	        	$('#updateDate').text(getNowTime())
+	        	
 	        }
 	        
 	        // 내 정보 수정 페이지 이동

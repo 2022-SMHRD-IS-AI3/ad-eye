@@ -212,4 +212,18 @@ function formatPhoneNumber(input) {
   input.value = phoneNumber;
 }
 
+// 최근업데이트날짜변경용
+function korTimeChange(utime) {
 
+    let date = new Date(utime);
+
+    let year = date.getFullYear();
+    let month = ('0' + (date.getMonth() + 1)).slice(-2);
+    let day = ('0' + date.getDate()).slice(-2);
+    let hours = ('0' + date.getHours()).slice(-2);
+    let minutes = ('0' + date.getMinutes()).slice(-2);
+    let seconds = ('0' + date.getSeconds()).slice(-2);
+
+    let formattedDate = year + '년 ' + month + '월 ' + day + '일 ' + hours + '시 ' + minutes + '분 ' + seconds + '초';
+    return formattedDate;
+}
