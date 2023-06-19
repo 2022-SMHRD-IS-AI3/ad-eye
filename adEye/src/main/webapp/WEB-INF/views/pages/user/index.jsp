@@ -81,9 +81,9 @@
                     <div class="sidenav-menu">
                         <div class="nav accordion" id="accordionSidenav">
                             
-                            <!-- Sidenav Menu Heading (내 구독 확인)-->
+                            <!-- (내 구독 확인) -->
+                            <div class="nav-link ps-3 pt-5 fw-bolder link-point" onClick="mySbs()" style="font-size: 1rem !important;color: #606060;letter-spacing: 0.05em;">홈으로 이동</div>
                             <div class="sidenav-menu-heading text-sm">내 구독 확인</div>
-                            <!-- Sidenav Accordion (Dashboard)-->
                            </div>
                       </div>
                 </nav>
