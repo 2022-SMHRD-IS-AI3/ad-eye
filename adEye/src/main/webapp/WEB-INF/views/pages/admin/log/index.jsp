@@ -108,7 +108,7 @@
        				dataList = response.result;
        				makePagination(response.pageMaker)
        	            getDataListCreate();
-	       	        if($('#key').val() == 'D' && $('#keyword').val() == dataList[0].device_uid) {
+	       	        if($('#key').val() == 'D' && dataList.length > 0 && $('#keyword').val() == dataList[0].device_uid) {
 	                 	$('#reboot_btn').removeClass('d-none')
 	                }else{
 	                	$('#reboot_btn').addClass('d-none')	
