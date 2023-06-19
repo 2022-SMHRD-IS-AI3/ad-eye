@@ -4,133 +4,133 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="DeviceMapper">
   
-  	<insert id="create">
-		insert into tb_device (device_uid, device_onoff, device_status, device_dt) values(#{device_uid}, #{device_onoff}, 'N', sysdate)
-	</insert>
-	<select id="list" resultType="com.sansam.adeye.domain.DeviceDTO">
-		<![CDATA[
-			SELECT	device_seq,
-       				device_uid,
-       				device_onoff,
-       				device_status,
-       				device_dt,
-       				NVL(mem_company, '없음') as mem_company,
-       				NVL(sbs_seq, 0) as sbs_seq,
-       				NVL(sbs_alias, '없음') as sbs_alias,
-       				data_check
-		 	FROM (
-  				SELECT /*+ INDEX_DESC(tb_device IDX_tb_device_PK) */
-         			rownum rn,
-         			d.device_seq,
-         			d.device_uid,
-         			d.device_onoff,
-         			d.device_status,
-         			d.device_dt,
-         			d.mem_company,
-        			d.sbs_seq,
-        			d.sbs_alias,
-        			d.data_check
-  				FROM (
-  					SELECT
-  						d.device_seq,
-            			d.device_uid,
-            			d.device_onoff,
-            			d.device_status,
-            			d.device_dt,
-            			(SELECT mem_company FROM tb_member m WHERE m.mem_id = s.mem_id AND s.device_seq = d.device_seq) AS mem_company,
-            			(SELECT sbs_seq FROM tb_subscription s WHERE s.device_seq = d.device_seq  AND s.sbs_status = 'Y') AS sbs_seq,
-            			(SELECT sbs_alias FROM tb_subscription s WHERE s.device_seq = d.device_seq AND s.sbs_status = 'Y') AS sbs_alias,
-            			(SELECT COUNT(log_seq) FROM tb_log l WHERE l.device_uid = d.device_uid AND l.log_dt &gt;= SYSDATE - INTERVAL '5' MINUTE) AS data_check
-        			FROM tb_device d
-        			LEFT JOIN tb_subscription s on d.device_seq = s.device_seq and s.sbs_status = 'Y'
+     <insert id="create">
+      insert into tb_device (device_uid, device_onoff, device_status, device_dt) values(#{device_uid}, #{device_onoff}, 'N', sysdate)
+   </insert>
+   <select id="list" resultType="com.sansam.adeye.domain.DeviceDTO">
+      <![CDATA[
+         SELECT   device_seq,
+                   device_uid,
+                   device_onoff,
+                   device_status,
+                   device_dt,
+                   NVL(mem_company, '없음') as mem_company,
+                   NVL(sbs_seq, 0) as sbs_seq,
+                   NVL(sbs_alias, '없음') as sbs_alias,
+                   data_check
+          FROM (
+              SELECT /*+ INDEX_DESC(tb_device IDX_tb_device_PK) */
+                  rownum rn,
+                  d.device_seq,
+                  d.device_uid,
+                  d.device_onoff,
+                  d.device_status,
+                  d.device_dt,
+                  d.mem_company,
+                 d.sbs_seq,
+                 d.sbs_alias,
+                 d.data_check
+              FROM (
+                 SELECT
+                    d.device_seq,
+                     d.device_uid,
+                     d.device_onoff,
+                     d.device_status,
+                     d.device_dt,
+                     (SELECT mem_company FROM tb_member m WHERE m.mem_id = s.mem_id AND s.device_seq = d.device_seq) AS mem_company,
+                     (SELECT sbs_seq FROM tb_subscription s WHERE s.device_seq = d.device_seq  AND s.sbs_status = 'Y') AS sbs_seq,
+                     (SELECT sbs_alias FROM tb_subscription s WHERE s.device_seq = d.device_seq AND s.sbs_status = 'Y') AS sbs_alias,
+                     (SELECT COUNT(log_seq) FROM tb_log l WHERE l.device_uid = d.device_uid AND l.log_dt >= SYSDATE - INTERVAL '5' MINUTE AND l.log_dt <= SYSDATE) AS data_check
+                 FROM tb_device d
+                 LEFT JOIN tb_subscription s on d.device_seq = s.device_seq and s.sbs_status = 'Y'
                     LEFT JOIN tb_member m on s.mem_id = m.mem_id
                     WHERE device_status != 'D'
-        			ORDER BY device_status DESC, device_seq DESC
-  				) d
-		        WHERE
-		]]>
-		<include refid="criteria"></include>         
-      	<![CDATA[
-               		rownum <= #{pageNum} * #{amount}
-              	)
-         	WHERE rn > (#{pageNum} - 1) * #{amount}
-      	]]>
-	</select>
-	<sql id="criteria">
-		<trim prefix="(" suffix=") AND" prefixOverrides="OR">
-        	<foreach collection="typeArr" item="type">
-            	<trim prefix="OR">
-                	<choose>
-                		<when test="type == 'D'.toString()">
-                     		device_uid LIKE '%'||#{keyword}||'%'
-                  		</when>
-                    	<when test="type == 'C'.toString()">
-                     		mem_company LIKE '%'||#{keyword}||'%'
-                  		</when>
-                  		<when test="type == 'A'.toString()">
-                     		sbs_alias LIKE '%'||#{keyword}||'%'
-                  		</when>
-               		</choose>
-            	</trim>
-         	</foreach>
-      	</trim>
-      	<trim prefix="(" suffix=") AND" prefixOverrides="OR">
-        	<foreach collection="statusArr" item="status">
-            	<trim prefix="OR">
-                	<choose>
-                    	<when test="status == 'Y'.toString()">
-                     		device_status LIKE '%Y%'
-                  		</when>
-                  		<when test="status == 'N'.toString()">
-                     		device_status LIKE '%N%'
-                  		</when>
-               		</choose>
-            	</trim>
-         	</foreach>
-      	</trim>
-	</sql>
-	
-	<select id="detail" parameterType="com.sansam.adeye.domain.DeviceDTO">
-		select * from tb_device where device_seq = #{device_seq}
-	</select>
-	
-	<delete id="delete" parameterType="int">
-		update tb_device device_status = 'D' set where device_seq = #{device_seq}
-	</delete>
+                 ORDER BY device_status DESC, device_seq DESC
+              ) d
+              WHERE
+      ]]>
+      <include refid="criteria"></include>         
+         <![CDATA[
+                     rownum <= #{pageNum} * #{amount}
+                 )
+            WHERE rn > (#{pageNum} - 1) * #{amount}
+         ]]>
+   </select>
+   <sql id="criteria">
+      <trim prefix="(" suffix=") AND" prefixOverrides="OR">
+           <foreach collection="typeArr" item="type">
+               <trim prefix="OR">
+                   <choose>
+                      <when test="type == 'D'.toString()">
+                           device_uid LIKE '%'||#{keyword}||'%'
+                        </when>
+                       <when test="type == 'C'.toString()">
+                           mem_company LIKE '%'||#{keyword}||'%'
+                        </when>
+                        <when test="type == 'A'.toString()">
+                           sbs_alias LIKE '%'||#{keyword}||'%'
+                        </when>
+                     </choose>
+               </trim>
+            </foreach>
+         </trim>
+         <trim prefix="(" suffix=") AND" prefixOverrides="OR">
+           <foreach collection="statusArr" item="status">
+               <trim prefix="OR">
+                   <choose>
+                       <when test="status == 'Y'.toString()">
+                           device_status LIKE '%Y%'
+                        </when>
+                        <when test="status == 'N'.toString()">
+                           device_status LIKE '%N%'
+                        </when>
+                     </choose>
+               </trim>
+            </foreach>
+         </trim>
+   </sql>
+   
+   <select id="detail" parameterType="com.sansam.adeye.domain.DeviceDTO">
+      select * from tb_device where device_seq = #{device_seq}
+   </select>
+   
+   <delete id="delete" parameterType="int">
+      update tb_device device_status = 'D' set where device_seq = #{device_seq}
+   </delete>
 
-	<update id="update" parameterType="com.sansam.adeye.domain.DeviceDTO">
-		update tb_device set device_uid=#{device_uid}, device_onoff = 'Y', device_status=#{device_status} where device_seq = #{device_seq}
-	</update>
-	
-	<select id="getOnoff" resultType="com.sansam.adeye.domain.DeviceDTO">
-		select device_onoff, device_uid from tb_device where device_uid = #{device_uid}
-	</select>
-	
-	<update id="control" parameterType="com.sansam.adeye.domain.DeviceDTO">
-		update tb_device set device_onoff = #{device_onoff} where device_uid = #{device_uid}
-	</update>
-	<update id="devStatusOn">
-		update tb_device set device_status = 'Y', device_onoff = 'Y' where device_seq = #{device_seq}
-	</update>
-	<update id="devStatusOff">
-		update tb_device set device_status = 'N', device_onoff = 'N' where device_seq = #{device_seq}
-	</update>
-  	
-	<select id="totalCnt" resultType="int" parameterType="com.sansam.adeye.domain.PageDTO">
-		SELECT COUNT(*) 
-		FROM (
-			SELECT *
-			FROM tb_device d 
+   <update id="update" parameterType="com.sansam.adeye.domain.DeviceDTO">
+      update tb_device set device_uid=#{device_uid}, device_onoff = 'Y', device_status=#{device_status} where device_seq = #{device_seq}
+   </update>
+   
+   <select id="getOnoff" resultType="com.sansam.adeye.domain.DeviceDTO">
+      select device_onoff, device_uid from tb_device where device_uid = #{device_uid}
+   </select>
+   
+   <update id="control" parameterType="com.sansam.adeye.domain.DeviceDTO">
+      update tb_device set device_onoff = #{device_onoff} where device_uid = #{device_uid}
+   </update>
+   <update id="devStatusOn">
+      update tb_device set device_status = 'Y', device_onoff = 'Y' where device_seq = #{device_seq}
+   </update>
+   <update id="devStatusOff">
+      update tb_device set device_status = 'N', device_onoff = 'N' where device_seq = #{device_seq}
+   </update>
+     
+   <select id="totalCnt" resultType="int" parameterType="com.sansam.adeye.domain.PageDTO">
+      SELECT COUNT(*) 
+      FROM (
+         SELECT *
+         FROM tb_device d 
             LEFT JOIN tb_subscription s on d.device_seq = s.device_seq and s.sbs_status = 'Y'
             LEFT JOIN tb_member m on s.mem_id = m.mem_id
-			)
-		WHERE
-		<include refid="criteria"></include> 
-			device_status != 'D' 
-	</select>
-	
-	<select id="deviceSimpleList" resultType="com.sansam.adeye.domain.DeviceDTO">
-		SELECT device_seq, device_uid, device_status FROM tb_device WHERE device_status != 'D' ORDER BY device_seq
-	</select>
+         )
+      WHERE
+      <include refid="criteria"></include> 
+         device_status != 'D' 
+   </select>
+   
+   <select id="deviceSimpleList" resultType="com.sansam.adeye.domain.DeviceDTO">
+      SELECT device_seq, device_uid, device_status FROM tb_device WHERE device_status != 'D' ORDER BY device_seq
+   </select>
   
 </mapper>
