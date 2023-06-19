@@ -318,14 +318,26 @@
             $(document).ready(function() {
             	const idValue = getQueryString('sbs_seq');
 
+            	
                 // id 값 유무로 등록 수정 판단
                 if(idValue){
+                	
+                	getDataDetail(idValue)
                 	getDashboardData(idValue);
-                	getDataDetail(idValue);
+                	
+
+                	
        				$('.mem_id').text(getQueryString('mem_id'))
        				
 		            getNowTime() // 4
 		            search_date.val(nowDay) // 5
+		            
+                	changeAPI("userDashboard", idValue);
+       				
+                	// 5초마다 실행
+                	setInterval(function() {
+                	  changeAPI("userDashboard", idValue);
+                	}, 5000);
 		            
                 	
                 }
@@ -478,7 +490,7 @@
                 })
             }
 
-            changeAPI("userDashboard",getQueryString('sbs_seq'))
+            
 
 	        var changeCheck = true;
 	       	function dataChange(){

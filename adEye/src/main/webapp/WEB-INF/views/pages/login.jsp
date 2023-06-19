@@ -25,7 +25,7 @@
                                 <!-- Social login form-->
                                 <div class="card my-5">
                                     <div class="pt-5 text-center">
-                                        <img class="w-25 mb-1" src="${path}/resources/assets/img/custom/logo.png" />
+                                        <img class="w-25 mb-1 link-point" onClick="moveCode('main')" src="${path}/resources/assets/img/custom/logo.png" />
                                         <div class="h1 fw-bolder mt-3 mb-3">LOGIN</div>
                                     </div>
                                     <div class="p-5 pt-3">
@@ -51,7 +51,7 @@
                                     <div class="card-body px-5 py-4">
                                         <div class="small text-center">
                                         	가입이 안되었으면
-                                            <a onclick="movePath('/pages/main#contact')" style="color : #034efc"> 문의 주세요</a>
+                                            <a onclick="movePath('/pages/main#contact')" class="link-point" style="color : #034efc"> 문의 주세요</a>
                                         </div>
                                     </div>
                                 </div>
