@@ -29,7 +29,7 @@
                             <div class="col-xl-12">
                                 <!-- Account details card-->
                                 <div class="card mb-4">
-                                    <div class="card-header">구독 정보</div>
+                                    <div class="card-header text-black">구독 정보</div>
                                     <div class="card-body">
                                         <form>
 
