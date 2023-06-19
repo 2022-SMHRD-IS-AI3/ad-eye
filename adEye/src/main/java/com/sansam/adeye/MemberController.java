@@ -200,13 +200,16 @@ public class MemberController {
 			// 해당 회원이 현재 구독 중인 수
 			paramMapsub.put("sbs_total", sbs_total);
 			// sDtoList = [{sbs_seq : , sbs_alias : , sbs_loc : , sbs_total_man : , sbs_total_interest : ,
-			//              sbs_male_per : , sbs_female_per : },{...},{...}]
+			//              sbs_male_per : , sbs_female_per : , today_total_man : , today_total_interest : ,
+			//              today_male_cnt : , today_female_cnt : },{...},{...}]
 			// sbs_total_man = 전체 노출 인구 수
 			// sbs_total_interest = 전체 관심 인구 수
 			// sbs_male_per = 전체 노출 인구 중 남자
 			// sbs_female_per = 전체 노출 인구 중 여자
 			// today_total_man = 하루 노출 인구 수
             // today_total_interest = 하루 관심 인구 수
+            // today_male_cnt = 하루 노출 인구 남자
+     		// today_female_cnt = 하루 노출 인구 중 여자
 			paramMapsub.put("sbs_list", sDtoList);
 			paramMap.put("pageMaker", new PageDTO(cri, total));
 			paramMap.put("result", paramMapsub);
