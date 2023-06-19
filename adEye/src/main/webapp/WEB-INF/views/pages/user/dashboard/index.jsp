@@ -15,7 +15,9 @@
         <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
 		<style>
-		
+		.info1 {
+			
+		}
 		</style>
 </head>
 <body class="nav-fixed">
@@ -116,8 +118,12 @@
                                         <tr>
                                             <th>매체 이름</th>
                                             <th>매체 위치</th>
-                                            <th class="text-center">광고 노출 인구(명)</br>당일 / 누적</th>
-                                            <th class="text-center">광고 주목 인구(명)</br>당일 / 누적</th>
+                                            <th class="text-center">광고 노출 인구(명)
+                                            <span data-bs-toggle="tooltip" data-bs-placement="top" title="광고물 앞을 지나간 모든 사람의 수"><i data-feather="info"></i></span>
+                                            </br>당일 / 누적</th>
+                                            <th class="text-center">광고 주목 인구(명)
+                                            <span data-bs-toggle="tooltip" data-bs-placement="top" title="광고 노출 인구 중 정면과 측면으로 측정된 사람의 수"><i data-feather="info"></i></span>
+                                            </br>당일 / 누적</th>
                                             <th class="text-center">전체 남녀 비율(%)</br>(남:여)</th>
                                         </tr>
                                     </thead>

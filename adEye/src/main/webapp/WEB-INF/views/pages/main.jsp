@@ -70,14 +70,17 @@
                     <div class="container-xl px-4">
                         <div class="row">
                           <div class="col-lg-6">
-                            <h1 class="mt-5 mb-5" style="font-weight: bold;">AI 솔루션을 통한 옥외 광고 효과 측정</h1>
-                            <p>&#60;애드아이&#62;는 단순히 유동인구로 광고효과를 파악하지 않습니다.</p>
-                              <p>유동인구 뿐만 아니라 보행자의 성별과 주목도를 정규화하여</p> 
-                              <p>더욱 정확한 광고 효과를 측정합니다.</p>
-                              
-                              <br>
-                              <p style="font-weight:bold;">&#60;애드아이&#62;를 통해 데이터를 수집하고
-                               당신의 광고 매체의 가치를 증명하세요!</p>
+                          	<p class=" mt-5 mb-3 fw-bolder text-gray-500">About 애드아이</p>
+                            <h1 class="mb-5" style="font-weight: bold;">AI 솔루션을 통한 옥외 광고 효과 측정</h1>
+                            <p>&#60;애드아이&#62;는 단순히 유동인구로 광고 효과를 파악하지 않습니다.</p>
+                            <p>카메라를 통해 <b>실시간으로 영상을 분석하고 유동인구와 보행자의 성별, 주목도를 정규화</b>하여</p>
+                            <p>더욱 정확한 광고 효과를 측정합니다.</p>
+                            <br>
+                            <p><b>영상과 사진을 저장하지 않으며 측정한 데이터를 클라이언트에게만 제공하므로</b></p>
+                            <p><b>개인정보를 보호하고 안정성을 확보</b>할 수 있습니다.</p>
+                            <br>
+                            <h5 class="fw-bolder">&#60;애드아이&#62;를 통해 데이터를 수집하고
+                            당신의 광고 매체의 가치를 증명하세요!</h5>
                           </div>
                           <div class="col-lg-6">
                             <img class="img-fluid" src="${path}/resources/assets/img/main/main-img.png" alt="...">
@@ -103,6 +106,7 @@
     								</div>
                      	
                                 </div>
+                                
                                 <!-- contact form -->
                                     <div class="col-lg-6">
                                     <form>
@@ -128,6 +132,7 @@
                                         </div>
                                         <button type="button" class="btn btn-primary form-control mt-3" onClick="dataSubmit()">문의하기</button>
                                     </form>
+                                </div>
                                 </div>
                         </section>
                     </div>
