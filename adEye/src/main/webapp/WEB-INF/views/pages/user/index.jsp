@@ -478,7 +478,8 @@
 	                		
 	                		dashboardData = response.result;
 	                		getNowTime()
-	        	        	$('#updateDate').text(korTimeChange(dashboardData.update_time))
+	                		var t = dashboardData.update_time != null ? korTimeChange(dashboardData.update_time) : '-'
+	        	        	$('#updateDate').text(t)
 	                		dataChange()
 	                		
 	                	}

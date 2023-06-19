@@ -35,16 +35,16 @@
   	
    	<select id="totalCnt" resultType="com.sansam.adeye.domain.AcqDashboardDTO" parameterType="com.sansam.adeye.domain.AcquisitionDTO">
   		
-	SELECT (SELECT TO_CHAR(MAX(acq_end_dt), 'YYYY-MM-DD HH24:MI:SS') FROM tb_acquisition WHERE sbs_seq = #{sbs_seq}) update_time, t.*
-	FROM (
-	    SELECT
-	        COUNT(CASE WHEN acq_gender = 'M' AND a.sbs_seq = #{sbs_seq} THEN 1 END) AS male_total_cnt,
-	        COUNT(CASE WHEN a.acq_interest &gt; 0 AND acq_gender = 'M' AND a.sbs_seq = #{sbs_seq} THEN 1 END) AS male_interest_cnt,
-	        COUNT(CASE WHEN acq_gender = 'W' AND a.sbs_seq = #{sbs_seq} THEN 1 END) AS female_total_cnt,
-	        COUNT(CASE WHEN a.acq_interest &gt; 0 AND acq_gender = 'W' AND a.sbs_seq = #{sbs_seq} THEN 1 END) AS female_interest_cnt,		
-	    FROM tb_acquisition a
-	    WHERE TRUNC(a.acq_start_dt) = TRUNC(TO_DATE(#{search_date}, 'YYYY-MM-DD'))
-    	) t
+		SELECT (SELECT TO_CHAR(MAX(acq_end_dt), 'YYYY-MM-DD HH24:MI:SS') FROM tb_acquisition WHERE sbs_seq = #{sbs_seq}) AS update_time, t.*
+		FROM (
+		    SELECT
+		        COUNT(CASE WHEN acq_gender = 'M' AND a.sbs_seq = #{sbs_seq} THEN 1 END) AS male_total_cnt,
+		        COUNT(CASE WHEN a.acq_interest &gt; 0 AND acq_gender = 'M' AND a.sbs_seq = #{sbs_seq} THEN 1 END) AS male_interest_cnt,
+		        COUNT(CASE WHEN acq_gender = 'W' AND a.sbs_seq = #{sbs_seq} THEN 1 END) AS female_total_cnt,
+		        COUNT(CASE WHEN a.acq_interest &gt; 0 AND acq_gender = 'W' AND a.sbs_seq = #{sbs_seq} THEN 1 END) AS female_interest_cnt    		
+		    FROM tb_acquisition a
+		    WHERE TRUNC(a.acq_start_dt) = TRUNC(TO_DATE(#{search_date}, 'YYYY-MM-DD'))
+		    ) t
   	</select>
   	  	  	
   	<!-- 수집 데이터 등록 -->
