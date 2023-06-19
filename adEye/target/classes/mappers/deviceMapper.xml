@@ -45,7 +45,7 @@
                  LEFT JOIN tb_subscription s on d.device_seq = s.device_seq and s.sbs_status = 'Y'
                     LEFT JOIN tb_member m on s.mem_id = m.mem_id
                     WHERE device_status != 'D'
-                 ORDER BY device_status DESC, device_seq DESC
+                 ORDER BY device_status DESC, device_onoff, device_seq DESC
               ) d
               WHERE
       ]]>
