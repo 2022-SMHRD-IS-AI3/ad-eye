@@ -15,8 +15,7 @@
                                 <div class="row align-items-center justify-content-between pt-3">
                                     <div class="col-auto mb-3">
                                         <h1 class="page-header-title">
-                                            <div class="page-header-icon"><i data-feather="plus-circle"></i></div>
-                                            구독 <span class="info-text"></span>
+                                            <b>구독 <span class="info-text"></span></b>
                                         </h1>
                                     </div>
                                 </div>
@@ -30,7 +29,7 @@
                             <div class="col-xl-12">
                                 <!-- Account details card-->
                                 <div class="card mb-4">
-                                    <div class="card-header">구독 정보</div>
+                                    <div class="card-header text-black">구독 정보</div>
                                     <div class="card-body">
                                         <form>
 

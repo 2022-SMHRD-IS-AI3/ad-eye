@@ -14,8 +14,7 @@
                                 <div class="row align-items-center justify-content-between pt-3">
                                     <div class="col-auto mb-3">
                                         <h1 class="page-header-title">
-                                            <div class="page-header-icon"><i data-feather="plus-circle"></i></div>
-                                            기기 등록
+                                            <b>기기 등록</b>
                                         </h1>
                                     </div>
                                 </div>
@@ -29,7 +28,7 @@
                             <div class="col-xl-12">
                                 <!-- Account details card-->
                                 <div class="card mb-4">
-                                    <div class="card-header">기기 정보</div>
+                                    <div class="card-header text-black">기기 정보</div>
                                     <div class="card-body">
                                         <form>
                                             <!-- 시리얼-->
