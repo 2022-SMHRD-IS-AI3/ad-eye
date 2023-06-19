@@ -52,10 +52,12 @@
 						s.sbs_alias
 					FROM tb_log l
 					INNER JOIN tb_device d ON l.device_uid = d.device_uid
-					LEFT OUTER JOIN tb_subscription s ON d.device_seq = s.device_seq WHERE s.sbs_status = 'Y'
+					LEFT OUTER JOIN tb_subscription s ON d.device_seq = s.device_seq
+					WHERE s.sbs_status = 'Y'
+					AND l.log_dt <= sysdate
 					ORDER BY log_dt DESC
 				) ls
-				WHERE
+				WHERE 
 		]]>
 		<include refid="criteria"></include>     
       	<![CDATA[
