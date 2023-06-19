@@ -337,8 +337,7 @@
                 	// 5초마다 실행
                 	setInterval(function() {
                 	  changeAPI("userDashboard", idValue);
-                	}, 000);
-		            
+                	}, 60000);
                 	
                 }
                 

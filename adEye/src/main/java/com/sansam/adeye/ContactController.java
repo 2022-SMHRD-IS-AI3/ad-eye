@@ -126,4 +126,31 @@ public class ContactController {
 		}
 		return paramMap;
 	}
+	
+	// 문의 삭제
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public @ResponseBody Map<String, Object> contactDelete(@RequestParam("contact_seq") String data) throws Exception {
+		log.info("/contact/delete : " + data);
+		// 보내줄 맵 객체 생성
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		int seq = Integer.parseInt(data);
+		
+		try {
+			
+			int cnt = service.delete(seq);
+			
+			if(cnt > 0) {
+				paramMap.put("code", "201");
+				paramMap.put("message", "처리완료");		
+			}else {
+				paramMap.put("code", "203");
+				paramMap.put("message", "처리실패");
+			}
+	
+		} catch (Exception e) {
+			paramMap.put("code", "500");
+			paramMap.put("message", "서버문제");
+		}
+		return paramMap;
+	}
 }

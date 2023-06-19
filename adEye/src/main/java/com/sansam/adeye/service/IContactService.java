@@ -17,4 +17,6 @@ public interface IContactService {
 	public int openYn(int seq) throws Exception;
 	// 전체 문의 내역 페이징
 	public int totalCnt(Criteria cri) throws Exception;
+	// 문의 삭제
+	public int delete(int seq) throws Exception;
 }

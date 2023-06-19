@@ -40,7 +40,7 @@
                                    		</select>
                                     </div>
                                    	<div class="col-md-3">
-                                        <input class="form-control" id="keyword" type="text" name="keyword" placeholder="내용을 입력해주세요" value="" />
+                                        <input class="form-control" id="keyword" type="text" name="keyword" onkeypress="submitEnter(event)" placeholder="내용을 입력해주세요" value="" />
                                     </div>
                                     
                                    <!--  <div class="col-md-2">
@@ -78,8 +78,9 @@
                                             <th>아이디</th>
                                             <th>이메일</th>
                                             <th>가입일</th>
-                                            <th>구독 수</th>
-                                            <th>삭제</th>
+                                            <th class="text-center">구독 수</th>
+                                            <th class="text-center">상태</th>
+                                            <th class="text-center">삭제</th>
                                         </tr>
                                     </thead>
                                     
@@ -159,7 +160,7 @@
             
             if (dataList.length === 0) {
                 // 데이터가 없는 경우 처리
-                createHTML = '<tr><td colspan="8">데이터가 없습니다.</td></tr>';
+                createHTML = '<tr><td colspan="9">데이터가 없습니다.</td></tr>';
             } else {
             	dataList.forEach(function(v,idx) {
             		var no = (page - 1) > 0 ? (page - 1) * 10 + (idx+1) : (idx+1);
@@ -173,9 +174,10 @@
 	                var formattedDate = year + '-' + month + '-' + day;
 	                
 	                var sbs_count = v.mem_pw == null ? 0 : v.mem_pw;
+	                var mem_status = v.mem_status == 'Y' ? '<b style="color:#98b93a;">사용중</b>' : '<b>사용중지</b>'
 	                
 	                var delBtn = '<button class="btn btn-danger btn-sm" onClick="dataDel(\''+ v.mem_id +'\')" type="button ">삭제</button>';
-	                createHTML += '<tr><td>'+ no +'</td><td class="text-primary link-point" style="" onClick="movePath(\'/pages/admin/member/push?id='+v.mem_id+'\')">'+ v.mem_company +'</td><td>'+ v.mem_phone +'</td><td class="text-primary link-point" onClick="movePath(\'/pages/admin/member/push?id='+v.mem_id+'\')">'+ v.mem_id +'</td><td>'+ v.mem_email +'</td><td>'+ formattedDate +'</td><td>'+ sbs_count +'</td><td>'+ delBtn +'</td></tr>'
+	                createHTML += '<tr><td>'+ no +'</td><td class="text-primary link-point" style="" onClick="movePath(\'/pages/admin/member/push?id='+v.mem_id+'\')">'+ v.mem_company +'</td><td>'+ v.mem_phone +'</td><td class="text-primary link-point" onClick="movePath(\'/pages/admin/member/push?id='+v.mem_id+'\')">'+ v.mem_id +'</td><td>'+ v.mem_email +'</td><td>'+ formattedDate +'</td><td class="text-center">'+ sbs_count +'</td><td class="text-center">'+ mem_status +'</td><td class="text-center">'+ delBtn +'</td></tr>'
 	            });
             }
             
@@ -187,6 +189,14 @@
         	page = p
         	getDataList()
         }
+        
+        
+    	// input 엔터 이벤트
+    	function submitEnter(e){
+    		if(e.keyCode === 13) {
+    			getDataList()
+    		}
+    	}
         </script>
     </body>
 </html>

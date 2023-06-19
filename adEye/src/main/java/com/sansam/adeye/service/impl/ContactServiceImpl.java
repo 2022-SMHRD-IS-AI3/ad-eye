@@ -41,8 +41,13 @@ public class ContactServiceImpl implements IContactService{
 		return cDao.openYn(seq);
 	}
 	// 전체 문의 내역 페이징
+	@Override
 	public int totalCnt(Criteria cri) throws Exception {
 		return cDao.totalCnt(cri);
 	}
-
+	// 문의 삭제
+	@Override
+	public int delete(int seq) throws Exception {
+		return cDao.delete(seq);
+	}
 }

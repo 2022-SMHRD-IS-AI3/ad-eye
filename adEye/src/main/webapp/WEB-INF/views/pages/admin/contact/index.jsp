@@ -49,7 +49,7 @@
                                    		
                                     </div>
                                    	<div class="col-md-2">
-                                        <input class="form-control" id="keyword" type="text" name="keyword" placeholder="내용을 입력해주세요" value="" />
+                                        <input class="form-control" id="keyword" type="text" name="keyword" onkeypress="submitEnter(event)" placeholder="내용을 입력해주세요" value="" />
                                     </div>
                                    	<div class="col-md-2">
                                    		<select class="form-select" id="contact_open" name="contact_open">
@@ -79,6 +79,7 @@
                                             <th>내용</th>
                                             <th>날짜</th>
                                             <th>확인</th>
+                                            <th>삭제</th>
                                         </tr>
                                     </thead>
                                     
@@ -139,16 +140,17 @@
         
         if (dataList.length === 0) {
             // 데이터가 없는 경우 처리
-            createHTML = '<tr><td colspan="7">데이터가 없습니다.</td></tr>';
+            createHTML = '<tr><td colspan="8">데이터가 없습니다.</td></tr>';
         } else {
         	dataList.forEach(function(v,idx) {
 	        	var no = (page - 1) > 0 ? (page - 1) * 10 + (idx+1) : (idx+1);
 
         		var contact_dt = formatDate(v.contact_dt);
                 var contact_open = v.contact_open == 'Y' ? "<b>확인</b>" : "<b style='color:#ff6262;'>미확인</b>";
+                var contact_content = v.contact_content != null ? v.contact_content : "-";
             
-                // var delBtn = '<button class="btn btn-danger btn-sm" onClick="dataDel(\''+ v.mem_id +'\')" type="button ">삭제</button>';
-                createHTML += '<tr><td>'+ no +'</td><td>'+ v.company +'</td><td>'+ v.phone +'</td><td>'+ v.email +'</td><td class="link-point text-primary" onClick="movePath(\'/pages/admin/contact/detail?id='+v.contact_seq+'\')"><div class="text-elipsis">'+ v.contact_content +'</div></td><td>'+ contact_dt +'</td><td>'+ contact_open +'</td></tr>'
+                var delBtn = '<button class="btn btn-danger btn-sm" onClick="dataDel(\''+ v.contact_seq +'\')" type="button ">삭제</button>';
+                createHTML += '<tr><td>'+ no +'</td><td>'+ v.company +'</td><td>'+ v.phone +'</td><td>'+ v.email +'</td><td class="link-point text-primary" onClick="movePath(\'/pages/admin/contact/detail?id='+v.contact_seq+'\')"><div class="text-elipsis">'+ contact_content +'</div></td><td>'+ contact_dt +'</td><td>'+ contact_open +'</td><td>'+ delBtn +'</td></tr>'
             });
         }
         
@@ -156,10 +158,41 @@
         
     }
     
+    
+    // 회원삭제
+    function dataDel(id){
+    	
+    	var checkMSG = "삭제하시겠습니까?";
+    	if(!confirm(checkMSG)){
+    		return
+    	}
+    	
+   		var path = "/contact/delete";
+   		var type = "GET";
+   		var data = {
+			contact_seq : id
+		}
+   		
+   		ajaxCallBack(path, type, data, function(response){
+   			conLog(response)
+   			if(response.code == "201") {
+   				getDataList()
+   				alert("처리가 완료 되었습니다.")
+			}
+   		});
+   	}
+    
     function pageMove(p){
     	page = p
     	getDataList()
     }
+    
+	// input 엔터 이벤트
+	function submitEnter(e){
+		if(e.keyCode === 13) {
+			getDataList()
+		}
+	}
 	</script>
 	</body>
 </html>
