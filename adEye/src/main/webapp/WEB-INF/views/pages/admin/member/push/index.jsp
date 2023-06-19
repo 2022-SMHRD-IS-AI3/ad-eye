@@ -181,7 +181,7 @@
 
             // id 값 유무로 등록 수정 판단
             if(idValue){
-            	$('.info-text').text('정보');
+            	$('.info-text').text('수정');
                 // 삭제, 수정 버튼
                 const changebtn = '<button class="btn btn-danger me-2" onClick="dataSubmit(\'dl\')" type="button ">삭제</button>'+
                    	'<button class="btn btn-primary" onClick="dataSubmit(\'up\')" type="button">수정</button>';
