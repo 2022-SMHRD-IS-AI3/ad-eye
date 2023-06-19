@@ -11,8 +11,8 @@ function pieChart(){
 
 	const data = {
 	    labels: [
-	      '광고주목 인원 : '+ dashboardData.female_interest_cnt +' 명 / 총 인원',
-	      '광고주목 인원 : '+ dashboardData.male_interest_cnt +' 명 / 총 인원'
+	      '광고주목 인구 : '+ dashboardData.female_interest_cnt +' 명 / 총 인구',
+	      '광고주목 인구 : '+ dashboardData.male_interest_cnt +' 명 / 총 인구'
 	    ],
 	    datasets: [{
 	      label: 'My First Dataset',
@@ -56,8 +56,8 @@ function pieChart(){
 function rePieChart(){
 
 	myPieChart.data.labels = [
-	      '광고주목 인원 : '+ dashboardData.female_interest_cnt +' 명 / 총 인원',
-	      '광고주목 인원 : '+ dashboardData.male_interest_cnt +' 명 / 총 인원'
+	      '광고주목 인구 : '+ dashboardData.female_interest_cnt +' 명 / 총 인구',
+	      '광고주목 인구 : '+ dashboardData.male_interest_cnt +' 명 / 총 인구'
 	    ];
 	myPieChart.data.datasets[0].data = [dashboardData.female_total_cnt, dashboardData.male_total_cnt];
 	myPieChart.update();

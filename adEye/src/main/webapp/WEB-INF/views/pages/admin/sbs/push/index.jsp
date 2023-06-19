@@ -44,6 +44,7 @@
                                                 </div>
                                                 <div class="col-md-2">
                                                     <button onclick="memberCheck()" class="btn btn-warning w-100 refresh-btn" type="button">계정 확인</button>
+                                                    <input class="form-control" id="mem_com_check" type="hidden" name="mem_com_check" value="N" />
                                                 </div>
                                                 <label for="" id="member_check" class="col-sm-6 col-form-label fw-bolder "></label>
                                             </div>
@@ -105,9 +106,9 @@
                                                 <label class="col-md-12 small mb-1" for="">* 구독기간</label>
                                                 <div class="col-md-7">
                                                 	<div class="d-flex flex-row">
-                                                		<input class="form-control w-50" id="sbs_start_dt" type="text" name="sbs_start_dt" placeholder="0000-00-00" value="" />
+                                                		<input class="form-control w-50" id="sbs_start_dt" type="text" style="background: #fff;" name="sbs_start_dt" placeholder="0000-00-00" value="" />
                                                 		<label class="col-form-label fw-bolder me-3 ms-3"> ~ </label>
-                                                    	<input class="form-control w-50" id="sbs_end_dt" type="text" name="sbs_end_dt" placeholder="0000-00-00" value="" />
+                                                    	<input class="form-control w-50" id="sbs_end_dt" type="text" style="background: #fff;" name="sbs_end_dt" placeholder="0000-00-00" value="" />
                                                 	</div>
                                                 	
                                                 </div>
@@ -294,31 +295,54 @@
             	
             }
             
-            
          	
 	        // 주소검색 api
+            var isPopupOpen = false;
 	        function postSearch(){
-	
-	            new daum.Postcode({
-	                oncomplete: function(data) {
-	                    // $('#post_num').val(data.zonecode)
-	                    $('#addr1').val(data.address)
-	                    $('#addr2').val('')
-	                    $('#addr2').focus()
-	                }
-	            }).open();
+	        	
+	        	if (!isPopupOpen) {
+	        	 	 isPopupOpen = true; // 팝업 창이 열린 상태로 변경
+		        		new daum.Postcode({
+		        	        oncomplete: function(data) {
+	        	          	$('#post_num').val(data.zonecode);
+	        	          	$('#addr1').val(data.address);
+	        	          	$('#addr2').val('').focus();
+	        	          	isPopupOpen = false; // 팝업 창이 닫힌 상태로 변경
+	        	        },
+	        	        onclose: function() {
+	        	          	isPopupOpen = false; // 팝업 창이 닫힌 상태로 변경
+	        	        }
+	        	  	}).open({
+	        	        autoClose: false // 팝업 창이 자동으로 닫히지 않도록 설정
+	        	  	});
+	        	}
 	        }
             
-            // 계정유무 확인
+         	// 계정 조회
             function memberCheck(){
-
-                if($('#mem_id').val() === '11test01') {
-                	$('#member_check').html('애드컴퍼니')
-                }else{
-                	$('#member_check').html('<span style="color:#f44336;">존재하지 않는 아이디입니다</span>')
-                }
-                
-            }
+            	
+           		var path = "/member/detail";
+           		var type = "GET";
+           		var data = {
+           			mem_id : $('#mem_id').val()
+        		}
+           		
+           		ajaxCallBack(path, type, data, function(response){
+           			
+           			conLog(response)
+           			if(response.code == "200") {
+           				if(response.result == null){
+           					$('#member_check').html('<span style="color:#f44336;">존재하지 않는 아이디입니다</span>')
+           					$('#mem_com_check').val('N')
+           				}else{
+           					if(response.result.mem_id == $('#mem_id').val()){
+           						$('#member_check').html(response.result.mem_company)
+           						$('#mem_com_check').val('Y')
+           					}
+           				}
+           			}
+           		});
+           	}
             
             // 데이터 전송
             function dataSubmit(flag){
@@ -340,6 +364,8 @@
             		msg = "삭제하시겠습니까?";
             	}else if('in' || 'up') { // 등록, 수정
             		
+            		
+            		
             		data = {
                       	mem_id : $('#mem_id').val(),
                       	sbs_seq : getQueryString('id') || 0,
@@ -353,11 +379,30 @@
                    	}
             		conLog(data)
             		
-    	       		if(isObjectEmpty(data)){ // 빈 값 체크
-    	       			alert("필수 입력정보가 입력되지 않았습니다");
-    	       			return
-    	       		}
-            	
+
+            		if($("#mem_id").val()== ""){
+                		alert('아이디를 입력해주세요');
+                		return
+                	}else if($("#device_seq").val()== ""){
+                		alert('기기를 선택해주세요');
+                		return
+                	}else if($("#sbs_grade").val()== ""){
+                		alert('등급을 선택해주세요');
+                		return
+                	}else if($("#sbs_alias").val()== ""){
+                		alert('매체이름을 입력해주세요');
+                		return
+                	}else if($("#addr1").val()== ""){
+                		alert('매체위치를 입력해주세요');
+                		return
+                	}else if($("#sbs_start_dt").val()== ""){
+                		alert('구독 시작일을 입력해주세요');
+                		return
+                	}else if($("#sbs_end_dt").val()== ""){
+                		alert('구독 종료일을 입력해주세요');
+                		return
+               		}
+            		
             		if(flag=='in') {
             			path = "/subscription/insert";
             		}else{
@@ -366,12 +411,13 @@
             		}
             		
             	}
+            	
             	var cflag = false
             	if(msg != ""){
             		cflag = confirm(msg);
             	}
             	
-            	if(msg == "" || cflag == false) {
+            	if(msg != "" && cflag == false) {
             		return
             	}
            		
@@ -399,7 +445,7 @@
            				
            			}else if(flag == 'dl'){
            				
-           				if(response.code == "202") {
+           				if(response.code == "201") {
     	       				alert("삭제 완료되었습니다")
     	       				moveCode('slist');
            				}else{

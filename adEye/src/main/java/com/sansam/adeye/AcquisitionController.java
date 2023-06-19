@@ -138,6 +138,8 @@ public class AcquisitionController {
 			int female_total_cnt = acDto.getFemale_total_cnt();
 			// 여자 관심인구 수
 			int female_interest_cnt = acDto.getFemale_interest_cnt();
+			// 여자 관심인구 수
+			String update_time = acDto.getUpdate_time();
 			// 하루 전체 노출인구 수
 			int man_total = male_total_cnt + female_total_cnt;
 			// 하루 전체 관심인구 수
@@ -153,6 +155,7 @@ public class AcquisitionController {
 			paramMapSub.put("male_interest_cnt", male_interest_cnt);
 			paramMapSub.put("female_total_cnt", female_total_cnt);
 			paramMapSub.put("female_interest_cnt", female_interest_cnt);
+			paramMapSub.put("update_time", update_time);
 			    
 		    
 		    System.out.println(paramMapSub.toString());

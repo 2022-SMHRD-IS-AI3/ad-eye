@@ -46,6 +46,23 @@
       	</trim>
 	</sql>
 	
+ 	<sql id="memCri">
+		<trim prefix="(" suffix=") AND" prefixOverrides="OR">
+        	<foreach collection="typeArr" item="type">
+            	<trim prefix="OR">
+                	<choose>
+                    	<when test="type == 'A'.toString()"> 
+                     		sbs_alias LIKE '%'||#{keyword}||'%'
+                  		</when>
+                  		<when test="type == 'L'.toString()">
+                     		sbs_loc LIKE '%'||#{keyword}||'%'
+                  		</when>
+               		</choose>
+            	</trim>
+         	</foreach>
+      	</trim>
+	</sql>
+	
    	<select id="list" resultType="com.sansam.adeye.domain.SubscriptionDTO">
    		<![CDATA[
 			SELECT	sbs_seq,
@@ -146,7 +163,7 @@
             			s.sbs_reg_dt,
             			s.sbs_grade,
             			s.sbs_status,
-            			(SELECT TRUNC(s.sbs_end_dt) - TRUNC(SYSDATE) FROM dual) AS d_day
+            			(SELECT TRUNC(s.sbs_end_dt) - TRUNC(SYSDATE) FROM dual WHERE s.sbs_status = 'Y') AS d_day
 					FROM tb_subscription s
 					LEFT JOIN tb_member m ON s.mem_id = m.mem_id
 					WHERE s.sbs_status != 'D'
@@ -170,7 +187,9 @@
                 sbs_total_man,
                 sbs_total_interest,
                 sbs_male_per,
-                sbs_female_per
+                sbs_female_per,
+                today_total_man,
+                today_total_interest
          FROM (
             SELECT /*+ INDEX_DESC(tb_subscription IDX_tb_subscription_PK) */
                  rownum rn,
@@ -180,11 +199,13 @@
                  (SELECT COUNT(acq_seq) FROM tb_acquisition WHERE sbs_seq = s.sbs_seq) AS sbs_total_man,
                  (SELECT COUNT(acq_interest) FROM tb_acquisition WHERE sbs_seq = s.sbs_seq AND (acq_interest = 1 OR acq_interest = 2)) AS sbs_total_interest,
                  (SELECT COUNT(acq_gender) FROM tb_acquisition WHERE sbs_seq = s.sbs_seq AND acq_gender = 'M') AS sbs_male_per,
-                 (SELECT COUNT(acq_gender) FROM tb_acquisition WHERE sbs_seq = s.sbs_seq AND acq_gender = 'W') AS sbs_female_per
+                 (SELECT COUNT(acq_gender) FROM tb_acquisition WHERE sbs_seq = s.sbs_seq AND acq_gender = 'W') AS sbs_female_per,
+                 (SELECT COUNT(acq_seq) FROM tb_acquisition WHERE sbs_seq = s.sbs_seq AND TRUNC(acq_end_dt) = TRUNC(sysdate)) AS today_total_man,
+                 (SELECT COUNT(acq_interest) FROM tb_acquisition WHERE sbs_seq = s.sbs_seq AND (acq_interest = 1 OR acq_interest = 2) AND TRUNC(acq_end_dt) = TRUNC(sysdate)) AS today_total_interest
              FROM tb_subscription s, dual
              WHERE mem_id = #{seq} AND s.sbs_status = 'Y' AND
        ]]>
-      <include refid="criteria"></include>         
+      <include refid="memCri"></include>         
          <![CDATA[
                 rownum <= #{pageNum} * #{amount}
            )
@@ -199,7 +220,7 @@
 		FROM (
     		SELECT DISTINCT
         		(SELECT m.mem_company FROM tb_subscription s INNER JOIN tb_member m ON s.mem_id = m.mem_id WHERE m.mem_id = #{seq} AND ROWNUM = 1) AS mem_company,
-        		(SELECT COUNT(sbs_seq) FROM tb_subscription WHERE mem_id = #{seq}) AS sbs_total
+        		(SELECT COUNT(sbs_seq) FROM tb_subscription WHERE mem_id = #{seq} AND sbs_status = 'Y') AS sbs_total
     		FROM tb_subscription)
 	</select>
 	
@@ -209,7 +230,7 @@
   	</insert>
   	
   	<select id="detail" resultType="com.sansam.adeye.domain.SubscriptionDTO">
-  		SELECT s.sbs_seq, s.mem_id, m.mem_company, s.device_seq, s.sbs_loc, s.sbs_alias, s.sbs_status, s.sbs_start_dt, s.sbs_end_dt, s.sbs_grade FROM tb_subscription s, tb_member m WHERE m.mem_id = s.mem_id AND s.sbs_seq = #{sbs_seq} 
+  		SELECT s.sbs_seq, s.mem_id, m.mem_company, s.device_seq, s.sbs_loc, s.sbs_alias, s.sbs_status, s.sbs_start_dt, s.sbs_end_dt, s.sbs_grade, (SELECT TRUNC(s.sbs_end_dt) - TRUNC(SYSDATE) FROM dual) AS d_day FROM tb_subscription s, tb_member m WHERE m.mem_id = s.mem_id AND s.sbs_seq = #{sbs_seq} 
   	</select>
 
 	<update id="update" parameterType="com.sansam.adeye.domain.SubscriptionDTO">
@@ -227,6 +248,29 @@
 		WHERE 
 		<include refid="criteria"></include>
 		s.sbs_status != 'D'
+	</select>
+	
+	<select id="dDayCnt" resultType="int">
+		SELECT COUNT(*)
+		FROM (
+			SELECT
+				(SELECT TRUNC(s.sbs_end_dt) - TRUNC(SYSDATE) FROM dual) AS d_day,
+				s.sbs_status
+			FROM tb_subscription s
+		LEFT JOIN tb_member m ON s.mem_id = m.mem_id) s
+		WHERE
+		<include refid="criteria"></include>
+		s.d_day &lt;= TO_NUMBER(#{seq}) 
+		AND s.sbs_status != 'Y'
+	</select>
+	
+ 	<select id="memSbsCnt" resultType="int">
+		SELECT COUNT(*)
+		FROM tb_subscription
+        WHERE   
+		<include refid="memCri"></include>
+		mem_id = #{seq}
+		AND sbs_status = 'Y'
 	</select>
 
 </mapper>

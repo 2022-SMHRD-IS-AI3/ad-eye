@@ -35,8 +35,8 @@
                                             <!-- 시리얼-->
                                             <div class="row gx-3 mb-3">
                                                 <div class="col-md-6">
-                                                    <label class="small mb-1" for="mem_company">* 시리얼</label>
-                                                    <input class="form-control" id="mem_company" type="text" name="mem_company" placeholder="시리얼" value="" />
+                                                    <label class="small mb-1" for="device_uid">* 시리얼</label>
+                                                    <input class="form-control" id="device_uid" type="text" name="device_uid" placeholder="시리얼" value="" />
                                                 </div>
                                             </div>
 
@@ -71,68 +71,28 @@
         
         // 데이터 전송
         function dataSubmit(flag){
-        	
-       		var path = "";
+       		var path = "/device/insert";
        		var type = "POST";
        		var data = {
        			device_uid : $('#device_uid').val(),
-                device_onoff : 'Y'
+                device_onoff : 'N'
             }
         		
-	       		if(isObjectEmpty(data)){ // 빈 값 체크
-	       			alert("필수 입력정보가 입력되지 않았습니다");
-	       			return
-	       		}
+	       	if($('#device_uid').val() == ''){
+	       		alert("기기 시리얼을 입력해주시기 바랍니다");
+	       		return
+	       	}
         	
-        		if(flag=='in') {
-        			path = "/member/insert";
-        		}else{
-        			msg = "수정하시겠습니까?";
-        			path = "/member/update";
-        		}
-        		
-        	
-        	
-        	var cflag = false
-        	if(msg != ""){
-        		cflag = confirm(msg);
-        	}
-        	
-        	if(msg == "" || cflag == false) {
-        		return
-        	}
-       		
        		ajaxCallBack(path, type, data, function(response){
        			
        			conLog(response)
-       			if(flag == 'in'){
        				
-	       			if(response.code == "201") {
-	       				alert("회원등록 완료되었습니다")
-	       				moveCode('mlist');
-	       			}else{
-	       				alert("회원등록 실패하였습니다")
-	       			}
-       				
-       			}else if(flag == 'up'){
-       				
-       				if(response.code == "202") {
-	       				alert("회원정보수정 완료되었습니다")
-	       				moveCode('dlist');
-       				}else{
-	       				alert("회원정보수정 실패하였습니다")
-	       			}
-       				
-       			}else if(flag == 'dl'){
-       				
-       				if(response.code == "202") {
-	       				alert("회원삭제 완료되었습니다")
-	       				moveCode('mlist');
-       				}else{
-	       				alert("회원삭제 실패하였습니다")
-	       			}
-       				
-       			}
+	       		if(response.code == "201") {
+	       			alert("등록 완료되었습니다")
+	       			moveCode('dlist');
+	       		}else{
+	       			alert("등록 실패하였습니다")
+	       		}
        		});
        	}
         

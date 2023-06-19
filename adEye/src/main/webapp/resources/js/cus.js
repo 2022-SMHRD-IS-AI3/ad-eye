@@ -3,7 +3,7 @@
 const url = "http://211.223.37.186:9000";
 
 // 콘솔로그 출력 유무
-let logFlag = false;
+let logFlag = true;
 
 // 콘솔출력 유무가 true 일때만 출력
 function conLog(data){
@@ -192,5 +192,38 @@ function makePagination(pm){
 	
 }
 
+// 뒤로가기
+function back(){
+	history.back();
+}
 
+function formatPhoneNumber(input) {
+  // 입력된 값에서 숫자만 추출
+  let phoneNumber = input.value.replace(/\D/g, '');
 
+  // 전화번호 형식을 적용하여 `-` 추가
+  if (phoneNumber.length > 3 && phoneNumber.length <= 6) {
+    phoneNumber = phoneNumber.replace(/(\d{3})(\d+)/, '$1-$2');
+  } else if (phoneNumber.length > 6) {
+    phoneNumber = phoneNumber.replace(/(\d{3})(\d{4})(\d+)/, '$1-$2-$3');
+  }
+
+  // 변환된 전화번호를 입력 필드에 설정
+  input.value = phoneNumber;
+}
+
+// 최근업데이트날짜변경용
+function korTimeChange(utime) {
+
+    let date = new Date(utime);
+
+    let year = date.getFullYear();
+    let month = ('0' + (date.getMonth() + 1)).slice(-2);
+    let day = ('0' + date.getDate()).slice(-2);
+    let hours = ('0' + date.getHours()).slice(-2);
+    let minutes = ('0' + date.getMinutes()).slice(-2);
+    let seconds = ('0' + date.getSeconds()).slice(-2);
+
+    let formattedDate = year + '년 ' + month + '월 ' + day + '일 ' + hours + '시 ' + minutes + '분 ' + seconds + '초';
+    return formattedDate;
+}

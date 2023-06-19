@@ -39,7 +39,7 @@
             <!-- * * Tip * * You can use text or an image for your navbar brand.-->
             <!-- * * * * * * When using an image, we recommend the SVG format.-->
             <!-- * * * * * * Dimensions: Maximum height: 32px, maximum width: 240px-->
-            <a class="navbar-brand pe-3 ps-4 ps-lg-2" onClick="mySbs()">
+            <a class="navbar-brand pe-3 ps-4 ps-lg-2 link-point" onClick="mySbs()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stack" viewBox="0 0 16 16">
                     <path d="m14.12 10.163 1.715.858c.22.11.22.424 0 .534L8.267 15.34a.598.598 0 0 1-.534 0L.165 11.555a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0l5.317-2.66zM7.733.063a.598.598 0 0 1 .534 0l7.568 3.784a.3.3 0 0 1 0 .535L8.267 8.165a.598.598 0 0 1-.534 0L.165 4.382a.299.299 0 0 1 0-.535L7.733.063z"/>
                     <path d="m14.12 6.576 1.715.858c.22.11.22.424 0 .534l-7.568 3.784a.598.598 0 0 1-.534 0L.165 7.968a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0l5.317-2.659z"/>
@@ -48,6 +48,8 @@
             <!-- Navbar Items-->
             <ul class="navbar-nav align-items-center ms-auto">
                 <!-- User Dropdown-->
+                <li class="nav-item  me-3 me-lg-4"><span class="fw-bolder sbs_alias"></span></li>
+                <li class="nav-item  me-3 me-lg-4 sbs_period"></li>
                 <li class="nav-item dropdown no-caret dropdown-user me-3 me-lg-4">
                     <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="img-fluid" src="${path}/resources/assets/img/user.png" /></a>
                     <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownUserImage">
@@ -80,7 +82,7 @@
                         <div class="nav accordion" id="accordionSidenav">
                             
                             <!-- Sidenav Menu Heading (내 구독 확인)-->
-                            <div class="sidenav-menu-heading">내 구독 확인</div>
+                            <div class="sidenav-menu-heading text-sm">내 구독 확인</div>
                             <!-- Sidenav Accordion (Dashboard)-->
                            </div>
                       </div>
@@ -98,6 +100,7 @@
                                 <div class="row align-items-center justify-content-between">
                                     <div class="col-auto mt-4">
                                         <h1 class="sbs_alias fw-bolder fs-1"></h1>
+                                        <h7 class="sbs_loc"></h7>
                                     </div>
                                 </div>
                             </div>
@@ -108,7 +111,7 @@
                                     <div class="col-md-12 text-end text-muted small">
 		                                <span>최근 업데이트 날짜</span>
 		                                ·
-		                                <span id="updateDate">2023년 06월 13일 15:56:24</span>
+		                                <span id="updateDate"></span>
 		                            </div>
                                 </div>
                             </div>
@@ -119,7 +122,6 @@
                                     <i class="fa-solid fa-chevron-left" onclick="changeDay('m')"></i>
                                     <input type="text" class="dateSelector"/>
                                     <input type="hidden" name="search_date" id="search_date">
-                                    <input type="hidden" name="sbs_seq" id="sbs_seq" value="37">
                                     <i class="fa-solid fa-chevron-right" onclick="changeDay('p')"></i>
                                 </div>
                             </div>
@@ -163,8 +165,10 @@
                                     <div class="card-footer small text-center text-muted">
                                         <span style="color: rgb(54, 162, 235);">■</span> 
                                         <span>남</span>
+                                        <span class="male_total_cnt"></span>
                                         <span style="color: rgb(255, 128, 122);">■</span> 
                                         <span>여</span>
+                                        <span class="female_total_cnt"></span>
                                     </div>
                                 </div>
                             </div>
@@ -241,37 +245,35 @@
         <script src="${path}/resources/js/cus.js"></script>
         <script>
         	loginSession()
-        	var nowDay = ""
-            getNowTime()
-            var search_date = $('#search_date')
-            search_date.val(nowDay)
+        	var nowDay = "" // 1
+            var search_date = $('#search_date') // 2
+            var dateSelector = document.querySelector('.dateSelector'); // 3
+            var te = null;
             
-            var dateSelector = document.querySelector('.dateSelector');
-            var te = flatpickr(dateSelector,{
-                defaultDate: $('#search_date').val(),
-                local: 'ko',
-                dateFormat : "Y-m-d",
-                onChange: function(selectDates, dateStr, instance){
-                	
-                    $('#search_date').val(dateStr)
-                    changeAPI('userDashboard', getQueryString('sbs_seq'))
-                },
-            });
 
             // 화살표꺽쇠 날짜 변경
             function changeDay(c){
 
                 var cDate = new Date(search_date.val())
-                
+                sDate = new Date(formatDate(sbs_start_dt))
                 var gDate = new Date(cDate);
-                if(c === 'm'){
+                
+                var chflag = false
+                if(c === 'm' && sDate < cDate){
                     gDate.setDate(cDate.getDate() - 1)
-                }else if(c === 'p'){
+                    chflag = true
+                }else if(c === 'p' &&  search_date.val() != nowDay){
                     gDate.setDate(cDate.getDate() + 1)
+                    
+                    chflag = true
                 }
-                search_date.val(getYMD(gDate));
-                te.setDate(getYMD(gDate))
-                changeAPI('userDashboard', getQueryString('sbs_seq'))
+                
+                if(chflag){
+	                search_date.val(getYMD(gDate));
+	                te.setDate(getYMD(gDate))
+	                changeAPI('userDashboard', getQueryString('sbs_seq'))
+                	
+                }
                 
             }
 
@@ -316,13 +318,74 @@
             $(document).ready(function() {
             	const idValue = getQueryString('sbs_seq');
 
+            	
                 // id 값 유무로 등록 수정 판단
                 if(idValue){
+                	
+                	getDataDetail(idValue)
                 	getDashboardData(idValue);
+                	
+
+                	
        				$('.mem_id').text(getQueryString('mem_id'))
+       				
+		            getNowTime() // 4
+		            search_date.val(nowDay) // 5
+		            
+                	changeAPI("userDashboard", idValue);
+       				
+                	// 5초마다 실행
+                	setInterval(function() {
+                	  changeAPI("userDashboard", idValue);
+                	}, 5000);
+		            
                 	
                 }
-            });
+                
+			});
+            
+            let sbs_start_dt = ''
+            let sbs_end_dt = ''
+         	// 데이터 상세 조회
+            function getDataDetail(id){
+            	
+           		var path = "/subscription/detail";
+           		var type = "GET";
+           		var data = {
+           			sbs_seq : id
+        		}
+           		
+           		ajaxCallBack(path, type, data, function(response){
+           			
+           			conLog(response)
+           			if(response.code == "200") {
+           				var info = response.result;
+           				var dday = info.d_day <= 0 ? 0 : info.d_day;
+           				sbs_start_dt = info.sbs_start_dt;
+           				
+           				var period = '<span class="text-muted">'+ formatDate(info.sbs_start_dt) +' ~ '+ formatDate(info.sbs_end_dt) +'</span> <span class="text-danger fw-bolder">('+ info.d_day +'일)</span>';
+           				$('.sbs_period').html(period);
+           				
+           				conLog(sbs_start_dt)
+           				te = flatpickr(dateSelector,{ // 6
+           	                defaultDate: $('#search_date').val(),
+           	                local: 'ko',
+           	                enable: [
+           	                    {
+           	                      from: formatDate(new Date(sbs_start_dt)),
+           	                      to: new Date()
+           	                    },
+           	                ],
+           	                dateFormat : "Y-m-d",
+           	                onChange: function(selectDates, dateStr, instance){
+           	                	
+           	                    $('#search_date').val(dateStr)
+           	                    changeAPI('userDashboard', getQueryString('sbs_seq'))
+           	                },
+           	            });
+           			}
+           		});
+           	}
             
          	// 데이터 상세 조회
             function getDashboardData(id){
@@ -347,15 +410,19 @@
            				if (dataList.length > 0) {
 
            					var sbs_alias = "";
+           					var sbs_loc = "";
            					dataList.forEach(function(v) {
            						
            						if(v.sbs_seq == id){
            							sbs_alias = v.sbs_alias
+           							var addrArr = v.sbs_loc.split(",");
+           			                sbs_loc = addrArr[0] + (addrArr[1]? ' '+ addrArr[1] : '');
            						}
                                     
         		            });
            					
            					$('.sbs_alias').text(sbs_alias);
+           					$('.sbs_loc').text(sbs_loc);
         	            	
         	            }
            				
@@ -372,13 +439,18 @@
 	            if (dataList.length > 0) {
 	                // 데이터가 없는 경우 처리
 	            	dataList.forEach(function(v) {
-		                
-		                createNavHTML += '<a class="nav-link collapsed" onClick="movePath(\'/pages/user?mem_id='+ mem_id +'&sbs_seq='+ v.sbs_seq +'\')" data-bs-toggle="collapse" data-bs-target="#collapseDashboards" aria-expanded="false" aria-controls="collapseDashboards">'+ v.sbs_alias + '<div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div></a>';
+	            		
+	            		var active = '';
+		                if(v.sbs_seq == getQueryString('sbs_seq')){
+		                	active = 'active';
+		                }
+		                createNavHTML += '<a class="nav-link collapsed '+ active +'" onClick="movePath(\'/pages/user?mem_id='+ mem_id +'&sbs_seq='+ v.sbs_seq +'\')" data-bs-toggle="collapse" data-bs-target="#collapseDashboards" aria-expanded="false" aria-controls="collapseDashboards">'+ v.sbs_alias + '<div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div></a>';
                             
 		            });
 	            }
 	            
 	            $('#accordionSidenav').append(createNavHTML)
+	            
 	            
 	        }
             
@@ -405,7 +477,11 @@
 	                	if(response.code == "200") {
 	                		
 	                		dashboardData = response.result;
+	                		getNowTime()
+	                		var t = dashboardData.update_time != null ? korTimeChange(dashboardData.update_time) : '-'
+	        	        	$('#updateDate').text(t)
 	                		dataChange()
+	                		
 	                	}
                         
                         dataChange()
@@ -417,14 +493,36 @@
                 })
             }
 
-            changeAPI("userDashboard",getQueryString('sbs_seq'))
+            
 
 	        var changeCheck = true;
 	       	function dataChange(){
+	       		var d = dashboardData
 	        	// 총 유동인구
-	        	$('#man_total').text(dashboardData.man_total.toLocaleString())
+	        	$('#man_total').text(d.man_total.toLocaleString())
 	        	// 총 주요 시청 횟수
-	        	$('#interest_total').text(dashboardData.interest_total.toLocaleString())
+	        	$('#interest_total').text(d.interest_total.toLocaleString())
+	        	
+	        	if(d.man_total > 0){
+	        		
+		        	var total = d.man_total;
+		        	var count1 = d.male_total_cnt;
+			        var count2 = d.female_total_cnt;
+	
+		        	var mtc = count1.toLocaleString()+'명';
+		        	var ftc = count2.toLocaleString()+'명';
+		        	
+			        var mtc_per = Math.round((((count1 / total) * 100) || 0))+ '%';
+			        var ftc_per = Math.round((((count2 / total) * 100) || 0))+ '%';
+		        	
+		        	var mtcSpan = ' - '+ mtc +' ('+ mtc_per +')' ; 
+		        	var ftcSpan = ' - '+ ftc +' ('+ ftc_per +')' ; 
+		        	$('.male_total_cnt').text(mtcSpan)
+		        	$('.female_total_cnt').text(ftcSpan)
+	        	}else{
+	        		$('.male_total_cnt').text('')
+		        	$('.female_total_cnt').text('')
+	        	}
 	        	if(changeCheck){
 	        		pieChart()
 	        		multiChart()
@@ -433,7 +531,7 @@
 	        		rePieChart()
 	        		reMultiChart()
 	        	}
-	        	$('#updateDate').text(getNowTime())
+	        	
 	        }
 	        
 	        // 내 정보 수정 페이지 이동

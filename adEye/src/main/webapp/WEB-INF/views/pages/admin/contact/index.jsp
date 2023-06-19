@@ -5,6 +5,16 @@
     <head>
         <title>문의 - admin</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+		<style>
+			.text-elipsis {
+			    display: inline-block;
+			    width: 20rem;
+			    white-space: nowrap;
+			    overflow: hidden;
+			    text-overflow: ellipsis;
+			}
+			
+		</style>
 		<%@ include file="../../../includes/header.jsp" %>
 		<!-- content -->
             <div id="layoutSidenav_content">
@@ -95,10 +105,8 @@
     $(document).ready(function() {
 
         // 유무 page 값 가져오기
-        const page = getQueryString('page');
         $('#contact_open').val(getQueryString('cs') || '').prop("selected", true);
 
-        // page 값 유무로 페이지체크
         getDataList()
 
     });
@@ -140,13 +148,13 @@
             createHTML = '<tr><td colspan="7">데이터가 없습니다.</td></tr>';
         } else {
         	dataList.forEach(function(v,idx) {
-	        		var no = (page - 1) > 0 ? (page - 1) * 10 + (idx+1) : (idx+1);
+	        	var no = (page - 1) > 0 ? (page - 1) * 10 + (idx+1) : (idx+1);
 
         		var contact_dt = formatDate(v.contact_dt);
-                var contact_open = v.contact_open == 'Y' ? "<span>확인</span>" : "<span style='color:#ff6262;'>미확인</span>";
+                var contact_open = v.contact_open == 'Y' ? "<b>확인</b>" : "<b style='color:#ff6262;'>미확인</b>";
             
                 // var delBtn = '<button class="btn btn-danger btn-sm" onClick="dataDel(\''+ v.mem_id +'\')" type="button ">삭제</button>';
-                createHTML += '<tr><td>'+ no +'</td><td>'+ v.company +'</td><td>'+ v.phone +'</td><td>'+ v.email +'</td><td class="link-point text-primary text-break w-25" onClick="movePath(\'/pages/admin/contact/detail?id='+v.contact_seq+'\')">'+ v.contact_content +'</td><td>'+ contact_dt +'</td><td>'+ contact_open +'</td></tr>'
+                createHTML += '<tr><td>'+ no +'</td><td>'+ v.company +'</td><td>'+ v.phone +'</td><td>'+ v.email +'</td><td class="link-point text-primary" onClick="movePath(\'/pages/admin/contact/detail?id='+v.contact_seq+'\')"><div class="text-elipsis">'+ v.contact_content +'</div></td><td>'+ contact_dt +'</td><td>'+ contact_open +'</td></tr>'
             });
         }
         

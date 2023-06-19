@@ -25,7 +25,7 @@
                                 <!-- Social login form-->
                                 <div class="card my-5">
                                     <div class="pt-5 text-center">
-                                        <img class="w-25 mb-1" src="${path}/resources/assets/img/custom/logo.png" />
+                                        <img class="w-25 mb-1 link-point" onClick="moveCode('main')" src="${path}/resources/assets/img/custom/logo.png" />
                                         <div class="h1 fw-bolder mt-3 mb-3">LOGIN</div>
                                     </div>
                                     <div class="p-5 pt-3">
@@ -34,12 +34,12 @@
                                             <!-- Form Group (email address)-->
                                             <div class="mb-3">
                                                <!--   <label class="text-gray-600 small" for="emailExample">Email address</label> -->
-                                                <input class="form-control form-control-solid" type="text" id="mem_id" name="mem_id" placeholder="ID" aria-label="Email Address" aria-describedby="emailExample" />
+                                                <input class="form-control form-control-solid" type="text" id="mem_id" name="mem_id" onkeypress="submitEnter(event)" placeholder="ID" aria-label="Email Address" aria-describedby="emailExample" />
                                             </div>
                                             <!-- Form Group (password)-->
                                             <div class="mb-3">
                                                 <!-- <label class="text-gray-600 small" for="passwordExample">Password</label>  -->
-                                                <input class="form-control form-control-solid" type="password" id="mem_pw" name="mem_pw" placeholder="Password" aria-label="Password" aria-describedby="passwordExample" />
+                                                <input class="form-control form-control-solid" type="password" id="mem_pw" name="mem_pw" onkeypress="submitEnter(event)" placeholder="Password" aria-label="Password" aria-describedby="passwordExample" />
                                             </div>
                                             <!-- Form Group (forgot password link)-->
                                             <!-- Form Group (login box).-->
@@ -50,8 +50,8 @@
                                     </div>
                                     <div class="card-body px-5 py-4">
                                         <div class="small text-center">
-                                            아직 회원이 아니시라면 
-                                            <a onclick="moveCode('main')" style="color : #034efc">여기</a>를 눌러주세요!
+                                        	가입이 안되었으면
+                                            <a onclick="movePath('/pages/main#contact')" class="link-point" style="color : #034efc"> 문의 주세요</a>
                                         </div>
                                     </div>
                                 </div>
@@ -80,7 +80,15 @@
         <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 		<script src="${path}/resources/js/cus.js"></script>
 		<script type="text/javascript">
-     	// 데이터 상세 조회
+		
+		// 엔터 로그인
+		function submitEnter(e){
+			if(e.keyCode === 13) {
+				login()
+			}
+		}
+		
+     	// 로그인
         function login(){
         	
        		var path = "/login";

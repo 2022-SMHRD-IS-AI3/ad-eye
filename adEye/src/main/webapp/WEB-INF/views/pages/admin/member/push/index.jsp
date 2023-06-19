@@ -39,9 +39,7 @@
 										<!-- 회사명-->
 										<div class="row gx-3 mb-3">
 											<div class="col-md-6">
-												<label class="small mb-1" for="mem_company">* 회사명</label> <input
-													class="form-control" id="mem_company" type="text"
-													name="mem_company" placeholder="회사명" value="" />
+												<label class="small mb-1" for="mem_company">* 회사명</label> <input class="form-control" id="mem_company" type="text" name="mem_company" placeholder="회사명" value="" />
 											</div>
 										</div>
 
@@ -51,26 +49,20 @@
 												<label class="small mb-1" for="mem_id">* 아이디</label>
 											</div>
 											<div class="col-md-6">
-												<input class="form-control" id="mem_id" type="text"
-													name="mem_id" placeholder="아이디" value="" />
+												<input class="form-control" id="mem_id" type="text" name="mem_id" placeholder="아이디" value="" />
 											</div>
 											<div class="col-md-2">
-												<button onclick="generateUUID('mem_id')"
-													class="btn btn-warning w-100 refresh-btn d-none"
-													type="button">새로고침</button>
+												<button onclick="generateUUID('mem_id')" class="btn btn-warning w-100 refresh-btn d-none" type="button">새로고침</button>
 											</div>
 										</div>
 
 										<!-- 비밀번호-->
 										<div class="row gx-3 mb-3">
 											<div class="col-md-6">
-												<label class="small mb-1" for="mem_pw">* 비밀번호</label> <input
-													class="form-control" id="mem_pw" type="password"
-													name="mem_pw" placeholder="비밀번호" value="1234" />
+												<label class="small mb-1" for="mem_pw">* 비밀번호</label> <input class="form-control" id="mem_pw" type="password" name="mem_pw" placeholder="비밀번호" value="1234" />
 											</div>
 											<div class="col-md-6">
-												<br> <span class="text-muted small">* 기본 비밀번호는
-													1234 입니다.</span>
+												<br> <span class="text-muted small">* 기본 비밀번호는 1234 입니다.</span>
 
 											</div>
 										</div>
@@ -78,18 +70,15 @@
 										<!-- 연락처-->
 										<div class="row gx-3 mb-3">
 											<div class="col-md-6">
-												<label class="small mb-1" for="mem_phone">* 연락처</label> <input
-													class="form-control" id="mem_phone" type="text"
-													name="mem_phone" placeholder="010-1234-1234" value="" />
+												<label class="small mb-1" for="mem_phone">* 연락처</label>
+												<input class="form-control" id="mem_phone" type="text" name="mem_phone" oninput="formatPhoneNumber(this)" placeholder="010-1234-1234" value="" maxlength="13" />
 											</div>
 										</div>
 
 										<!-- 이메일-->
 										<div class="row gx-3 mb-3">
 											<div class="col-md-6">
-												<label class="small mb-1" for="mem_email">* 이메일</label> <input
-													class="form-control" id="mem_email" type="text"
-													name="mem_email" placeholder="abc123@abc.com" value="" />
+												<label class="small mb-1" for="mem_email">* 이메일</label> <input	class="form-control" id="mem_email" type="text" name="mem_email" placeholder="abc123@abc.com" value="" />
 											</div>
 										</div>
 
@@ -107,13 +96,10 @@
                                                     <button onclick="postSearch()" class="btn btn-info w-100" type="button">우편번호 검색</button>
                                                 </div> -->
 											<div class="col-md-7 mt-2">
-												<input class="form-control" onclick="postSearch()"
-													id="addr1" type="text" name="addr1" placeholder="주소 검색"
-													value="" />
+												<input class="form-control" onclick="postSearch()" id="addr1" type="text" name="addr1" placeholder="주소 검색" value="" />
 											</div>
 											<div class="col-md-7 mt-2">
-												<input class="form-control" id="addr2" type="text"
-													name="addr2" placeholder="상세주소" value="" />
+												<input class="form-control" id="addr2" type="text" name="addr2" placeholder="상세주소" value="" />
 											</div>
 										</div>
 
@@ -121,14 +107,11 @@
 										<div class="mb-3">
 											<label class="small mb-1">* 계정구분</label> <br>
 											<div class="form-check form-check-inline">
-												<input class="form-check-input" id="admin_n" name="admin_yn"
-													type="radio" value="N" checked /> <label
-													class="form-check-label" for="admin_n">사용자(N)</label>
+												<input class="form-check-input" id="admin_n" name="admin_yn" type="radio" value="N" checked />
+												<label class="form-check-label" for="admin_n">사용자(N)</label>
 											</div>
 											<div class="form-check form-check-inline">
-												<input class="form-check-input" id="admin_y" name="admin_yn"
-													type="radio" value="Y" /> <label class="form-check-label"
-													for="admin_y">관리자(Y)</label>
+												<input class="form-check-input" id="admin_y" name="admin_yn" type="radio" value="Y" /> <label class="form-check-label" for="admin_y">관리자(Y)</label>
 											</div>
 
 										</div>
@@ -137,14 +120,12 @@
 										<div class="mb-3">
 											<label class="small mb-1">* 계정상태</label> <br>
 											<div class="form-check form-check-inline">
-												<input class="form-check-input" id="mem_status_y"
-													name="mem_status" type="radio" value="Y" checked /> <label
-													class="form-check-label" for="mem_status_y">사용중</label>
+												<input class="form-check-input" id="mem_status_y" name="mem_status" type="radio" value="Y" checked />
+												 <label class="form-check-label" for="mem_status_y">사용중</label>
 											</div>
 											<div class="form-check form-check-inline">
-												<input class="form-check-input" id="mem_status_n"
-													name="mem_status" type="radio" value="N" /> <label
-													class="form-check-label" for="mem_status_n">사용중지</label>
+												<input class="form-check-input" id="mem_status_n" name="mem_status" type="radio" value="N" />
+												 <label class="form-check-label" for="mem_status_n">사용중지</label>
 											</div>
 
 										</div>
@@ -156,11 +137,9 @@
 								</div>
 								<div class="card-footer position-relative">
 									<div class="d-flex align-items-center justify-content-between">
-										<button class="btn btn-secondary" type="button"
-											onclick="moveCode('mlist')">목록</button>
+										<button class="btn btn-secondary" type="button" onclick="moveCode('mlist')">목록</button>
 										<div class="submit-btn-wrap">
-											<button class="btn btn-primary del-btn"
-												onClick="dataSubmit('in')" type="button">등록</button>
+											<button class="btn btn-primary del-btn" onClick="dataSubmit('in')" type="button">등록</button>
 										</div>
 									</div>
 
@@ -278,19 +257,35 @@
         	}else if('in' || 'up') { // 등록, 수정
         		
         		data = {
-                  	mem_id : getQueryString('id'),
+                  	mem_id : $('#mem_id').val(),
                    	mem_pw : $('#mem_pw').val(),
                   	mem_company : $('#mem_company').val(),
                   	mem_phone : $('#mem_phone').val(),
                   	mem_email : $('#mem_email').val(),
                    	mem_status : $('input[name=mem_status]:checked').val(),
+                   	admin_yn : $('input[name=admin_yn]:checked').val(),
                   	company_addr : $('#addr1').val() + "," + $('#addr2').val()
                	}
         		
-	       		if(isObjectEmpty(data)){ // 빈 값 체크
-	       			alert("필수 입력정보가 입력되지 않았습니다");
-	       			return
-	       		}
+        		if($("#mem_company").val()== ""){
+            		alert('회사명을 입력해주세요');
+            		return
+            	}else if($("#mem_id").val()== ""){
+            		alert('아이디를 입력해주세요');
+            		return
+            	}else if($("#mem_pw").val()== ""){
+            		alert('비밀번호를 입력해주세요');
+            		return
+            	}else if($("#mem_phone").val()== ""){
+            		alert('연락처를 입력해주세요');
+            		return
+            	}else if($("#mem_email").val()== ""){
+            		alert('이메일을 입력해주세요');
+            		return
+            	}else if($("#addr1").val()== ""){
+            		alert('주소를 입력해주세요');
+            		return
+           		}
         	
         		if(flag=='in') {
         			path = "/member/insert";
@@ -306,7 +301,7 @@
         		cflag = confirm(msg);
         	}
         	
-        	if(msg == "" || cflag == false) {
+        	if(msg != "" && cflag == false) {
         		return
         	}
        		
@@ -333,7 +328,7 @@
        				
        			}else if(flag == 'dl'){
        				
-       				if(response.code == "202") {
+       				if(response.code == "201") {
 	       				alert("삭제 완료되었습니다")
 	       				moveCode('mlist');
        				}else{

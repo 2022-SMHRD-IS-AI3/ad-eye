@@ -52,7 +52,9 @@
                                 <table id="datatable" class="table table-striped table-hover">
                                     <thead>
                                         <tr>
+                                        	<th>No.</th>
                                             <th>기기시리얼</th>
+                                            <th>매체이름</th>
                                             <th>매체위치</th>
                                             <th>로그시간</th>
                                             <th>로그내용</th>
@@ -122,14 +124,14 @@
             
             if (dataList.length === 0) {
                 // 데이터가 없는 경우 처리
-                createHTML = '<tr><td colspan="4">데이터가 없습니다.</td></tr>';
+                createHTML = '<tr><td colspan="5">데이터가 없습니다.</td></tr>';
             } else {
             	dataList.forEach(function(v,idx) {
-    	        	var no = (page - 1) > 0 ? (page - 1) * 10 + (idx+1) : (idx+1);
+            		var no = (page - 1) > 0 ? (page - 1) * 10 + (idx+1) : (idx+1);
 
             		var log_dt = formatDate(v.log_dt);
                 
-                    createHTML += '<tr><td>'+ v.device_uid +'</td><td>'+ v.sbs_loc +'</td><td>'+ log_dt +'</td><td>'+ v.log_msg +'</td></tr>'
+                    createHTML += '<tr><td>'+ no +'</td><td>'+ v.device_uid +'</td><td>'+ v.sbs_alias +'</td><td>'+ v.sbs_loc +'</td><td>'+ log_dt +'</td><td>'+ v.log_msg +'</td></tr>'
                 });
             }
             
