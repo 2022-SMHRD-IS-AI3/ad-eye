@@ -40,7 +40,7 @@
             			(SELECT mem_company FROM tb_member m WHERE m.mem_id = s.mem_id AND s.device_seq = d.device_seq) AS mem_company,
             			(SELECT sbs_seq FROM tb_subscription s WHERE s.device_seq = d.device_seq  AND s.sbs_status = 'Y') AS sbs_seq,
             			(SELECT sbs_alias FROM tb_subscription s WHERE s.device_seq = d.device_seq AND s.sbs_status = 'Y') AS sbs_alias,
-            			(SELECT COUNT(log_seq) FROM tb_log l WHERE l.device_uid = d.device_uid AND l.log_dt >= SYSDATE - INTERVAL '5' MINUTE) AS data_check
+            			(SELECT COUNT(log_seq) FROM tb_log l WHERE l.device_uid = d.device_uid AND l.log_dt &gt;= SYSDATE - INTERVAL '5' MINUTE AND l.log_dt &lt;= SYSDATE) AS data_check
         			FROM tb_device d
         			LEFT JOIN tb_subscription s on d.device_seq = s.device_seq and s.sbs_status = 'Y'
                     LEFT JOIN tb_member m on s.mem_id = m.mem_id
