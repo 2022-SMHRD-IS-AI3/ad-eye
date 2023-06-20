@@ -125,7 +125,9 @@
                                             <th class="text-center">광고 주목 인구(명)
                                             <span data-bs-toggle="tooltip" data-bs-placement="top" title="광고 노출 인구 중 정면과 측면으로 측정된 사람의 수"><i data-feather="info"></i></span>
                                             </br>당일 / 누적</th>
-                                            <th class="text-center">전체 남녀 비율(%)</br>(남:여) 당일 / 누적</th>
+                                            <th class="text-center">전체 남녀 비율(%)
+                                            <span data-bs-toggle="tooltip" data-bs-placement="top" title="광고 노출 인구의 남녀 비율 (남:여)"><i data-feather="info"></i></span>
+                                            </br>당일 / 누적</th>
                                         </tr>
                                     </thead>
                                     
