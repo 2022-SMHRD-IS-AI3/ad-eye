@@ -215,7 +215,7 @@
 		                var t_count2 = v.today_female_cnt;
 		                var t_per1 = ((t_count1 / t_total) * 100) || 0;
 		                var t_per2 = ((t_count2 / t_total) * 100) || 0;
-		                var t_per = Math.round(t_per1) + '% : ' +  Math.round(t_per2) + '%';
+		                var t_per = Math.round(t_per1) + ' : ' +  Math.round(t_per2);
 		                if(t_total == 0) {
 		                	t_per	= '-';
 		                }
@@ -226,7 +226,7 @@
 		                var count2 = v.sbs_female_per;
 		                var per1 = ((count1 / total) * 100) || 0;
 		                var per2 = ((count2 / total) * 100) || 0;
-		                var per = Math.round(per1) + '% : ' +  Math.round(per2) + '%';
+		                var per = Math.round(per1) + ' : ' +  Math.round(per2);
 		                if(total == 0) {
 		                	per	= '-';
 		                }

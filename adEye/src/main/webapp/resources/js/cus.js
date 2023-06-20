@@ -162,8 +162,11 @@ function loginSession(){
 	   	if(response.code != "200") {
 	   		
 	   		moveCode('login');
-	       				
+	       	return		
 	 	}
+	 	
+	 	$('.mem_id').text(response.mem_id)
+	 	
 	});
 }
 

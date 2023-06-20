@@ -71,7 +71,7 @@ public class HomeController {
 					paramMap.put("code", "200");
 					paramMap.put("message", "로그인 성공");
 				}else if(admin_yn == 'Y'){
-					paramMapsub.put("move_url", "/pages/admin?mem_id="+ mem_id);
+					paramMapsub.put("move_url", "/pages/admin");
 					paramMap.put("result", paramMapsub);
 					paramMap.put("code", "200");
 					paramMap.put("message", "로그인 성공");				
@@ -107,6 +107,7 @@ public class HomeController {
 			
 			paramMap.put("code", "200");
 			paramMap.put("message", "로그인중");
+			paramMap.put("mem_id", session.getAttribute("LoginId").toString());
 		}else {
 			paramMap.put("code", "202");
 			paramMap.put("message", "로그인해주세요");
