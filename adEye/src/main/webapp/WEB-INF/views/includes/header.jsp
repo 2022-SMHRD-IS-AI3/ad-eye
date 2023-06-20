@@ -35,8 +35,7 @@
                         <h6 class="dropdown-header d-flex align-items-center">
                             <img class="dropdown-user-img" src="${path}/resources/assets/img/user-gear.png" />
                             <div class="dropdown-user-details">
-                                <div class="dropdown-user-details-name">admin</div>
-                                <div class="dropdown-user-details-email">admin</div>
+                                <div class="dropdown-user-details-name mem_id"></div>
                             </div>
                         </h6>
                         <div class="dropdown-divider"></div>

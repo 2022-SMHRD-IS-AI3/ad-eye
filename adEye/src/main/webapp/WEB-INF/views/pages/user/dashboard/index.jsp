@@ -69,7 +69,8 @@
                     <div class="sidenav-menu">
                         <div class="nav accordion" id="accordionSidenav">
                             
-                            <!-- Sidenav Menu Heading (내 구독 확인)-->
+                            <!-- (내 구독 확인) -->
+                            <div class="nav-link ps-3 pt-5 fw-bolder link-point" onClick="mySbs()" style="font-size: 1rem !important;color: #606060;letter-spacing: 0.05em;">홈으로 이동</div>
                             <div class="sidenav-menu-heading text-sm">내 구독 확인</div>
                             <!-- Sidenav Accordion (Dashboard)-->
                            </div>
@@ -124,7 +125,9 @@
                                             <th class="text-center">광고 주목 인구(명)
                                             <span data-bs-toggle="tooltip" data-bs-placement="top" title="광고 노출 인구 중 정면과 측면으로 측정된 사람의 수"><i data-feather="info"></i></span>
                                             </br>당일 / 누적</th>
-                                            <th class="text-center">전체 남녀 비율(%)</br>(남:여)</th>
+                                            <th class="text-center">전체 남녀 비율(%)
+                                            <span data-bs-toggle="tooltip" data-bs-placement="top" title="광고 노출 인구의 남녀 비율 (남:여)"><i data-feather="info"></i></span>
+                                            </br>당일 / 누적</th>
                                         </tr>
                                     </thead>
                                     
@@ -141,11 +144,6 @@
                     <div class="container-xl px-4">
                         <div class="row">
                             <div class="col-md-6 small">Copyright &copy; Ad-EYE 2023</div>
-                            <!-- <div class="col-md-6 text-md-end small">
-                                <a href="#!">Privacy Policy</a>
-                                &middot;
-                                <a href="#!">Terms &amp; Conditions</a>
-                            </div> -->
                         </div>
                     </div>
                 </footer>
@@ -210,16 +208,31 @@
 	            	
 	            	dataList.forEach(function(v) {
 		                
+		                
+		                // 당일
+		                var t_total = v.today_total_man;
+		                var t_count1 = v.today_male_cnt;
+		                var t_count2 = v.today_female_cnt;
+		                var t_per1 = ((t_count1 / t_total) * 100) || 0;
+		                var t_per2 = ((t_count2 / t_total) * 100) || 0;
+		                var t_per = Math.round(t_per1) + ' : ' +  Math.round(t_per2);
+		                if(t_total == 0) {
+		                	t_per	= '-';
+		                }
+		                
+	            		// 누적
 		                var total = v.sbs_total_man;
 		                var count1 = v.sbs_male_per;
 		                var count2 = v.sbs_female_per;
-			
-		                var percentage1 = ((count1 / total) * 100) || 0;
-		                var percentage2 = ((count2 / total) * 100) || 0;
-		                var per = Math.round(percentage1) + '% : ' +  Math.round(percentage2) + '%';
-		                if(percentage1 == 0) {
+		                var per1 = ((count1 / total) * 100) || 0;
+		                var per2 = ((count2 / total) * 100) || 0;
+		                var per = Math.round(per1) + ' : ' +  Math.round(per2);
+		                if(total == 0) {
 		                	per	= '-';
 		                }
+		                
+		                var man_per = t_per +' / '+ per;
+		                
 		                var interest = v.today_total_interest +' / '+ v.sbs_total_interest;
 		                if(v.today_total_interest == 0 && v.sbs_total_interest == 0) {
 		                	interest	= '-';
@@ -234,7 +247,7 @@
 		                
 		                var mem_id = getQueryString('mem_id');
 		                
-		                createHTML += '<tr class="link-point" onClick="movePath(\'/pages/user?mem_id='+ mem_id +'&sbs_seq='+v.sbs_seq+'\')"><td>'+ v.sbs_alias +'</td><td>'+ sbs_loc +'</td><td class="text-center">'+ man +'</td><td class="text-center">'+ interest +'</td><td class="text-center">'+ per +'</td></tr>'
+		                createHTML += '<tr class="link-point" onClick="movePath(\'/pages/user?mem_id='+ mem_id +'&sbs_seq='+v.sbs_seq+'\')"><td>'+ v.sbs_alias +'</td><td>'+ sbs_loc +'</td><td class="text-center">'+ man +'</td><td class="text-center">'+ interest +'</td><td class="text-center">'+ man_per +'</td></tr>'
 		                 
 		            });
 	            }
@@ -279,7 +292,7 @@
         		            });
            				}
            				
-           				if($('#accordionSidenav').children().length == 1){
+           				if($('#accordionSidenav').children().length == 2){
         		            $('#accordionSidenav').append(createNavHTML)
         	            }
            				

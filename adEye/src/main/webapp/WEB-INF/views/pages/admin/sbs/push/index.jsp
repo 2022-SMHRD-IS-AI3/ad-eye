@@ -255,15 +255,19 @@
            			
            			conLog(response)
            			if(response.code == "200") {
+           				
+           				// 기기 목록 담을 배열
            				deviceList = [];
            				response.result.forEach(function(v){
+           					// 기기 상태가 미사용 이거나, 현재 수정할 정보의 기기 번호와 동일할 경우
            					if(v.device_status == 'N' || v.device_seq == device_seq){
-           						
+           						// 기기 목록 배열에 추가
            						deviceList.push({device_seq:v.device_seq, device_uid:v.device_uid});
            					}
            				})
-           				
+						// 기기 목록 배열의 개수가 0보다 클 경우           				
            				if(deviceList.length > 0){
+           					// 배열 select option 생성
            					deviceListCreate()
            				}
            				
