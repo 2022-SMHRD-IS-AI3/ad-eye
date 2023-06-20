@@ -171,7 +171,7 @@
         <script src="${path}/resources/assets/demo/multi-chart.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
         <script>
-    	var nowDay = "" // 1
+    		var nowDay = "" // 1
             var search_date = $('#search_date') // 2
             var dateSelector = document.querySelector('.dateSelector'); // 3
             var te = null;
@@ -251,6 +251,12 @@
 		            getNowTime() // 4
 		            search_date.val(nowDay) // 5
 		            
+                	changeAPI("userDashboard", idValue);
+       				
+                	// 5초마다 실행
+                	setInterval(function() {
+                	  changeAPI("userDashboard", idValue);
+                	}, 60000);
                 	
                 }
                 
@@ -322,6 +328,9 @@
 	                	if(response.code == "200") {
 	                		
 	                		dashboardData = response.result;
+	                		getNowTime()
+	                		var t = dashboardData.update_time != null ? korTimeChange(dashboardData.update_time) : '-'
+	        	        	$('#updateDate').text(t)
 	                		dataChange()
 	                		
 	                	}
@@ -335,14 +344,34 @@
                 })
             }
 
-            changeAPI("userDashboard",getQueryString('sbs_seq'))
-
 	        var changeCheck = true;
 	       	function dataChange(){
+	       		var d = dashboardData
 	        	// 총 유동인구
-	        	$('#man_total').text(dashboardData.man_total.toLocaleString())
+	        	$('#man_total').text(d.man_total.toLocaleString())
 	        	// 총 주요 시청 횟수
-	        	$('#interest_total').text(dashboardData.interest_total.toLocaleString())
+	        	$('#interest_total').text(d.interest_total.toLocaleString())
+	        	
+	        	if(d.man_total > 0){
+	        		
+		        	var total = d.man_total;
+		        	var count1 = d.male_total_cnt;
+			        var count2 = d.female_total_cnt;
+	
+		        	var mtc = count1.toLocaleString()+'명';
+		        	var ftc = count2.toLocaleString()+'명';
+		        	
+			        var mtc_per = Math.round((((count1 / total) * 100) || 0))+ '%';
+			        var ftc_per = Math.round((((count2 / total) * 100) || 0))+ '%';
+		        	
+		        	var mtcSpan = ' - '+ mtc +' ('+ mtc_per +')' ; 
+		        	var ftcSpan = ' - '+ ftc +' ('+ ftc_per +')' ; 
+		        	$('.male_total_cnt').text(mtcSpan)
+		        	$('.female_total_cnt').text(ftcSpan)
+	        	}else{
+	        		$('.male_total_cnt').text('')
+		        	$('.female_total_cnt').text('')
+	        	}
 	        	if(changeCheck){
 	        		pieChart()
 	        		multiChart()
@@ -351,7 +380,7 @@
 	        		rePieChart()
 	        		reMultiChart()
 	        	}
-	        	$('#updateDate').text(getNowTime())
+	        	
 	        }
 	        
 	        

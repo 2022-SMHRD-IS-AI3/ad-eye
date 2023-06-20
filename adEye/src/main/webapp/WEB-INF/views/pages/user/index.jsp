@@ -492,8 +492,6 @@
                 })
             }
 
-            
-
 	        var changeCheck = true;
 	       	function dataChange(){
 	       		var d = dashboardData
