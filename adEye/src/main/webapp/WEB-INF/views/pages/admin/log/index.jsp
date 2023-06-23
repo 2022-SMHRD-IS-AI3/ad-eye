@@ -52,10 +52,10 @@
                                 <table id="datatable" class="table table-striped table-hover">
                                     <thead>
                                         <tr>
-                                        	<th>No.</th>
-                                            <th>기기시리얼</th>
-                                            <th>매체이름</th>
-                                            <th>매체위치</th>
+                                        	<th class="text-center">No.</th>
+                                            <th class="text-center">기기시리얼</th>
+                                            <th class="text-center">매체이름</th>
+                                            <th class="text-center">매체위치</th>
                                             <th>로그내용</th>
                                         </tr>
                                     </thead>
@@ -130,7 +130,7 @@
 
             		var log_dt = formatDate(v.log_dt);
                 
-                    createHTML += '<tr><td>'+ no +'</td><td>'+ v.device_uid +'</td><td>'+ v.sbs_alias +'</td><td>'+ v.sbs_loc +'</td><td>'+ v.log_msg +'</td></tr>'
+                    createHTML += '<tr><td class="text-center">'+ no +'</td><td class="text-center">'+ v.device_uid +'</td><td class="text-center">'+ v.sbs_alias +'</td><td class="text-center">'+ v.sbs_loc +'</td><td>'+ v.log_msg +'</td></tr>'
                 });
             }
             

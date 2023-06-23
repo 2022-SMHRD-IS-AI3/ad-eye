@@ -2,10 +2,10 @@ package com.sansam.adeye.service;
 
 import java.util.List;
 
+import com.sansam.adeye.domain.AcqDTO;
 import com.sansam.adeye.domain.AcqDashboardDTO;
 import com.sansam.adeye.domain.AcquisitionDTO;
 import com.sansam.adeye.domain.AcquisitionDashboardDTO;
-import com.sansam.adeye.domain.AcquisitionSubmitDTO;
 import com.sansam.adeye.domain.DeviceDTO;
 import com.sansam.adeye.domain.LogDTO;
 
@@ -19,7 +19,7 @@ public interface IAcquisitionService {
 	// 로그 수집
 	public int logInsert(List<LogDTO> dto) throws Exception;
 	// 수집 등록
-	public DeviceDTO acqCreate(List<AcquisitionSubmitDTO> dtoList ) throws Exception;
+	public DeviceDTO acqCreate(AcqDTO dto) throws Exception;
 	// max tid
 	public int acqMaxTid(String uid) throws Exception;
 	

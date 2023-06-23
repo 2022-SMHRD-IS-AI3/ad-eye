@@ -72,14 +72,14 @@
                                 <table id="datatable" class="table table-striped table-hover">
                                     <thead>
                                         <tr>
-                                        	<th>No.</th>
+                                        	<th class="text-center">No.</th>
                                             <th>회사명</th>
                                             <th>연락처</th>
                                             <th>이메일</th>
                                             <th>내용</th>
-                                            <th>날짜</th>
-                                            <th>확인</th>
-                                            <th>삭제</th>
+                                            <th class="text-center">날짜</th>
+                                            <th class="text-center">열람상태</th>
+                                            <th class="text-center">삭제</th>
                                         </tr>
                                     </thead>
                                     
@@ -150,7 +150,7 @@
                 var contact_content = v.contact_content != null ? v.contact_content : "-";
             
                 var delBtn = '<button class="btn btn-danger btn-sm" onClick="dataDel(\''+ v.contact_seq +'\')" type="button ">삭제</button>';
-                createHTML += '<tr><td>'+ no +'</td><td>'+ v.company +'</td><td>'+ v.phone +'</td><td>'+ v.email +'</td><td class="link-point text-primary" onClick="movePath(\'/pages/admin/contact/detail?id='+v.contact_seq+'\')"><div class="text-elipsis">'+ contact_content +'</div></td><td>'+ contact_dt +'</td><td>'+ contact_open +'</td><td>'+ delBtn +'</td></tr>'
+                createHTML += '<tr><td class="text-center">'+ no +'</td><td>'+ v.company +'</td><td>'+ v.phone +'</td><td>'+ v.email +'</td><td class="link-point text-primary" onClick="movePath(\'/pages/admin/contact/detail?id='+v.contact_seq+'\')"><div class="text-elipsis">'+ contact_content +'</div></td><td class="text-center">'+ contact_dt +'</td><td class="text-center">'+ contact_open +'</td><td class="text-center">'+ delBtn +'</td></tr>'
             });
         }
         

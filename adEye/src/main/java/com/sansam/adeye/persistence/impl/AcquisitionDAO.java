@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.sansam.adeye.domain.AcqDTO;
 import com.sansam.adeye.domain.AcqDashboardDTO;
 import com.sansam.adeye.domain.AcquisitionDTO;
 import com.sansam.adeye.domain.AcquisitionDashboardDTO;
@@ -44,33 +45,36 @@ public class AcquisitionDAO implements IAcquisitionDAO{
 	
 	// 수집 데이터 저장
 	@Override
-	public DeviceDTO acqCreate(List<AcquisitionSubmitDTO> dtoList) throws Exception {
+	public DeviceDTO acqCreate(AcqDTO adto) throws Exception {
 		
 		// 처리에 따른 결과코드 담아주기 
 		DeviceDTO result = new DeviceDTO();
 		
 		try {
 			
-			for (AcquisitionSubmitDTO dto : dtoList) {
-				System.out.println(dto);
+			if(adto.getAcq_list().size() > 0) {
 				
-				int cnt = session.selectOne("AcquisitionMapper.tidCheck",new AcquisitionSubmitDTO(dto.getDevice_uid(), dto.getAcq_tid(), null, null, null, null));
-				if(cnt > 0) {
-					session.insert("AcquisitionMapper.update", dto);
-					System.out.println(cnt);
-				}else {
-					session.insert("AcquisitionMapper.create", dto);
+				for (AcquisitionSubmitDTO dto : adto.getAcq_list()) {
+					System.out.println("1313"+dto);
+					
+					int cnt = session.selectOne("AcquisitionMapper.tidCheck",new AcquisitionSubmitDTO(dto.getDevice_uid(), dto.getAcq_tid(), null, null, null, null));
+					if(cnt > 0) {
+						session.insert("AcquisitionMapper.update", dto);
+						System.out.println(cnt);
+					}else {
+						session.insert("AcquisitionMapper.create", dto);
+					}
+					
 				}
-				
+				result.setDevice_seq(1);
 			}
 			
-			result.setDevice_seq(1);
 		} catch (Exception e) {
 			result.setDevice_seq(2);
 			
 		}
 		// uid 값으로  seq,onoff 상태 가져오기
-		DeviceDTO d = session.selectOne("DeviceMapper.getOnoff", dtoList.get(0).getDevice_uid());
+		DeviceDTO d = session.selectOne("DeviceMapper.getOnoff", adto.getDevice_uid());
 		
 		result.setDevice_onoff(d.getDevice_onoff());
 		// 재부팅 요청이 들어온 경우

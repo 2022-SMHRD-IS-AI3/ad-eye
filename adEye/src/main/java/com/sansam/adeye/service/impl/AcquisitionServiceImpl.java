@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sansam.adeye.domain.AcqDTO;
 import com.sansam.adeye.domain.AcqDashboardDTO;
 import com.sansam.adeye.domain.AcquisitionDTO;
 import com.sansam.adeye.domain.AcquisitionDashboardDTO;
@@ -44,8 +45,8 @@ public class AcquisitionServiceImpl implements IAcquisitionService{
 		return lDao.logInsert(dto);
 	}
 	@Override
-	public DeviceDTO acqCreate(List<AcquisitionSubmitDTO> dtoList) throws Exception {
-		return acDao.acqCreate(dtoList);
+	public DeviceDTO acqCreate(AcqDTO dto) throws Exception {
+		return acDao.acqCreate(dto);
 	}
 	@Override
 	public int acqMaxTid(String uid) throws Exception {

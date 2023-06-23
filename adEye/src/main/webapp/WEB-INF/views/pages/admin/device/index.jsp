@@ -58,7 +58,7 @@
                                 <table id="datatable" class="table table-striped table-hover">
                                     <thead>
                                         <tr>
-                                            <th>No.</th>
+                                            <th class="text-center">No.</th>
                                             <th>시리얼</th>
                                             <th>회사명</th>
                                             <th>매체 이름</th>
@@ -130,7 +130,7 @@
 	            		var device_onoff = v.device_onoff == 'Y' ? '<span style="color: #9ecd73;font-weight: bolder;">ON</span>' : v.device_onoff == 'R' ? '<span style="color: #676767;font-weight: bolder;">REBOOT</span>' : '<span style="color: #ff5353;font-weight: bolder;">OFF</span>';
 	            		var device_status = v.device_status == 'Y' ? '<span style="color: #9ecd73;font-weight: bolder;">사용중</span>' : '<span style="color: #ff5353;font-weight: bolder;">미사용</span>';
 		                
-		                createHTML += '<tr '+ red +'><td class="link-point" onClick="movePath(\'/pages/admin/device/pop?sbs_seq='+v.sbs_seq+'\',\'pop\')">'+ no +'</td><td class="link-point" onClick="movePath(\'/pages/admin/device/pop?sbs_seq='+v.sbs_seq+'\',\'pop\')">'+ v.device_uid +'</td><td class="link-point" onClick="movePath(\'/pages/admin/device/pop?sbs_seq='+v.sbs_seq+'\',\'pop\')">'+ v.mem_company +'</td><td class="link-point" onClick="movePath(\'/pages/admin/device/pop?sbs_seq='+v.sbs_seq+'\',\'pop\')">'+ v.sbs_alias +'</td><td class="text-center">'+ device_onoff +'</td><td class="text-center">'+ device_status +'</td><td class="text-primary link-point text-center" onClick="movePath(\'/pages/admin/log?key=D&uid='+v.device_uid+'\')">'+ v.data_check +'</td></tr>'
+		                createHTML += '<tr '+ red +'><td class="link-point text-center" onClick="movePath(\'/pages/admin/device/pop?sbs_seq='+v.sbs_seq+'\',\'pop\')">'+ no +'</td><td class="link-point" onClick="movePath(\'/pages/admin/device/pop?sbs_seq='+v.sbs_seq+'\',\'pop\')">'+ v.device_uid +'</td><td class="link-point" onClick="movePath(\'/pages/admin/device/pop?sbs_seq='+v.sbs_seq+'\',\'pop\')">'+ v.mem_company +'</td><td class="link-point" onClick="movePath(\'/pages/admin/device/pop?sbs_seq='+v.sbs_seq+'\',\'pop\')">'+ v.sbs_alias +'</td><td class="text-center">'+ device_onoff +'</td><td class="text-center">'+ device_status +'</td><td class="text-primary link-point text-center" onClick="movePath(\'/pages/admin/log?key=D&uid='+v.device_uid+'\')">'+ v.data_check +'</td></tr>'
 		            });
 	            }
 	            

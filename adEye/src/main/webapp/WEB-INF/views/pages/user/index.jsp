@@ -337,8 +337,8 @@
                 	// 5초마다 실행
                 	setInterval(function() {
                 	  changeAPI("userDashboard", idValue);
-                	}, 60000);
-                	
+                	//}, 60000);
+                	}, 10000);
                 }
                 
 			});
@@ -467,7 +467,7 @@
                 // ajax문
                 $.ajax({ // url, success, error 는 무조건 있어야한다
                     // 어디랑 통신 할건지
-                    url: 'http://211.223.37.186:9000/acq/acqDashboard',
+                    url: url+'/acq/acqDashboard',
                     type: aType,
                     data: aDatas,
                     // 통신에 성공했을 때 실행할 로직

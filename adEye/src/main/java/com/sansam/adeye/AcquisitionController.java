@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sansam.adeye.domain.AcqDTO;
 import com.sansam.adeye.domain.AcqDashboardDTO;
 import com.sansam.adeye.domain.AcquisitionDTO;
 import com.sansam.adeye.domain.AcquisitionDashboardDTO;
@@ -22,6 +23,7 @@ import com.sansam.adeye.domain.DeviceDTO;
 import com.sansam.adeye.domain.LogDTO;
 import com.sansam.adeye.persistence.impl.LogDAO;
 import com.sansam.adeye.service.IAcquisitionService;
+import com.sansam.adeye.service.IDeviceService;
 
 import lombok.extern.log4j.Log4j;
 
@@ -32,6 +34,7 @@ public class AcquisitionController {
 	
 	@Autowired
 	IAcquisitionService service;
+	IDeviceService dservice;
 	
 	String code = "";
 	String message = "";
@@ -39,33 +42,27 @@ public class AcquisitionController {
 	
 	// 데이터 수집
 	@RequestMapping(value = "/submit", method = RequestMethod.POST)
-	public @ResponseBody Map<String,String> submit(@RequestBody List<AcquisitionSubmitDTO> data) throws Exception {
+	public @ResponseBody Map<String,String> submit(@RequestBody AcqDTO data) throws Exception {
 		System.out.println(data.toString());
-		log.info("수집 데이터 개수 : " + data.size() + " 개");
+		log.info("수집 데이터 개수 : " + data.getAcq_list().size() + " 개");
 		Map<String,String> paramMap = new HashMap<String, String>();
 		
 		try {
+			reboot_code = "0";
+			DeviceDTO result = service.acqCreate(data);
 			
-			if(data.size() > 0) {
-				DeviceDTO result = service.acqCreate(data);
-				System.out.println(result.toString());
-				if(result.getDevice_onoff() == 'R') {
-					reboot_code = "1";
-				}
-				code = "201";
-				message = "등록 성공";
-			}else {
-				code = "206";
-				message = "전송데이터 없음";
+			if(result.getDevice_onoff() == 'R') {
+				reboot_code = "1";
 			}
-			
+			code = "201";
+			message = "등록 성공";
 			
 		} catch (Exception e) {
 			reboot_code = "0";
 			code = "500";
 			message = "서버 문제";
 		}
-		log.info(code+message);
+		log.info(reboot_code);
 		
 		paramMap.put("reboot_code", reboot_code);
 		paramMap.put("code", code);

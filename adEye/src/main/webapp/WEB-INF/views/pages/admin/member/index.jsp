@@ -72,12 +72,12 @@
                                 <table id="datatable" class="table table-striped table-hover">
                                     <thead>
                                         <tr>
-                                        	<th>No.</th>
+                                        	<th class="text-center">No.</th>
                                             <th>회사명</th>
                                             <th>연락처</th>
                                             <th>아이디</th>
                                             <th>이메일</th>
-                                            <th>가입일</th>
+                                            <th class="text-center">가입일</th>
                                             <th class="text-center">구독 수</th>
                                             <th class="text-center">상태</th>
                                             <th class="text-center">삭제</th>
@@ -177,7 +177,7 @@
 	                var mem_status = v.mem_status == 'Y' ? '<b style="color:#98b93a;">사용중</b>' : '<b>사용중지</b>'
 	                
 	                var delBtn = '<button class="btn btn-danger btn-sm" onClick="dataDel(\''+ v.mem_id +'\')" type="button ">삭제</button>';
-	                createHTML += '<tr><td>'+ no +'</td><td class="text-primary link-point" style="" onClick="movePath(\'/pages/admin/member/push?id='+v.mem_id+'\')">'+ v.mem_company +'</td><td>'+ v.mem_phone +'</td><td class="text-primary link-point" onClick="movePath(\'/pages/admin/member/push?id='+v.mem_id+'\')">'+ v.mem_id +'</td><td>'+ v.mem_email +'</td><td>'+ formattedDate +'</td><td class="text-center">'+ sbs_count +'</td><td class="text-center">'+ mem_status +'</td><td class="text-center">'+ delBtn +'</td></tr>'
+	                createHTML += '<tr><td class="text-center">'+ no +'</td><td class="text-primary link-point" style="" onClick="movePath(\'/pages/admin/member/push?id='+v.mem_id+'\')">'+ v.mem_company +'</td><td>'+ v.mem_phone +'</td><td class="text-primary link-point" onClick="movePath(\'/pages/admin/member/push?id='+v.mem_id+'\')">'+ v.mem_id +'</td><td>'+ v.mem_email +'</td><td class="text-center">'+ formattedDate +'</td><td class="text-center">'+ sbs_count +'</td><td class="text-center">'+ mem_status +'</td><td class="text-center">'+ delBtn +'</td></tr>'
 	            });
             }
             
